@@ -1,0 +1,76 @@
+name: Weekly PubMed Catheter & PFA Ablation Paper Summarizer
+
+on:
+  schedule:
+    # 毎週月曜日 朝 06:00 JST (日曜日 21:00 UTC) に自動実行
+    - cron: '0 21 * * 0'
+  workflow_dispatch: # GitHub Web画面からの手動実行ボタンを有効化
+
+# GitHub Pages へのデプロイおよびリポジトリへの書き込み権限
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# 同時実行の制御
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run PubMed Summarizer & Generate Reports
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          DAYS_PAST: 90
+          MAX_RESULTS: 80
+          NOTIFICATION_EMAIL: 'hiromiyoshimu@gmail.com'
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+        run: node src/index.js
+
+      - name: Build Web App Static Site
+        run: npm run build
+
+      - name: Upload Excel Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Catheter_PFA_Ablation_Papers_Report
+          path: outputs/*.xlsx
+          retention-days: 90
+
+      - name: Commit and push updated files to repository
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add outputs/*.xlsx public/papers.json
+          git commit -m "auto: Update weekly PubMed catheter & PFA ablation Excel report and Web App data [JST Mon 06:00]" || exit 0
+          git push
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

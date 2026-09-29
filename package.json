@@ -1,0 +1,24 @@
+{
+  "name": "pubmed-catheter-ablation-summary",
+  "version": "1.0.0",
+  "description": "Fetch catheter ablation papers from PubMed from past 3 months and generate Excel report with Japanese abstract summaries.",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "exceljs": "^4.4.0",
+    "nodemailer": "^6.9.16",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "vite": "^5.4.11"
+  }
+}
