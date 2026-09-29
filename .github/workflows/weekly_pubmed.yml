@@ -4,6 +4,8 @@ on:
   schedule:
     # 毎週月曜日 朝 06:00 JST (日曜日 21:00 UTC) に自動実行
     - cron: '0 21 * * 0'
+  push:
+    branches: [ main ]
   workflow_dispatch: # GitHub Web画面からの手動実行ボタンを有効化
 
 # GitHub Pages へのデプロイおよびリポジトリへの書き込み権限
