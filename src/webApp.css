@@ -71,7 +71,7 @@ body.font-small {
   --title-ja-size: 14px;
   --title-en-size: 11px;
   --summary-size: 11.5px;
-  --modal-title-size: 16px;
+  --modal-title-size: 15px;
   --modal-content-size: 12px;
 }
 
@@ -81,7 +81,7 @@ body.font-normal {
   --title-en-size: 12px;
   --summary-size: 13px;
   --modal-title-size: 18px;
-  --modal-content-size: 13.5px;
+  --modal-content-size: 14px;
 }
 
 body.font-large {
@@ -89,17 +89,17 @@ body.font-large {
   --title-ja-size: 19px;
   --title-en-size: 14px;
   --summary-size: 15.5px;
-  --modal-title-size: 21px;
-  --modal-content-size: 16px;
+  --modal-title-size: 22px;
+  --modal-content-size: 17px;
 }
 
 body.font-xlarge {
   --base-font-size: 20px;
-  --title-ja-size: 22px;
-  --title-en-size: 15.5px;
-  --summary-size: 17.5px;
-  --modal-title-size: 24px;
-  --modal-content-size: 18.5px;
+  --title-ja-size: 22.5px;
+  --title-en-size: 16px;
+  --summary-size: 18px;
+  --modal-title-size: 26px;
+  --modal-content-size: 20px;
 }
 
 body {
@@ -543,7 +543,7 @@ body.light-theme .paper-card.is-new {
 }
 
 .detail-title-ja {
-  font-size: 18px;
+  font-size: var(--modal-title-size, 18px);
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 6px;
@@ -551,7 +551,7 @@ body.light-theme .paper-card.is-new {
 }
 
 .detail-title-en {
-  font-size: 13px;
+  font-size: calc(var(--modal-content-size, 13.5px) * 0.95);
   color: var(--text-muted);
   font-style: italic;
   margin-bottom: 16px;
@@ -565,7 +565,7 @@ body.light-theme .paper-card.is-new {
   flex-direction: column;
   gap: 8px;
   margin-bottom: 20px;
-  font-size: 12px;
+  font-size: calc(var(--modal-content-size, 13.5px) * 0.9);
 }
 
 .meta-item {
@@ -602,7 +602,7 @@ body.light-theme .paper-card.is-new {
   color: var(--text-primary);
   padding: 10px;
   border-radius: var(--radius-sm);
-  font-size: 12px;
+  font-size: calc(var(--modal-content-size, 13.5px) * 0.9);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -622,7 +622,7 @@ body.light-theme .paper-card.is-new {
 }
 
 .section-title {
-  font-size: 14px;
+  font-size: calc(var(--modal-content-size, 13.5px) * 1.08);
   font-weight: 700;
   color: var(--accent-blue);
   margin-bottom: 10px;
@@ -637,7 +637,7 @@ body.light-theme .paper-card.is-new {
   background: var(--bg-secondary);
   border-radius: var(--radius-md);
   padding: 14px;
-  font-size: 13px;
+  font-size: var(--modal-content-size, 13.5px);
   line-height: 1.7;
   white-space: pre-wrap;
   color: var(--text-primary);
@@ -645,7 +645,7 @@ body.light-theme .paper-card.is-new {
 
 .section-content.en {
   font-family: 'Inter', sans-serif;
-  font-size: 12.5px;
+  font-size: calc(var(--modal-content-size, 13.5px) * 0.92);
   color: var(--text-secondary);
 }
 
