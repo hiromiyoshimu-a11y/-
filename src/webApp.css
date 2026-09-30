@@ -628,11 +628,13 @@ body.light-theme .paper-card.is-new {
 }
 
 /* ------------------------------------
-   PC・タブレット用 レスポンシブ最適化
+   PC・タブレット用 超ワイド画面レスポンシブ最適化
    ------------------------------------ */
 @media (min-width: 768px) {
   #app {
-    max-width: 1200px;
+    width: 95%;
+    max-width: 1280px;
+    margin: 0 auto;
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -640,7 +642,7 @@ body.light-theme .paper-card.is-new {
   .paper-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    gap: 20px;
   }
 
   .paper-card {
@@ -672,13 +674,13 @@ body.light-theme .paper-card.is-new {
   }
 
   .modal-sheet {
-    max-width: 880px;
+    max-width: 920px;
     max-height: 85vh;
     border-radius: var(--radius-lg);
   }
 
   .modal-body {
-    padding: 24px;
+    padding: 28px;
   }
 
   .detail-title-ja {
@@ -694,12 +696,25 @@ body.light-theme .paper-card.is-new {
 
 @media (min-width: 1200px) {
   #app {
-    max-width: 1480px;
+    width: 95%;
+    max-width: 1680px;
   }
 
   .paper-grid {
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1600px) {
+  #app {
+    width: 96%;
+    max-width: 1920px;
+  }
+
+  .paper-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
   }
 }
 
