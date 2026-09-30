@@ -646,15 +646,15 @@ body.light-theme .paper-card.is-new {
 /* 抄録・要約の【概要】【方法】【結果】【結論】強調バッジ */
 .abs-header-badge {
   display: block;
-  margin-top: 14px;
-  margin-bottom: 6px;
+  margin-top: 12px;
+  margin-bottom: 4px;
   font-weight: 700;
-  font-size: calc(var(--modal-content-size, 13.5px) * 1.05);
+  font-size: calc(var(--modal-content-size, 13.5px) * 1.02);
   color: var(--accent-blue);
   background: rgba(56, 189, 248, 0.12);
-  padding: 4px 10px;
-  border-radius: 6px;
-  border-left: 4px solid var(--accent-blue);
+  padding: 3px 9px;
+  border-radius: 5px;
+  border-left: 3.5px solid var(--accent-blue);
   width: fit-content;
 }
 

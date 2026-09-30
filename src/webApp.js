@@ -361,20 +361,22 @@ window.openDetail = function(pmid) {
   formattedSummaryJa = formattedSummaryJa
     .replace(/【(概要|方法|結果|結論)】/g, '<span class="abs-header-badge">【$1】</span>');
 
-  // 抄録全訳 (abstractJa) の【背景】【目的】【方法】【結果】【結論】バッジ化＆改行
+  // 抄録全訳 (abstractJa) の【背景】【目的】【方法】【結果】【結論】バッジ化＆無駄な空白行完全排除
   let rawAbsJa = paper.abstractJa || paper.abstract || '抄録の全訳がありません。';
-  // 事前見出し統一
   rawAbsJa = rawAbsJa
     .replace(/(?:背景・目的|背景\/目的)[:：]/g, '【背景・目的】')
     .replace(/(?:背景)[:：]/g, '【背景】')
     .replace(/(?:目的)[:：]/g, '【目的】')
     .replace(/(?:方法|対象・方法|対象と方法)[:：]/g, '【方法】')
     .replace(/(?:結果|成績)[:：]/g, '【結果】')
-    .replace(/(?:結論|考察)[:：]/g, '【結論】');
+    .replace(/(?:結論|考察)[:：]/g, '【結論】')
+    .replace(/\n{2,}/g, '\n') // 連続する改行を単一改行へ圧縮
+    .trim();
 
   let formattedAbsJa = escapeHtml(rawAbsJa);
+  // 見出しバッジ前後の余分な改行を消去し、CSSのmarginのみでコンパクトにレイアウト
   formattedAbsJa = formattedAbsJa
-    .replace(/【(背景|目的|方法|結果|結論|背景・目的)】/g, '<span class="abs-header-badge">【$1】</span>');
+    .replace(/\n*【(背景|目的|方法|結果|結論|背景・目的)】\n*/g, '<span class="abs-header-badge">【$1】</span>');
 
   // 英語抄録 (abstractEn) の見出しバッジ化
   let formattedAbsEn = escapeHtml(paper.abstract || '');

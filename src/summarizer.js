@@ -361,9 +361,10 @@ ${abstract}`;
       const result = await model.generateContent(prompt);
       let text = result.response.text().trim();
       if (text && /[\u3040-\u30ff\u4e00-\u9faf]/.test(text)) {
-        // パラグラフ毎の見出し直後改行＋見出し前1行空欄の強制整形
+        // パラグラフ毎の見出し直後改行＋無駄な空白行圧縮
         text = text
-          .replace(/\n*【(背景|背景・目的|目的|方法|結果|結論)】\n*/g, '\n\n【$1】\n')
+          .replace(/\n*【(背景|背景・目的|目的|方法|結果|結論)】\n*/g, '\n【$1】\n')
+          .replace(/\n{2,}/g, '\n')
           .replace(/^\n+/, '')
           .trim();
         return text;
@@ -373,7 +374,8 @@ ${abstract}`;
 
   const translated = await translateToNaturalJapanese(abstract);
   return translated
-    .replace(/\n*【(背景|背景・目的|目的|方法|結果|結論)】\n*/g, '\n\n【$1】\n')
+    .replace(/\n*【(背景|背景・目的|目的|方法|結果|結論)】\n*/g, '\n【$1】\n')
+    .replace(/\n{2,}/g, '\n')
     .replace(/^\n+/, '')
     .trim();
 }
