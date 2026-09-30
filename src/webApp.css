@@ -82,8 +82,7 @@ body {
    App Header & Navigation
    ------------------------------------ */
 .app-header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 100;
   background-color: var(--header-bg);
   backdrop-filter: blur(12px);
@@ -679,6 +678,8 @@ body.light-theme .paper-card.is-new {
   }
 
   .app-header {
+    position: sticky;
+    top: 0;
     padding: 20px 28px;
     border-radius: 0 0 var(--radius-md) var(--radius-md);
   }
