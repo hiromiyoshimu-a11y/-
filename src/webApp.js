@@ -23,9 +23,12 @@ async function initApp() {
 async function loadPaperData() {
   const paperListEl = document.getElementById('paperList');
   try {
-    let res = await fetch('/papers.json');
+    let res = await fetch('./papers.json');
     if (!res.ok) {
-      res = await fetch('/outputs/papers.json');
+      res = await fetch('papers.json');
+    }
+    if (!res.ok) {
+      res = await fetch('./outputs/papers.json');
     }
     const data = await res.json();
     
