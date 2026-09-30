@@ -7,6 +7,8 @@ let allPapers = [];
 let bookmarks = JSON.parse(localStorage.getItem('ep_paper_bookmarks') || '[]');
 let currentFilterTab = 'all';
 
+let deferredPrompt;
+
 document.addEventListener('DOMContentLoaded', () => {
   initApp();
 });
@@ -14,7 +16,37 @@ document.addEventListener('DOMContentLoaded', () => {
 async function initApp() {
   setupEventListeners();
   loadThemePreference();
+  registerServiceWorker();
+  setupPwaInstaller();
   await loadPaperData();
+}
+
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('ServiceWorker registered:', reg.scope))
+        .catch(err => console.log('ServiceWorker registration failed:', err));
+    });
+  }
+}
+
+function setupPwaInstaller() {
+  const installBtn = document.getElementById('pwaInstallBtn');
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) {
+      installBtn.style.display = 'inline-flex';
+      installBtn.addEventListener('click', async () => {
+        installBtn.style.display = 'none';
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`PWA install outcome: ${outcome}`);
+        deferredPrompt = null;
+      });
+    }
+  });
 }
 
 /**

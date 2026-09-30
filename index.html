@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>⚡ カテーテル / パルスフィールドアブレーション & 不整脈 最新論文ナビ</title>
   <meta name="description" content="PubMed過去3ヶ月の主要誌(Europace, Heart Rhythm, JACC EP, Circ EP, NEJM, Nat Med等)のカテーテルアブレーション・PFA・不整脈最新論文のAI日本語要約＆全訳アプリ">
+  <!-- PWA Meta Tags & Manifest -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#0F172A">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +31,10 @@
             <p class="sub-title">カテーテル / パルスフィールドアブレーション 最新論文ナビ</p>
           </div>
         </div>
-        <div class="header-actions">
+        <div class="header-actions" style="display: flex; gap: 8px; align-items: center;">
+          <button id="pwaInstallBtn" class="action-btn primary" style="display: none; padding: 6px 12px; font-size: 11px; border-radius: 20px;">
+            📱 アプリをインストール
+          </button>
           <button id="themeToggle" class="icon-btn" aria-label="テーマ切り替え">
             <span class="theme-icon">🌙</span>
           </button>
