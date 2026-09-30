@@ -627,6 +627,82 @@ body.light-theme .paper-card.is-new {
   z-index: 300;
 }
 
+/* ------------------------------------
+   PC・タブレット用 レスポンシブ最適化
+   ------------------------------------ */
+@media (min-width: 768px) {
+  #app {
+    max-width: 1200px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .paper-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .paper-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .card-summary-box {
+    flex-grow: 1;
+  }
+
+  .app-header {
+    padding: 16px 24px;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+
+  .brand h1 {
+    font-size: 22px;
+  }
+
+  .brand .sub-title {
+    font-size: 13px;
+  }
+
+  .modal-overlay {
+    align-items: center;
+    padding: 24px;
+  }
+
+  .modal-sheet {
+    max-width: 880px;
+    max-height: 85vh;
+    border-radius: var(--radius-lg);
+  }
+
+  .modal-body {
+    padding: 24px;
+  }
+
+  .detail-title-ja {
+    font-size: 20px;
+  }
+
+  .detail-meta-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 16px;
+  }
+}
+
+@media (min-width: 1200px) {
+  #app {
+    max-width: 1480px;
+  }
+
+  .paper-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
 /* アニメーション */
 @keyframes fadeIn {
   from { opacity: 0; }
