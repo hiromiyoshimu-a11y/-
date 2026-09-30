@@ -332,21 +332,51 @@ ${abstract}`;
     .trim();
 }
 
+import fs from 'fs';
+
 /**
- * 論文リストに対してタイトル翻訳・要約・抄録全訳を一括適用
+ * 論文リストに対してタイトル翻訳・要約・抄録全訳を一括適用 (キャッシュで爆速化)
  */
-export async function summarizePapers(papers) {
+export async function summarizePapers(papers, existingJsonPath = 'public/papers.json') {
   console.log(`[Summarizer] ${papers.length}件の論文の日本語タイトル翻訳・4行要約・抄録全訳を開始します...`);
+
+  // 既存の要約データがあれば読み込んで再利用（高速キャッシュ）
+  const cachedPaperMap = new Map();
+  if (fs.existsSync(existingJsonPath)) {
+    try {
+      const prevData = JSON.parse(fs.readFileSync(existingJsonPath, 'utf-8'));
+      if (prevData && Array.isArray(prevData.papers)) {
+        prevData.papers.forEach(p => {
+          if (p.pmid && p.titleJa && p.summaryJa && p.abstractJa) {
+            cachedPaperMap.set(String(p.pmid), p);
+          }
+        });
+        console.log(`[Summarizer] 既存のキャッシュから ${cachedPaperMap.size}件の要約済データを再利用します。`);
+      }
+    } catch {}
+  }
 
   for (let i = 0; i < papers.length; i++) {
     const paper = papers[i];
-    console.log(`[Summarizer] (${i + 1}/${papers.length}) 処理中: PMID ${paper.pmid} - ${paper.title.slice(0, 40)}...`);
+    const pmidStr = String(paper.pmid);
+
+    // キャッシュに存在する場合は再利用してAPI呼び出しをスキップ
+    if (cachedPaperMap.has(pmidStr)) {
+      const cached = cachedPaperMap.get(pmidStr);
+      paper.titleJa = cached.titleJa;
+      paper.summaryJa = cached.summaryJa;
+      paper.abstractJa = cached.abstractJa;
+      console.log(`[Summarizer] (${i + 1}/${papers.length}) ⚡ キャッシュ利用: PMID ${paper.pmid}`);
+      continue;
+    }
+
+    console.log(`[Summarizer] (${i + 1}/${papers.length}) 🤖 新規AI要約中: PMID ${paper.pmid} - ${paper.title.slice(0, 40)}...`);
 
     paper.titleJa = await translateTitle(paper.title);
     paper.summaryJa = await summarizeAbstract(paper.title, paper.abstract, paper.studyTypeLabel, paper.sampleSize);
     paper.abstractJa = await translateAbstractFull(paper.abstract);
 
-    await new Promise(r => setTimeout(r, 400));
+    await new Promise(r => setTimeout(r, 200));
   }
 
   return papers;
