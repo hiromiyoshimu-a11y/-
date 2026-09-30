@@ -16,9 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
 async function initApp() {
   setupEventListeners();
   loadThemePreference();
+  loadFontSizePreference();
   registerServiceWorker();
   setupPwaInstaller();
   await loadPaperData();
+}
+
+function loadFontSizePreference() {
+  const size = localStorage.getItem('ep_font_size') || 'normal';
+  applyFontSize(size);
+  const select = document.getElementById('fontSizeSelect');
+  if (select) select.value = size;
+}
+
+function applyFontSize(size) {
+  document.body.classList.remove('font-small', 'font-normal', 'font-large', 'font-xlarge');
+  document.body.classList.add(`font-${size}`);
 }
 
 function registerServiceWorker() {
@@ -192,6 +205,15 @@ function setupEventListeners() {
 
   document.getElementById('journalSelect').addEventListener('change', renderPapers);
   document.getElementById('sortSelect').addEventListener('change', renderPapers);
+
+  const fontSelect = document.getElementById('fontSizeSelect');
+  if (fontSelect) {
+    fontSelect.addEventListener('change', (e) => {
+      const selected = e.target.value;
+      applyFontSize(selected);
+      localStorage.setItem('ep_font_size', selected);
+    });
+  }
 
   document.getElementById('themeToggle').addEventListener('click', toggleTheme);
 
