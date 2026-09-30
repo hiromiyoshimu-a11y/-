@@ -638,9 +638,34 @@ body.light-theme .paper-card.is-new {
   border-radius: var(--radius-md);
   padding: 14px;
   font-size: var(--modal-content-size, 13.5px);
-  line-height: 1.7;
+  line-height: 1.75;
   white-space: pre-wrap;
   color: var(--text-primary);
+}
+
+/* 抄録・要約の【概要】【方法】【結果】【結論】強調バッジ */
+.abs-header-badge {
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: calc(var(--modal-content-size, 13.5px) * 1.05);
+  color: var(--accent-blue);
+  background: rgba(56, 189, 248, 0.12);
+  padding: 4px 10px;
+  border-radius: 6px;
+  border-left: 4px solid var(--accent-blue);
+  width: fit-content;
+}
+
+body.light-theme .abs-header-badge {
+  color: #0284C7;
+  background: rgba(2, 132, 199, 0.08);
+  border-left: 4px solid #0284C7;
+}
+
+.abs-header-badge:first-child {
+  margin-top: 0;
 }
 
 .section-content.en {

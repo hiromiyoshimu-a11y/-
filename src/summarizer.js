@@ -83,7 +83,31 @@ function removeDesuMasuStrict(text) {
   // 重複ラベルの削除
   s = s.replace(/^(背景|目的|方法|結果|結論|背景・目的|対象|手技|主要成果|臨床要点)[:：\s]*/gi, '');
 
-  // 丁寧語（です・ます等）の正確な常体・体言止め変換
+  // 1. 否定・例外パターンの優先直置換（否定の破壊を防止）
+  s = s.replace(/ではありませんでしたであった/g, 'ではなかった')
+       .replace(/ではありませんでした/g, 'ではなかった')
+       .replace(/ではありません/g, 'ではない')
+       .replace(/説明されていません/g, '明確にされていない')
+       .replace(/処方されませんでした/g, '処方されなかった')
+       .replace(/されませんでしたであった/g, 'されなかった')
+       .replace(/されませんでした/g, 'されなかった')
+       .replace(/できませんでしたであった/g, 'できなかった')
+       .replace(/できませんでした/g, 'できなかった')
+       .replace(/ありませんでしたであった/g, 'なかった')
+       .replace(/ありませんでした/g, 'なかった')
+       .replace(/ませんでしたであった/g, 'なかった')
+       .replace(/ませんでした/g, 'なかった');
+
+  // 2. 助詞の重複・助詞崩れの補正
+  s = s.replace(/でを認めた/g, 'で認めた')
+       .replace(/をを/g, 'を')
+       .replace(/がを/g, 'が')
+       .replace(/にを/g, 'に')
+       .replace(/でを/g, 'で')
+       .replace(/機能しる/g, '機能する')
+       .replace(/確立しる/g, '確立する');
+
+  // 3. 丁寧語（です・ます等）の正確な常体・体言止め変換
   s = s.replace(/比較すること/g, 'の比較')
        .replace(/比較するこ/g, 'の比較')
        .replace(/観察されました/g, 'を認めた')
@@ -95,7 +119,6 @@ function removeDesuMasuStrict(text) {
        .replace(/評価されました/g, 'を評価した')
        .replace(/裏付けています/g, 'を裏付けるものである')
        .replace(/裏付けてい/g, 'を裏付けるものである')
-       .replace(/説明されていません/g, 'の明確化が必要である')
        .replace(/サポートする可能性があり/g, 'への寄与を示唆')
        .replace(/することができます/g, 'が可能である')
        .replace(/できます/g, 'できる')
@@ -113,6 +136,10 @@ function removeDesuMasuStrict(text) {
        .replace(/ます([。.\s]|$)/g, 'る$1')
        .replace(/[。.\s]+$/g, '')
        .trim();
+
+  // 4. 二重化の最終クリーニング
+  s = s.replace(/であったであった/g, 'であった')
+       .replace(/であったあった/g, 'であった');
 
   return s;
 }
@@ -207,6 +234,23 @@ export async function summarizeAbstract(title, abstract, studyTypeLabel = '', sa
       const result = await model.generateContent(prompt);
       let text = result.response.text().trim();
       if (text && /[\u3040-\u30ff\u4e00-\u9faf]/.test(text)) {
+        // AIによる二重校閲（文法崩れ・助詞の重複・資金提供文言のセルフチェック）
+        try {
+          const proofreadPrompt = `あなたは医学日本語の厳格な校閲担当者です。
+以下の4行臨床要約を点検し、文法崩れ（「〜ませんでしたであった」等）、助詞の重複（「〜をを」「〜でを」等）、動詞の誤変換（「〜しる」等）、丁寧語（です・ます）の残り、または【結論】に資金提供情報や治験番号が含まれていれば、自然で美しい医学常体（〜である / 〜であった / 〜を認めた / 〜の比較など）に修正してください。
+各行の見出し【概要】【方法】【結果】【結論】はそのまま維持し、修正後の4行要約テキストのみを出力してください。
+
+【対象要約】:
+${text}`;
+          const proofreadRes = await model.generateContent(proofreadPrompt);
+          const proofreadText = proofreadRes.response.text().trim();
+          if (proofreadText && proofreadText.includes('【結論】')) {
+            text = proofreadText;
+          }
+        } catch (proofreadErr) {
+          console.warn(`[Summarizer] セルフ校閲スキップ:`, proofreadErr.message);
+        }
+
         text = text.split('\n').map(line => {
           const colonIdx = line.indexOf('】');
           if (colonIdx !== -1) {

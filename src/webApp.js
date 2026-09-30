@@ -356,13 +356,30 @@ window.openDetail = function(pmid) {
 
   const modalBody = document.getElementById('modalBody');
 
-  let formattedAbsJa = escapeHtml(paper.abstractJa || paper.abstract || '抄録の全訳がありません。');
-  formattedAbsJa = formattedAbsJa
-    .replace(/【(背景|目的|方法|結果|結論|背景・目的)】/g, '<strong style="color:var(--accent-blue); font-size:14px; display:inline-block; margin-top:14px;">【$1】</strong>');
+  // 臨床要約 (summaryJa) の【概要】【方法】【結果】【結論】バッジ化
+  let formattedSummaryJa = escapeHtml(paper.summaryJa || '要約準備中');
+  formattedSummaryJa = formattedSummaryJa
+    .replace(/【(概要|方法|結果|結論)】/g, '<span class="abs-header-badge">【$1】</span>');
 
+  // 抄録全訳 (abstractJa) の【背景】【目的】【方法】【結果】【結論】バッジ化＆改行
+  let rawAbsJa = paper.abstractJa || paper.abstract || '抄録の全訳がありません。';
+  // 事前見出し統一
+  rawAbsJa = rawAbsJa
+    .replace(/(?:背景・目的|背景\/目的)[:：]/g, '【背景・目的】')
+    .replace(/(?:背景)[:：]/g, '【背景】')
+    .replace(/(?:目的)[:：]/g, '【目的】')
+    .replace(/(?:方法|対象・方法|対象と方法)[:：]/g, '【方法】')
+    .replace(/(?:結果|成績)[:：]/g, '【結果】')
+    .replace(/(?:結論|考察)[:：]/g, '【結論】');
+
+  let formattedAbsJa = escapeHtml(rawAbsJa);
+  formattedAbsJa = formattedAbsJa
+    .replace(/【(背景|目的|方法|結果|結論|背景・目的)】/g, '<span class="abs-header-badge">【$1】</span>');
+
+  // 英語抄録 (abstractEn) の見出しバッジ化
   let formattedAbsEn = escapeHtml(paper.abstract || '');
   formattedAbsEn = formattedAbsEn
-    .replace(/\b(BACKGROUND|OBJECTIVE|METHODS|RESULTS|CONCLUSIONS):\n?/gi, '<strong style="color:var(--accent-blue); font-size:13px; display:inline-block; margin-top:12px;">$1:</strong>\n');
+    .replace(/\b(BACKGROUND|OBJECTIVE|METHODS|RESULTS|CONCLUSIONS):\n?/gi, '<span class="abs-header-badge" style="text-transform:uppercase;">$1</span>');
 
   modalBody.innerHTML = `
     <div class="detail-title-ja">${escapeHtml(paper.titleJa || paper.title)}</div>
@@ -388,7 +405,7 @@ window.openDetail = function(pmid) {
 
     <div class="section-block">
       <div class="section-title">💡 臨床要約 (4項目ポイント)</div>
-      <div class="section-content">${escapeHtml(paper.summaryJa || '')}</div>
+      <div class="section-content">${formattedSummaryJa}</div>
     </div>
 
     <div class="section-block">
