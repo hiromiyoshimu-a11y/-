@@ -354,6 +354,9 @@ window.openDetail = function(pmid) {
   const paper = allPapers.find(p => String(p.pmid) === String(pmid));
   if (!paper) return;
 
+  // iOS Safari 対策: モーダル開閉時のフォントサイズクラス再確定
+  loadFontSizePreference();
+
   const modalBody = document.getElementById('modalBody');
 
   // 臨床要約 (summaryJa) の【概要】【方法】【結果】【結論】バッジ化

@@ -102,6 +102,39 @@ body.font-xlarge {
   --modal-content-size: 20px;
 }
 
+/* 🍎 iOS Safari 互換性対策：固定モーダル要素への直接 font-size 適用ルール */
+body.font-small .detail-title-ja { font-size: 15px !important; }
+body.font-small .detail-title-en { font-size: 11px !important; }
+body.font-small .detail-meta-list { font-size: 11px !important; }
+body.font-small .action-btn { font-size: 11px !important; }
+body.font-small .section-title { font-size: 13px !important; }
+body.font-small .section-content { font-size: 12px !important; }
+body.font-small .abs-header-badge { font-size: 12px !important; }
+
+body.font-normal .detail-title-ja { font-size: 18px !important; }
+body.font-normal .detail-title-en { font-size: 13px !important; }
+body.font-normal .detail-meta-list { font-size: 12.5px !important; }
+body.font-normal .action-btn { font-size: 12.5px !important; }
+body.font-normal .section-title { font-size: 15px !important; }
+body.font-normal .section-content { font-size: 14px !important; }
+body.font-normal .abs-header-badge { font-size: 14px !important; }
+
+body.font-large .detail-title-ja { font-size: 22px !important; }
+body.font-large .detail-title-en { font-size: 16px !important; }
+body.font-large .detail-meta-list { font-size: 15px !important; }
+body.font-large .action-btn { font-size: 15px !important; }
+body.font-large .section-title { font-size: 18.5px !important; }
+body.font-large .section-content { font-size: 17px !important; }
+body.font-large .abs-header-badge { font-size: 17px !important; }
+
+body.font-xlarge .detail-title-ja { font-size: 26px !important; }
+body.font-xlarge .detail-title-en { font-size: 19px !important; }
+body.font-xlarge .detail-meta-list { font-size: 18px !important; }
+body.font-xlarge .action-btn { font-size: 18px !important; }
+body.font-xlarge .section-title { font-size: 22px !important; }
+body.font-xlarge .section-content { font-size: 20px !important; }
+body.font-xlarge .abs-header-badge { font-size: 20px !important; }
+
 body {
   font-family: var(--font-family);
   background-color: var(--bg-primary);
