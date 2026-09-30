@@ -22,41 +22,74 @@ async function initApp() {
  */
 async function loadPaperData() {
   const paperListEl = document.getElementById('paperList');
-  try {
-    let res = await fetch('./papers.json');
-    if (!res.ok) {
-      res = await fetch('papers.json');
-    }
-    if (!res.ok) {
-      res = await fetch('./outputs/papers.json');
-    }
-    const data = await res.json();
-    
-    allPapers = data.papers || [];
+  
+  // 現在のページのアドレスから絶対URLを組み立てる (末尾スラッシュ補正)
+  let currentPath = window.location.pathname;
+  if (!currentPath.endsWith('/') && !currentPath.includes('.html')) {
+    currentPath += '/';
+  }
+  
+  const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
 
-    // 新着数およびメタ情報更新
-    const newCount = data.newCount || allPapers.filter(p => p.isNew).length;
-    document.getElementById('updatedDateBadge').textContent = `📅 最終更新: ${data.updatedAt || '2026-09-29'}`;
-    document.getElementById('paperCountBadge').textContent = `📄 ${allPapers.length}件の最新論文`;
+  const candidateUrls = [
+    `${window.location.origin}${basePath}papers.json`,
+    './papers.json',
+    'papers.json',
+    '/papers.json',
+    `${window.location.origin}/papers.json`,
+    './outputs/papers.json'
+  ];
 
-    const newBadgeEl = document.getElementById('newCountBadge');
-    if (newCount > 0) {
-      newBadgeEl.textContent = `✨ 今週の新着: ${newCount}件`;
-      newBadgeEl.style.display = 'inline-block';
-    } else {
-      newBadgeEl.style.display = 'none';
+  let data = null;
+  let lastError = null;
+
+  for (const url of candidateUrls) {
+    try {
+      const cacheBustUrl = url.includes('?') ? `${url}&_=${Date.now()}` : `${url}?_=${Date.now()}`;
+      console.log('Trying to fetch paper data from:', cacheBustUrl);
+      const res = await fetch(cacheBustUrl);
+      if (res.ok) {
+        data = await res.json();
+        console.log('Successfully loaded paper data from:', url);
+        break;
+      }
+    } catch (e) {
+      lastError = e;
     }
+  }
 
-    renderPapers();
-  } catch (err) {
-    console.error('データ読み込みエラー:', err);
+  if (!data || !data.papers) {
+    console.error('All fetch attempts failed:', lastError);
     paperListEl.innerHTML = `
-      <div class="loading-state">
-        <p style="color: #EF4444; font-weight: 600;">⚠️ データファイルを読み込めませんでした。</p>
-        <p style="font-size: 12px; margin-top: 6px;">"node src/index.js" を実行してデータを生成してください。</p>
+      <div class="loading-state" style="text-align: center; padding: 28px 16px;">
+        <p style="color: #EF4444; font-weight: 700; font-size: 16px;">⚠️ 論文データを読み込めませんでした</p>
+        <p style="font-size: 12px; margin-top: 8px; color: var(--text-secondary);">
+          ブラウザのキャッシュが残っている可能性があります。下のボタンを押して再読み込みをお試しください。
+        </p>
+        <button onclick="location.reload(true)" style="margin-top: 16px; padding: 10px 24px; background: var(--accent-blue); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+          🔄 ページを強制作再読み込み
+        </button>
       </div>
     `;
+    return;
   }
+
+  allPapers = data.papers || [];
+
+  // 新着数およびメタ情報更新
+  const newCount = data.newCount || allPapers.filter(p => p.isNew).length;
+  document.getElementById('updatedDateBadge').textContent = `📅 最終更新: ${data.updatedAt || '2026-09-29'}`;
+  document.getElementById('paperCountBadge').textContent = `📄 ${allPapers.length}件の最新論文`;
+
+  const newBadgeEl = document.getElementById('newCountBadge');
+  if (newCount > 0) {
+    newBadgeEl.textContent = `✨ 今週の新着: ${newCount}件`;
+    newBadgeEl.style.display = 'inline-block';
+  } else {
+    newBadgeEl.style.display = 'none';
+  }
+
+  renderPapers();
 }
 
 /**
