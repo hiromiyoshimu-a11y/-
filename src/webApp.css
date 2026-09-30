@@ -689,19 +689,19 @@ body.light-theme .paper-card.is-new {
   }
 
   .card-title-ja {
-    font-size: 20px;
+    font-size: calc(var(--title-ja-size, 16px) * 1.25);
     line-height: 1.5;
     margin-bottom: 8px;
   }
 
   .card-title-en {
-    font-size: 14px;
+    font-size: calc(var(--title-en-size, 12px) * 1.2);
     margin-bottom: 16px;
   }
 
   .card-summary-box {
     padding: 16px 20px;
-    font-size: 14.5px;
+    font-size: calc(var(--summary-size, 13px) * 1.18);
     line-height: 1.8;
     border-left-width: 5px;
     border-radius: var(--radius-md);
@@ -709,11 +709,11 @@ body.light-theme .paper-card.is-new {
   }
 
   .card-date-journal {
-    font-size: 13px;
+    font-size: calc(var(--base-font-size, 15px) * 0.85);
   }
 
   .card-footer {
-    font-size: 13px;
+    font-size: calc(var(--base-font-size, 15px) * 0.85);
   }
 
   .app-header {
@@ -749,12 +749,12 @@ body.light-theme .paper-card.is-new {
   }
 
   .detail-title-ja {
-    font-size: 24px;
+    font-size: calc(var(--modal-title-size, 18px) * 1.3);
     line-height: 1.5;
   }
 
   .detail-title-en {
-    font-size: 15px;
+    font-size: calc(var(--title-en-size, 12px) * 1.25);
     margin-bottom: 24px;
   }
 
@@ -763,15 +763,15 @@ body.light-theme .paper-card.is-new {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px 20px;
     padding: 16px 20px;
-    font-size: 13px;
+    font-size: calc(var(--base-font-size, 15px) * 0.85);
   }
 
   .section-title {
-    font-size: 16px;
+    font-size: calc(var(--base-font-size, 15px) * 1.1);
   }
 
   .section-content {
-    font-size: 15px;
+    font-size: calc(var(--modal-content-size, 13.5px) * 1.15);
     line-height: 1.9;
     padding: 20px;
   }

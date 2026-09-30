@@ -48,13 +48,22 @@ function setupPwaInstaller() {
   const installBtn = document.getElementById('pwaInstallBtn');
   if (!installBtn) return;
 
-  // アプリインストールボタンを表示
-  installBtn.style.display = 'inline-flex';
+  // デフォルトは非表示
+  installBtn.style.display = 'none';
 
+  // Android 端末のみ判定
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  if (!isAndroid) {
+    // iPhone / iPad / PC等ではボタンを非表示
+    return;
+  }
+
+  // Android端末のみ beforeinstallprompt を検知してボタン表示
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    console.log('beforeinstallprompt captured.');
+    installBtn.style.display = 'inline-flex';
+    console.log('PWA installer prompt captured for Android.');
   });
 
   installBtn.addEventListener('click', async () => {
@@ -63,37 +72,31 @@ function setupPwaInstaller() {
       const { outcome } = await deferredPrompt.userChoice;
       console.log(`PWA install outcome: ${outcome}`);
       deferredPrompt = null;
+      installBtn.style.display = 'none';
     } else {
-      // プロンプトが未取得の場合のAndroid / iOS 手順モーダル
-      showInstallGuideModal();
+      showAndroidInstallGuideModal();
     }
   });
 }
 
-function showInstallGuideModal() {
+function showAndroidInstallGuideModal() {
   const modalBody = document.getElementById('modalBody');
   modalBody.innerHTML = `
     <div style="text-align: center; padding: 10px 0;">
-      <div style="font-size: 48px; margin-bottom: 8px;">📲</div>
-      <h3 style="font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">スマホへのアプリインストール方法</h3>
+      <div style="font-size: 48px; margin-bottom: 8px;">🤖</div>
+      <h3 style="font-size: 18px; font-weight: 700; color: var(--text-primary); margin-bottom: 12px;">Android アプリの追加方法</h3>
       
       <div style="background: var(--bg-secondary); border-radius: var(--radius-md); padding: 16px; text-align: left; margin-bottom: 16px; font-size: 13px; line-height: 1.8;">
-        <p style="font-weight: 700; color: var(--accent-blue); margin-bottom: 6px;">🤖 Android (Chrome) の場合:</p>
-        <ol style="padding-left: 20px; margin-bottom: 12px;">
+        <p style="font-weight: 700; color: var(--accent-blue); margin-bottom: 6px;">Android (Chrome) での手順:</p>
+        <ol style="padding-left: 20px;">
           <li>画面右上のメニューアイコン <strong>「⋮」</strong> (3点マーク) をタップ</li>
           <li><strong>「ホーム画面に追加」</strong> または <strong>「アプリをインストール」</strong> を選択</li>
           <li>「追加」を押すと、ホーム画面にアプリが追加されます！</li>
         </ol>
-
-        <p style="font-weight: 700; color: var(--accent-blue); margin-bottom: 6px;">🍎 iPhone (Safari) の場合:</p>
-        <ol style="padding-left: 20px;">
-          <li>画面下部の <strong>「共有」</strong> ボタン (▢に↑のマーク) をタップ</li>
-          <li><strong>「ホーム画面に追加」</strong> を選択</li>
-        </ol>
       </div>
 
       <button onclick="closeModal()" style="width: 100%; padding: 12px; background: var(--accent-blue); color: white; border: none; border-radius: var(--radius-sm); font-weight: 700; font-size: 14px; cursor: pointer;">
-        わかりました
+        閉じる
       </button>
     </div>
   `;
