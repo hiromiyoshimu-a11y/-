@@ -775,8 +775,8 @@ body.light-theme .abs-header-badge {
   }
 
   .app-header {
-    position: sticky;
-    top: 0;
+    position: relative;
+    top: auto;
     padding: 20px 28px;
     border-radius: 0 0 var(--radius-md) var(--radius-md);
   }
