@@ -154,7 +154,8 @@ body {
    App Header & Navigation
    ------------------------------------ */
 .app-header {
-  position: relative;
+  position: relative !important;
+  top: auto !important;
   z-index: 100;
   background-color: var(--header-bg);
   backdrop-filter: blur(12px);
