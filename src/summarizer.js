@@ -71,6 +71,11 @@ export function removeDesuMasuStrict(text) {
   if (!text) return '';
   let s = String(text).trim();
 
+  // 資金提供文言・治験番号表記の完全削除
+  s = s.replace(/\([^\)]*(?:資金提供|助成金|ClinicalTrials|NCT\d+|治験番号)[^\)]*\)/gi, '')
+       .replace(/^(?:資金提供|助成金|ClinicalTrials|NCT\d+)[:\s].*/gi, '')
+       .trim();
+
   // JSON 化け文字列の防御
   if (s.includes('{"_":') || s.includes('{ "_":')) {
     try {
@@ -277,22 +282,53 @@ ${text}`;
  * 英文抄録を解析し、「です・ます」を完全排除した常体・体言止め4行要約を生成
  */
 async function buildStrictNoDesuMasuSummary(abstract, studyTypeLabel, sampleSize) {
-  const cleanAbs = abstract
+  // 資金提供情報や治験登録番号のブラケット・括弧文を削除
+  let cleanAbs = abstract
+    .replace(/\(Funded by[\s\S]*?\)/gi, '')
+    .replace(/Funded by[\s\S]*?(\.|$)/gi, '')
+    .replace(/ClinicalTrials\.gov\s*(number|identifier)?\s*:?\s*NCT\d+/gi, '')
+    .replace(/NCT\d+/gi, '')
     .replace(/\[\s*\([^)]*\)\s*\]/g, '')
-    .replace(/\s+/g, ' ');
+    .replace(/\s+/g, ' ')
+    .trim();
 
-  const sentences = cleanAbs.split(/(?<=\. )/).map(s => s.trim()).filter(s => s.length > 20);
+  let aimText = '';
+  let methodText = '';
+  let resultText = '';
+  let conclusionText = '';
 
-  let aimSentence = sentences[0] || '';
-  let methodSentence = sentences[1] || '';
-  let resultSentence = '';
-  let conclusionSentence = sentences[sentences.length - 1] || '';
+  // 構造化タグ (BACKGROUND, METHODS, RESULTS, CONCLUSIONS) の判定
+  const bgMatch = cleanAbs.match(/(?:BACKGROUND|OBJECTIVES?|PURPOSE)[:\s]+([\s\S]*?)(?=(?:METHODS?|PATIENTS|STUDY DESIGN|RESULTS?|CONCLUSIONS?)|$)/i);
+  const methodMatch = cleanAbs.match(/(?:METHODS?|PATIENTS AND METHODS?|STUDY DESIGN)[:\s]+([\s\S]*?)(?=(?:RESULTS?|CONCLUSIONS?)|$)/i);
+  const resultMatch = cleanAbs.match(/(?:RESULTS?|FINDINGS)[:\s]+([\s\S]*?)(?=(?:CONCLUSIONS?)|$)/i);
+  const conclusionMatch = cleanAbs.match(/(?:CONCLUSIONS?|IMPLICATIONS)[:\s]+([\s\S]*?)$/i);
 
-  const resultCandidates = sentences.filter(s => /%|p\s*[=<]|hazard ratio|odds ratio|rate|successful|recurrence|isolation/i.test(s));
-  if (resultCandidates.length > 0) {
-    resultSentence = resultCandidates.slice(0, 2).join(' ');
-  } else if (sentences.length > 2) {
-    resultSentence = sentences[Math.floor(sentences.length / 2)];
+  if (bgMatch) aimText = bgMatch[1].trim();
+  if (methodMatch) methodText = methodMatch[1].trim();
+  if (resultMatch) resultText = resultMatch[1].trim();
+  if (conclusionMatch) conclusionText = conclusionMatch[1].trim();
+
+  // タグが無かった場合のフォールバック（文分割処理）
+  const sentences = cleanAbs.split(/(?<=\. )/).map(s => s.trim()).filter(s => s.length > 15);
+
+  if (!aimText) aimText = sentences[0] || '';
+  if (!methodText) methodText = sentences[1] || sentences[0] || '';
+  if (!resultText) {
+    const resultCandidates = sentences.filter(s => /%|p\s*[=<]|hazard ratio|odds ratio|rate|successful|recurrence|isolation|occurred|incidence/i.test(s));
+    resultText = resultCandidates.length > 0 ? resultCandidates.slice(0, 2).join(' ') : (sentences[Math.floor(sentences.length / 2)] || '');
+  }
+  if (!conclusionText) {
+    // 末尾から「主要成果」を指す文をチョイス (資金提供等は除外済み)
+    const validSentences = sentences.filter(s => !/funded|clinicaltrials|nct\d+/i.test(s));
+    conclusionText = validSentences[validSentences.length - 1] || sentences[sentences.length - 1] || '';
+  }
+
+  // 結論セクション内の「第1文」（主要正結論）を最優先抽出
+  if (conclusionText) {
+    const concSentences = conclusionText.split(/(?<=\. )/).map(s => s.trim()).filter(Boolean);
+    if (concSentences.length > 0) {
+      conclusionText = concSentences[0];
+    }
   }
 
   const removeBoilerplate = text => text
@@ -301,19 +337,23 @@ async function buildStrictNoDesuMasuSummary(abstract, studyTypeLabel, sampleSize
     .replace(/^this study evaluated/gi, '')
     .replace(/^in conclusion,/gi, '')
     .replace(/^our findings suggest that/gi, '')
+    .replace(/^background[:\s]*/gi, '')
+    .replace(/^methods[:\s]*/gi, '')
+    .replace(/^results[:\s]*/gi, '')
+    .replace(/^conclusions[:\s]*/gi, '')
     .trim();
 
-  const jaAim = removeDesuMasuStrict(await translateToNaturalJapanese(removeBoilerplate(aimSentence)));
-  const jaMethod = removeDesuMasuStrict(await translateToNaturalJapanese(removeBoilerplate(methodSentence)));
-  const jaResult = removeDesuMasuStrict(await translateToNaturalJapanese(removeBoilerplate(resultSentence)));
-  const jaConclusion = removeDesuMasuStrict(await translateToNaturalJapanese(removeBoilerplate(conclusionSentence)));
+  const jaAim = removeDesuMasuStrict(await translateToNaturalJapanese(removeBoilerplate(aimText)));
+  const jaMethod = removeDesuMasuStrict(await translateToNaturalJapanese(removeBoilerplate(methodText)));
+  const jaResult = removeDesuMasuStrict(await translateToNaturalJapanese(removeBoilerplate(resultText)));
+  const jaConclusion = removeDesuMasuStrict(await translateToNaturalJapanese(removeBoilerplate(conclusionText)));
 
   const nStr = sampleSize > 0 ? `N = ${sampleSize.toLocaleString()}例` : '症例数: 不明';
 
-  const line1 = `【概要】` + (jaAim || '不整脈治療におけるアブレーション手技の臨床有効性の検証') + ` (${studyTypeLabel} / ${nStr})`;
-  const line2 = `【方法】` + (jaMethod || 'カテーテル / パルスフィールドアブレーションのプロトコル実施');
-  const line3 = `【結果】` + (jaResult || '治療成功率および非再発率等主要評価項目を解析した');
-  const line4 = `【結論】` + (jaConclusion || '安全性を維持した有効な治療選択肢であることを示している');
+  const line1 = `【概要】` + (jaAim || '心血管疾患治療における臨床アプローチの検証') + ` (${studyTypeLabel} / ${nStr})`;
+  const line2 = `【方法】` + (jaMethod || '標準プロトコルに従った介入および評価の実施');
+  const line3 = `【結果】` + (jaResult || '主要評価項目および安全性の解析を行った');
+  const line4 = `【結論】` + (jaConclusion || '安全性を伴う有効な臨床選択肢であることを示した');
 
   return [line1, line2, line3, line4].join('\n');
 }
