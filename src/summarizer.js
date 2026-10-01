@@ -1,6 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import axios from 'axios';
 import dotenv from 'dotenv';
+import { fetchFreeArticleFullText, summarizeFromFullText } from './freeArticleFetcher.js';
 dotenv.config();
 
 let genAI = null;
@@ -11,7 +12,7 @@ if (process.env.GEMINI_API_KEY) {
 /**
  * 英語テキストを自然な日本語へ翻訳 (長文も端折らず全文章翻訳)
  */
-async function translateToNaturalJapanese(text) {
+export async function translateToNaturalJapanese(text) {
   if (!text || text.trim().length === 0) return '';
 
   const cleanText = text
@@ -66,7 +67,7 @@ async function translateToNaturalJapanese(text) {
 /**
  * 文中・文末のすべての「です」「ます」を完全排除し、常体（である・であった・を認めた）・体言止めに統一する徹底フィルター
  */
-function removeDesuMasuStrict(text) {
+export function removeDesuMasuStrict(text) {
   if (!text) return '';
   let s = String(text).trim();
 
@@ -408,19 +409,39 @@ export async function summarizePapers(papers, existingJsonPath = 'public/papers.
     const paper = papers[i];
     const pmidStr = String(paper.pmid);
 
-    // キャッシュに存在する場合は再利用してAPI呼び出しをスキップ
+    // キャッシュに存在する場合は再利用（ただしダミーの「PubMed抄録未掲載論文」テキストの場合は再評価）
     if (cachedPaperMap.has(pmidStr)) {
       const cached = cachedPaperMap.get(pmidStr);
-      paper.titleJa = cached.titleJa;
-      paper.summaryJa = cached.summaryJa;
-      paper.abstractJa = cached.abstractJa;
-      console.log(`[Summarizer] (${i + 1}/${papers.length}) ⚡ キャッシュ利用: PMID ${paper.pmid}`);
-      continue;
+      const isDummySummary = cached.summaryJa && cached.summaryJa.includes('PubMed抄録未掲載論文');
+      if (!isDummySummary) {
+        paper.titleJa = cached.titleJa;
+        paper.summaryJa = cached.summaryJa;
+        paper.abstractJa = cached.abstractJa;
+        console.log(`[Summarizer] (${i + 1}/${papers.length}) ⚡ キャッシュ利用: PMID ${paper.pmid}`);
+        continue;
+      }
     }
 
-    console.log(`[Summarizer] (${i + 1}/${papers.length}) 🤖 新規AI要約中: PMID ${paper.pmid} - ${paper.title.slice(0, 40)}...`);
+    console.log(`[Summarizer] (${i + 1}/${papers.length}) 🤖 新規要約処理中: PMID ${paper.pmid} - ${paper.title.slice(0, 40)}...`);
 
     paper.titleJa = await translateTitle(paper.title);
+
+    // 抄録がない場合、Free Article の本文を自動取得
+    const isNoAbstract = !paper.abstract || paper.abstract.includes('抄録なし') || paper.abstract.includes('Abstract not available');
+    if (isNoAbstract) {
+      console.log(`[Summarizer] PMID ${paper.pmid} は抄録未掲載です。Free Article 本文の探索を開始します...`);
+      const fullText = await fetchFreeArticleFullText(paper.pmid, paper.doi);
+      if (fullText) {
+        const fullSummary = await summarizeFromFullText(paper, fullText);
+        if (fullSummary && fullSummary.summaryJa) {
+          paper.summaryJa = fullSummary.summaryJa;
+          paper.abstractJa = fullSummary.abstractJa;
+          console.log(`[Summarizer] 🎉 PMID ${paper.pmid} Free Article 本文からの要約生成に成功！`);
+          continue;
+        }
+      }
+    }
+
     paper.summaryJa = await summarizeAbstract(paper.title, paper.abstract, paper.studyTypeLabel, paper.sampleSize);
     paper.abstractJa = await translateAbstractFull(paper.abstract);
 
