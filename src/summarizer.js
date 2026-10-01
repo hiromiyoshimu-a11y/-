@@ -430,7 +430,7 @@ export async function summarizePapers(papers, existingJsonPath = 'public/papers.
     const isNoAbstract = !paper.abstract || paper.abstract.includes('抄録なし') || paper.abstract.includes('Abstract not available');
     if (isNoAbstract) {
       console.log(`[Summarizer] PMID ${paper.pmid} は抄録未掲載です。Free Article 本文の探索を開始します...`);
-      const fullText = await fetchFreeArticleFullText(paper.pmid, paper.doi);
+      const fullText = await fetchFreeArticleFullText(paper.pmid, paper.doi, paper.title);
       if (fullText) {
         const fullSummary = await summarizeFromFullText(paper, fullText);
         if (fullSummary && fullSummary.summaryJa) {
