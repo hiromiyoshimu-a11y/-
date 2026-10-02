@@ -15,7 +15,7 @@ async function main() {
   console.log('====================================================');
 
   const daysPast = parseInt(process.env.DAYS_PAST || '90', 10);
-  const maxResults = parseInt(process.env.MAX_RESULTS || '50', 10);
+  const maxResults = parseInt(process.env.MAX_RESULTS || '100', 10);
 
   try {
     // 1. PubMedより論文データ取得

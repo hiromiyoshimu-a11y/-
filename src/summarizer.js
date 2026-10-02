@@ -20,18 +20,41 @@ export async function translateToNaturalJapanese(text) {
     .replace(/[\r\n]+/g, ' ')
     .trim();
 
-  // 1000文字を超える長文の場合は文単位で分割して全訳結合
   if (cleanText.length > 800) {
     const sentences = cleanText.split(/(?<=\. )/).filter(Boolean);
-    const translatedParts = [];
+    const chunks = [];
+    let currentChunk = '';
+
     for (const sent of sentences) {
-      if (!sent.trim()) continue;
-      const partJa = await translateToNaturalJapanese(sent);
+      if ((currentChunk + sent).length > 800) {
+        if (currentChunk) chunks.push(currentChunk);
+        if (sent.length > 800) {
+          for (let i = 0; i < sent.length; i += 800) {
+            chunks.push(sent.substring(i, i + 800));
+          }
+          currentChunk = '';
+        } else {
+          currentChunk = sent;
+        }
+      } else {
+        currentChunk += (currentChunk ? ' ' : '') + sent;
+      }
+    }
+    if (currentChunk) chunks.push(currentChunk);
+
+    const translatedParts = [];
+    for (const chunk of chunks) {
+      if (!chunk.trim()) continue;
+      const partJa = await _translateSingleChunk(chunk);
       translatedParts.push(partJa);
     }
     return translatedParts.join(' ');
   }
 
+  return await _translateSingleChunk(cleanText);
+}
+
+async function _translateSingleChunk(cleanText) {
   try {
     const url = 'https://translate.googleapis.com/translate_a/single';
     const res = await axios.get(url, {
@@ -61,7 +84,7 @@ export async function translateToNaturalJapanese(text) {
     }
   } catch {}
 
-  return text;
+  return cleanText;
 }
 
 /**
