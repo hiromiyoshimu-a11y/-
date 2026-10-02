@@ -71,25 +71,15 @@ export function removeDesuMasuStrict(text) {
   if (!text) return '';
   let s = String(text).trim();
 
-  // 資金提供文言・治験番号表記の完全削除
+  // 1. 資金提供文言・治験番号表記の完全削除
   s = s.replace(/\([^\)]*(?:資金提供|助成金|ClinicalTrials|NCT\d+|治験番号)[^\)]*\)/gi, '')
        .replace(/^(?:資金提供|助成金|ClinicalTrials|NCT\d+)[:\s].*/gi, '')
        .trim();
 
-  // JSON 化け文字列の防御
-  if (s.includes('{"_":') || s.includes('{ "_":')) {
-    try {
-      const parsed = JSON.parse(s);
-      if (parsed && parsed._) s = parsed._;
-    } catch {
-      s = s.replace(/\{\s*"_"\s*:\s*"([^"]+)"[^\}]*\}/g, '$1');
-    }
-  }
-
-  // 重複ラベルの削除
+  // 2. 重複ラベルの削除
   s = s.replace(/^(背景|目的|方法|結果|結論|背景・目的|対象|手技|主要成果|臨床要点)[:：\s]*/gi, '');
 
-  // 1. 否定・例外パターンの優先直置換（否定の破壊を防止）
+  // 3. 否定・例外パターンの優先直置換
   s = s.replace(/ではありませんでしたであった/g, 'ではなかった')
        .replace(/ではありませんでした/g, 'ではなかった')
        .replace(/ではありません/g, 'ではない')
@@ -104,32 +94,33 @@ export function removeDesuMasuStrict(text) {
        .replace(/ませんでしたであった/g, 'なかった')
        .replace(/ませんでした/g, 'なかった');
 
-  // 2. 助詞の重複・助詞崩れの補正
-  s = s.replace(/でを認めた/g, 'で認めた')
-       .replace(/をを/g, 'を')
-       .replace(/がを/g, 'が')
-       .replace(/にを/g, 'に')
-       .replace(/でを/g, 'で')
-       .replace(/機能しる/g, '機能する')
-       .replace(/確立しる/g, '確立する');
+  // 4. 過去形・受け身の丁寧語（行われました・定義されました等）の完全常体化
+  s = s.replace(/行われました/g, 'を行った')
+       .replace(/行われ/g, 'を行い')
+       .replace(/実施されました/g, 'を実施した')
+       .replace(/選択されました/g, 'を選択した')
+       .replace(/定義されました/g, 'と定義した')
+       .replace(/層別化されました/g, 'に層別化した')
+       .replace(/割り当てられました/g, 'に割り付けた')
+       .replace(/監視されました/g, 'で監視した')
+       .replace(/評価されました/g, 'を評価した')
+       .replace(/報告されました/g, 'と報告された')
+       .replace(/確認されました/g, 'を確認した')
+       .replace(/記録されました/g, 'を記録した');
 
-  // 3. 丁寧語（です・ます等）の正確な常体・体言止め変換
+  // 5. 一般的な丁寧語（です・ます等）の正確な常体・体言止め変換
   s = s.replace(/比較すること/g, 'の比較')
        .replace(/比較するこ/g, 'の比較')
        .replace(/観察されました/g, 'を認めた')
-       .replace(/観察された/g, 'を認めた')
-       .replace(/示されました/g, 'を示した')
-       .replace(/確認されました/g, 'を確認した')
        .replace(/認められました/g, 'を認めた')
+       .replace(/示されました/g, 'を示した')
        .replace(/収集しました/g, 'を解析した')
-       .replace(/評価されました/g, 'を評価した')
        .replace(/裏付けています/g, 'を裏付けるものである')
-       .replace(/裏付けてい/g, 'を裏付けるものである')
        .replace(/サポートする可能性があり/g, 'への寄与を示唆')
        .replace(/することができます/g, 'が可能である')
        .replace(/できます/g, 'できる')
        .replace(/となります/g, 'となる')
-       .replace(/になります/g, 'になる')
+       .replace(/になリます|になります/g, 'になる')
        .replace(/を行います/g, 'を行う')
        .replace(/行いました/g, 'を実施した')
        .replace(/されました/g, 'された')
@@ -143,8 +134,18 @@ export function removeDesuMasuStrict(text) {
        .replace(/[。.\s]+$/g, '')
        .trim();
 
-  // 4. 二重化の最終クリーニング
-  s = s.replace(/であったであった/g, 'であった')
+  // 6. 文頭の不自然な助詞（「を」「が」「で」スタート）や助詞＋動詞スタートの文法異常を100%修正
+  s = s.replace(/^(?:を|が|で|に|へ|より)(?:認めた|確認した|評価した|示した|解析した)?\s*/g, '');
+  s = s.replace(/^観察された/g, '');
+  s = s.replace(/^認められた/g, '');
+
+  // 7. 助詞の重複・文節の最終クリーニング
+  s = s.replace(/でを認めた/g, 'で認めた')
+       .replace(/をを/g, 'を')
+       .replace(/がを/g, 'が')
+       .replace(/にを/g, 'に')
+       .replace(/でを/g, 'で')
+       .replace(/であったであった/g, 'であった')
        .replace(/であったあった/g, 'であった');
 
   return s;
