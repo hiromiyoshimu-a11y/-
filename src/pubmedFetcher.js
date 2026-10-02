@@ -204,6 +204,26 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 15
       // 論文タイトルの完全テキスト抽出
       let title = cleanTextContent(article.ArticleTitle) || 'No title available';
 
+      // 書簡・手紙・コメント・Editorial (Letter, Response, Reply, Comment等) の厳格除外判定
+      const pubTypesRaw = article.PublicationTypeList?.PublicationType;
+      const pubTypes = Array.isArray(pubTypesRaw) ? pubTypesRaw : (pubTypesRaw ? [pubTypesRaw] : []);
+      const pubTypeNames = pubTypes.map(pt => extractTextContent(pt).toLowerCase());
+      const lowerTitle = title.toLowerCase();
+
+      const isLetterOrComment = pubTypeNames.some(pt => 
+        pt.includes('letter') || pt.includes('comment') || pt.includes('editorial') || 
+        pt.includes('erratum') || pt.includes('reply') || pt.includes('news') || pt.includes('correspondence')
+      ) || 
+      lowerTitle.startsWith('letter ') || lowerTitle.startsWith('letter:') || lowerTitle.includes('letter by ') || lowerTitle.includes('letter regarding') || lowerTitle.includes('letter to') ||
+      lowerTitle.startsWith('response ') || lowerTitle.startsWith('response:') || lowerTitle.includes('response by ') || lowerTitle.includes('response to ') || lowerTitle.includes('in response') ||
+      lowerTitle.startsWith('reply ') || lowerTitle.startsWith('reply:') || lowerTitle.includes('reply to ') || lowerTitle.includes('reply by ') || lowerTitle.includes('author reply') || lowerTitle.includes("author's reply") || lowerTitle.includes("authors' reply") ||
+      lowerTitle.startsWith('comment ') || lowerTitle.includes('comment on ') || lowerTitle.includes('comments on ') || lowerTitle.startsWith('editorial') || lowerTitle.includes('corrigendum');
+
+      if (isLetterOrComment) {
+        console.log(`[PubMed Fetcher] 🚫 書簡/手紙/回答/コメント論文を除外しました: PMID ${pmid} - ${title.slice(0, 50)}...`);
+        continue;
+      }
+
       // 雑誌情報
       const journal = article.Journal;
       const journalTitle = cleanTextContent(journal?.Title || journal?.ISOAbbreviation || 'Unknown Journal');
@@ -272,11 +292,6 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 15
       const url = `https://pubmed.ncbi.nlm.nih.gov/${pmid}/`;
 
       // 研究デザイン判定 & 症例数 (N) 抽出
-      const pubTypesRaw = article.PublicationTypeList?.PublicationType;
-      const pubTypes = Array.isArray(pubTypesRaw) ? pubTypesRaw : (pubTypesRaw ? [pubTypesRaw] : []);
-      const pubTypeNames = pubTypes.map(pt => extractTextContent(pt).toLowerCase());
-
-      const lowerTitle = title.toLowerCase();
       const lowerAbs = abstractText.toLowerCase();
 
       let designRank = 3;
