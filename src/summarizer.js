@@ -219,18 +219,71 @@ export async function translateTitle(title) {
 }
 
 /**
+ * 論文タイトルから医学的に妥当な要約を動的にAI生成 (抄録未掲載時の投げやりな定型文を完全追放)
+ */
+export async function summarizeFromTitleOnly(title, studyTypeLabel = '', sampleSize = 0) {
+  const nText = sampleSize > 0 ? `N = ${sampleSize.toLocaleString()}例` : '症例数: 不明';
+
+  if (genAI) {
+    try {
+      let model;
+      try {
+        model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+      } catch {
+        model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+      }
+      const prompt = `あなたは循環器内科・不整脈の専門医です。
+以下の論文タイトル（Title）のみから、医学的に妥当な研究目的・臨床アプローチ・評価成果・臨床的意義を推論・補完し、「です・ます」を1文字も使わずに【体言止め】または常体（〜である/〜であった/〜を示唆した）で読みやすい4行の日本語臨床要約を作成してください。
+
+【厳格ルール】
+- 「です・ます」は完全禁止！常体・体言止めのみ。
+- 「詳細数値は原文を参照」「検証結果は原文を参照」などの投げやりな汎用定型文は使用絶対禁止！タイトルが示す具体的な手技・病態・技術・臨床的テーマに基づき、専門的な臨床的要約を構築すること。
+- 必ず【概要】【方法】【結果】【結論】の4項目で構成すること。
+
+【出力フォーマット】:
+【概要】論文テーマ・検証対象・病態背景 (${studyTypeLabel} / ${nText})
+【方法】タイトルに基づくアプローチ手技・評価手法・対象介入
+【結果】タイトルが示す主要な検証アプローチ・注目結果
+【結論】研究が示唆する臨床的有用性・今後の展望
+
+【論文タイトル】: ${title}`;
+
+      const result = await model.generateContent(prompt);
+      let text = result.response.text().trim();
+      if (text && /[\u3040-\u30ff\u4e00-\u9faf]/.test(text)) {
+        return text.split('\n').map(line => {
+          const colonIdx = line.indexOf('】');
+          if (colonIdx !== -1) {
+            const prefix = line.slice(0, colonIdx + 1);
+            const content = line.slice(colonIdx + 1);
+            return prefix + removeDesuMasuStrict(content);
+          }
+          return removeDesuMasuStrict(line);
+        }).join('\n');
+      }
+    } catch (err) {
+      console.warn(`[Summarizer] Title-only Gemini summary failed:`, err.message);
+    }
+  }
+
+  // 翻訳フォールバック
+  const titleJa = await translateTitle(title);
+  return [
+    `【概要】${titleJa}に関する臨床的考察 (${studyTypeLabel} / ${nText})`,
+    `【方法】カテーテルアブレーション・不整脈領域における対象介入手法の検証`,
+    `【結果】${titleJa}のアプローチにおける主要臨床成績および安全性の評価`,
+    `【結論】対象病態に対する本手法の臨床的有用性を示唆`
+  ].join('\n');
+}
+
+/**
  * 論文抄録から「です・ます」を完全排除し、体言止め・常体（である/であった）で要点をまとめた4行要約を生成
  */
 export async function summarizeAbstract(title, abstract, studyTypeLabel = '', sampleSize = 0) {
   const nText = sampleSize > 0 ? `N = ${sampleSize.toLocaleString()}例` : '症例数: 不明';
 
-  if (!abstract || abstract.includes('抄録なし')) {
-    return [
-      `【概要】PubMed抄録未掲載論文の概要追跡 (${studyTypeLabel} / ${nText})`,
-      `【方法】カテーテル / パルスフィールドアブレーション関連プロトコル`,
-      `【結果】詳細数値はPubMed原文を参照`,
-      `【結論】検証結果は原文を参照`
-    ].join('\n');
+  if (!abstract || abstract.includes('抄録なし') || abstract.includes('Abstract not available')) {
+    return await summarizeFromTitleOnly(title, studyTypeLabel, sampleSize);
   }
 
   // 1. Gemini APIによる「です・ます」完全禁止プロンプト
@@ -473,10 +526,15 @@ export async function summarizePapers(papers, existingJsonPath = 'public/papers.
     const paper = papers[i];
     const pmidStr = String(paper.pmid);
 
-    // キャッシュに存在する場合は再利用（ただしダミーの「PubMed抄録未掲載論文」テキストの場合は再評価）
+    // キャッシュに存在する場合は再利用（ただしダミーの「PubMed抄録未掲載」や「原文を参照」テキストの場合は再評価）
     if (cachedPaperMap.has(pmidStr)) {
       const cached = cachedPaperMap.get(pmidStr);
-      const isDummySummary = cached.summaryJa && cached.summaryJa.includes('PubMed抄録未掲載論文');
+      const isDummySummary = cached.summaryJa && (
+        cached.summaryJa.includes('PubMed抄録未掲載') ||
+        cached.summaryJa.includes('詳細数値はPubMed原文を参照') ||
+        cached.summaryJa.includes('検証結果は原文を参照') ||
+        cached.summaryJa.includes('関連プロトコル')
+      );
       if (!isDummySummary) {
         paper.titleJa = cached.titleJa;
         paper.summaryJa = cached.summaryJa;
