@@ -318,21 +318,19 @@ export async function summarizeAbstract(title, abstract, studyTypeLabel = '', sa
         model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
       }
       const prompt = `あなたは循環器内科・不整脈の専門医です。
-以下の英語抄録（Abstract）を熟読し、「です」「ます」「でした」「されます」などの丁寧語は**1文字も絶対に使用せず**、**【体言止め】または「・・・である」「・・・であった」「・・・を認めた」「・・・を示した」**の常体表現のみを用いて、読みやすい日本語臨床要約（4項目）を作成してください。
+以下の英語抄録（Abstract）を熟読し、超多忙な臨床医がパッと見で10秒で内容を理解できるよう、**全体の長さを合計10行以内（およそ250〜350文字程度）にまとめたコンパクトで簡潔な日本語臨床要約（4項目）**を作成してください。
 
-【厳格な遵守ルール】
-- 「〜です」「〜ます」「〜でした」「〜されます」「〜となります」などの丁寧語表現は文頭・文中・文末を問わず完全禁止！
-- 必ず【概要】【方法】【結果】【結論】の4つの見出し項目のみで構成すること（「まとめ」の項目は不要）。
-- 【結論】には、抄録のCONCLUSION（結論）セクションの【最も主要な臨床的結論・主要成果（通常CONCLUSIONの第1文）】を絶対優先して採用すること！研究の限界（Limitation: 「単一群であるため〜」「確立することはできない〜」「さらなる検証が必要〜」など）や資金提供情報は結論の主文に絶対採用しないこと。
-- 資金提供情報 (Funded by...) や治験登録番号 (ClinicalTrials.gov...) は【結論】から絶対除外すること。
-- 症例数は数値がある場合は数字、不明な場合は「症例数: 不明」と明記すること。
-- タイトルや演題名は含めないこと。
+【文字数・長さの厳格ルール】
+- 全体で【合計10行以内（約300文字程度）】に必ず凝縮すること！ダラダラとした長文の直訳や、詳細な背景・試験プロトコルの長文列挙は絶対禁止。
+- 各項目（【概要】【方法】【結果】【結論】）はそれぞれ【1〜2文（各60〜90文字以内）】の短文ポイントでまとめること。
+- 「〜です」「〜ます」「〜でした」「〜されます」などの丁寧語表現は1文字も絶対に使用禁止！【体言止め】または常体（〜である/〜であった/〜を認めた）のみ。
+- 【結論】は最も主要な臨床成果・統計的結論を1文でズバリ提示すること。資金提供情報や治験番号、研究の限界は除外。
 
-【出力フォーマット】:
-【概要】研究の背景・検証目的・対象コホート (${studyTypeLabel} / ${nText})
-【方法】アプローチ手技・使用デバイス・評価プロトコル・追跡期間
-【結果】主要な成果数値（成功率・非再発率・PVI率・主要イベント率・p値・HR数値など）
-【結論】研究から得られた主要な結論・統計的解釈
+【出力フォーマット (合計10行以内・簡潔要約)】:
+【概要】研究目的と対象 (${studyTypeLabel} / ${nText})
+【方法】アプローチ手技・比較・主要評価プロトコル
+【結果】主要な成果数値（成功率・非再発率・PVI率・主要イベント率・HR値など短文で）
+【結論】研究から得られた主要結論
 
 【タイトル】: ${title}
 【抄録】: ${abstract}`;
@@ -447,12 +445,25 @@ async function buildStrictNoDesuMasuSummary(abstract, studyTypeLabel, sampleSize
   const jaResult = removeDesuMasuStrict(await translateToNaturalJapanese(removeBoilerplate(resultText)));
   const jaConclusion = removeDesuMasuStrict(await translateToNaturalJapanese(removeBoilerplate(conclusionText)));
 
+  const truncateLine = (str, maxLen = 90) => {
+    if (!str) return '';
+    const clean = str.trim();
+    if (clean.length <= maxLen) return clean;
+    const firstSent = clean.split(/(?<=[。．\n])/)[0];
+    return (firstSent.length > 15 && firstSent.length <= maxLen) ? firstSent : clean.slice(0, maxLen) + '…';
+  };
+
+  const jaAimShort = truncateLine(jaAim, 85);
+  const jaMethodShort = truncateLine(jaMethod, 85);
+  const jaResultShort = truncateLine(jaResult, 110);
+  const jaConclusionShort = truncateLine(jaConclusion, 90);
+
   const nStr = sampleSize > 0 ? `N = ${sampleSize.toLocaleString()}例` : '症例数: 不明';
 
-  const line1 = `【概要】` + (jaAim || '心血管疾患治療における臨床アプローチの検証') + ` (${studyTypeLabel} / ${nStr})`;
-  const line2 = `【方法】` + (jaMethod || '標準プロトコルに従った介入および評価の実施');
-  const line3 = `【結果】` + (jaResult || '主要評価項目および安全性の解析を行った');
-  const line4 = `【結論】` + (jaConclusion || '安全性を伴う有効な臨床選択肢であることを示した');
+  const line1 = `【概要】` + (jaAimShort || '心血管疾患治療における臨床アプローチの検証') + ` (${studyTypeLabel} / ${nStr})`;
+  const line2 = `【方法】` + (jaMethodShort || '標準プロトコルに従った介入および評価の実施');
+  const line3 = `【結果】` + (jaResultShort || '主要評価項目および安全性の解析を実施');
+  const line4 = `【結論】` + (jaConclusionShort || '安全性を伴う有効な臨床選択肢であることを提示');
 
   return [line1, line2, line3, line4].join('\n');
 }
