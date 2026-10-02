@@ -108,20 +108,23 @@ function formatAbstractStructured(absNode) {
 export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 100) {
   const keywordTerm = `("catheter ablation"[Title/Abstract] OR "pulsed field ablation"[Title/Abstract] OR "arrhythmia"[Title/Abstract] OR "arrhythmias"[Title/Abstract] OR "catheter ablation"[MeSH Terms] OR "pulsed field ablation"[MeSH Terms] OR "arrhythmias, cardiac"[MeSH Terms])`;
 
-  // 各主要雑誌グループ
+  // 各主要雑誌グループ (全12グループ)
   const journalGroups = [
+    { name: 'European Heart Journal (EHJ)', query: '("European Heart Journal"[Journal] OR "Eur Heart J"[Journal])' },
+    { name: 'Circulation', query: '("Circulation"[Journal])' },
     { name: 'Journal of Arrhythmia (JoA)', query: '("Journal of Arrhythmia"[Journal] OR "J Arrhythm"[Journal])' },
-    { name: 'Circulation', query: '("Circulation"[Journal] OR "Circ Genom Precis Med"[Journal])' },
-    { name: 'European Heart Journal (EHJ)', query: '("European Heart Journal"[Journal] OR "Eur Heart J"[Journal] OR "Eur Heart J Case Rep"[Journal])' },
-    { name: '和文誌 心電図', query: '("Shin-denzu"[Journal] OR "Japanese Journal of Electrocardiology"[Journal] OR "Shinzo"[Journal])' },
-    { name: 'Heart Rhythm', query: '("Heart Rhythm"[Journal] OR "Heart Rhythm O2"[Journal] OR "Heart Rhythm Case Rep"[Journal])' },
+    { name: 'Heart Rhythm', query: '("Heart Rhythm"[Journal] OR "Heart Rhythm O2"[Journal])' },
     { name: 'EP Europace', query: '("Europace"[Journal])' },
     { name: 'JACC EP', query: '("JACC Clin Electrophysiol"[Journal])' },
     { name: 'Circ EP', query: '("Circ Arrhythm Electrophysiol"[Journal])' },
-    { name: 'JCE / NEJM / Others', query: '("J Cardiovasc Electrophysiol"[Journal] OR "J Interv Card Electrophysiol"[Journal] OR "N Engl J Med"[Journal] OR "Nat Med"[Journal])' }
+    { name: 'JCE', query: '("J Cardiovasc Electrophysiol"[Journal])' },
+    { name: 'JICE', query: '("J Interv Card Electrophysiol"[Journal])' },
+    { name: 'Heart Rhythm Case Rep', query: '("Heart Rhythm Case Rep"[Journal])' },
+    { name: 'NEJM / Nat Med', query: '("N Engl J Med"[Journal] OR "Nat Med"[Journal])' },
+    { name: '和文誌 心電図', query: '("Shin-denzu"[Journal] OR "Japanese Journal of Electrocardiology"[Journal] OR "Shinzo"[Journal])' }
   ];
 
-  console.log(`[PubMed Fetcher] 各主要雑誌 (${journalGroups.map(g => g.name).join(', ')}) から過去${daysPast}日間の論文をバランス良く収集します...`);
+  console.log(`[PubMed Fetcher] 全${journalGroups.length}の対象主要雑誌から過去${daysPast}日間の論文を均等に収集します...`);
 
   let allIds = [];
   const searchUrl = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi';
@@ -136,7 +139,7 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 10
           reldate: daysPast,
           datetype: 'pdat',
           sort: 'pub_date',
-          retmax: 15,
+          retmax: 5,
           retmode: 'json'
         }
       });

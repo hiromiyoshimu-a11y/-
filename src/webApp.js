@@ -201,11 +201,13 @@ function updateJournalOptions() {
     { value: 'europace', label: 'EP Europace' },
     { value: 'heart rhythm', label: 'Heart Rhythm' },
     { value: 'jacc', label: 'JACC EP' },
-    { value: '心電図', label: '和文誌『心電図』' },
+    { value: 'circ arrhythm', label: 'Circ EP' },
     { value: 'interventional', label: 'JICE' },
     { value: 'cardiovascular', label: 'JCE' },
     { value: 'case reports', label: 'Heart Rhythm Case Rep' },
-    { value: 'england', label: 'NEJM' }
+    { value: 'england', label: 'NEJM' },
+    { value: 'nature medicine', label: 'Nature Medicine' },
+    { value: '心電図', label: '和文誌『心電図』' }
   ];
 
   allPapers.forEach(paper => {
@@ -216,7 +218,7 @@ function updateJournalOptions() {
   });
 
   const totalJournalsCount = Object.keys(journalCounts).length;
-  let optionsHtml = `<option value="all">📚 すべての雑誌 (全${totalJournalsCount}誌)</option>`;
+  let optionsHtml = `<option value="all">📚 すべての対象誌 (${totalJournalsCount}誌ヒット)</option>`;
 
   const addedKeys = new Set();
 
