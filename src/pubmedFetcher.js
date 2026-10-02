@@ -103,16 +103,16 @@ function formatAbstractStructured(absNode) {
 }
 
 /**
- * PubMed APIから過去3ヶ月の指定9誌（EP Europace, Heart Rhythm, JICE, JACC EP, Circ EP, Heart Rhythm Case Rep, JCE, Nat Med, NEJM）の論文を取得
+ * PubMed APIから過去3ヶ月の指定主要雑誌（Heart Rhythm, Europace, JACC EP, Circ EP, JCE, Circulation, Eur Heart J, J Arrhythm, 心電図 等）の論文を取得
  */
 export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 100) {
   const keywordTerm = `("catheter ablation"[Title/Abstract] OR "pulsed field ablation"[Title/Abstract] OR "arrhythmia"[Title/Abstract] OR "arrhythmias"[Title/Abstract] OR "catheter ablation"[MeSH Terms] OR "pulsed field ablation"[MeSH Terms] OR "arrhythmias, cardiac"[MeSH Terms])`;
   
-  const journalQuery = `("Europace"[Journal] OR "Heart Rhythm"[Journal] OR "Heart Rhythm O2"[Journal] OR "J Interv Card Electrophysiol"[Journal] OR "JACC Clin Electrophysiol"[Journal] OR "Circ Arrhythm Electrophysiol"[Journal] OR "Heart Rhythm Case Rep"[Journal] OR "J Cardiovasc Electrophysiol"[Journal] OR "Nat Med"[Journal] OR "Nature Medicine"[Journal] OR "N Engl J Med"[Journal] OR "New England Journal of Medicine"[Journal])`;
+  const journalQuery = `("Europace"[Journal] OR "Heart Rhythm"[Journal] OR "Heart Rhythm O2"[Journal] OR "J Interv Card Electrophysiol"[Journal] OR "JACC Clin Electrophysiol"[Journal] OR "Circ Arrhythm Electrophysiol"[Journal] OR "Heart Rhythm Case Rep"[Journal] OR "J Cardiovasc Electrophysiol"[Journal] OR "Nat Med"[Journal] OR "Nature Medicine"[Journal] OR "N Engl J Med"[Journal] OR "New England Journal of Medicine"[Journal] OR "Journal of Arrhythmia"[Journal] OR "J Arrhythm"[Journal] OR "Circulation"[Journal] OR "European Heart Journal"[Journal] OR "Eur Heart J"[Journal] OR "Shin-denzu"[Journal] OR "Japanese Journal of Electrocardiology"[Journal] OR "Shinzo"[Journal])`;
 
   const searchTerm = `${keywordTerm} AND ${journalQuery}`;
 
-  console.log(`[PubMed Fetcher] PubMedから過去${daysPast}日間の指定9誌論文を検索中...`);
+  console.log(`[PubMed Fetcher] PubMedから過去${daysPast}日間の対象主要雑誌論文を検索中...`);
 
   // 1. esearch.fcgi
   const searchUrl = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi';
