@@ -165,6 +165,9 @@ async function loadPaperData() {
 
   allPapers = data.papers || [];
 
+  // 雑誌フィルターを論文データから動的に生成・更新
+  updateJournalOptions();
+
   // 新着数およびメタ情報更新
   const newCount = data.newCount || allPapers.filter(p => p.isNew).length;
   document.getElementById('updatedDateBadge').textContent = `📅 最終更新: ${data.updatedAt || '2026-09-29'}`;
@@ -179,6 +182,69 @@ async function loadPaperData() {
   }
 
   renderPapers();
+}
+
+/**
+ * 論文データに含まれるすべての雑誌を抽出し、ドロップダウンを動的に更新
+ */
+function updateJournalOptions() {
+  const journalSelect = document.getElementById('journalSelect');
+  if (!journalSelect) return;
+
+  const currentSelection = journalSelect.value;
+  const journalCounts = {};
+
+  const predefined = [
+    { value: 'eur heart j', label: 'European Heart Journal (EHJ)' },
+    { value: 'circulation', label: 'Circulation' },
+    { value: 'j arrhythm', label: 'Journal of Arrhythmia (JoA)' },
+    { value: 'europace', label: 'EP Europace' },
+    { value: 'heart rhythm', label: 'Heart Rhythm' },
+    { value: 'jacc', label: 'JACC EP' },
+    { value: '心電図', label: '和文誌『心電図』' },
+    { value: 'interventional', label: 'JICE' },
+    { value: 'cardiovascular', label: 'JCE' },
+    { value: 'case reports', label: 'Heart Rhythm Case Rep' },
+    { value: 'england', label: 'NEJM' }
+  ];
+
+  allPapers.forEach(paper => {
+    const j = (paper.journalAbbr || paper.journal || '').trim();
+    if (j) {
+      journalCounts[j] = (journalCounts[j] || 0) + 1;
+    }
+  });
+
+  const totalJournalsCount = Object.keys(journalCounts).length;
+  let optionsHtml = `<option value="all">📚 すべての雑誌 (全${totalJournalsCount}誌)</option>`;
+
+  const addedKeys = new Set();
+
+  predefined.forEach(p => {
+    const matchCount = allPapers.filter(paper => {
+      const jTitle = (paper.journal || '').toLowerCase();
+      const jAbbr = (paper.journalAbbr || '').toLowerCase();
+      return jTitle.includes(p.value) || jAbbr.includes(p.value);
+    }).length;
+
+    if (matchCount > 0) {
+      optionsHtml += `<option value="${p.value}">${p.label} (${matchCount}件)</option>`;
+      addedKeys.add(p.value);
+    }
+  });
+
+  Object.keys(journalCounts).forEach(j => {
+    const lowerJ = j.toLowerCase();
+    const isCovered = Array.from(addedKeys).some(val => lowerJ.includes(val));
+    if (!isCovered) {
+      optionsHtml += `<option value="${lowerJ}">${j} (${journalCounts[j]}件)</option>`;
+    }
+  });
+
+  journalSelect.innerHTML = optionsHtml;
+  if (currentSelection && Array.from(journalSelect.options).some(o => o.value === currentSelection)) {
+    journalSelect.value = currentSelection;
+  }
 }
 
 /**
