@@ -39,7 +39,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DAYS_PAST: 90
-          MAX_RESULTS: 80
+          MAX_RESULTS: 150
           NOTIFICATION_EMAIL: 'hiromiyoshimu@gmail.com'
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}

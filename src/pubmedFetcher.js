@@ -105,7 +105,7 @@ function formatAbstractStructured(absNode) {
 /**
  * PubMed APIから過去3ヶ月の指定主要雑誌（Heart Rhythm, Europace, JACC EP, Circ EP, JCE, Circulation, Eur Heart J, J Arrhythm, 心電図 等）の論文をバランス良く取得
  */
-export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 100) {
+export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 150) {
   const keywordTerm = `("catheter ablation"[Title/Abstract] OR "pulsed field ablation"[Title/Abstract] OR "arrhythmia"[Title/Abstract] OR "arrhythmias"[Title/Abstract] OR "catheter ablation"[MeSH Terms] OR "pulsed field ablation"[MeSH Terms] OR "arrhythmias, cardiac"[MeSH Terms])`;
 
   // 各主要雑誌グループ (全12グループ)
@@ -124,7 +124,7 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 10
     { name: '和文誌 心電図', query: '("Shin-denzu"[Journal] OR "Japanese Journal of Electrocardiology"[Journal] OR "Shinzo"[Journal])' }
   ];
 
-  console.log(`[PubMed Fetcher] 全${journalGroups.length}の対象主要雑誌から過去${daysPast}日間の論文を均等に収集します...`);
+  console.log(`[PubMed Fetcher] 全${journalGroups.length}の対象主要雑誌から過去${daysPast}日間の論文を各誌10本ずつ均等に収集します...`);
 
   let allIds = [];
   const searchUrl = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi';
@@ -139,7 +139,7 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 10
           reldate: daysPast,
           datetype: 'pdat',
           sort: 'pub_date',
-          retmax: 5,
+          retmax: 10,
           retmode: 'json'
         }
       });
@@ -149,6 +149,8 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 10
     } catch (err) {
       console.warn(`[PubMed Fetcher] ${group.name} 取得エラー:`, err.message);
     }
+    // NCBI API レートリミット (429 Error) 回避のため短いウェイトを挿入
+    await new Promise(resolve => setTimeout(resolve, 400));
   }
 
   // 重複IDの除去
