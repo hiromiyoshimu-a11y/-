@@ -74,6 +74,7 @@
         <button class="tab-btn" data-filter="prospective">🔵 前向き研究</button>
         <button class="tab-btn" data-filter="case">🔴 症例報告</button>
         <button class="tab-btn" data-filter="bookmarks">❤️ ブックマーク</button>
+        <button class="tab-btn" data-filter="read" id="readTabBtn">☑ 既読 (0)</button>
       </div>
 
       <div class="secondary-filters">
@@ -86,6 +87,10 @@
           <option value="date">🕒 掲載日順 (新しい順)</option>
           <option value="sampleSize">👥 症例数順 (多い順)</option>
         </select>
+
+        <button id="toggleShowReadBtn" class="styled-toggle-btn" title="既読の論文も一覧に含めて表示します">
+          👁️ 既読も表示
+        </button>
       </div>
     </header>
 

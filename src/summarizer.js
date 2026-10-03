@@ -2,6 +2,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import axios from 'axios';
 import dotenv from 'dotenv';
 import { fetchFreeArticleFullText, summarizeFromFullText } from './freeArticleFetcher.js';
+import { jhrsPromptInstructions, normalizeJhrsTerms } from './jhrsTermsHelper.js';
 dotenv.config();
 
 let genAI = null;
@@ -65,7 +66,7 @@ async function _translateSingleChunk(cleanText) {
     if (res.data && res.data[0]) {
       const trans = res.data[0].map(part => part[0]).filter(Boolean).join('');
       if (trans && /[\u3040-\u30ff\u4e00-\u9faf]/.test(trans)) {
-        return trans;
+        return normalizeJhrsTerms(trans);
       }
     }
   } catch {}
@@ -79,7 +80,7 @@ async function _translateSingleChunk(cleanText) {
     if (res.data && Array.isArray(res.data)) {
       const trans = res.data.join('');
       if (trans && /[\u3040-\u30ff\u4e00-\u9faf]/.test(trans)) {
-        return trans;
+        return normalizeJhrsTerms(trans);
       }
     }
   } catch {}
@@ -169,9 +170,8 @@ export function removeDesuMasuStrict(text) {
        .replace(/にを/g, 'に')
        .replace(/でを/g, 'で')
        .replace(/であったであった/g, 'であった')
-       .replace(/であったあった/g, 'であった');
-
-  return s;
+  // 8. 日本不整脈心電学会 (JHRS) 公式用語標準化
+  return normalizeJhrsTerms(s);
 }
 
 /**
@@ -189,6 +189,7 @@ export async function translateTitle(title) {
         model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
       }
       const prompt = `あなたは医学論文の専門翻訳者です。
+${jhrsPromptInstructions}
 以下の英語タイトルを、「です・ます」を**1文字も使わず**、必ず**【体言止め（〜の比較、〜の評価、〜の検討など）】**で簡潔かつ自然な日本語タイトルに翻訳してください。日本語タイトルのみを出力してください。\n\n${title}`;
       const result = await model.generateContent(prompt);
       const text = result.response.text().trim();

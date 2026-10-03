@@ -1,0 +1,1970 @@
+[
+  {
+    "en": "1:1 arrhythmia",
+    "ja": "1：1不整脈"
+  },
+  {
+    "en": "64-channel overlapped waveform",
+    "ja": "64チャネル重ね合せ波形"
+  },
+  {
+    "en": "ablation",
+    "ja": "焼灼、アブレーション"
+  },
+  {
+    "en": "absent sinus node",
+    "ja": "洞結節欠損"
+  },
+  {
+    "en": "accessory pathway division procedure",
+    "ja": "副伝導路切断術"
+  },
+  {
+    "en": "acetylcholine-activated potassium channel",
+    "ja": "アセチルコリン感受性カリウム（K+）チャネル"
+  },
+  {
+    "en": "action potential",
+    "ja": "活動電位"
+  },
+  {
+    "en": "action potential amplitude",
+    "ja": "活動電位高（振幅）"
+  },
+  {
+    "en": "action potential duration （APD)",
+    "ja": "活動電位持続時間"
+  },
+  {
+    "en": "activation map",
+    "ja": "電位時相（興奮）マップ"
+  },
+  {
+    "en": "activation recovery interval",
+    "ja": "興奮回復間隔（時間）"
+  },
+  {
+    "en": "active standing",
+    "ja": "能動立位"
+  },
+  {
+    "en": "activity-sensor",
+    "ja": "活動センサー"
+  },
+  {
+    "en": "adaptive AV delay",
+    "ja": "アダプティブＡＶディレイ"
+  },
+  {
+    "en": "adenosine triphosphate test",
+    "ja": "ATPテスト"
+  },
+  {
+    "en": "adenosine triphosphate （ATP)",
+    "ja": "アデノシン三リン酸"
+  },
+  {
+    "en": "AED(automatic external defibrillator )",
+    "ja": "自動体外式除細動器"
+  },
+  {
+    "en": "afterdepolarization",
+    "ja": "後脱分極"
+  },
+  {
+    "en": "allele",
+    "ja": "対立遺伝子"
+  },
+  {
+    "en": "ampulla cardiomyopathy",
+    "ja": "たこつぼ［型］心筋症"
+  },
+  {
+    "en": "analogue filter",
+    "ja": "アナログフィルター"
+  },
+  {
+    "en": "anisotropic reentry",
+    "ja": "異方［向］性リエントリー"
+  },
+  {
+    "en": "antenna box",
+    "ja": "アンテナボックス"
+  },
+  {
+    "en": "anterior AV node",
+    "ja": "前方房室結節"
+  },
+  {
+    "en": "anticoagulation therapy",
+    "ja": "抗凝固療法"
+  },
+  {
+    "en": "antiplatelet  therapy",
+    "ja": "抗血小板療法"
+  },
+  {
+    "en": "antitachycardia pacing",
+    "ja": "抗頻拍ペーシング"
+  },
+  {
+    "en": "antithrombotic therapy",
+    "ja": "抗血栓療法"
+  },
+  {
+    "en": "arrhythmogenic right ventricular cardiomyopathy",
+    "ja": "催不整脈性右室心筋症、\n不整脈原（源）性右室心筋症"
+  },
+  {
+    "en": "artifact（artefact）",
+    "ja": "人工産物、アーティファクト"
+  },
+  {
+    "en": "asplenia",
+    "ja": "無脾症［候群］"
+  },
+  {
+    "en": "ATP sensitive （dependent） potassium channel",
+    "ja": "ATP感受性（依存性）カリウム（K+）チャネル"
+  },
+  {
+    "en": "ATP-sensitive potassium current",
+    "ja": "ATP感受性カリウム（K+）電流"
+  },
+  {
+    "en": "atrial mapping",
+    "ja": "心房マッピング"
+  },
+  {
+    "en": "automaticity",
+    "ja": "自動能［性］"
+  },
+  {
+    "en": "autosomal dominant inheritance",
+    "ja": "常染色体優性遺伝"
+  },
+  {
+    "en": "autosomal recessive inheritance",
+    "ja": "常染色体劣性遺伝"
+  },
+  {
+    "en": "axial resistance",
+    "ja": "軸抵抗"
+  },
+  {
+    "en": "Bachmann&#039;s bundle",
+    "ja": "バッハマン（Bachmann）束"
+  },
+  {
+    "en": "background current",
+    "ja": "背景電流"
+  },
+  {
+    "en": "band-pass filter",
+    "ja": "帯域濾波"
+  },
+  {
+    "en": "baroreflex sensitivity",
+    "ja": "圧［受容体］反射感受性"
+  },
+  {
+    "en": "baseline correction",
+    "ja": "基線補正"
+  },
+  {
+    "en": "Bazett&#039;s correction",
+    "ja": "バゼット（Bazett）補正"
+  },
+  {
+    "en": "biatrial appendage preservation maze procedure",
+    "ja": "両心耳温存メイズ手術"
+  },
+  {
+    "en": "bidirectional digital filter",
+    "ja": "双方向性デジタルフィルター"
+  },
+  {
+    "en": "biological signal",
+    "ja": "生体信号"
+  },
+  {
+    "en": "biphasic waveform defibrillation",
+    "ja": "2相性波除細動"
+  },
+  {
+    "en": "bipolar lead",
+    "ja": "双極誘導"
+  },
+  {
+    "en": "bipolar radiofrequency ablation device",
+    "ja": "双極高周波アブレーションデバイス"
+  },
+  {
+    "en": "biventricular pacemaker",
+    "ja": "両心室ペースメーカ"
+  },
+  {
+    "en": "blanking period",
+    "ja": "ブランキング時間"
+  },
+  {
+    "en": "body surface potential mapping",
+    "ja": "体表面電位［分布図］作製"
+  },
+  {
+    "en": "box counting",
+    "ja": "ボックスカウンティング"
+  },
+  {
+    "en": "box lesion",
+    "ja": "ボックスリージョン"
+  },
+  {
+    "en": "brain natriuretic peptides （BNP）",
+    "ja": "脳性ナトリウム利尿ペプチド"
+  },
+  {
+    "en": "Brugada sign",
+    "ja": "ブルガダ（Brugada）徴候"
+  },
+  {
+    "en": "Brugada syndrome",
+    "ja": "ブルガダ（Brugada）症候群"
+  },
+  {
+    "en": "bump phenomenon",
+    "ja": "バンプ現象"
+  },
+  {
+    "en": "bundle branch reentry",
+    "ja": "脚[枝]間リエントリー頻拍"
+  },
+  {
+    "en": "calcium channel current",
+    "ja": "カルシウム（Ca2+）チャネル電流"
+  },
+  {
+    "en": "calcium pump",
+    "ja": "カルシウム（Ca2+）ポンプ"
+  },
+  {
+    "en": "calcium release channel",
+    "ja": "カルシウム（Ca2+）放出チャネル"
+  },
+  {
+    "en": "calcium spike",
+    "ja": "カルシウム棘波（スパイク）"
+  },
+  {
+    "en": "calcium store",
+    "ja": "カルシウム（Ca2+）貯蔵"
+  },
+  {
+    "en": "calcium transient",
+    "ja": "初期カルシウム（Ca2+）濃度変化（カルシウムトランジエント）"
+  },
+  {
+    "en": "calcium uptake",
+    "ja": "カルシウム（Ca2+）取込み"
+  },
+  {
+    "en": "calcium-induced calcium release",
+    "ja": "カルシウム（Ca2+）［誘発］放出"
+  },
+  {
+    "en": "capacitive current",
+    "ja": "容量電流"
+  },
+  {
+    "en": "capture",
+    "ja": "捕捉"
+  },
+  {
+    "en": "cardiac arrest",
+    "ja": "心停止"
+  },
+  {
+    "en": "cardiac magnetic field strength",
+    "ja": "心臓磁場強度"
+  },
+  {
+    "en": "cardiac resynchronization therapy （CRT）",
+    "ja": "心臓再同期療法"
+  },
+  {
+    "en": "cardiac standstill",
+    "ja": "心静止"
+  },
+  {
+    "en": "cardiac time interval",
+    "ja": "?時間指標"
+  },
+  {
+    "en": "carotid sinus massage",
+    "ja": "頚動脈洞マッサージ"
+  },
+  {
+    "en": "catecholaminergic polymorphic ventricular tachycardia",
+    "ja": "カテコラミン誘発性多形性心室頻拍"
+  },
+  {
+    "en": "catheter maze ablation",
+    "ja": "カテーテルメイズ法"
+  },
+  {
+    "en": "cDNA（complementary DNA）",
+    "ja": "相補的DNA"
+  },
+  {
+    "en": "chaotic atrial rhythm",
+    "ja": "無秩序型心房調律"
+  },
+  {
+    "en": "chaotic atrial tachycardia",
+    "ja": "無秩序型心房頻拍"
+  },
+  {
+    "en": "charring",
+    "ja": "炭化"
+  },
+  {
+    "en": "chloride current",
+    "ja": "塩素［イオン］電流"
+  },
+  {
+    "en": "cholinergic nerve fiber",
+    "ja": "コリン作動神経"
+  },
+  {
+    "en": "class I antiarrhythmic agents",
+    "ja": "I群抗不整脈薬"
+  },
+  {
+    "en": "class II antiarrhythmic agents",
+    "ja": "II群抗不整脈薬"
+  },
+  {
+    "en": "class III antiarrhythmic agents",
+    "ja": "III群抗不整脈薬"
+  },
+  {
+    "en": "class IV antiarrhythmic agents",
+    "ja": "IV群抗不整脈薬"
+  },
+  {
+    "en": "clinical pharmacology",
+    "ja": "臨床薬理学"
+  },
+  {
+    "en": "complex fractionated atrial electrogram (CFAE)",
+    "ja": "複雑性分裂心房電位"
+  },
+  {
+    "en": "concordant",
+    "ja": "一致した"
+  },
+  {
+    "en": "conductance",
+    "ja": "コンダクタンス"
+  },
+  {
+    "en": "conduction block",
+    "ja": "伝導ブロック"
+  },
+  {
+    "en": "cool-tip catheter",
+    "ja": "先端冷却カテーテル"
+  },
+  {
+    "en": "cost benefit of the measure",
+    "ja": "医療経済効率"
+  },
+  {
+    "en": "crosstalk",
+    "ja": "クロストーク（交叉干渉）"
+  },
+  {
+    "en": "cryoablation",
+    "ja": "冷凍（凍結）凝固アブレーション"
+  },
+  {
+    "en": "current arrow map (cAM)",
+    "ja": "電流アロー図"
+  },
+  {
+    "en": "current voltage relation",
+    "ja": "膜電流電圧関係"
+  },
+  {
+    "en": "current-ratio map",
+    "ja": "カレントレイシオマップ"
+  },
+  {
+    "en": "cut and sew",
+    "ja": "切開再縫合"
+  },
+  {
+    "en": "defibrillation threshold",
+    "ja": "除細動閾値"
+  },
+  {
+    "en": "delayed afterdepolarization",
+    "ja": "遅延後脱分極"
+  },
+  {
+    "en": "delayed rectifier potassium current",
+    "ja": "遅延整流カリウム（K+）電流"
+  },
+  {
+    "en": "delayed rectifying potassium channel",
+    "ja": "遅延整流カリウム（K+）チャネル"
+  },
+  {
+    "en": "depolarization",
+    "ja": "脱分極"
+  },
+  {
+    "en": "dewar",
+    "ja": "デュワ"
+  },
+  {
+    "en": "diastolic depolarization",
+    "ja": "拡張期脱分極"
+  },
+  {
+    "en": "digitalis toxicity",
+    "ja": "ジギタリス中毒"
+  },
+  {
+    "en": "direct-current electrical cardioversion",
+    "ja": "直流通電"
+  },
+  {
+    "en": "discordant",
+    "ja": "不一致の"
+  },
+  {
+    "en": "domain",
+    "ja": "ドメイン（領域）"
+  },
+  {
+    "en": "dominant negative mutation",
+    "ja": "優性ネガティブ変異"
+  },
+  {
+    "en": "Donnan&#039;s ［membrane］ equilibrium",
+    "ja": "ドナン（Donnan）［の膜］平衡"
+  },
+  {
+    "en": "Dor&#039;s procedure",
+    "ja": "ドール（Dor）手術"
+  },
+  {
+    "en": "double counting",
+    "ja": "二重検出"
+  },
+  {
+    "en": "drop attacks （fall）",
+    "ja": "転倒発作"
+  },
+  {
+    "en": "drug intoxicity",
+    "ja": "薬物中毒"
+  },
+  {
+    "en": "drug-induced arrhythmia",
+    "ja": "薬剤［誘発］性不整脈"
+  },
+  {
+    "en": "drug-induced atrioventricular block",
+    "ja": "薬剤（誘発）性房室ブロック"
+  },
+  {
+    "en": "dual chamber pacemaker",
+    "ja": "デュアル（二腔）チャンバーペースメーカ"
+  },
+  {
+    "en": "dual current vector diagram",
+    "ja": "デュアル電流ベクトルダイアグラム"
+  },
+  {
+    "en": "dual sinus node",
+    "ja": "二重洞結節"
+  },
+  {
+    "en": "dual （twin） AV node",
+    "ja": "二重房室結節"
+  },
+  {
+    "en": "dual-chamber ICD",
+    "ja": "デｭアルチャンバー（二腔）ICD"
+  },
+  {
+    "en": "dynamic AV delay",
+    "ja": "ダイナミック AV ディレイ"
+  },
+  {
+    "en": "earliest activation site",
+    "ja": "最早期興奮部位"
+  },
+  {
+    "en": "early Afterdepolarization",
+    "ja": "早期後脱分極"
+  },
+  {
+    "en": "early repolarization syndrome",
+    "ja": "早期再分極症候群"
+  },
+  {
+    "en": "ECG transportation",
+    "ja": "心電図伝送"
+  },
+  {
+    "en": "effective refractory period",
+    "ja": "有効不応期"
+  },
+  {
+    "en": "efflux",
+    "ja": "外向き流束"
+  },
+  {
+    "en": "elective replacement indicator (ERI)",
+    "ja": "選択的交換指標"
+  },
+  {
+    "en": "electrical remodeling",
+    "ja": "電気的リモデリング"
+  },
+  {
+    "en": "electrical scar tissue",
+    "ja": "電気的瘢痕組織"
+  },
+  {
+    "en": "electrical storm",
+    "ja": "電気的嵐（ストーム）"
+  },
+  {
+    "en": "electro-anatomical mapping",
+    "ja": "電気解剖マッピング"
+  },
+  {
+    "en": "electro-chemical potential gradient",
+    "ja": "電気化学電位勾配"
+  },
+  {
+    "en": "electro-mechanical dissociation",
+    "ja": "興奮収縮解離"
+  },
+  {
+    "en": "electrogenic pump",
+    "ja": "起電性ポンプ"
+  },
+  {
+    "en": "electromagnetic interference",
+    "ja": "電磁波干渉"
+  },
+  {
+    "en": "electrotonic potential",
+    "ja": "電気緊張電位"
+  },
+  {
+    "en": "encircling endocardial ventriculotomy",
+    "ja": "円周状心内膜切開術（全周性心内膜心室切開術）"
+  },
+  {
+    "en": "end-of-life （EOL）",
+    "ja": "交換指標"
+  },
+  {
+    "en": "endless loop tachycardia",
+    "ja": "エンドレスループ（無限旋回環）頻拍"
+  },
+  {
+    "en": "endocardial approach",
+    "ja": "心内膜アプローチ"
+  },
+  {
+    "en": "endocardial cryoablation procedure",
+    "ja": "心内膜凍結術"
+  },
+  {
+    "en": "endocardial electrode",
+    "ja": "心内膜電極"
+  },
+  {
+    "en": "endocardial resection procedure",
+    "ja": "心内膜切開［除］術"
+  },
+  {
+    "en": "entrainment",
+    "ja": "エントレインメント（乗っ取り）"
+  },
+  {
+    "en": "epicardial approach",
+    "ja": "心外膜アプローチ"
+  },
+  {
+    "en": "epicardial electrode",
+    "ja": "心外膜電極"
+  },
+  {
+    "en": "epicardial mapping",
+    "ja": "心外膜マッピング"
+  },
+  {
+    "en": "evaluation of electrophysiologic effects of drugs",
+    "ja": "電気生理学的薬効評価"
+  },
+  {
+    "en": "event ECG",
+    "ja": "イベント心電図"
+  },
+  {
+    "en": "event marker",
+    "ja": "イベントマーカー"
+  },
+  {
+    "en": "evoked response",
+    "ja": "惹起反応"
+  },
+  {
+    "en": "excitable gap",
+    "ja": "興奮間隙"
+  },
+  {
+    "en": "exon",
+    "ja": "エキソン"
+  },
+  {
+    "en": "external loop recorder",
+    "ja": "体外式ループ心電計"
+  },
+  {
+    "en": "extracellular electrode",
+    "ja": "細胞外電極"
+  },
+  {
+    "en": "extracellular space",
+    "ja": "細胞外間隙"
+  },
+  {
+    "en": "f-QRS",
+    "ja": "フィルター化QRS"
+  },
+  {
+    "en": "far-field potential",
+    "ja": "ファーフィールド電位"
+  },
+  {
+    "en": "far-field R-wave sensing",
+    "ja": "ファーフィールドR波センシング"
+  },
+  {
+    "en": "fascicular tachycardia",
+    "ja": "束枝頻拍"
+  },
+  {
+    "en": "fast drug",
+    "ja": "ファストドラッグ"
+  },
+  {
+    "en": "fast Fourier transform",
+    "ja": "高速フーリエ（Fourier）変換"
+  },
+  {
+    "en": "fetal magnetocardiography",
+    "ja": "胎児心磁図"
+  },
+  {
+    "en": "figure of eight",
+    "ja": "8字形"
+  },
+  {
+    "en": "filter?",
+    "ja": "濾波器（フィルター）"
+  },
+  {
+    "en": "frameshift mutation",
+    "ja": "フレームシフト変異"
+  },
+  {
+    "en": "frequency characteristics",
+    "ja": "周波数特性"
+  },
+  {
+    "en": "frequency domain",
+    "ja": "周波数領域、周波数ドメイン"
+  },
+  {
+    "en": "frequency-dependent block",
+    "ja": "頻度依存性ブロック"
+  },
+  {
+    "en": "Fridericia&#039;s correction",
+    "ja": "フリデリシア（Fridericia）補正"
+  },
+  {
+    "en": "ganglionated plexi ablation",
+    "ja": "心臓神経叢焼灼術"
+  },
+  {
+    "en": "gap junction",
+    "ja": "間隙（細隙）結合、ギャップジャンクション結合"
+  },
+  {
+    "en": "gene",
+    "ja": "遺伝子"
+  },
+  {
+    "en": "generator",
+    "ja": "ジェネレータ、発生装置"
+  },
+  {
+    "en": "genotype",
+    "ja": "遺伝子型"
+  },
+  {
+    "en": "giga-seal",
+    "ja": "ギガシール"
+  },
+  {
+    "en": "gradient, ramp, slope, tilt[ing]",
+    "ja": "傾斜"
+  },
+  {
+    "en": "gradiometer sensor",
+    "ja": "磁器センサ"
+  },
+  {
+    "en": "grid map",
+    "ja": "グリッドマップ"
+  },
+  {
+    "en": "haploinsufficiency",
+    "ja": "ハプロ不全"
+  },
+  {
+    "en": "haplotype",
+    "ja": "ハプロタイプ"
+  },
+  {
+    "en": "Hardy&#039;s operation",
+    "ja": "ハーディー（Hardy）手術（三尖弁挙上転移術）"
+  },
+  {
+    "en": "head-up tilt test",
+    "ja": "チルト検査、傾斜台試験、ヘッドアップチルト試験"
+  },
+  {
+    "en": "heart rate control",
+    "ja": "心拍数コントロール"
+  },
+  {
+    "en": "heart rate variability analysis",
+    "ja": "心拍変動解析"
+  },
+  {
+    "en": "heterotaxia",
+    "ja": "内臓心房錯位、内臓錯位［症］"
+  },
+  {
+    "en": "heterotaxy syndrome",
+    "ja": "内臓心房錯位症候群"
+  },
+  {
+    "en": "heterozygosity",
+    "ja": "ヘテロ接合性、遺伝的ヘテロ接合体"
+  },
+  {
+    "en": "high frequency component",
+    "ja": "高周波成分"
+  },
+  {
+    "en": "high resolution",
+    "ja": "高分解能"
+  },
+  {
+    "en": "Hill&#039;s coefficient",
+    "ja": "ヒル（Hill）係数"
+  },
+  {
+    "en": "holding potential",
+    "ja": "保持電位"
+  },
+  {
+    "en": "home ECG",
+    "ja": "家庭用心電計"
+  },
+  {
+    "en": "hotspot",
+    "ja": "ホットスポット"
+  },
+  {
+    "en": "hybrid therapy",
+    "ja": "ハイブリッド療法"
+  },
+  {
+    "en": "hyperpolarization",
+    "ja": "過分極"
+  },
+  {
+    "en": "hyperpolarization-activated inward current",
+    "ja": "過分極活性化内向き電流"
+  },
+  {
+    "en": "hyperpolarization-induced inward  current",
+    "ja": "過分極誘発内向き電流"
+  },
+  {
+    "en": "hysteresis",
+    "ja": "ヒステリシス、履歴現象"
+  },
+  {
+    "en": "ICH E14 guideline",
+    "ja": "ICH E14 ガイドライン"
+  },
+  {
+    "en": "ICH S7B guideline",
+    "ja": "ICH S7B ガイドライン"
+  },
+  {
+    "en": "implantable cardioverter-defibrillators",
+    "ja": "植込み型除細動器"
+  },
+  {
+    "en": "implantable loop recorder",
+    "ja": "植込み型ループレコーダー"
+  },
+  {
+    "en": "implantable （ECG） loop recorder",
+    "ja": "植込み型ループ心電計"
+  },
+  {
+    "en": "implanted device malfunction",
+    "ja": "植込み機器機能不全"
+  },
+  {
+    "en": "inactivated channel block",
+    "ja": "不活性化チャネルブロック"
+  },
+  {
+    "en": "inactivation",
+    "ja": "不活性化"
+  },
+  {
+    "en": "inappropriate sinus tachycardia",
+    "ja": "不適切洞頻脈"
+  },
+  {
+    "en": "incisional atrial reentrant tachycardia",
+    "ja": "切開線関連心房リエントリー性頻拍"
+  },
+  {
+    "en": "incisional tachycardia",
+    "ja": "切開線頻拍"
+  },
+  {
+    "en": "incomplete conduction block",
+    "ja": "不完全伝導ブロック"
+  },
+  {
+    "en": "inferior AV node",
+    "ja": "下方房室結節"
+  },
+  {
+    "en": "influx",
+    "ja": "内向き流束、流入"
+  },
+  {
+    "en": "inside-out patch",
+    "ja": "内側外面型パッチ、インサイドアウトパッチ"
+  },
+  {
+    "en": "integrated bipolar lead",
+    "ja": "統合双極電極"
+  },
+  {
+    "en": "intercalated disk［disc］",
+    "ja": "介在板"
+  },
+  {
+    "en": "intercellular space",
+    "ja": "細胞間隙"
+  },
+  {
+    "en": "interfascicular reentry",
+    "ja": "束枝間リエントリー頻拍"
+  },
+  {
+    "en": "intermediate drug",
+    "ja": "インターメディエートドラッグ"
+  },
+  {
+    "en": "intermittent bradycardia",
+    "ja": "間歇的徐脈"
+  },
+  {
+    "en": "intracellular calcium overload",
+    "ja": "細胞内カルシウム（Ca2+）過負荷"
+  },
+  {
+    "en": "intraoperative mapping",
+    "ja": "術中マッピング"
+  },
+  {
+    "en": "intron",
+    "ja": "イントロン"
+  },
+  {
+    "en": "inward current",
+    "ja": "内向き電流"
+  },
+  {
+    "en": "inward rectifier potassium current",
+    "ja": "内向き整流カリウム（K+）電流"
+  },
+  {
+    "en": "inward rectifying potassium channel",
+    "ja": "内向き整流カリウム（K+）チャネル"
+  },
+  {
+    "en": "ion-selective［ion-sensitive］electrode",
+    "ja": "イオン選択性（感受性）電極"
+  },
+  {
+    "en": "irrigated ablation",
+    "ja": "灌流アブレーション"
+  },
+  {
+    "en": "irrigation catheter",
+    "ja": "潅流カテーテル"
+  },
+  {
+    "en": "isochronal map",
+    "ja": "等時線マップ"
+  },
+  {
+    "en": "isointegral map",
+    "ja": "等磁場線図、等積分（値分布）図"
+  },
+  {
+    "en": "isolated delayed potential",
+    "ja": "孤立性遅延電位"
+  },
+  {
+    "en": "isomerism",
+    "ja": "イソメリズム、異性"
+  },
+  {
+    "en": "J-T interval",
+    "ja": "J-T間隔"
+  },
+  {
+    "en": "junctional ectopic tachycardia",
+    "ja": "接合部異所性頻拍"
+  },
+  {
+    "en": "junctional potential",
+    "ja": "接合部電位"
+  },
+  {
+    "en": "J　wave",
+    "ja": "J波"
+  },
+  {
+    "en": "Kent&#039;s bundle",
+    "ja": "ケント（Kent）束"
+  },
+  {
+    "en": "knock-in",
+    "ja": "ノックイン"
+  },
+  {
+    "en": "knock-out",
+    "ja": "ノックアウト"
+  },
+  {
+    "en": "L-type calcium current",
+    "ja": "L型カルシウム（Ca2+）電流"
+  },
+  {
+    "en": "Langendorff&#039;s apparatus",
+    "ja": "ランゲンドルフ（Langendorff）灌流装置"
+  },
+  {
+    "en": "LAS40 (Low amplitude signal below 40 μV)",
+    "ja": "LAS40"
+  },
+  {
+    "en": "late potential",
+    "ja": "遅延電位"
+  },
+  {
+    "en": "lead system",
+    "ja": "誘導システム"
+  },
+  {
+    "en": "left atrial maze procedure",
+    "ja": "左房メイズ手術"
+  },
+  {
+    "en": "left isomerism",
+    "ja": "左［側］相同"
+  },
+  {
+    "en": "lesion set",
+    "ja": "リージョンセット"
+  },
+  {
+    "en": "linear ablation",
+    "ja": "線状焼灼（アブレーション）"
+  },
+  {
+    "en": "linkage analysis",
+    "ja": "連鎖解析"
+  },
+  {
+    "en": "linkage disequilibrium",
+    "ja": "連鎖不均衡"
+  },
+  {
+    "en": "long-lasting atrial fibrillation",
+    "ja": "永続性心房細動"
+  },
+  {
+    "en": "loop memory ECG",
+    "ja": "ループメモリー心電計?"
+  },
+  {
+    "en": "low amplitude signal",
+    "ja": "低振幅信号"
+  },
+  {
+    "en": "magnet rate",
+    "ja": "マグネットレート"
+  },
+  {
+    "en": "magnetic navigation system",
+    "ja": "磁気誘導システム"
+  },
+  {
+    "en": "magnetic noise origin",
+    "ja": "磁気雑音源"
+  },
+  {
+    "en": "magnetic shielding",
+    "ja": "磁気シールド"
+  },
+  {
+    "en": "magnetocardiogram mapping",
+    "ja": "心磁図マッピング"
+  },
+  {
+    "en": "magnetocardiography",
+    "ja": "心磁図"
+  },
+  {
+    "en": "maximum conductance",
+    "ja": "最大コンダクタンス"
+  },
+  {
+    "en": "maximum diastolic potential",
+    "ja": "最大拡張期電位"
+  },
+  {
+    "en": "maximum rate of rise （maximum upstroke velocity）",
+    "ja": "最大立ち上がり速度"
+  },
+  {
+    "en": "maze procedure",
+    "ja": "メイズ手術（手技）"
+  },
+  {
+    "en": "mean closed time",
+    "ja": "平均閉時間"
+  },
+  {
+    "en": "mean ensemble current",
+    "ja": "平均集合電流"
+  },
+  {
+    "en": "mean open time",
+    "ja": "平均開［口］時間"
+  },
+  {
+    "en": "meandering",
+    "ja": "ミアンダリング、さまよい運動"
+  },
+  {
+    "en": "membrane charge",
+    "ja": "膜電荷"
+  },
+  {
+    "en": "membrane current",
+    "ja": "膜電流"
+  },
+  {
+    "en": "membrane stabilizing action",
+    "ja": "膜安定化作用"
+  },
+  {
+    "en": "membrane transport",
+    "ja": "膜輸送"
+  },
+  {
+    "en": "membrane （transmembrane） potential",
+    "ja": "膜電位、膜内外電位差"
+  },
+  {
+    "en": "microelectrode",
+    "ja": "微小電極"
+  },
+  {
+    "en": "microstripe antenna",
+    "ja": "マイクロストリップアンテナ"
+  },
+  {
+    "en": "microwave ablation device",
+    "ja": "マイクロ波アブレーションデバイス"
+  },
+  {
+    "en": "microwave radar",
+    "ja": "マイクロ波レーダー"
+  },
+  {
+    "en": "mirror image",
+    "ja": "鏡像、ミラーイメージ"
+  },
+  {
+    "en": "missense mutation",
+    "ja": "ミスセンス変異"
+  },
+  {
+    "en": "mobile ECG",
+    "ja": "モバイル心電図"
+  },
+  {
+    "en": "mode switching",
+    "ja": "モードスイッチング"
+  },
+  {
+    "en": "modified surgical maze procedure",
+    "ja": "簡略化メイズ（Maze）法"
+  },
+  {
+    "en": "modifier gene",
+    "ja": "修飾遺伝子"
+  },
+  {
+    "en": "monophasic action potential",
+    "ja": "単相［性］活動電位"
+  },
+  {
+    "en": "mosaic",
+    "ja": "モザイク"
+  },
+  {
+    "en": "multifocal atrial tachycardia",
+    "ja": "多源性心房頻拍"
+  },
+  {
+    "en": "multiphasic oscillation",
+    "ja": "多相性振動"
+  },
+  {
+    "en": "multiple telemetry system",
+    "ja": "マルチテレメータシステム"
+  },
+  {
+    "en": "multiple-current-vector diagram method (mCVD method）",
+    "ja": "マルチ電流ベクトルダイアグラム"
+  },
+  {
+    "en": "muscarinic acetylcholine receptor-operated potassium current",
+    "ja": "ムスカリ ン性アセチルコリン受容体感受性カリウム（K+）電流"
+  },
+  {
+    "en": "muscarinic receptor-blocking effect",
+    "ja": "ムスカリン受容体阻害作用"
+  },
+  {
+    "en": "mutation",
+    "ja": "変異"
+  },
+  {
+    "en": "Nernst equation",
+    "ja": "ネルンスト（Nernst）の式"
+  },
+  {
+    "en": "neurally mediated syncope",
+    "ja": "神経調節性失神"
+  },
+  {
+    "en": "noise level",
+    "ja": "ノイズレベル"
+  },
+  {
+    "en": "non-contact mapping",
+    "ja": "非接触マッピング"
+  },
+  {
+    "en": "non-contact monitoring system",
+    "ja": "非接触計測システム"
+  },
+  {
+    "en": "non-selective cation channel",
+    "ja": "非選択性陽イオンチャネル"
+  },
+  {
+    "en": "noncompaction",
+    "ja": "緻密化障害"
+  },
+  {
+    "en": "nonpharmacological therapy",
+    "ja": "非薬物療法"
+  },
+  {
+    "en": "nonsense mutation",
+    "ja": "ナンセンス変異"
+  },
+  {
+    "en": "nontransmural necrosis",
+    "ja": "非貫壁性壊死"
+  },
+  {
+    "en": "oblique sinus",
+    "ja": "斜洞"
+  },
+  {
+    "en": "open channel block",
+    "ja": "活性化チャネルブロック、開状態チャネル遮断"
+  },
+  {
+    "en": "open probability",
+    "ja": "開［口］確率"
+  },
+  {
+    "en": "open time",
+    "ja": "開［口］時間"
+  },
+  {
+    "en": "orthostatic intolerance",
+    "ja": "起立不耐"
+  },
+  {
+    "en": "orthostatic intolerance syndromes",
+    "ja": "起立不耐症候群"
+  },
+  {
+    "en": "outside-out patch",
+    "ja": "外側外面型パッチ"
+  },
+  {
+    "en": "outward current",
+    "ja": "外向き電流"
+  },
+  {
+    "en": "overdrive suppression",
+    "ja": "高頻度［過］駆動抑制、オーバードライブサプレッション"
+  },
+  {
+    "en": "oversensing",
+    "ja": "過剰感知"
+  },
+  {
+    "en": "overshoot",
+    "ja": "オーバーシュート"
+  },
+  {
+    "en": "pacemaker",
+    "ja": "ペースメーカ"
+  },
+  {
+    "en": "pacemaker mediated tachycardia",
+    "ja": "ペースメーカ介在頻拍"
+  },
+  {
+    "en": "pacemaker potential",
+    "ja": "歩調取り電位、ペースメーカ電位"
+  },
+  {
+    "en": "pacemaker runaway",
+    "ja": "ペースメーカランナウェイ"
+  },
+  {
+    "en": "pacing code",
+    "ja": "ペースメーカコード"
+  },
+  {
+    "en": "pacing modes",
+    "ja": "ぺーシングモード"
+  },
+  {
+    "en": "paroxysmal atrial fibrillatrion",
+    "ja": "発作性心房細動"
+  },
+  {
+    "en": "passive standing",
+    "ja": "受動立位"
+  },
+  {
+    "en": "patch clamp",
+    "ja": "パッチクランプ"
+  },
+  {
+    "en": "patch clamp method",
+    "ja": "パッチクランプ法"
+  },
+  {
+    "en": "penetrance",
+    "ja": "浸透率"
+  },
+  {
+    "en": "peri-atrioventricular node cryoablation",
+    "ja": "房室結節周囲凍結術"
+  },
+  {
+    "en": "persistent atrial fibrillation",
+    "ja": "持続性心房細動"
+  },
+  {
+    "en": "pharmacological therapy",
+    "ja": "薬物療法"
+  },
+  {
+    "en": "pharmacological therapy guideline",
+    "ja": "薬物治療ガイドライン"
+  },
+  {
+    "en": "phenotype",
+    "ja": "表現型"
+  },
+  {
+    "en": "plateau phase",
+    "ja": "プラトー相"
+  },
+  {
+    "en": "polymorphism",
+    "ja": "［遺伝子］多型性"
+  },
+  {
+    "en": "polysplenia",
+    "ja": "多脾症［候群］"
+  },
+  {
+    "en": "pop phenomenon",
+    "ja": "ポップ現象"
+  },
+  {
+    "en": "post-ventricular atrial refractory period (PVARP)",
+    "ja": "心室イベント後心房不応期"
+  },
+  {
+    "en": "posterior AV node",
+    "ja": "後方房室結節"
+  },
+  {
+    "en": "postoperative atrial fibrillation",
+    "ja": "術後心房細動"
+  },
+  {
+    "en": "postoperative atrial tachycardia",
+    "ja": "術後心房頻拍"
+  },
+  {
+    "en": "postural orthostatic tachycardia syndrome",
+    "ja": "体位性（起立性）頻拍症候群"
+  },
+  {
+    "en": "potassium accumulation",
+    "ja": "カリウム（K+）蓄積"
+  },
+  {
+    "en": "potassium channel opener",
+    "ja": "カリウム（K+）［チャネル］開口薬、カリウム（K+）チャネルオープナー"
+  },
+  {
+    "en": "potassium current",
+    "ja": "カリウム（K+）電流"
+  },
+  {
+    "en": "potassium selective [sensitive] electrode",
+    "ja": "カリウム（K+）選択性（感受性）電極"
+  },
+  {
+    "en": "preferential pathway",
+    "ja": "優先経路"
+  },
+  {
+    "en": "proarrhythmic effects",
+    "ja": "催不整脈作用"
+  },
+  {
+    "en": "promoter",
+    "ja": "プロモーター"
+  },
+  {
+    "en": "propagation map",
+    "ja": "興奮伝播マップ"
+  },
+  {
+    "en": "pseudo-tendon",
+    "ja": "仮（偽）性腱索"
+  },
+  {
+    "en": "pulmonary vein isolation",
+    "ja": "肺静脈隔離術"
+  },
+  {
+    "en": "pulmonary vein pacing",
+    "ja": "肺静脈ペーシング"
+  },
+  {
+    "en": "pulseless ventricular tachycardia",
+    "ja": "無脈性心室頻拍"
+  },
+  {
+    "en": "Purkinje network",
+    "ja": "プルキンエ（Purkinje）線維網"
+  },
+  {
+    "en": "Purkinje-muscle junction",
+    "ja": "プルキンエ（Purkinje）心室筋接合部"
+  },
+  {
+    "en": "QT dispersion",
+    "ja": "QT間隔（時間）のばらつき、ディスパージョン"
+  },
+  {
+    "en": "QT product",
+    "ja": "QTプロダクト"
+  },
+  {
+    "en": "QT variability index",
+    "ja": "QT変動指数"
+  },
+  {
+    "en": "QT-RR relationship",
+    "ja": "QT-RR関係"
+  },
+  {
+    "en": "quinidine syncope",
+    "ja": "キニジン失神"
+  },
+  {
+    "en": "radial procedure",
+    "ja": "放射状手術（手技）、ラディアル手術（手技）"
+  },
+  {
+    "en": "radiofrequency ablation",
+    "ja": "高周波焼灼（アブレーション）"
+  },
+  {
+    "en": "rate smoothing",
+    "ja": "レートスムージング"
+  },
+  {
+    "en": "rate stability",
+    "ja": "レートスタビリティー"
+  },
+  {
+    "en": "receptor operated channel",
+    "ja": "受容体作動性チャネル"
+  },
+  {
+    "en": "recovery time constant",
+    "ja": "回復時定数"
+  },
+  {
+    "en": "reentry",
+    "ja": "リエントリー、再入、旋回、〈大動脈解離の〉再入口部"
+  },
+  {
+    "en": "reflected wave",
+    "ja": "反射波"
+  },
+  {
+    "en": "reflex syncope",
+    "ja": "反射性失神"
+  },
+  {
+    "en": "remote telemetry",
+    "ja": "遠隔モニター"
+  },
+  {
+    "en": "repolarization phase",
+    "ja": "再分極相"
+  },
+  {
+    "en": "residual conduction",
+    "ja": "遺残伝導"
+  },
+  {
+    "en": "resting membrane potential",
+    "ja": "静止［膜］電位"
+  },
+  {
+    "en": "restitution property",
+    "ja": "レスティテューション特性"
+  },
+  {
+    "en": "reversal potential",
+    "ja": "逆転電位"
+  },
+  {
+    "en": "reverse use dependence",
+    "ja": "逆頻度依存性"
+  },
+  {
+    "en": "right atrial maze procedure",
+    "ja": "右房メイズ手術"
+  },
+  {
+    "en": "right isomerism",
+    "ja": "右［側］相同"
+  },
+  {
+    "en": "RMS40",
+    "ja": "RMS40"
+  },
+  {
+    "en": "RTc dispersion",
+    "ja": "RTｃディスパージョン"
+  },
+  {
+    "en": "ryanodine receptor",
+    "ja": "リアノジン受容体"
+  },
+  {
+    "en": "safety pacing",
+    "ja": "セイフティーペーシング"
+  },
+  {
+    "en": "sampling interval of the microwave radar",
+    "ja": "サンプリング周波数"
+  },
+  {
+    "en": "short QT syndrome",
+    "ja": "QT短縮症候群"
+  },
+  {
+    "en": "short-coupled variant of torsade de pointes",
+    "ja": "短連結性異型トルサードドポアント"
+  },
+  {
+    "en": "Sicilian Gambit",
+    "ja": "シシリアンガンビット"
+  },
+  {
+    "en": "signal to noise ratio (S/N ratio )",
+    "ja": "信号雑音比（S/N比）"
+  },
+  {
+    "en": "signal-averaged electrocardiography",
+    "ja": "加算平均心電図"
+  },
+  {
+    "en": "single channel current",
+    "ja": "単一チャネル電流"
+  },
+  {
+    "en": "single nucleotide polymorphism (SNP )",
+    "ja": "1（単）塩基多型"
+  },
+  {
+    "en": "single-chamber ICD",
+    "ja": "シングルチャンバーＩＣＤ"
+  },
+  {
+    "en": "single-chamber pacemaker",
+    "ja": "シングルチャンバーペースメーカ"
+  },
+  {
+    "en": "sinus node shift",
+    "ja": "洞結節移動"
+  },
+  {
+    "en": "situational syncope",
+    "ja": "状況［性］失神"
+  },
+  {
+    "en": "situs ambiguous",
+    "ja": "錯位、非定位"
+  },
+  {
+    "en": "slow conduction (delayed conduction)",
+    "ja": "遅い（緩徐）伝導"
+  },
+  {
+    "en": "slow conduction area (delayed conduction area)",
+    "ja": "遅延（緩徐）伝導部位"
+  },
+  {
+    "en": "slow drug",
+    "ja": "スロードラッグ"
+  },
+  {
+    "en": "slow pathway  (conduction)",
+    "ja": "遅伝導［路］"
+  },
+  {
+    "en": "slow response",
+    "ja": "緩徐応答"
+  },
+  {
+    "en": "sodium channel",
+    "ja": "ナトリウム（Na+）チャネル"
+  },
+  {
+    "en": "sodium current",
+    "ja": "ナトリウム（Na+）電流"
+  },
+  {
+    "en": "sodium-calcium exchange current",
+    "ja": "ナトリウム（Na+）-カルシウム（Ca2+）交換電流"
+  },
+  {
+    "en": "sodium-calcium exchange system",
+    "ja": "ナトリウム（Na+）-カルシウム（Ca2+）交換系"
+  },
+  {
+    "en": "sodium-potassium pump",
+    "ja": "ナトリウム（Na+）-カリウム（K+） ポンプ"
+  },
+  {
+    "en": "sodium-potassium pump current",
+    "ja": "ナトリウム（Na+）-カリウム（K+）ポンプ電流"
+  },
+  {
+    "en": "specific membrane capacitance",
+    "ja": "［固有］膜容量"
+  },
+  {
+    "en": "spiral reentry",
+    "ja": "スパイラル型リエントリー、渦巻きリエントリー"
+  },
+  {
+    "en": "splicing mutation",
+    "ja": "スプライシング変異"
+  },
+  {
+    "en": "SQUID (superconducting quantum interference device)　sensor",
+    "ja": "SQUIDセンサ"
+  },
+  {
+    "en": "SSCP (single stranded conformation polymorphism)",
+    "ja": "1本鎖コンフォーメーション多型"
+  },
+  {
+    "en": "stellate ganglion block",
+    "ja": "星状神経節遮断術"
+  },
+  {
+    "en": "stereotaxis",
+    "ja": "ステレオタキシス"
+  },
+  {
+    "en": "stretch-activated channel",
+    "ja": "伸展活性化チャネル"
+  },
+  {
+    "en": "substrate",
+    "ja": "素地、其質"
+  },
+  {
+    "en": "substrate map",
+    "ja": "基質マップ"
+  },
+  {
+    "en": "subtraction map??",
+    "ja": "差引き［分布］図"
+  },
+  {
+    "en": "superior AV node",
+    "ja": "上方房室結節"
+  },
+  {
+    "en": "supernormal conduction",
+    "ja": "過常伝導"
+  },
+  {
+    "en": "supernormal excitability",
+    "ja": "過常興奮性"
+  },
+  {
+    "en": "supernormal phase",
+    "ja": "過常期"
+  },
+  {
+    "en": "suprathreshold stimulus",
+    "ja": "閾値上刺激"
+  },
+  {
+    "en": "surface electrode",
+    "ja": "表面電極"
+  },
+  {
+    "en": "surgical maze procedure",
+    "ja": "迷路手術"
+  },
+  {
+    "en": "survivor detection",
+    "ja": "生存者探知"
+  },
+  {
+    "en": "sympathomimetic drugs",
+    "ja": "交感神経刺激薬"
+  },
+  {
+    "en": "T wave alternans",
+    "ja": "T波交互脈"
+  },
+  {
+    "en": "T wave morphology analysis",
+    "ja": "T波形解析"
+  },
+  {
+    "en": "T-type calcium current",
+    "ja": "T型カルシウム（Ca2+）電流"
+  },
+  {
+    "en": "T-wave oversensing",
+    "ja": "T波オーバーセンシング"
+  },
+  {
+    "en": "tachycardia induced cardiomyopathy",
+    "ja": "頻脈誘発性心筋症"
+  },
+  {
+    "en": "tail current",
+    "ja": "末尾電流"
+  },
+  {
+    "en": "tangent method",
+    "ja": "接線法"
+  },
+  {
+    "en": "template",
+    "ja": "雛型"
+  },
+  {
+    "en": "temporary pacing",
+    "ja": "一時的ペーシング"
+  },
+  {
+    "en": "test potential",
+    "ja": "試験電位"
+  },
+  {
+    "en": "thoracoscopic mini-maze procedure",
+    "ja": "胸腔鏡下メイズ手術"
+  },
+  {
+    "en": "thorough QT/QTc study",
+    "ja": "詳細QT/QTｃ試験"
+  },
+  {
+    "en": "threshold method",
+    "ja": "閾値法"
+  },
+  {
+    "en": "tilt training",
+    "ja": "起立訓練"
+  },
+  {
+    "en": "time constant",
+    "ja": "時定数"
+  },
+  {
+    "en": "time domain analysis",
+    "ja": "時間領域［ドメイン］解析"
+  },
+  {
+    "en": "time-dependent",
+    "ja": "時間依存性"
+  },
+  {
+    "en": "tracking rate",
+    "ja": "トラッキング・レート"
+  },
+  {
+    "en": "transesophageal atrial electrophysiological study",
+    "ja": "経食道心房電気生理検査"
+  },
+  {
+    "en": "transesophageal atrial lead",
+    "ja": "経食道心房リード"
+  },
+  {
+    "en": "transesophageal atrial pacing",
+    "ja": "経食道心房ペーシング"
+  },
+  {
+    "en": "transfection",
+    "ja": "遺伝子移入、トランスフェクション"
+  },
+  {
+    "en": "transgenic animal",
+    "ja": "トランスジェニック動物"
+  },
+  {
+    "en": "transient depolarization",
+    "ja": "一過性脱分極"
+  },
+  {
+    "en": "transient inward current",
+    "ja": "一過性内向き電流"
+  },
+  {
+    "en": "transient loss of consciousness",
+    "ja": "一過性意識消失"
+  },
+  {
+    "en": "transient outward current",
+    "ja": "一過性外向き電流"
+  },
+  {
+    "en": "transmural dispersion",
+    "ja": "貫壁性ディスパージョン"
+  },
+  {
+    "en": "transmural necrosis",
+    "ja": "貫壁性壊死"
+  },
+  {
+    "en": "transverse conduction",
+    "ja": "横方向伝導"
+  },
+  {
+    "en": "transverse sinus",
+    "ja": "横［静脈］洞"
+  },
+  {
+    "en": "transverse tubular system",
+    "ja": "横細管系"
+  },
+  {
+    "en": "triggered activity",
+    "ja": "撃発活動 、トリガードアクティビティ"
+  },
+  {
+    "en": "trigger",
+    "ja": "トリガー、引き金"
+  },
+  {
+    "en": "true bipolar lead",
+    "ja": "真性双極電極"
+  },
+  {
+    "en": "ultrasound ablation device",
+    "ja": "超音波アブレーションデバイス"
+  },
+  {
+    "en": "undersensing",
+    "ja": "感知不全、アンダーセンシング"
+  },
+  {
+    "en": "unidirectional block",
+    "ja": "一方向性ブロック"
+  },
+  {
+    "en": "unipolar radiofrequency ablation device",
+    "ja": "単極高周波アブレーションデバイス"
+  },
+  {
+    "en": "unit membrane",
+    "ja": "単位膜"
+  },
+  {
+    "en": "unitary current",
+    "ja": "単位電流"
+  },
+  {
+    "en": "univentricular heart",
+    "ja": "単心室心"
+  },
+  {
+    "en": "use-dependent block",
+    "ja": "使用依存性ブロック"
+  },
+  {
+    "en": "vaporization",
+    "ja": "蒸散"
+  },
+  {
+    "en": "Vaughan Williams classification",
+    "ja": "ヴォーン･ウイリアムズ（Vaughan Williams）分類"
+  },
+  {
+    "en": "vector arrow map",
+    "ja": "ベクトルアローマップ"
+  },
+  {
+    "en": "vector magnitude",
+    "ja": "ベクトルマグニチュード"
+  },
+  {
+    "en": "ventricular mapping",
+    "ja": "心室マッピング"
+  },
+  {
+    "en": "ventricular tachycardia surgery",
+    "ja": "心室頻拍手術"
+  },
+  {
+    "en": "virtual electrode",
+    "ja": "仮想（バーチャル）電極"
+  },
+  {
+    "en": "voltage clamp",
+    "ja": "［膜］電位固定"
+  },
+  {
+    "en": "voltage clamp method",
+    "ja": "電位固定法"
+  },
+  {
+    "en": "voltage map",
+    "ja": "電位波高マップ"
+  },
+  {
+    "en": "voltage operated channel",
+    "ja": "電位作動性チャネル"
+  },
+  {
+    "en": "wave length",
+    "ja": "［興奮］波長"
+  },
+  {
+    "en": "wavelet transform",
+    "ja": "ウェ－ブレット変換"
+  },
+  {
+    "en": "whole cell current",
+    "ja": "細胞全膜電流"
+  },
+  {
+    "en": "whole cell voltage clamp",
+    "ja": "細胞全膜電位固定"
+  },
+  {
+    "en": "whole heart bull&#039;s eye map",
+    "ja": "心臓全体ブルズアイマップ"
+  },
+  {
+    "en": "whole heart electrical activation map",
+    "ja": "心臓全体電気興奮ダイアグラム"
+  },
+  {
+    "en": "window current",
+    "ja": "窓電流"
+  },
+  {
+    "en": "X-linked inheritance",
+    "ja": "X連鎖遺伝"
+  },
+  {
+    "en": "β blockers",
+    "ja": "β遮断薬"
+  }
+]
