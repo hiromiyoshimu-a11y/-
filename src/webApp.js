@@ -417,8 +417,8 @@ function renderPapers() {
 
   paperListEl.innerHTML = filtered.map((paper) => {
     const pmidStr = String(paper.pmid);
-    const isBookmarked = bookmarks.includes(pmidStr);
-    const isRead = readPapers.includes(pmidStr);
+    const isBookmarked = bookmarks.map(String).includes(pmidStr);
+    const isRead = readPapers.map(String).includes(pmidStr);
 
     let designBadgeClass = 'other';
     if (paper.designRank === 1) designBadgeClass = 'rct';
@@ -435,11 +435,11 @@ function renderPapers() {
             <span class="design-badge ${designBadgeClass}">${paper.studyTypeLabel}</span>
             <span class="sample-badge">👥 ${sampleStr}</span>
           </div>
-          <div class="card-actions" onclick="event.stopPropagation();">
-            <button class="read-btn ${isRead ? 'active' : ''}" onclick="event.stopPropagation(); toggleRead('${paper.pmid}')" title="${isRead ? 'タップで未読に戻す' : '手動で既読にする（一覧から非表示）'}">
+          <div class="card-actions" onclick="event.stopPropagation();" onpointerdown="event.stopPropagation();" ontouchstart="event.stopPropagation();">
+            <button type="button" class="read-btn ${isRead ? 'active' : ''}" onclick="event.stopPropagation(); toggleRead('${paper.pmid}');" onpointerdown="event.stopPropagation();" ontouchstart="event.stopPropagation();" title="${isRead ? 'タップで未読に戻す' : '手動で既読にする（一覧から非表示）'}">
               ${isRead ? '☑ 既読' : '☐ 既読（非表示）'}
             </button>
-            <button class="bookmark-btn ${isBookmarked ? 'active' : ''}" onclick="event.stopPropagation(); toggleBookmark('${paper.pmid}')" title="ブックマーク">
+            <button type="button" class="bookmark-btn ${isBookmarked ? 'active' : ''}" onclick="event.stopPropagation(); toggleBookmark('${paper.pmid}');" onpointerdown="event.stopPropagation();" ontouchstart="event.stopPropagation();" title="${isBookmarked ? 'ブックマークを外す' : 'ブックマークに保存'}">
               ${isBookmarked ? '❤️' : '🤍'}
             </button>
           </div>
@@ -461,8 +461,9 @@ function renderPapers() {
 
 window.toggleRead = function(pmid) {
   const pmidStr = String(pmid);
-  if (readPapers.includes(pmidStr)) {
-    readPapers = readPapers.filter(id => id !== pmidStr);
+  const currentRead = readPapers.map(String);
+  if (currentRead.includes(pmidStr)) {
+    readPapers = currentRead.filter(id => id !== pmidStr);
     showToast('未読に戻しました');
   } else {
     readPapers.push(pmidStr);
@@ -474,8 +475,9 @@ window.toggleRead = function(pmid) {
 
 window.toggleBookmark = function(pmid) {
   const pmidStr = String(pmid);
-  if (bookmarks.includes(pmidStr)) {
-    bookmarks = bookmarks.filter(id => id !== pmidStr);
+  const currentBookmarks = bookmarks.map(String);
+  if (currentBookmarks.includes(pmidStr)) {
+    bookmarks = currentBookmarks.filter(id => id !== pmidStr);
     showToast('ブックマークから削除しました');
   } else {
     bookmarks.push(pmidStr);
