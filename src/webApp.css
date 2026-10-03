@@ -339,17 +339,24 @@ body {
 .secondary-filters {
   display: flex;
   gap: 8px;
+  width: 100%;
 }
 
 .styled-select {
-  flex: 1;
+  flex: 1 1 50%;
+  min-width: 0;
+  max-width: 50%;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
-  padding: 6px 10px;
+  padding: 6px 8px;
   border-radius: var(--radius-sm);
   font-size: 12px;
   outline: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 /* ------------------------------------
@@ -789,24 +796,59 @@ body.light-theme .abs-header-badge {
    スマホ最適化：一覧画面の要約を画面幅いっぱいに拡大
    ------------------------------------ */
 @media (max-width: 767px) {
+  #app {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding-bottom: 30px;
+  }
+
   .app-header {
-    padding: 10px 10px;
+    padding: 10px 8px;
+    border-radius: 0;
+  }
+
+  .secondary-filters {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .secondary-filters .styled-select {
+    flex: 1 1 50% !important;
+    min-width: 0 !important;
+    max-width: 50% !important;
+    font-size: 11.5px;
+    padding: 6px 4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    box-sizing: border-box;
   }
 
   .main-content {
-    padding: 8px 4px;
+    padding: 6px 0 !important; /* 画面左右の端まで100%フルフラット展開 */
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .paper-grid {
     gap: 8px;
+    width: 100%;
   }
 
   .paper-card {
+    width: 100%;
+    margin: 0;
+    border-left: none;
+    border-right: none;
+    border-radius: 0; /* フラットカードで画面横幅いっぱい（0pxマージン）に展開 */
     padding: 12px 10px;
-    border-radius: var(--radius-md);
+    box-sizing: border-box;
   }
 
-  /* 要約ボックスをカードの左右端までネガティブマージンで最大展開 */
+  /* 要約ボックスをカード左右端まで完全フルフラット展開 */
   .card-summary-box {
     margin-left: -10px;
     margin-right: -10px;
@@ -816,6 +858,8 @@ body.light-theme .abs-header-badge {
     line-height: 1.55;
     border-left: 4px solid var(--accent-blue);
     margin-bottom: 10px;
+    width: calc(100% + 20px);
+    box-sizing: border-box;
   }
 
   .card-title-ja {
