@@ -5,6 +5,7 @@
 
 let allPapers = [];
 let bookmarks = JSON.parse(localStorage.getItem('ep_paper_bookmarks') || '[]');
+let readPapers = JSON.parse(localStorage.getItem('ep_paper_read') || '[]');
 let currentFilterTab = 'all';
 
 let deferredPrompt;
@@ -170,8 +171,16 @@ async function loadPaperData() {
 
   // 新着数およびメタ情報更新
   const newCount = data.newCount || allPapers.filter(p => p.isNew).length;
+  const unreadCount = allPapers.filter(p => !readPapers.includes(String(p.pmid))).length;
+  const readCount = readPapers.length;
+
   document.getElementById('updatedDateBadge').textContent = `📅 最終更新: ${data.updatedAt || '2026-09-29'}`;
-  document.getElementById('paperCountBadge').textContent = `📄 ${allPapers.length}件の最新論文`;
+  document.getElementById('paperCountBadge').textContent = `📄 未読 ${unreadCount}件 (既読 ${readCount}件)`;
+
+  const readTabBtn = document.getElementById('readTabBtn');
+  if (readTabBtn) readTabBtn.textContent = `☑ 既読のみ (${readCount})`;
+  const showAllTabBtn = document.getElementById('showAllTabBtn');
+  if (showAllTabBtn) showAllTabBtn.textContent = `📋 全件表示 (${allPapers.length})`;
 
   const newBadgeEl = document.getElementById('newCountBadge');
   if (newCount > 0) {
@@ -321,7 +330,32 @@ function renderPapers() {
   const journalVal = document.getElementById('journalSelect').value;
   const sortVal = document.getElementById('sortSelect').value;
 
+  const unreadCount = allPapers.filter(p => !readPapers.includes(String(p.pmid))).length;
+  const readCount = readPapers.length;
+
+  document.getElementById('paperCountBadge').textContent = `📄 未読 ${unreadCount}件 (既読 ${readCount}件)`;
+  const readTabBtn = document.getElementById('readTabBtn');
+  if (readTabBtn) readTabBtn.textContent = `☑ 既読のみ (${readCount})`;
+  const showAllTabBtn = document.getElementById('showAllTabBtn');
+  if (showAllTabBtn) showAllTabBtn.textContent = `📋 全件表示 (${allPapers.length})`;
+
   let filtered = allPapers.filter(paper => {
+    const pmidStr = String(paper.pmid);
+    const isRead = readPapers.includes(pmidStr);
+    const isBookmarked = bookmarks.includes(pmidStr);
+
+    // 既読の表示/非表示フィルター
+    if (currentFilterTab === 'read') {
+      // 「既読のみ」タブ：既読がついているものだけ表示
+      if (!isRead) return false;
+    } else if (currentFilterTab === 'show_all') {
+      // 「全件表示」タブ：既読・未読問わず全件表示
+    } else {
+      // デフォルト（未読のみ、新着、RCT、前向き、症例、ブックマーク等の通常タブ）：
+      // 既読がついているものは表示から隠す！
+      if (isRead) return false;
+    }
+
     if (searchText) {
       const titleJa = (paper.titleJa || '').toLowerCase();
       const titleEn = (paper.title || '').toLowerCase();
@@ -336,7 +370,7 @@ function renderPapers() {
     if (currentFilterTab === 'rct' && paper.designRank !== 1) return false;
     if (currentFilterTab === 'prospective' && paper.designRank !== 2) return false;
     if (currentFilterTab === 'case' && paper.designRank !== 99) return false;
-    if (currentFilterTab === 'bookmarks' && !bookmarks.includes(paper.pmid)) return false;
+    if (currentFilterTab === 'bookmarks' && !isBookmarked) return false;
 
     if (journalVal !== 'all') {
       const jTitle = (paper.journal || '').toLowerCase();
@@ -365,16 +399,27 @@ function renderPapers() {
   });
 
   if (filtered.length === 0) {
+    let emptyMsg = '🔍 該当する論文は見つかりませんでした。';
+    if (currentFilterTab === 'read') {
+      emptyMsg = '☑ 既読の論文はまだありません。読んだ論文の「☐ 既読」をチェックするとここに表示されます。';
+    } else if (currentFilterTab === 'bookmarks') {
+      emptyMsg = '❤️ ブックマークされた論文はありません。';
+    } else if (readCount > 0) {
+      emptyMsg = `✨ すべての未読論文を読み終えました！（既読論文が ${readCount} 件あります。「☑ 既読のみ」または「📋 全件表示」タブで確認できます）`;
+    }
     paperListEl.innerHTML = `
-      <div class="loading-state">
-        <p>🔍 該当する論文は見つかりませんでした。</p>
+      <div class="loading-state" style="text-align: center; padding: 32px 16px;">
+        <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">${emptyMsg}</p>
       </div>
     `;
     return;
   }
 
   paperListEl.innerHTML = filtered.map((paper) => {
-    const isBookmarked = bookmarks.includes(paper.pmid);
+    const pmidStr = String(paper.pmid);
+    const isBookmarked = bookmarks.includes(pmidStr);
+    const isRead = readPapers.includes(pmidStr);
+
     let designBadgeClass = 'other';
     if (paper.designRank === 1) designBadgeClass = 'rct';
     else if (paper.designRank === 2) designBadgeClass = 'prospective';
@@ -383,16 +428,21 @@ function renderPapers() {
     const sampleStr = paper.sampleSize > 0 ? `N=${paper.sampleSize.toLocaleString()}例` : 'N不明';
 
     return `
-      <div class="paper-card ${paper.isNew ? 'is-new' : ''}" onclick="openDetail('${paper.pmid}')">
+      <div class="paper-card ${paper.isNew ? 'is-new' : ''} ${isRead ? 'is-read' : ''}" onclick="openDetail('${paper.pmid}')">
         <div class="paper-card-header">
           <div class="card-badges">
             ${paper.isNew ? '<span class="new-badge">✨ NEW 新着</span>' : ''}
             <span class="design-badge ${designBadgeClass}">${paper.studyTypeLabel}</span>
             <span class="sample-badge">👥 ${sampleStr}</span>
           </div>
-          <button class="bookmark-btn ${isBookmarked ? 'active' : ''}" onclick="event.stopPropagation(); toggleBookmark('${paper.pmid}')">
-            ${isBookmarked ? '❤️' : '🤍'}
-          </button>
+          <div class="card-actions" onclick="event.stopPropagation();">
+            <button class="read-btn ${isRead ? 'active' : ''}" onclick="event.stopPropagation(); toggleRead('${paper.pmid}')" title="${isRead ? 'タップで未読に戻す' : '手動で既読にする（一覧から非表示）'}">
+              ${isRead ? '☑ 既読' : '☐ 既読（非表示）'}
+            </button>
+            <button class="bookmark-btn ${isBookmarked ? 'active' : ''}" onclick="event.stopPropagation(); toggleBookmark('${paper.pmid}')" title="ブックマーク">
+              ${isBookmarked ? '❤️' : '🤍'}
+            </button>
+          </div>
         </div>
         <div class="card-date-journal">
           📅 ${paper.pubDate} | 📖 ${paper.journalAbbr || paper.journal}
@@ -409,12 +459,26 @@ function renderPapers() {
   }).join('');
 }
 
+window.toggleRead = function(pmid) {
+  const pmidStr = String(pmid);
+  if (readPapers.includes(pmidStr)) {
+    readPapers = readPapers.filter(id => id !== pmidStr);
+    showToast('未読に戻しました');
+  } else {
+    readPapers.push(pmidStr);
+    showToast('☑ 既読マークをつけました（一覧から非表示）');
+  }
+  localStorage.setItem('ep_paper_read', JSON.stringify(readPapers));
+  renderPapers();
+};
+
 window.toggleBookmark = function(pmid) {
-  if (bookmarks.includes(pmid)) {
-    bookmarks = bookmarks.filter(id => id !== pmid);
+  const pmidStr = String(pmid);
+  if (bookmarks.includes(pmidStr)) {
+    bookmarks = bookmarks.filter(id => id !== pmidStr);
     showToast('ブックマークから削除しました');
   } else {
-    bookmarks.push(pmid);
+    bookmarks.push(pmidStr);
     showToast('❤️ ブックマークに保存しました');
   }
   localStorage.setItem('ep_paper_bookmarks', JSON.stringify(bookmarks));
@@ -429,6 +493,9 @@ window.openDetail = function(pmid) {
   loadFontSizePreference();
 
   const modalBody = document.getElementById('modalBody');
+  const pmidStr = String(paper.pmid);
+  const isRead = readPapers.includes(pmidStr);
+  const isBookmarked = bookmarks.includes(pmidStr);
 
   // 臨床要約 (summaryJa) の【概要】【方法】【結果】【結論】バッジ化
   let formattedSummaryJa = escapeHtml(paper.summaryJa || '要約準備中');
@@ -461,8 +528,14 @@ window.openDetail = function(pmid) {
     <div class="detail-title-ja">${escapeHtml(paper.titleJa || paper.title)}</div>
     <div class="detail-title-en">(${escapeHtml(paper.title)})</div>
 
-    <div class="action-row">
-      <button class="action-btn primary" onclick="copyCitation('${paper.pmid}')">
+    <div class="action-row" style="flex-wrap: wrap; gap: 8px;">
+      <button class="action-btn ${isRead ? 'primary' : ''}" onclick="toggleRead('${paper.pmid}'); openDetail('${paper.pmid}');">
+        ${isRead ? '☑ 既読マーク中 (タップで未読化)' : '☐ 既読マークを付ける'}
+      </button>
+      <button class="action-btn ${isBookmarked ? 'primary' : ''}" onclick="toggleBookmark('${paper.pmid}'); openDetail('${paper.pmid}');">
+        ${isBookmarked ? '❤️ ブックマーク中' : '🤍 ブックマーク追加'}
+      </button>
+      <button class="action-btn" onclick="copyCitation('${paper.pmid}')">
         📋 出典(Vancouver)をコピー
       </button>
       <a class="action-btn" href="${paper.url}" target="_blank" rel="noopener">
