@@ -786,6 +786,45 @@ body.light-theme .abs-header-badge {
 }
 
 /* ------------------------------------
+   スマホ最適化：一覧画面の要約を画面幅いっぱいに拡大
+   ------------------------------------ */
+@media (max-width: 767px) {
+  .app-header {
+    padding: 10px 10px;
+  }
+
+  .main-content {
+    padding: 8px 4px;
+  }
+
+  .paper-grid {
+    gap: 8px;
+  }
+
+  .paper-card {
+    padding: 12px 10px;
+    border-radius: var(--radius-md);
+  }
+
+  /* 要約ボックスをカードの左右端までネガティブマージンで最大展開 */
+  .card-summary-box {
+    margin-left: -10px;
+    margin-right: -10px;
+    border-radius: 0;
+    padding: 10px 12px 10px 14px;
+    font-size: var(--summary-size, 12px);
+    line-height: 1.55;
+    border-left: 4px solid var(--accent-blue);
+    margin-bottom: 10px;
+  }
+
+  .card-title-ja {
+    font-size: var(--title-ja-size, 15px);
+    line-height: 1.42;
+  }
+}
+
+/* ------------------------------------
    PC・大画面用 フルサイズ単一論文 読みやすさ最優先レイアウト
    ------------------------------------ */
 @media (min-width: 768px) {
