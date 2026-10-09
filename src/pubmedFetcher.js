@@ -105,10 +105,10 @@ function formatAbstractStructured(absNode) {
 /**
  * PubMed APIから過去3ヶ月の指定主要雑誌（Heart Rhythm, Europace, JACC EP, Circ EP, JCE, Circulation, Eur Heart J, J Arrhythm, 心電図 等）の論文をバランス良く取得
  */
-export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 150) {
+export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 300) {
   const keywordTerm = `("catheter ablation"[Title/Abstract] OR "pulsed field ablation"[Title/Abstract] OR "arrhythmia"[Title/Abstract] OR "arrhythmias"[Title/Abstract] OR "catheter ablation"[MeSH Terms] OR "pulsed field ablation"[MeSH Terms] OR "arrhythmias, cardiac"[MeSH Terms])`;
 
-  // 各主要雑誌グループ (全12グループ)
+  // 各主要雑誌グループ (全13グループ)
   const journalGroups = [
     { name: 'European Heart Journal (EHJ)', query: '("European Heart Journal"[Journal] OR "Eur Heart J"[Journal])' },
     { name: 'Circulation', query: '("Circulation"[Journal])' },
@@ -121,6 +121,7 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 15
     { name: 'JICE', query: '("J Interv Card Electrophysiol"[Journal])' },
     { name: 'Heart Rhythm Case Rep', query: '("Heart Rhythm Case Rep"[Journal])' },
     { name: 'NEJM / Nat Med', query: '("N Engl J Med"[Journal] OR "Nat Med"[Journal])' },
+    { name: 'JAMA', query: '("JAMA"[Journal] OR "JAMA Cardiol"[Journal])' },
     { name: '和文誌 心電図', query: '("Shin-denzu"[Journal] OR "Japanese Journal of Electrocardiology"[Journal] OR "Shinzo"[Journal])' }
   ];
 
@@ -132,14 +133,15 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 15
   for (const group of journalGroups) {
     try {
       const searchTerm = `${keywordTerm} AND ${group.query}`;
+      const searchDays = (group.name === 'JAMA' || group.name === 'NEJM / Nat Med') ? 365 : daysPast;
       const res = await axios.get(searchUrl, {
         params: {
           db: 'pubmed',
           term: searchTerm,
-          reldate: daysPast,
+          reldate: searchDays,
           datetype: 'pdat',
           sort: 'pub_date',
-          retmax: 10,
+          retmax: 20,
           retmode: 'json'
         }
       });
@@ -159,7 +161,7 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 15
   // ヒットが少ない場合の全体補完
   if (idList.length < 30) {
     console.log(`[PubMed Fetcher] 各誌個別のヒット合計 (${idList.length}件) のため、全体補完検索を実施...`);
-    const allJournalQuery = `("Europace"[Journal] OR "Heart Rhythm"[Journal] OR "Heart Rhythm O2"[Journal] OR "J Interv Card Electrophysiol"[Journal] OR "JACC Clin Electrophysiol"[Journal] OR "Circ Arrhythm Electrophysiol"[Journal] OR "Heart Rhythm Case Rep"[Journal] OR "J Cardiovasc Electrophysiol"[Journal] OR "Nat Med"[Journal] OR "N Engl J Med"[Journal] OR "Journal of Arrhythmia"[Journal] OR "J Arrhythm"[Journal] OR "Circulation"[Journal] OR "European Heart Journal"[Journal] OR "Eur Heart J"[Journal])`;
+    const allJournalQuery = `("Europace"[Journal] OR "Heart Rhythm"[Journal] OR "Heart Rhythm O2"[Journal] OR "J Interv Card Electrophysiol"[Journal] OR "JACC Clin Electrophysiol"[Journal] OR "Circ Arrhythm Electrophysiol"[Journal] OR "Heart Rhythm Case Rep"[Journal] OR "J Cardiovasc Electrophysiol"[Journal] OR "Nat Med"[Journal] OR "N Engl J Med"[Journal] OR "JAMA"[Journal] OR "JAMA Cardiol"[Journal] OR "Journal of Arrhythmia"[Journal] OR "J Arrhythm"[Journal] OR "Circulation"[Journal] OR "European Heart Journal"[Journal] OR "Eur Heart J"[Journal])`;
     const fallbackRes = await axios.get(searchUrl, {
       params: { db: 'pubmed', term: `${keywordTerm} AND ${allJournalQuery}`, reldate: daysPast, datetype: 'pdat', sort: 'pub_date', retmax: maxResults, retmode: 'json' }
     });
@@ -167,7 +169,8 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 15
     idList = Array.from(new Set([...idList, ...fallbackIds]));
   }
 
-  idList = idList.slice(0, maxResults);
+  const effectiveMaxResults = Math.max(maxResults, 300);
+  idList = idList.slice(0, effectiveMaxResults);
   console.log(`[PubMed Fetcher] 最終収集論文数: ${idList.length}件`);
 
   if (idList.length === 0) {
@@ -341,6 +344,7 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 15
         'europace', 'heart rhythm', 'interventional cardiac electrophysiology',
         'jacc', 'circulation', 'cardiovascular electrophysiology',
         'nature medicine', 'nat med', 'new england journal', 'n engl j med', 'nejm',
+        'jama',
         'journal of arrhythmia', 'j arrhythm', 'european heart journal', 'eur heart j',
         'shin-denzu', 'shinzo', 'electrocardiology', '心電図'
       ].some(jKey => lowerJournal.includes(jKey) || lowerAbbr.includes(jKey));
@@ -385,5 +389,17 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 15
     return b.pmid - a.pmid;
   });
 
-  return resultPapers;
+  // 各雑誌最大10本に厳格制限 (各誌10本ずつ均等選択)
+  const journalPaperCount = new Map();
+  const cappedPapers = [];
+  for (const paper of resultPapers) {
+    const jKey = (paper.journalAbbr || paper.journal || '').toLowerCase();
+    const count = journalPaperCount.get(jKey) || 0;
+    if (count < 10) {
+      journalPaperCount.set(jKey, count + 1);
+      cappedPapers.push(paper);
+    }
+  }
+
+  return cappedPapers;
 }

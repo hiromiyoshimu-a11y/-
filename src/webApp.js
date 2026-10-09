@@ -216,6 +216,7 @@ function updateJournalOptions() {
     { value: 'case reports', label: 'Heart Rhythm Case Rep' },
     { value: 'england', label: 'NEJM' },
     { value: 'nature medicine', label: 'Nature Medicine' },
+    { value: 'jama', label: 'JAMA' },
     { value: '心電図', label: '和文誌『心電図』' }
   ];
 
