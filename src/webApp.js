@@ -3,6 +3,8 @@
  * モバイル・スマホ最適化 Web アプリケーション フロントエンド Script
  */
 
+import { SplashScreen } from '@capacitor/splash-screen';
+
 let allPapers = [];
 let bookmarks = JSON.parse(localStorage.getItem('ep_paper_bookmarks') || '[]');
 let readPapers = JSON.parse(localStorage.getItem('ep_paper_read') || '[]');
@@ -21,6 +23,20 @@ async function initApp() {
   registerServiceWorker();
   setupPwaInstaller();
   await loadPaperData();
+
+  // スプラッシュスクリーンのスムーズなフェードアウト
+  try {
+    if (window.Capacitor) {
+      await SplashScreen.hide({ fadeOutDuration: 500 });
+    }
+  } catch (e) {
+    console.log('SplashScreen hide skipped:', e);
+  }
+
+  // 起動完了後、バックグラウンドでクラウド最新データを自動同期
+  setTimeout(() => {
+    syncWithCloud(false);
+  }, 800);
 }
 
 function loadFontSizePreference() {
@@ -107,69 +123,83 @@ function showAndroidInstallGuideModal() {
   document.getElementById('detailModal').style.display = 'flex';
 }
 
+// リモートクラウド上の最新論文URL (GitHub Raw / GitHub Pages)
+const REMOTE_DATA_URLS = [
+  'https://raw.githubusercontent.com/hiromiyoshimu-a11y/-/main/public/papers.json',
+  'https://hiromiyoshimu-a11y.github.io/-/papers.json'
+];
+
 /**
- * 論文データの読み込み (public/papers.json または outputs/papers.json)
+ * 論文データの読み込み (Offline-First: ローカルキャッシュを即座に表示)
  */
 async function loadPaperData() {
   const paperListEl = document.getElementById('paperList');
   
-  // 現在のページのアドレスから絶対URLを組み立てる (末尾スラッシュ補正)
+  // 1. まずローカルストレージの最新キャッシュをチェック（オフラインでも瞬時に起動）
+  const cachedDataStr = localStorage.getItem('ep_papers_cache');
+  if (cachedDataStr) {
+    try {
+      const cached = JSON.parse(cachedDataStr);
+      if (cached && Array.isArray(cached.papers) && cached.papers.length > 0) {
+        console.log('Loaded from local storage cache:', cached.papers.length, 'papers');
+        applyPaperData(cached);
+        return;
+      }
+    } catch (e) {
+      console.warn('Failed to parse cached papers:', e);
+    }
+  }
+
+  // 2. キャッシュがなければアプリバンドル内のローカル papers.json を読み込む
   let currentPath = window.location.pathname;
   if (!currentPath.endsWith('/') && !currentPath.includes('.html')) {
     currentPath += '/';
   }
-  
   const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
 
-  const candidateUrls = [
+  const localUrls = [
     `${window.location.origin}${basePath}papers.json`,
     './papers.json',
     'papers.json',
-    '/papers.json',
-    `${window.location.origin}/papers.json`,
-    './outputs/papers.json'
+    '/papers.json'
   ];
 
   let data = null;
-  let lastError = null;
-
-  for (const url of candidateUrls) {
+  for (const url of localUrls) {
     try {
-      const cacheBustUrl = url.includes('?') ? `${url}&_=${Date.now()}` : `${url}?_=${Date.now()}`;
-      console.log('Trying to fetch paper data from:', cacheBustUrl);
-      const res = await fetch(cacheBustUrl);
+      const res = await fetch(`${url}?_=${Date.now()}`);
       if (res.ok) {
         data = await res.json();
-        console.log('Successfully loaded paper data from:', url);
         break;
       }
-    } catch (e) {
-      lastError = e;
-    }
+    } catch {}
   }
 
-  if (!data || !data.papers) {
-    console.error('All fetch attempts failed:', lastError);
+  if (data && data.papers) {
+    applyPaperData(data);
+    localStorage.setItem('ep_papers_cache', JSON.stringify(data));
+  } else {
     paperListEl.innerHTML = `
       <div class="loading-state" style="text-align: center; padding: 28px 16px;">
         <p style="color: #EF4444; font-weight: 700; font-size: 16px;">⚠️ 論文データを読み込めませんでした</p>
         <p style="font-size: 12px; margin-top: 8px; color: var(--text-secondary);">
-          ブラウザのキャッシュが残っている可能性があります。下のボタンを押して再読み込みをお試しください。
+          通信環境を確認の上、同期ボタンを押してください。
         </p>
-        <button onclick="location.reload(true)" style="margin-top: 16px; padding: 10px 24px; background: var(--accent-blue); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
-          🔄 ページを強制作再読み込み
+        <button onclick="syncWithCloud(true)" style="margin-top: 16px; padding: 10px 24px; background: var(--accent-blue); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer;">
+          🔄 最新データを同期する
         </button>
       </div>
     `;
-    return;
   }
+}
 
+/**
+ * 取得したデータをUIへ反映
+ */
+function applyPaperData(data) {
   allPapers = data.papers || [];
-
-  // 雑誌フィルターを論文データから動的に生成・更新
   updateJournalOptions();
 
-  // 新着数およびメタ情報更新
   const newCount = data.newCount || allPapers.filter(p => p.isNew).length;
   const unreadCount = allPapers.filter(p => !readPapers.includes(String(p.pmid))).length;
   const readCount = readPapers.length;
@@ -192,6 +222,56 @@ async function loadPaperData() {
 
   renderPapers();
 }
+
+/**
+ * クラウド（GitHub / サーバー）から最新論文データを自動同期
+ */
+window.syncWithCloud = async function(isManual = false) {
+  const syncIcon = document.getElementById('syncIcon');
+  const syncText = document.getElementById('syncText');
+
+  if (syncIcon) syncIcon.style.transform = 'rotate(360deg)';
+  if (syncText) syncText.textContent = '同期中...';
+
+  let latestData = null;
+  for (const url of REMOTE_DATA_URLS) {
+    try {
+      console.log('[Cloud Sync] Checking remote url:', url);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 6000);
+      const res = await fetch(`${url}?_=${Date.now()}`, { signal: controller.signal });
+      clearTimeout(timeoutId);
+      if (res.ok) {
+        latestData = await res.json();
+        console.log('[Cloud Sync] Successfully fetched latest data from:', url);
+        break;
+      }
+    } catch (e) {
+      console.warn('[Cloud Sync] Failed from', url, e.message);
+    }
+  }
+
+  if (syncIcon) {
+    setTimeout(() => { syncIcon.style.transform = 'rotate(0deg)'; }, 600);
+  }
+  if (syncText) syncText.textContent = '最新同期';
+
+  if (latestData && Array.isArray(latestData.papers)) {
+    const prevCount = allPapers.length;
+    applyPaperData(latestData);
+    localStorage.setItem('ep_papers_cache', JSON.stringify(latestData));
+
+    if (isManual) {
+      showToast(`✅ クラウド最新データ (${latestData.papers.length}件) を同期しました！`);
+    } else if (latestData.papers.length !== prevCount) {
+      showToast(`✨ 最新論文データが更新されました (${latestData.papers.length}件)`);
+    }
+  } else {
+    if (isManual) {
+      showToast('⚠️ クラウドと通信できませんでした。現在のデータを表示します。');
+    }
+  }
+};
 
 /**
  * 論文データに含まれるすべての雑誌を抽出し、ドロップダウンを動的に更新
@@ -305,6 +385,36 @@ function setupEventListeners() {
   document.getElementById('detailModal').addEventListener('click', (e) => {
     if (e.target.id === 'detailModal') closeModal();
   });
+
+  const infoBtn = document.getElementById('infoBtn');
+  if (infoBtn) {
+    infoBtn.addEventListener('click', () => {
+      document.getElementById('disclaimerModal').style.display = 'flex';
+    });
+  }
+
+  const closeDisclaimerModal = document.getElementById('closeDisclaimerModal');
+  if (closeDisclaimerModal) {
+    closeDisclaimerModal.addEventListener('click', () => {
+      document.getElementById('disclaimerModal').style.display = 'none';
+    });
+  }
+
+  const disclaimerModal = document.getElementById('disclaimerModal');
+  if (disclaimerModal) {
+    disclaimerModal.addEventListener('click', (e) => {
+      if (e.target.id === 'disclaimerModal') {
+        disclaimerModal.style.display = 'none';
+      }
+    });
+  }
+
+  const syncBtn = document.getElementById('syncOnlineBtn');
+  if (syncBtn) {
+    syncBtn.addEventListener('click', () => {
+      syncWithCloud(true);
+    });
+  }
 }
 
 function toggleTheme() {
@@ -538,6 +648,9 @@ window.openDetail = function(pmid) {
       <button class="action-btn ${isBookmarked ? 'primary' : ''}" onclick="toggleBookmark('${paper.pmid}'); openDetail('${paper.pmid}');">
         ${isBookmarked ? '❤️ ブックマーク中' : '🤍 ブックマーク追加'}
       </button>
+      <button class="action-btn" onclick="sharePaper('${paper.pmid}')">
+        📤 論文を共有
+      </button>
       <button class="action-btn" onclick="copyCitation('${paper.pmid}')">
         📋 出典(Vancouver)をコピー
       </button>
@@ -577,6 +690,37 @@ window.openDetail = function(pmid) {
 function closeModal() {
   document.getElementById('detailModal').style.display = 'none';
 }
+
+window.sharePaper = async function(pmid) {
+  const paper = allPapers.find(p => String(p.pmid) === String(pmid));
+  if (!paper) return;
+
+  const title = paper.titleJa || paper.title;
+  const url = paper.url || `https://pubmed.ncbi.nlm.nih.gov/${paper.pmid}/`;
+  const shareData = {
+    title: title,
+    text: `【最新医学論文】${title} (${paper.journal || ''})`,
+    url: url
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+      return;
+    } catch (e) {
+      if (e.name !== 'AbortError') {
+        console.error('Share failed:', e);
+      }
+    }
+  }
+
+  // フォールバック: クリップボードにURLコピー
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(`${title}\n${url}`).then(() => {
+      showToast('🔗 論文リンクをクリップボードにコピーしました！');
+    });
+  }
+};
 
 window.copyCitation = function(pmid) {
   const paper = allPapers.find(p => String(p.pmid) === String(pmid));

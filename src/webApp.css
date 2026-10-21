@@ -147,7 +147,7 @@ body {
 #app {
   max-width: 800px;
   margin: 0 auto;
-  padding-bottom: 40px;
+  padding-bottom: max(40px, calc(20px + env(safe-area-inset-bottom)));
 }
 
 /* ------------------------------------
@@ -162,6 +162,9 @@ body {
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
   padding: 12px 16px;
+  padding-top: max(12px, env(safe-area-inset-top));
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
 }
 
 .header-top {
@@ -640,7 +643,7 @@ body.light-theme .paper-card.is-new {
 }
 
 .modal-body {
-  padding: 20px 16px 40px 16px;
+  padding: 20px 16px max(40px, calc(20px + env(safe-area-inset-bottom))) 16px;
   overflow-y: auto;
 }
 

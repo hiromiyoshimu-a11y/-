@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>⚡ カテーテル / パルスフィールドアブレーション & 不整脈 最新論文ナビ</title>
   <meta name="description" content="PubMed過去3ヶ月の主要誌(Europace, Heart Rhythm, JACC EP, Circ EP, NEJM, Nat Med等)のカテーテルアブレーション・PFA・不整脈最新論文のAI日本語要約＆全訳アプリ">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -41,8 +41,8 @@
             <option value="large">🔤 大</option>
             <option value="xlarge">🔤 特大</option>
           </select>
-          <button id="pwaInstallBtn" class="action-btn primary" style="display: none; padding: 6px 12px; font-size: 11px; border-radius: 20px;">
-            📱 アプリをインストール
+          <button id="infoBtn" class="icon-btn" aria-label="医療免責事項・アプリ情報" title="医療免責事項・アプリ情報">
+            <span class="theme-icon">ℹ️</span>
           </button>
           <button id="themeToggle" class="icon-btn" aria-label="テーマ切り替え">
             <span class="theme-icon">🌙</span>
@@ -55,6 +55,10 @@
         <span class="badge date-badge" id="updatedDateBadge">📅 最終更新: 2026-09-29</span>
         <span class="badge count-badge" id="paperCountBadge">📄 50件の最新論文</span>
         <span class="badge new-count-badge" id="newCountBadge" style="display: none;">✨ 今週の新着: 0件</span>
+        <button id="syncOnlineBtn" class="badge sync-badge" title="最新論文データをクラウドと同期" style="cursor: pointer; border: 1px solid var(--accent-blue); background: var(--accent-blue-bg); color: var(--accent-blue); display: inline-flex; align-items: center; gap: 4px; font-weight: 600;">
+          <span id="syncIcon" style="display: inline-block; transition: transform 0.6s ease;">🔄</span>
+          <span id="syncText">最新同期</span>
+        </button>
       </div>
 
       <!-- 検索・フィルターエリア -->
@@ -110,6 +114,34 @@
         </div>
         <div class="modal-body" id="modalBody">
           <!-- 詳細内容がここに展開される -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 医療免責事項 & アプリ情報モーダル (App Store 必須準拠) -->
+    <div id="disclaimerModal" class="modal-overlay" style="display: none;">
+      <div class="modal-sheet" style="max-height: 80vh;">
+        <div class="modal-header">
+          <h3 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 0;">ℹ️ アプリ情報 & 医療免責事項</h3>
+          <button id="closeDisclaimerModal" class="close-modal-btn">✕</button>
+        </div>
+        <div class="modal-body" style="font-size: 13.5px; line-height: 1.8; color: var(--text-secondary);">
+          <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-md); border-left: 4px solid var(--accent-blue); margin-bottom: 16px;">
+            <strong style="color: var(--text-primary); display: block; margin-bottom: 6px;">⚖️ 医療免責事項 (Medical Disclaimer)</strong>
+            本アプリは、米国国立医学図書館（PubMed / NLM）が提供する公開医学論文の書誌情報およびAI要約を閲覧するための学術研究・情報提供支援ツールです。<br>
+            <strong>本アプリが提供する情報は、専門的な医学的アドバイス、診断、または治療の代替となるものではありません。</strong><br>
+            実際の臨床判断や治療方針の決定に際しては、必ず原著論文を精読し、担当の医師および医療専門家の判断に基づいてください。
+          </div>
+
+          <div style="margin-bottom: 16px;">
+            <strong style="color: var(--text-primary); display: block; margin-bottom: 6px;">📚 データソース & 著作権</strong>
+            論文データは PubMed API (E-utilities) を通じて取得されています。各論文の抄録およびタイトルの著作権は、原著者および各出版元ジャーナルに帰属します。
+          </div>
+
+          <div style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 24px;">
+            EP & PFA Papers v1.0.0<br>
+            Designed for Clinical Electrophysiologists
+          </div>
         </div>
       </div>
     </div>
