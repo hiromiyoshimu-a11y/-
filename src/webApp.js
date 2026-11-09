@@ -432,6 +432,28 @@ function loadThemePreference() {
   }
 }
 
+const MONTH_MAP = {
+  jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6,
+  jul: 7, aug: 8, sep: 9, oct: 10, nov: 11, dec: 12
+};
+
+function parsePubDateValue(dateStr) {
+  if (!dateStr) return 0;
+  const parts = String(dateStr).trim().split(/[-/\s]+/);
+  const year = parseInt(parts[0], 10) || 0;
+  let month = 1;
+  if (parts[1]) {
+    const mLower = parts[1].toLowerCase().slice(0, 3);
+    if (MONTH_MAP[mLower]) {
+      month = MONTH_MAP[mLower];
+    } else if (!isNaN(parseInt(parts[1], 10))) {
+      month = parseInt(parts[1], 10);
+    }
+  }
+  const day = parts[2] ? (parseInt(parts[2], 10) || 1) : 1;
+  return year * 10000 + month * 100 + day;
+}
+
 /**
  * 論文リストのフィルタリング・ソート＆描画
  */
@@ -500,8 +522,15 @@ function renderPapers() {
       if (a.isTargetJournal !== b.isTargetJournal) return b.isTargetJournal ? 1 : -1;
       return (b.sampleSize || 0) - (a.sampleSize || 0);
     }
-    if (sortVal === 'date') {
-      return (b.pubDate || '').localeCompare(a.pubDate || '');
+    if (sortVal === 'date_desc' || sortVal === 'date') {
+      const diff = parsePubDateValue(b.pubDate) - parsePubDateValue(a.pubDate);
+      if (diff !== 0) return diff;
+      return String(b.pmid || '').localeCompare(String(a.pmid || ''));
+    }
+    if (sortVal === 'date_asc') {
+      const diff = parsePubDateValue(a.pubDate) - parsePubDateValue(b.pubDate);
+      if (diff !== 0) return diff;
+      return String(a.pmid || '').localeCompare(String(b.pmid || ''));
     }
     if (sortVal === 'sampleSize') {
       return (b.sampleSize || 0) - (a.sampleSize || 0);
