@@ -6,6 +6,9 @@ on:
     branches: [ main ]
     paths:
       - '.github/workflows/build_android_apk.yml'
+      - 'index.html'
+      - 'src/webApp.js'
+      - 'src/webApp.css'
 
 permissions:
   contents: write

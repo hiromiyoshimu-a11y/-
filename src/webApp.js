@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function initApp() {
+  initDeviceSyncCode();
   setupEventListeners();
   loadThemePreference();
   loadFontSizePreference();
@@ -33,10 +34,206 @@ async function initApp() {
     console.log('SplashScreen hide skipped:', e);
   }
 
-  // 起動完了後、バックグラウンドでクラウド最新データを自動同期
+  // 起動完了後、バックグラウンドでクラウド最新データ＆既読・ブックマークを自動同期
   setTimeout(() => {
     syncWithCloud(false);
+    pullUserStateFromCloud(getSyncCode(), false, false);
   }, 800);
+
+  // 別端末で操作した後に画面へ戻ってきた際にも自動同期
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      pullUserStateFromCloud(getSyncCode(), false, false);
+    }
+  });
+}
+
+// ====================================================
+// 🔗 10桁コードによる複数端末（iPhone / Mac / iPad / Android）同期機能
+// ====================================================
+const KV_APP_KEY = 'y3liigs4';
+
+function generateTenCharCode() {
+  const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+  let result = 'EP';
+  for (let i = 0; i < 8; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+
+function getSyncCode() {
+  let code = localStorage.getItem('ep_sync_code');
+  if (!code || code.length < 6) {
+    code = generateTenCharCode();
+    localStorage.setItem('ep_sync_code', code);
+  }
+  return code;
+}
+
+function initDeviceSyncCode() {
+  const code = getSyncCode();
+  const displayEl = document.getElementById('mySyncCodeDisplay');
+  if (displayEl) displayEl.textContent = code;
+  updateSyncStatusUI('クラウド自動同期：有効');
+}
+
+function updateSyncStatusUI(statusMsg) {
+  const statusEl = document.getElementById('syncStatusText');
+  if (statusEl) {
+    statusEl.textContent = `${statusMsg}（既読 ${readPapers.length}件 / ブックマーク ${bookmarks.length}件）`;
+  }
+  const displayEl = document.getElementById('mySyncCodeDisplay');
+  if (displayEl) {
+    displayEl.textContent = getSyncCode();
+  }
+}
+
+function toBase64Url(str) {
+  return btoa(unescape(encodeURIComponent(str)))
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+}
+
+function fromBase64Url(b64u) {
+  let s = String(b64u).replace(/"/g, '').trim().replace(/-/g, '+').replace(/_/g, '/');
+  while (s.length % 4) s += '=';
+  return decodeURIComponent(escape(atob(s)));
+}
+
+async function pushUserStateToCloud(code = getSyncCode()) {
+  if (!code) return;
+  const ts = Date.now();
+  localStorage.setItem('ep_user_state_ts', String(ts));
+
+  const payload = {
+    b: [...new Set(bookmarks.map(String))],
+    r: [...new Set(readPapers.map(String))],
+    ts
+  };
+  const jsonStr = JSON.stringify(payload);
+  const encoded = toBase64Url(jsonStr);
+
+  updateSyncStatusUI('☁️ クラウドへ保存中...');
+
+  try {
+    await Promise.any([
+      fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${KV_APP_KEY}/ep_${code}/${encoded}`, {
+        method: 'POST'
+      }),
+      fetch(`https://ntfy.sh/ep_pfa_sync_${code}`, {
+        method: 'POST',
+        body: jsonStr
+      })
+    ]);
+    updateSyncStatusUI('✅ クラウド同期完了');
+  } catch (e) {
+    console.warn('[Device Sync] Cloud push failed:', e);
+    updateSyncStatusUI('⚠️ オフライン（次回通信時に同期）');
+  }
+}
+
+async function fetchCloudPayloads(code) {
+  const results = [];
+
+  const p1 = (async () => {
+    try {
+      const res = await fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${KV_APP_KEY}/ep_${code}?_=${Date.now()}`);
+      if (res.ok) {
+        const raw = (await res.text()).replace(/"/g, '').trim();
+        if (raw && raw !== 'null') {
+          const parsed = JSON.parse(fromBase64Url(raw));
+          if (parsed && Array.isArray(parsed.b) && Array.isArray(parsed.r)) {
+            results.push(parsed);
+          }
+        }
+      }
+    } catch {}
+  })();
+
+  const p2 = (async () => {
+    try {
+      const res = await fetch(`https://ntfy.sh/ep_pfa_sync_${code}/json?poll=1&since=24h&_=${Date.now()}`);
+      if (res.ok) {
+        const lines = (await res.text()).trim().split('\n').filter(Boolean);
+        for (let i = lines.length - 1; i >= 0; i--) {
+          try {
+            const evt = JSON.parse(lines[i]);
+            if (evt && evt.message) {
+              const parsed = JSON.parse(evt.message);
+              if (parsed && Array.isArray(parsed.b) && Array.isArray(parsed.r)) {
+                results.push(parsed);
+                break;
+              }
+            }
+          } catch {}
+        }
+      }
+    } catch {}
+  })();
+
+  await Promise.allSettled([p1, p2]);
+  if (results.length === 0) return null;
+  results.sort((a, b) => (b.ts || 0) - (a.ts || 0));
+  return results[0];
+}
+
+async function pullUserStateFromCloud(code = getSyncCode(), mergeMode = false, showFeedback = false) {
+  if (!code) return;
+  if (showFeedback) updateSyncStatusUI('🔄 クラウドから同期中...');
+
+  const cloudData = await fetchCloudPayloads(code);
+  const localTs = Number(localStorage.getItem('ep_user_state_ts') || 0);
+
+  if (!cloudData) {
+    // クラウド側にまだデータがなく、ローカルに既読・ブックマークがある場合はクラウドへ初回登録
+    if (bookmarks.length > 0 || readPapers.length > 0 || showFeedback) {
+      await pushUserStateToCloud(code);
+    }
+    if (showFeedback) {
+      showToast(`✅ 同期コード「${code}」のデータをクラウドに保存しました`);
+    }
+    updateSyncStatusUI('✅ クラウド同期済み');
+    return;
+  }
+
+  if (mergeMode) {
+    // 別端末の10桁コードを入力して連携したときは、両方の端末の既読・ブックマークを合算（マージ）
+    bookmarks = [...new Set([...bookmarks.map(String), ...cloudData.b.map(String)])];
+    readPapers = [...new Set([...readPapers.map(String), ...cloudData.r.map(String)])];
+    localStorage.setItem('ep_paper_bookmarks', JSON.stringify(bookmarks));
+    localStorage.setItem('ep_paper_read', JSON.stringify(readPapers));
+    renderPapers();
+    await pushUserStateToCloud(code);
+    if (showFeedback) {
+      showToast(`🔗 コード「${code}」で連携完了！（既読 ${readPapers.length}件 / ブックマーク ${bookmarks.length}件）`);
+    }
+    return;
+  }
+
+  // 通常の自動同期：クラウド側の方が新しい変更であればローカルに反映
+  if ((cloudData.ts || 0) > localTs) {
+    const prevReadLen = readPapers.length;
+    const prevBmLen = bookmarks.length;
+    bookmarks = [...new Set(cloudData.b.map(String))];
+    readPapers = [...new Set(cloudData.r.map(String))];
+    localStorage.setItem('ep_paper_bookmarks', JSON.stringify(bookmarks));
+    localStorage.setItem('ep_paper_read', JSON.stringify(readPapers));
+    localStorage.setItem('ep_user_state_ts', String(cloudData.ts));
+    renderPapers();
+    updateSyncStatusUI('✅ クラウドから最新状態を反映');
+    if (showFeedback || prevReadLen !== readPapers.length || prevBmLen !== bookmarks.length) {
+      showToast(`🔄 別端末の既読・ブックマークを同期しました`);
+    }
+  } else if (localTs > (cloudData.ts || 0)) {
+    await pushUserStateToCloud(code);
+  } else {
+    updateSyncStatusUI('✅ クラウドと最新状態で同期済み');
+    if (showFeedback) {
+      showToast('✅ 既読・ブックマークは最新の状態です');
+    }
+  }
 }
 
 function loadFontSizePreference() {
@@ -413,6 +610,67 @@ function setupEventListeners() {
   if (syncBtn) {
     syncBtn.addEventListener('click', () => {
       syncWithCloud(true);
+      pullUserStateFromCloud(getSyncCode(), false, false);
+    });
+  }
+
+  // 🔗 端末間データ同期モーダル制御
+  const openSyncModal = () => {
+    initDeviceSyncCode();
+    document.getElementById('deviceSyncModal').style.display = 'flex';
+  };
+  const deviceSyncBtn = document.getElementById('deviceSyncBtn');
+  if (deviceSyncBtn) deviceSyncBtn.addEventListener('click', openSyncModal);
+  const metaDeviceSyncBtn = document.getElementById('metaDeviceSyncBtn');
+  if (metaDeviceSyncBtn) metaDeviceSyncBtn.addEventListener('click', openSyncModal);
+
+  const closeDeviceSyncModal = document.getElementById('closeDeviceSyncModal');
+  if (closeDeviceSyncModal) {
+    closeDeviceSyncModal.addEventListener('click', () => {
+      document.getElementById('deviceSyncModal').style.display = 'none';
+    });
+  }
+  const deviceSyncModal = document.getElementById('deviceSyncModal');
+  if (deviceSyncModal) {
+    deviceSyncModal.addEventListener('click', (e) => {
+      if (e.target.id === 'deviceSyncModal') {
+        deviceSyncModal.style.display = 'none';
+      }
+    });
+  }
+
+  const copySyncCodeBtn = document.getElementById('copySyncCodeBtn');
+  if (copySyncCodeBtn) {
+    copySyncCodeBtn.addEventListener('click', () => {
+      const code = getSyncCode();
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(code).then(() => {
+          showToast(`📋 同期コード「${code}」をコピーしました！`);
+        });
+      }
+    });
+  }
+
+  const forceCloudSyncBtn = document.getElementById('forceCloudSyncBtn');
+  if (forceCloudSyncBtn) {
+    forceCloudSyncBtn.addEventListener('click', () => {
+      pullUserStateFromCloud(getSyncCode(), false, true);
+    });
+  }
+
+  const applySyncCodeBtn = document.getElementById('applySyncCodeBtn');
+  if (applySyncCodeBtn) {
+    applySyncCodeBtn.addEventListener('click', async () => {
+      const inputEl = document.getElementById('inputSyncCode');
+      const rawInput = (inputEl ? inputEl.value : '').trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+      if (rawInput.length < 6 || rawInput.length > 14) {
+        showToast('⚠️ 10桁の英数字コードを入力してください');
+        return;
+      }
+      localStorage.setItem('ep_sync_code', rawInput);
+      if (inputEl) inputEl.value = '';
+      initDeviceSyncCode();
+      await pullUserStateFromCloud(rawInput, true, true);
     });
   }
 }
@@ -611,6 +869,7 @@ window.toggleRead = function(pmid) {
   }
   localStorage.setItem('ep_paper_read', JSON.stringify(readPapers));
   renderPapers();
+  pushUserStateToCloud(getSyncCode());
 };
 
 window.toggleBookmark = function(pmid) {
@@ -625,6 +884,7 @@ window.toggleBookmark = function(pmid) {
   }
   localStorage.setItem('ep_paper_bookmarks', JSON.stringify(bookmarks));
   renderPapers();
+  pushUserStateToCloud(getSyncCode());
 };
 
 window.openDetail = function(pmid) {
