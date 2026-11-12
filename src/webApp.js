@@ -24,6 +24,7 @@ async function initApp() {
   loadFontSizePreference();
   registerServiceWorker();
   setupPwaInstaller();
+  initPullToRefresh();
   await loadPaperData();
 
   // スプラッシュスクリーンのスムーズなフェードアウト
@@ -45,6 +46,115 @@ async function initApp() {
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'visible') {
       pullUserStateFromCloud(getSyncCode(), false, false);
+    }
+  });
+}
+
+/**
+ * 📲 下に引っ張って更新 (Pull to Refresh) 機能
+ */
+function initPullToRefresh() {
+  const ptrEl = document.getElementById('pullToRefresh');
+  const ptrIcon = document.getElementById('ptrIcon');
+  const ptrText = document.getElementById('ptrText');
+  if (!ptrEl || !ptrIcon || !ptrText) return;
+
+  let startY = 0;
+  let isTracking = false;
+  let isRefreshing = false;
+  const THRESHOLD = 65; // ピクセル
+
+  window.addEventListener('touchstart', (e) => {
+    if (isRefreshing) return;
+    // 画面が最上部にあり、モーダルが開いていない場合のみ監視
+    const isModalOpen = document.querySelector('.modal-overlay[style*="display: flex"]');
+    if (window.scrollY <= 2 && !isModalOpen && e.touches.length === 1) {
+      startY = e.touches[0].pageY;
+      isTracking = true;
+    } else {
+      isTracking = false;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isTracking || isRefreshing) return;
+    const currentY = e.touches[0].pageY;
+    const diff = currentY - startY;
+
+    if (diff > 0 && window.scrollY <= 0) {
+      // 指の引きに抵抗感（ダンピング）を付加
+      const pullDistance = Math.min(diff * 0.45, 80);
+      ptrEl.style.transition = 'none';
+      ptrEl.style.transform = `translate(-50%, ${pullDistance}px)`;
+      ptrEl.style.opacity = String(Math.min(pullDistance / 35, 1));
+
+      if (pullDistance >= THRESHOLD * 0.75) {
+        ptrIcon.style.transform = 'rotate(180deg)';
+        ptrText.textContent = '離して最新論文を更新';
+        ptrEl.classList.add('ptr-ready');
+      } else {
+        ptrIcon.style.transform = 'rotate(0deg)';
+        ptrText.textContent = '下に引っ張って更新';
+        ptrEl.classList.remove('ptr-ready');
+      }
+    } else if (diff < 0) {
+      // 上にスクロールした場合は追従解除
+      isTracking = false;
+      ptrEl.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
+      ptrEl.style.transform = 'translate(-50%, -130%)';
+      ptrEl.style.opacity = '0';
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', async () => {
+    if (!isTracking || isRefreshing) return;
+    isTracking = false;
+
+    if (ptrEl.classList.contains('ptr-ready')) {
+      // 更新処理の実行
+      isRefreshing = true;
+      ptrEl.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+      ptrEl.style.transform = 'translate(-50%, 55px)';
+      ptrIcon.textContent = '🔄';
+      ptrIcon.classList.add('ptr-spin');
+      ptrText.textContent = '最新論文を同期中...';
+
+      try {
+        await window.syncWithCloud(true);
+        if (typeof pullUserStateFromCloud === 'function') {
+          await pullUserStateFromCloud(getSyncCode(), false, false);
+        }
+        ptrIcon.classList.remove('ptr-spin');
+        ptrIcon.textContent = '✓';
+        ptrText.textContent = '最新データに更新完了';
+      } catch (err) {
+        ptrIcon.classList.remove('ptr-spin');
+        ptrIcon.textContent = '✓';
+        ptrText.textContent = '更新完了';
+      } finally {
+        setTimeout(() => {
+          ptrEl.style.transition = 'transform 0.35s ease, opacity 0.35s ease';
+          ptrEl.style.transform = 'translate(-50%, -130%)';
+          ptrEl.style.opacity = '0';
+          setTimeout(() => {
+            ptrEl.style.transition = '';
+            ptrEl.classList.remove('ptr-ready');
+            ptrIcon.textContent = '⬇️';
+            ptrIcon.style.transform = 'rotate(0deg)';
+            ptrText.textContent = '下に引っ張って更新';
+            isRefreshing = false;
+          }, 350);
+        }, 700);
+      }
+    } else {
+      // 閾値未満で指を離した場合はスムーズに戻す
+      ptrEl.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+      ptrEl.style.transform = 'translate(-50%, -130%)';
+      ptrEl.style.opacity = '0';
+      setTimeout(() => {
+        ptrEl.style.transition = '';
+        ptrIcon.style.transform = 'rotate(0deg)';
+      }, 250);
     }
   });
 }

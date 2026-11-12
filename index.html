@@ -23,6 +23,14 @@
   <link rel="stylesheet" href="/src/webApp.css">
 </head>
 <body class="dark-theme">
+  <!-- 下に引っ張って更新 (Pull to Refresh) インジケーター -->
+  <div id="pullToRefresh" class="ptr-indicator" aria-hidden="true">
+    <div class="ptr-content">
+      <span id="ptrIcon" class="ptr-icon">⬇️</span>
+      <span id="ptrText" class="ptr-text">下に引っ張って更新</span>
+    </div>
+  </div>
+
   <div id="app">
     <!-- モバイルヘッダー -->
     <header class="app-header">
