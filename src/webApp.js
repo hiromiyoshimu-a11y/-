@@ -1292,33 +1292,33 @@ window.openDetail = function(pmid) {
   const isRead = readPapers.includes(pmidStr);
   const isBookmarked = bookmarks.includes(pmidStr);
 
-  // 臨床要約 (summaryJa) の見出しバッジ化（【方法と結論】【方法と結果】等にも対応）
+  // 臨床要約 (summaryJa) の見出しバッジ化（【背景】【背景と目的】【方法と結論】等に対応）
   let formattedSummaryJa = escapeHtml(paper.summaryJa || '要約準備中');
   formattedSummaryJa = formattedSummaryJa
-    .replace(/【(概要|方法|結果|結論|方法と結論|方法と結果|方法・結果|背景|目的)】/g, '<span class="abs-header-badge">【$1】</span>');
+    .replace(/【(概要|背景と目的|背景・目的|背景|目的|方法と結論|方法と結果|方法・結果|方法|結果|結論)】/g, '<span class="abs-header-badge">【$1】</span>');
 
   // 抄録全訳 (abstractJa) の見出しバッジ化＆無駄な空白行完全排除
   let rawAbsJa = paper.abstractJa || paper.abstract || '抄録の全訳がありません。';
   rawAbsJa = rawAbsJa
+    .replace(/(?:Background and aims|Background and objectives|Background & aims|背景と目的|背景・目的|背景\/目的)[:：]/gi, '【背景と目的】')
+    .replace(/(?:Background|背景)[:：]/gi, '【背景】')
+    .replace(/(?:Aims|Aim|Objectives|Objective|目的)[:：]/gi, '【目的】')
     .replace(/(?:Methods and results|Methods & results|方法と結果|方法と結論|方法・結果)[:：]/gi, '【方法と結論】')
-    .replace(/(?:背景・目的|背景\/目的)[:：]/g, '【背景・目的】')
-    .replace(/(?:背景)[:：]/g, '【背景】')
-    .replace(/(?:目的)[:：]/g, '【目的】')
-    .replace(/(?:方法|対象・方法|対象と方法)[:：]/g, '【方法】')
-    .replace(/(?:結果|成績)[:：]/g, '【結果】')
-    .replace(/(?:結論|考察)[:：]/g, '【結論】')
+    .replace(/(?:Methods|Method|方法|対象・方法|対象と方法)[:：]/gi, '【方法】')
+    .replace(/(?:Results|Result|結果|成績)[:：]/gi, '【結果】')
+    .replace(/(?:Conclusions|Conclusion|結論|考察)[:：]/gi, '【結論】')
     .replace(/\n{2,}/g, '\n') // 連続する改行を単一改行へ圧縮
     .trim();
 
   let formattedAbsJa = escapeHtml(rawAbsJa);
   // 見出しバッジ前後の余分な改行を消去し、CSSのmarginのみでコンパクトにレイアウト
   formattedAbsJa = formattedAbsJa
-    .replace(/\n*【(背景|目的|方法|結果|結論|背景・目的|方法と結論|方法と結果|方法・結果)】\n*/g, '<span class="abs-header-badge">【$1】</span>');
+    .replace(/\n*【(背景と目的|背景・目的|背景|目的|方法と結論|方法と結果|方法・結果|方法|結果|結論)】\n*/g, '<span class="abs-header-badge">【$1】</span>');
 
   // 英語抄録 (abstractEn) の見出しバッジ化
   let formattedAbsEn = escapeHtml(paper.abstract || '');
   formattedAbsEn = formattedAbsEn
-    .replace(/\b(BACKGROUND|OBJECTIVE|AIMS?|METHODS AND RESULTS|METHODS & RESULTS|METHODS|RESULTS|CONCLUSIONS?):\n?/gi, '<span class="abs-header-badge" style="text-transform:uppercase;">$1</span>');
+    .replace(/\b(BACKGROUND AND AIMS|BACKGROUND AND OBJECTIVES|BACKGROUND & AIMS|BACKGROUND|OBJECTIVES?|AIMS?|METHODS AND RESULTS|METHODS & RESULTS|METHODS|RESULTS|CONCLUSIONS?):\n?/gi, '<span class="abs-header-badge" style="text-transform:uppercase;">$1</span>');
 
   modalBody.innerHTML = `
     <div class="detail-title-ja">${escapeHtml(paper.titleJa || paper.title)}</div>
