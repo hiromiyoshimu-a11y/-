@@ -9,6 +9,19 @@ let allPapers = [];
 let bookmarks = JSON.parse(localStorage.getItem('ep_paper_bookmarks') || '[]');
 let readPapers = JSON.parse(localStorage.getItem('ep_paper_read') || '[]');
 let currentFilterTab = 'all';
+let selectedJournals = null; // Set of selected journal keys. null = initial state (all selected)
+
+try {
+  const savedJournals = localStorage.getItem('ep_selected_journals');
+  if (savedJournals) {
+    const parsed = JSON.parse(savedJournals);
+    if (Array.isArray(parsed)) {
+      selectedJournals = new Set(parsed);
+    }
+  }
+} catch (e) {
+  selectedJournals = null;
+}
 
 let deferredPrompt;
 
@@ -470,70 +483,122 @@ window.syncWithCloud = async function(isManual = false) {
   }
 };
 
+const PREDEFINED_JOURNALS = [
+  { key: 'eur heart j', label: 'European Heart Journal (EHJ)' },
+  { key: 'circulation', label: 'Circulation' },
+  { key: 'j arrhythm', label: 'Journal of Arrhythmia (JoA)' },
+  { key: 'heart rhythm', label: 'Heart Rhythm' },
+  { key: 'europace', label: 'EP Europace' },
+  { key: 'jacc', label: 'JACC EP' },
+  { key: 'circ arrhythm', label: 'Circ EP' },
+  { key: 'cardiovascular', label: 'JCE' },
+  { key: 'interventional', label: 'JICE' },
+  { key: 'case reports', label: 'Heart Rhythm Case Rep' },
+  { key: 'england', label: 'NEJM' },
+  { key: 'nature medicine', label: 'Nature Medicine' },
+  { key: 'jama', label: 'JAMA' },
+  { key: '心電図', label: '和文誌『心電図』' }
+];
+
+function saveSelectedJournals() {
+  if (selectedJournals) {
+    localStorage.setItem('ep_selected_journals', JSON.stringify(Array.from(selectedJournals)));
+  }
+}
+
+function updateJournalFilterLabel(totalCount) {
+  const labelEl = document.getElementById('journalFilterLabel');
+  if (!labelEl) return;
+  const currentCount = selectedJournals ? selectedJournals.size : totalCount;
+  if (currentCount >= totalCount) {
+    labelEl.textContent = `対象誌: すべて選択中 (${totalCount}誌)`;
+  } else if (currentCount === 0) {
+    labelEl.textContent = `対象誌: 未選択 (0誌)`;
+  } else if (currentCount === 1) {
+    const singleKey = Array.from(selectedJournals)[0];
+    const item = PREDEFINED_JOURNALS.find(p => p.key === singleKey);
+    const label = item ? item.label : singleKey;
+    labelEl.textContent = `対象誌: ${label}`;
+  } else {
+    labelEl.textContent = `対象誌: ${currentCount}誌選択中`;
+  }
+}
+
 /**
- * 論文データに含まれるすべての雑誌を抽出し、ドロップダウンを動的に更新
+ * 論文データに含まれるすべての雑誌を抽出し、複数選択チェックボックスリストを動的に更新
  */
 function updateJournalOptions() {
-  const journalSelect = document.getElementById('journalSelect');
-  if (!journalSelect) return;
-
-  const currentSelection = journalSelect.value;
-  const journalCounts = {};
-
-  const predefined = [
-    { value: 'eur heart j', label: 'European Heart Journal (EHJ)' },
-    { value: 'circulation', label: 'Circulation' },
-    { value: 'j arrhythm', label: 'Journal of Arrhythmia (JoA)' },
-    { value: 'europace', label: 'EP Europace' },
-    { value: 'heart rhythm', label: 'Heart Rhythm' },
-    { value: 'jacc', label: 'JACC EP' },
-    { value: 'circ arrhythm', label: 'Circ EP' },
-    { value: 'interventional', label: 'JICE' },
-    { value: 'cardiovascular', label: 'JCE' },
-    { value: 'case reports', label: 'Heart Rhythm Case Rep' },
-    { value: 'england', label: 'NEJM' },
-    { value: 'nature medicine', label: 'Nature Medicine' },
-    { value: 'jama', label: 'JAMA' },
-    { value: '心電図', label: '和文誌『心電図』' }
-  ];
-
-  allPapers.forEach(paper => {
-    const j = (paper.journalAbbr || paper.journal || '').trim();
-    if (j) {
-      journalCounts[j] = (journalCounts[j] || 0) + 1;
-    }
-  });
-
-  const totalJournalsCount = Object.keys(journalCounts).length;
-  let optionsHtml = `<option value="all">📚 すべての対象誌 (${totalJournalsCount}誌ヒット)</option>`;
+  const checkboxListEl = document.getElementById('journalCheckboxList');
+  if (!checkboxListEl) return;
 
   const addedKeys = new Set();
+  const availableJournals = [];
 
-  predefined.forEach(p => {
+  // 定義済み主要13/14誌の集計
+  PREDEFINED_JOURNALS.forEach(p => {
     const matchCount = allPapers.filter(paper => {
       const jTitle = (paper.journal || '').toLowerCase();
       const jAbbr = (paper.journalAbbr || '').toLowerCase();
-      return jTitle.includes(p.value) || jAbbr.includes(p.value);
+      return jTitle.includes(p.key) || jAbbr.includes(p.key);
     }).length;
 
     if (matchCount > 0) {
-      optionsHtml += `<option value="${p.value}">${p.label} (${matchCount}件)</option>`;
-      addedKeys.add(p.value);
+      availableJournals.push({ key: p.key, label: p.label, count: matchCount });
+      addedKeys.add(p.key);
     }
   });
 
-  Object.keys(journalCounts).forEach(j => {
-    const lowerJ = j.toLowerCase();
-    const isCovered = Array.from(addedKeys).some(val => lowerJ.includes(val));
-    if (!isCovered) {
-      optionsHtml += `<option value="${lowerJ}">${j} (${journalCounts[j]}件)</option>`;
+  // 未定義の雑誌があればその他として追加
+  const extraCounts = {};
+  allPapers.forEach(paper => {
+    const j = (paper.journalAbbr || paper.journal || '').trim();
+    if (j) {
+      const lowerJ = j.toLowerCase();
+      const isCovered = Array.from(addedKeys).some(k => lowerJ.includes(k));
+      if (!isCovered) {
+        extraCounts[j] = (extraCounts[j] || 0) + 1;
+      }
     }
   });
 
-  journalSelect.innerHTML = optionsHtml;
-  if (currentSelection && Array.from(journalSelect.options).some(o => o.value === currentSelection)) {
-    journalSelect.value = currentSelection;
+  Object.entries(extraCounts).forEach(([j, count]) => {
+    const lowerKey = j.toLowerCase();
+    availableJournals.push({ key: lowerKey, label: j, count: count });
+  });
+
+  // 初回ロードで未設定の場合はすべて選択状態に初期化
+  if (selectedJournals === null) {
+    selectedJournals = new Set(availableJournals.map(j => j.key));
   }
+
+  // チェックボックスHTMLを生成
+  checkboxListEl.innerHTML = availableJournals.map(j => {
+    const isChecked = selectedJournals.has(j.key);
+    return `
+      <label class="journal-check-item">
+        <input type="checkbox" value="${escapeHtml(j.key)}" data-journal-key="${escapeHtml(j.key)}" ${isChecked ? 'checked' : ''}>
+        <span class="item-label">${escapeHtml(j.label)}</span>
+        <span class="item-count">${j.count}件</span>
+      </label>
+    `;
+  }).join('');
+
+  // 各チェックボックスの変更イベント
+  checkboxListEl.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', (e) => {
+      const key = e.target.dataset.journalKey;
+      if (e.target.checked) {
+        selectedJournals.add(key);
+      } else {
+        selectedJournals.delete(key);
+      }
+      saveSelectedJournals();
+      updateJournalFilterLabel(availableJournals.length);
+      renderPapers();
+    });
+  });
+
+  updateJournalFilterLabel(availableJournals.length);
 }
 
 /**
@@ -564,8 +629,92 @@ function setupEventListeners() {
     });
   });
 
-  document.getElementById('journalSelect').addEventListener('change', renderPapers);
-  document.getElementById('sortSelect').addEventListener('change', renderPapers);
+  // 期間選択
+  const periodSelect = document.getElementById('periodSelect');
+  if (periodSelect) {
+    const savedPeriod = localStorage.getItem('ep_period');
+    if (savedPeriod && ['3m', '6m', '1y'].includes(savedPeriod)) {
+      periodSelect.value = savedPeriod;
+    }
+    periodSelect.addEventListener('change', (e) => {
+      localStorage.setItem('ep_period', e.target.value);
+      renderPapers();
+    });
+  }
+
+  // 雑誌フィルタードロップダウン開閉・クイック操作
+  const journalToggleBtn = document.getElementById('journalFilterToggleBtn');
+  const journalDropdown = document.getElementById('journalFilterDropdown');
+  if (journalToggleBtn && journalDropdown) {
+    journalToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isHidden = journalDropdown.style.display === 'none';
+      if (isHidden) {
+        journalDropdown.style.display = 'flex';
+        journalToggleBtn.classList.add('open');
+        journalToggleBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        journalDropdown.style.display = 'none';
+        journalToggleBtn.classList.remove('open');
+        journalToggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    const closeBtn = document.getElementById('closeJournalFilterBtn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        journalDropdown.style.display = 'none';
+        journalToggleBtn.classList.remove('open');
+        journalToggleBtn.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    const selectAllBtn = document.getElementById('selectAllJournalsBtn');
+    if (selectAllBtn) {
+      selectAllBtn.addEventListener('click', () => {
+        const cbs = document.querySelectorAll('#journalCheckboxList input[type="checkbox"]');
+        if (!selectedJournals) selectedJournals = new Set();
+        cbs.forEach(cb => {
+          cb.checked = true;
+          selectedJournals.add(cb.dataset.journalKey);
+        });
+        saveSelectedJournals();
+        updateJournalFilterLabel(cbs.length);
+        renderPapers();
+      });
+    }
+
+    const clearAllBtn = document.getElementById('clearAllJournalsBtn');
+    if (clearAllBtn) {
+      clearAllBtn.addEventListener('click', () => {
+        const cbs = document.querySelectorAll('#journalCheckboxList input[type="checkbox"]');
+        cbs.forEach(cb => {
+          cb.checked = false;
+        });
+        if (selectedJournals) selectedJournals.clear();
+        saveSelectedJournals();
+        updateJournalFilterLabel(cbs.length);
+        renderPapers();
+      });
+    }
+
+    // ドロップダウンの外側タップ/クリックで閉じる
+    document.addEventListener('click', (e) => {
+      if (!journalDropdown.contains(e.target) && !journalToggleBtn.contains(e.target)) {
+        if (journalDropdown.style.display !== 'none') {
+          journalDropdown.style.display = 'none';
+          journalToggleBtn.classList.remove('open');
+          journalToggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      }
+    });
+  }
+
+  const sortSelect = document.getElementById('sortSelect');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', renderPapers);
+  }
 
   const fontSelect = document.getElementById('fontSizeSelect');
   if (fontSelect) {
@@ -712,14 +861,32 @@ function parsePubDateValue(dateStr) {
   return year * 10000 + month * 100 + day;
 }
 
+function parsePubDateToDate(dateStr) {
+  if (!dateStr) return null;
+  const parts = String(dateStr).trim().split(/[-/\s]+/);
+  const year = parseInt(parts[0], 10);
+  if (!year || isNaN(year)) return null;
+  let month = 1;
+  if (parts[1]) {
+    const mLower = parts[1].toLowerCase().slice(0, 3);
+    if (MONTH_MAP[mLower]) {
+      month = MONTH_MAP[mLower];
+    } else if (!isNaN(parseInt(parts[1], 10))) {
+      month = parseInt(parts[1], 10);
+    }
+  }
+  const day = parts[2] ? (parseInt(parts[2], 10) || 1) : 1;
+  return new Date(year, month - 1, day);
+}
+
 /**
  * 論文リストのフィルタリング・ソート＆描画
  */
 function renderPapers() {
   const paperListEl = document.getElementById('paperList');
   const searchText = document.getElementById('searchInput').value.toLowerCase().trim();
-  const journalVal = document.getElementById('journalSelect').value;
-  const sortVal = document.getElementById('sortSelect').value;
+  const sortVal = document.getElementById('sortSelect')?.value || 'priority';
+  const periodVal = document.getElementById('periodSelect')?.value || '1y';
 
   const unreadCount = allPapers.filter(p => !readPapers.includes(String(p.pmid))).length;
   const readCount = readPapers.length;
@@ -734,6 +901,18 @@ function renderPapers() {
     const pmidStr = String(paper.pmid);
     const isRead = readPapers.includes(pmidStr);
     const isBookmarked = bookmarks.includes(pmidStr);
+
+    // 期間フィルター（過去3ヶ月・過去6ヶ月・過去1年間）
+    if (periodVal !== '1y') {
+      const pDate = parsePubDateToDate(paper.pubDate);
+      if (pDate) {
+        const daysLimit = periodVal === '3m' ? 92 : 185;
+        const cutoffTime = Date.now() - (daysLimit * 24 * 60 * 60 * 1000);
+        if (pDate.getTime() < cutoffTime) {
+          return false;
+        }
+      }
+    }
 
     // 既読の表示/非表示フィルター
     if (currentFilterTab === 'read') {
@@ -763,10 +942,15 @@ function renderPapers() {
     if (currentFilterTab === 'case' && paper.designRank !== 99) return false;
     if (currentFilterTab === 'bookmarks' && !isBookmarked) return false;
 
-    if (journalVal !== 'all') {
+    // 複数雑誌チェックボックスフィルター
+    if (selectedJournals) {
+      if (selectedJournals.size === 0) {
+        return false; // 1誌もチェックされていない場合は表示しない
+      }
       const jTitle = (paper.journal || '').toLowerCase();
       const jAbbr = (paper.journalAbbr || '').toLowerCase();
-      if (!jTitle.includes(journalVal) && !jAbbr.includes(journalVal)) {
+      const matches = Array.from(selectedJournals).some(key => jTitle.includes(key) || jAbbr.includes(key));
+      if (!matches) {
         return false;
       }
     }
@@ -798,7 +982,9 @@ function renderPapers() {
 
   if (filtered.length === 0) {
     let emptyMsg = '🔍 該当する論文は見つかりませんでした。';
-    if (currentFilterTab === 'read') {
+    if (selectedJournals && selectedJournals.size === 0) {
+      emptyMsg = '📚 表示する雑誌が選択されていません。<br>上部の「対象誌」ドロップダウンから雑誌にチェックを入れてください。';
+    } else if (currentFilterTab === 'read') {
       emptyMsg = '☑ 既読の論文はまだありません。読んだ論文の「☐ 既読」をチェックするとここに表示されます。';
     } else if (currentFilterTab === 'bookmarks') {
       emptyMsg = '❤️ ブックマークされた論文はありません。';

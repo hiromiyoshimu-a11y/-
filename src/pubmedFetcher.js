@@ -103,9 +103,9 @@ function formatAbstractStructured(absNode) {
 }
 
 /**
- * PubMed APIから過去3ヶ月の指定主要雑誌（Heart Rhythm, Europace, JACC EP, Circ EP, JCE, Circulation, Eur Heart J, J Arrhythm, 心電図 等）の論文をバランス良く取得
+ * PubMed APIから過去1年間の指定主要雑誌（Heart Rhythm, Europace, JACC EP, Circ EP, JCE, Circulation, Eur Heart J, J Arrhythm, 心電図 等）の論文をバランス良く取得
  */
-export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 300) {
+export async function fetchCatheterAblationPapers(daysPast = 365, maxResults = 1500) {
   const keywordTerm = `("catheter ablation"[Title/Abstract] OR "pulsed field ablation"[Title/Abstract] OR "arrhythmia"[Title/Abstract] OR "arrhythmias"[Title/Abstract] OR "catheter ablation"[MeSH Terms] OR "pulsed field ablation"[MeSH Terms] OR "arrhythmias, cardiac"[MeSH Terms])`;
 
   // 各主要雑誌グループ (全13グループ)
@@ -125,7 +125,7 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 30
     { name: '和文誌 心電図', query: '("Shin-denzu"[Journal] OR "Japanese Journal of Electrocardiology"[Journal] OR "Shinzo"[Journal])' }
   ];
 
-  console.log(`[PubMed Fetcher] 全${journalGroups.length}の対象主要雑誌から過去${daysPast}日間の論文を各誌10本ずつ均等に収集します...`);
+  console.log(`[PubMed Fetcher] 全${journalGroups.length}の対象主要雑誌から過去${daysPast}日間の論文を網羅的に収集します...`);
 
   let allIds = [];
   const searchUrl = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi';
@@ -133,7 +133,7 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 30
   for (const group of journalGroups) {
     try {
       const searchTerm = `${keywordTerm} AND ${group.query}`;
-      const searchDays = (group.name === 'JAMA' || group.name === 'NEJM / Nat Med') ? 365 : daysPast;
+      const searchDays = daysPast;
       const res = await axios.get(searchUrl, {
         params: {
           db: 'pubmed',
@@ -141,7 +141,7 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 30
           reldate: searchDays,
           datetype: 'pdat',
           sort: 'pub_date',
-          retmax: 20,
+          retmax: 200,
           retmode: 'json'
         }
       });
@@ -152,14 +152,14 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 30
       console.warn(`[PubMed Fetcher] ${group.name} 取得エラー:`, err.message);
     }
     // NCBI API レートリミット (429 Error) 回避のため短いウェイトを挿入
-    await new Promise(resolve => setTimeout(resolve, 400));
+    await new Promise(resolve => setTimeout(resolve, 350));
   }
 
   // 重複IDの除去
   let idList = Array.from(new Set(allIds));
 
   // ヒットが少ない場合の全体補完
-  if (idList.length < 30) {
+  if (idList.length < 50) {
     console.log(`[PubMed Fetcher] 各誌個別のヒット合計 (${idList.length}件) のため、全体補完検索を実施...`);
     const allJournalQuery = `("Europace"[Journal] OR "Heart Rhythm"[Journal] OR "Heart Rhythm O2"[Journal] OR "J Interv Card Electrophysiol"[Journal] OR "JACC Clin Electrophysiol"[Journal] OR "Circ Arrhythm Electrophysiol"[Journal] OR "Heart Rhythm Case Rep"[Journal] OR "J Cardiovasc Electrophysiol"[Journal] OR "Nat Med"[Journal] OR "N Engl J Med"[Journal] OR "JAMA"[Journal] OR "JAMA Cardiol"[Journal] OR "Journal of Arrhythmia"[Journal] OR "J Arrhythm"[Journal] OR "Circulation"[Journal] OR "European Heart Journal"[Journal] OR "Eur Heart J"[Journal])`;
     const fallbackRes = await axios.get(searchUrl, {
@@ -169,7 +169,7 @@ export async function fetchCatheterAblationPapers(daysPast = 90, maxResults = 30
     idList = Array.from(new Set([...idList, ...fallbackIds]));
   }
 
-  const effectiveMaxResults = Math.max(maxResults, 300);
+  const effectiveMaxResults = Math.max(maxResults, 1500);
   idList = idList.slice(0, effectiveMaxResults);
   console.log(`[PubMed Fetcher] 最終収集論文数: ${idList.length}件`);
 

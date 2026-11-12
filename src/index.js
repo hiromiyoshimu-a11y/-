@@ -14,8 +14,8 @@ async function main() {
   console.log(' 🩺 PubMed カテーテルアブレーション論文要約ワークフロー ');
   console.log('====================================================');
 
-  const daysPast = parseInt(process.env.DAYS_PAST || '90', 10);
-  const maxResults = parseInt(process.env.MAX_RESULTS || '300', 10);
+  const daysPast = parseInt(process.env.DAYS_PAST || '365', 10);
+  const maxResults = parseInt(process.env.MAX_RESULTS || '1500', 10);
 
   try {
     // 1. PubMedより論文データ取得

@@ -38,8 +38,8 @@ jobs:
       - name: Run PubMed Summarizer & Generate Reports
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          DAYS_PAST: 90
-          MAX_RESULTS: 300
+          DAYS_PAST: 365
+          MAX_RESULTS: 1500
           NOTIFICATION_EMAIL: 'hiromiyoshimu@gmail.com'
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}

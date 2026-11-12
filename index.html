@@ -89,12 +89,39 @@
         <button class="tab-btn" data-filter="show_all" id="showAllTabBtn">📋 全件表示 (既読含む)</button>
       </div>
 
+      <!-- 雑誌複数選択フィルターボタン & チェックボックスドロップダウン -->
+      <div class="journal-filter-section">
+        <button id="journalFilterToggleBtn" type="button" class="journal-filter-toggle-btn" aria-expanded="false" title="表示する雑誌を複数選択">
+          <span class="btn-icon">📚</span>
+          <span id="journalFilterLabel" class="btn-text">対象誌: すべて選択中 (13誌)</span>
+          <span class="dropdown-arrow">▼</span>
+        </button>
+
+        <div id="journalFilterDropdown" class="journal-filter-dropdown" style="display: none;">
+          <div class="journal-dropdown-header">
+            <span class="dropdown-title">📚 表示する雑誌（複数選択可）</span>
+            <div class="journal-quick-actions">
+              <button type="button" id="selectAllJournalsBtn" class="quick-btn">✓ 全選択</button>
+              <button type="button" id="clearAllJournalsBtn" class="quick-btn">✕ 全解除</button>
+            </div>
+          </div>
+          <div id="journalCheckboxList" class="journal-checkbox-list">
+            <!-- チェックボックス群が動的生成される -->
+          </div>
+          <div class="journal-dropdown-footer">
+            <button type="button" id="closeJournalFilterBtn" class="close-filter-btn">完了</button>
+          </div>
+        </div>
+      </div>
+
       <div class="secondary-filters">
-        <select id="journalSelect" class="styled-select">
-          <option value="all">📚 すべての対象誌</option>
+        <select id="periodSelect" class="styled-select" aria-label="表示期間の選択" title="表示期間の選択">
+          <option value="3m">📅 過去3ヶ月</option>
+          <option value="6m">📅 過去6ヶ月</option>
+          <option value="1y" selected>📅 過去1年間</option>
         </select>
 
-        <select id="sortSelect" class="styled-select">
+        <select id="sortSelect" class="styled-select" aria-label="並び替え順" title="並び替え順">
           <option value="priority">🔥 優先順 (RCT/症例)</option>
           <option value="date_desc">🕒 掲載日 (新しい順)</option>
           <option value="date_asc">🕰️ 掲載日 (古い順)</option>
