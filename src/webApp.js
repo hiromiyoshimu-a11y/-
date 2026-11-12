@@ -11,18 +11,6 @@ let readPapers = JSON.parse(localStorage.getItem('ep_paper_read') || '[]');
 let currentFilterTab = 'all';
 let selectedJournals = null; // Set of selected journal keys. null = initial state (all selected)
 
-try {
-  const savedJournals = localStorage.getItem('ep_selected_journals');
-  if (savedJournals) {
-    const parsed = JSON.parse(savedJournals);
-    if (Array.isArray(parsed)) {
-      selectedJournals = new Set(parsed);
-    }
-  }
-} catch (e) {
-  selectedJournals = null;
-}
-
 let deferredPrompt;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -484,21 +472,116 @@ window.syncWithCloud = async function(isManual = false) {
 };
 
 const PREDEFINED_JOURNALS = [
-  { key: 'eur heart j', label: 'European Heart Journal (EHJ)' },
-  { key: 'circulation', label: 'Circulation' },
-  { key: 'j arrhythm', label: 'Journal of Arrhythmia (JoA)' },
-  { key: 'heart rhythm', label: 'Heart Rhythm' },
-  { key: 'europace', label: 'EP Europace' },
-  { key: 'jacc', label: 'JACC EP' },
-  { key: 'circ arrhythm', label: 'Circ EP' },
-  { key: 'cardiovascular', label: 'JCE' },
-  { key: 'interventional', label: 'JICE' },
-  { key: 'case reports', label: 'Heart Rhythm Case Rep' },
-  { key: 'england', label: 'NEJM' },
-  { key: 'nature medicine', label: 'Nature Medicine' },
-  { key: 'jama', label: 'JAMA' },
-  { key: '心電図', label: '和文誌『心電図』' }
+  {
+    key: 'jce',
+    label: 'JCE（Journal of Cardiovascular Electrophysiology）',
+    match: (t, a) => t.includes('cardiovasc') || a.includes('cardiovasc') || t.includes('jce') || a.includes('jce')
+  },
+  {
+    key: 'jice',
+    label: 'JICE（Journal of Interventional Cardiac Electrophysiology）',
+    match: (t, a) => t.includes('interv card') || a.includes('interv card') || t.includes('jice') || a.includes('jice')
+  },
+  {
+    key: 'heart_rhythm',
+    label: 'Heart Rhythm（Heart Rhythm）',
+    match: (t, a) => (t.includes('heart rhythm') || a.includes('heart rhythm')) && !t.includes('case') && !a.includes('case')
+  },
+  {
+    key: 'europace',
+    label: 'EP Europace（Europace）',
+    match: (t, a) => t.includes('europace') || a.includes('europace')
+  },
+  {
+    key: 'jacc_ep',
+    label: 'JACC EP（JACC: Clinical Electrophysiology）',
+    match: (t, a) => t.includes('jacc') || a.includes('jacc')
+  },
+  {
+    key: 'circ_ep',
+    label: 'Circ EP（Circulation: Arrhythmia and Electrophysiology）',
+    match: (t, a) => t.includes('circ arrhythm') || a.includes('circ arrhythm') || (t.includes('circulation') && t.includes('arrhythm'))
+  },
+  {
+    key: 'circulation',
+    label: 'Circulation（Circulation）',
+    match: (t, a) => (t.includes('circulation') || a.includes('circulation')) && !t.includes('arrhythm') && !a.includes('arrhythm')
+  },
+  {
+    key: 'ehj',
+    label: 'EHJ（European Heart Journal）',
+    match: (t, a) => t.includes('eur heart j') || a.includes('eur heart j') || t.includes('european heart') || a.includes('european heart')
+  },
+  {
+    key: 'joa',
+    label: 'JoA（Journal of Arrhythmia）',
+    match: (t, a) => a.includes('j arrhythm') || t.startsWith('journal of arrhythmia')
+  },
+  {
+    key: 'hr_case_rep',
+    label: 'Heart Rhythm Case Rep（Heart Rhythm Case Reports）',
+    match: (t, a) => t.includes('case rep') || a.includes('case rep')
+  },
+  {
+    key: 'nejm',
+    label: 'NEJM（The New England Journal of Medicine）',
+    match: (t, a) => t.includes('engl j med') || a.includes('engl j med') || t.includes('new england') || a.includes('new england') || t.includes('nejm')
+  },
+  {
+    key: 'nat_med',
+    label: 'Nat Med（Nature Medicine）',
+    match: (t, a) => t.includes('nat med') || a.includes('nat med') || t.includes('nature medicine')
+  },
+  {
+    key: 'jama_cardiol',
+    label: 'JAMA Cardiol（JAMA Cardiology）',
+    match: (t, a) => t.includes('jama cardiol') || a.includes('jama cardiol')
+  },
+  {
+    key: 'jama',
+    label: 'JAMA（Journal of the American Medical Association）',
+    match: (t, a) => (t.includes('jama') || a.includes('jama')) && !t.includes('cardiol') && !a.includes('cardiol')
+  },
+  {
+    key: 'shindenzu',
+    label: '心電図（日本不整脈心電学会学術誌『心電図』）',
+    match: (t, a) => t.includes('心電図') || t.includes('shin-denzu') || a.includes('shin-denzu') || t.includes('shinzo') || a.includes('shinzo') || t.includes('electrocardiology')
+  }
 ];
+
+export function getJournalDisplayName(paper) {
+  if (!paper) return '';
+  const t = (paper.journal || '').toLowerCase();
+  const a = (paper.journalAbbr || '').toLowerCase();
+
+  const found = PREDEFINED_JOURNALS.find(j => j.match(t, a));
+  if (found) {
+    return found.label;
+  }
+
+  if (paper.journalAbbr && paper.journal && paper.journalAbbr !== paper.journal) {
+    return `${paper.journalAbbr}（${paper.journal}）`;
+  }
+  return paper.journalAbbr || paper.journal || '';
+}
+
+function paperMatchesJournalFilter(paper) {
+  if (!selectedJournals) return true;
+  if (selectedJournals.size === 0) return false;
+
+  const t = (paper.journal || '').toLowerCase();
+  const a = (paper.journalAbbr || '').toLowerCase();
+
+  for (const jKey of selectedJournals) {
+    const predefined = PREDEFINED_JOURNALS.find(p => p.key === jKey);
+    if (predefined) {
+      if (predefined.match(t, a)) return true;
+    } else {
+      if (t.includes(jKey) || a.includes(jKey)) return true;
+    }
+  }
+  return false;
+}
 
 function saveSelectedJournals() {
   if (selectedJournals) {
@@ -534,12 +617,12 @@ function updateJournalOptions() {
   const addedKeys = new Set();
   const availableJournals = [];
 
-  // 定義済み主要13/14誌の集計
+  // 定義済み主要誌の集計
   PREDEFINED_JOURNALS.forEach(p => {
     const matchCount = allPapers.filter(paper => {
-      const jTitle = (paper.journal || '').toLowerCase();
-      const jAbbr = (paper.journalAbbr || '').toLowerCase();
-      return jTitle.includes(p.key) || jAbbr.includes(p.key);
+      const t = (paper.journal || '').toLowerCase();
+      const a = (paper.journalAbbr || '').toLowerCase();
+      return p.match(t, a);
     }).length;
 
     if (matchCount > 0) {
@@ -551,13 +634,12 @@ function updateJournalOptions() {
   // 未定義の雑誌があればその他として追加
   const extraCounts = {};
   allPapers.forEach(paper => {
-    const j = (paper.journalAbbr || paper.journal || '').trim();
-    if (j) {
-      const lowerJ = j.toLowerCase();
-      const isCovered = Array.from(addedKeys).some(k => lowerJ.includes(k));
-      if (!isCovered) {
-        extraCounts[j] = (extraCounts[j] || 0) + 1;
-      }
+    const t = (paper.journal || '').toLowerCase();
+    const a = (paper.journalAbbr || '').toLowerCase();
+    const isCovered = PREDEFINED_JOURNALS.some(p => p.match(t, a));
+    if (!isCovered) {
+      const j = (paper.journalAbbr || paper.journal || '').trim();
+      if (j) extraCounts[j] = (extraCounts[j] || 0) + 1;
     }
   });
 
@@ -566,7 +648,25 @@ function updateJournalOptions() {
     availableJournals.push({ key: lowerKey, label: j, count: count });
   });
 
-  // 初回ロードで未設定の場合はすべて選択状態に初期化
+  // 初回ロードで未設定または保存されたキーが古い場合はすべて選択状態に初期化
+  if (selectedJournals === null) {
+    try {
+      const savedJournals = localStorage.getItem('ep_selected_journals');
+      if (savedJournals) {
+        const parsed = JSON.parse(savedJournals);
+        if (Array.isArray(parsed)) {
+          const validKeys = new Set(availableJournals.map(j => j.key));
+          const filtered = parsed.filter(k => validKeys.has(k));
+          if (filtered.length > 0) {
+            selectedJournals = new Set(filtered);
+          }
+        }
+      }
+    } catch (e) {
+      selectedJournals = null;
+    }
+  }
+
   if (selectedJournals === null) {
     selectedJournals = new Set(availableJournals.map(j => j.key));
   }
@@ -947,10 +1047,7 @@ function renderPapers() {
       if (selectedJournals.size === 0) {
         return false; // 1誌もチェックされていない場合は表示しない
       }
-      const jTitle = (paper.journal || '').toLowerCase();
-      const jAbbr = (paper.journalAbbr || '').toLowerCase();
-      const matches = Array.from(selectedJournals).some(key => jTitle.includes(key) || jAbbr.includes(key));
-      if (!matches) {
+      if (!paperMatchesJournalFilter(paper)) {
         return false;
       }
     }
@@ -1029,7 +1126,7 @@ function renderPapers() {
           </div>
         </div>
         <div class="card-date-journal">
-          📅 ${paper.pubDate} | 📖 ${paper.journalAbbr || paper.journal}
+          📅 ${paper.pubDate} | 📖 ${escapeHtml(getJournalDisplayName(paper))}
         </div>
         <div class="card-title-ja">${escapeHtml(paper.titleJa || paper.title)}</div>
         <div class="card-title-en">(${escapeHtml(paper.title)})</div>
@@ -1136,7 +1233,7 @@ window.openDetail = function(pmid) {
 
     <div class="detail-meta-list">
       <div class="meta-item"><span class="meta-label">掲載日</span><span class="meta-value">${paper.pubDate}</span></div>
-      <div class="meta-item"><span class="meta-label">雑誌名・巻号</span><span class="meta-value">${paper.journal} ${paper.volumeIssuePage}</span></div>
+      <div class="meta-item"><span class="meta-label">雑誌名・巻号</span><span class="meta-value">${escapeHtml(getJournalDisplayName(paper))} ${escapeHtml(paper.volumeIssuePage || '')}</span></div>
       <div class="meta-item"><span class="meta-label">研究デザイン</span><span class="meta-value">${paper.studyTypeLabel} (N = ${paper.sampleSize > 0 ? paper.sampleSize.toLocaleString() + '例' : '不明'})</span></div>
       <div class="meta-item"><span class="meta-label">著者</span><span class="meta-value">${escapeHtml(paper.authors)}</span></div>
       <div class="meta-item"><span class="meta-label">DOI</span><span class="meta-value">${paper.doi ? `<a href="https://doi.org/${paper.doi}" target="_blank">${paper.doi}</a>` : 'N/A'}</span></div>
@@ -1174,7 +1271,7 @@ window.sharePaper = async function(pmid) {
   const url = paper.url || `https://pubmed.ncbi.nlm.nih.gov/${paper.pmid}/`;
   const shareData = {
     title: title,
-    text: `【最新医学論文】${title} (${paper.journal || ''})`,
+    text: `【最新医学論文】${title} (${getJournalDisplayName(paper)})`,
     url: url
   };
 
