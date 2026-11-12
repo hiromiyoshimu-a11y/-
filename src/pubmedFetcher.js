@@ -192,21 +192,33 @@ export async function fetchCatheterAblationPapers(daysPast = 365, maxResults = 1
       retmode: 'xml'
     });
 
-    try {
-      const fetchRes = await axios.post(fetchUrl, formData.toString(), {
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      });
-      const xmlData = fetchRes.data;
+    let fetchSuccess = false;
+    for (let retry = 0; retry < 3; retry++) {
+      try {
+        const fetchRes = await axios.post(fetchUrl, formData.toString(), {
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          timeout: 25000
+        });
+        const xmlData = fetchRes.data;
 
-      // 3. XMLパース
-      const parsedXml = await parseStringPromise(xmlData, { explicitArray: false, mergeAttrs: true });
-      const articleListRaw = parsedXml.PubmedArticleSet?.PubmedArticle;
-      const batchArticles = Array.isArray(articleListRaw)
-        ? articleListRaw
-        : (articleListRaw ? [articleListRaw] : []);
-      articlesArray.push(...batchArticles);
-    } catch (err) {
-      console.warn(`[PubMed Fetcher] バッチ取得エラー (${i + 1}〜${i + chunkIds.length}):`, err.message);
+        // 3. XMLパース
+        const parsedXml = await parseStringPromise(xmlData, { explicitArray: false, mergeAttrs: true });
+        const articleListRaw = parsedXml.PubmedArticleSet?.PubmedArticle;
+        const batchArticles = Array.isArray(articleListRaw)
+          ? articleListRaw
+          : (articleListRaw ? [articleListRaw] : []);
+        articlesArray.push(...batchArticles);
+        fetchSuccess = true;
+        break;
+      } catch (err) {
+        console.warn(`[PubMed Fetcher] バッチ取得試行 ${retry + 1}/3 失敗 (${i + 1}〜${i + chunkIds.length}):`, err.message);
+        if (retry < 2) {
+          await new Promise(resolve => setTimeout(resolve, 1500 * (retry + 1)));
+        }
+      }
+    }
+    if (!fetchSuccess) {
+      console.error(`[PubMed Fetcher] バッチ取得完全失敗 (${i + 1}〜${i + chunkIds.length})`);
     }
 
     // NCBI API レートリミット回避ウェイト
@@ -406,17 +418,6 @@ export async function fetchCatheterAblationPapers(daysPast = 365, maxResults = 1
     return b.pmid - a.pmid;
   });
 
-  // 各雑誌最大10本に厳格制限 (各誌10本ずつ均等選択)
-  const journalPaperCount = new Map();
-  const cappedPapers = [];
-  for (const paper of resultPapers) {
-    const jKey = (paper.journalAbbr || paper.journal || '').toLowerCase();
-    const count = journalPaperCount.get(jKey) || 0;
-    if (count < 10) {
-      journalPaperCount.set(jKey, count + 1);
-      cappedPapers.push(paper);
-    }
-  }
-
-  return cappedPapers;
+  console.log(`[PubMed Fetcher] 抽出・整形完了論文数: ${resultPapers.length}件`);
+  return resultPapers.slice(0, effectiveMaxResults);
 }
