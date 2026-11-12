@@ -1292,14 +1292,6 @@ window.openDetail = function(pmid) {
   const isRead = readPapers.includes(pmidStr);
   const isBookmarked = bookmarks.includes(pmidStr);
 
-  let designBadgeClass = 'other';
-  if (paper.designRank === 1) designBadgeClass = 'rct';
-  else if (paper.designRank === 2) designBadgeClass = 'prospective';
-  else if (paper.designRank === 99) designBadgeClass = 'case';
-
-  const sampleStr = paper.sampleSize > 0 ? `N = ${paper.sampleSize.toLocaleString()}例` : 'N = 不明';
-  const summaryPoints = parseSummaryPoints(paper.summaryJa);
-
   // 臨床要約 (summaryJa) の【概要】【方法】【結果】【結論】バッジ化
   let formattedSummaryJa = escapeHtml(paper.summaryJa || '要約準備中');
   formattedSummaryJa = formattedSummaryJa
