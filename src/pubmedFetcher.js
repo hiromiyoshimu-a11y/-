@@ -90,10 +90,11 @@ function formatAbstractStructured(absNode) {
   let fullAbstract = parts.join('\n\n');
 
   // ラベルが未付与のテキスト抄録の場合、本文内の見出しキーを検出して改行・空行区切り整形
-  if (!/BACKGROUND:\n|METHODS:\n|RESULTS:\n|CONCLUSIONS:\n/i.test(fullAbstract)) {
+  if (!/BACKGROUND:\n|METHODS:\n|METHODS AND RESULTS:\n|RESULTS:\n|CONCLUSIONS:\n/i.test(fullAbstract)) {
     fullAbstract = fullAbstract
-      .replace(/\b(BACKGROUND|BACKGROUND AND OBJECTIVES?|OBJECTIVE|OBJECTIVES|PURPOSE|INTRODUCTION)[:\s]+/gi, '\n\nBACKGROUND:\n')
-      .replace(/\b(METHODS|METHODS AND RESULTS|METHODS AND MATERIALS|PATIENTS AND METHODS|STUDY DESIGN)[:\s]+/gi, '\n\nMETHODS:\n')
+      .replace(/\b(BACKGROUND|BACKGROUND AND OBJECTIVES?|OBJECTIVE|OBJECTIVES|PURPOSE|AIMS?|INTRODUCTION)[:\s]+/gi, '\n\nBACKGROUND:\n')
+      .replace(/\b(METHODS AND RESULTS|METHODS & RESULTS)[:\s]+/gi, '\n\nMETHODS AND RESULTS:\n')
+      .replace(/\b(METHODS|METHODS AND MATERIALS|PATIENTS AND METHODS|STUDY DESIGN)[:\s]+/gi, '\n\nMETHODS:\n')
       .replace(/\b(RESULTS|FINDINGS)[:\s]+/gi, '\n\nRESULTS:\n')
       .replace(/\b(CONCLUSIONS?|SUMMARY)[:\s]+/gi, '\n\nCONCLUSIONS:\n')
       .trim();
