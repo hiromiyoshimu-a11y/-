@@ -177,24 +177,41 @@ export async function fetchCatheterAblationPapers(daysPast = 365, maxResults = 1
     return [];
   }
 
-  // 2. efetch.fcgi
+  // 2. efetch.fcgi (414 Request-URI Too Long 回避のためPOSTメソッド＆150件ずつバッチ分割取得)
   const fetchUrl = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi';
-  const fetchParams = {
-    db: 'pubmed',
-    id: idList.join(','),
-    retmode: 'xml'
-  };
+  const BATCH_SIZE = 150;
+  const articlesArray = [];
 
-  const fetchRes = await axios.get(fetchUrl, { params: fetchParams });
-  const xmlData = fetchRes.data;
+  for (let i = 0; i < idList.length; i += BATCH_SIZE) {
+    const chunkIds = idList.slice(i, i + BATCH_SIZE);
+    console.log(`[PubMed Fetcher] 論文詳細XML取得中: ${i + 1}〜${Math.min(i + BATCH_SIZE, idList.length)}件 / 全${idList.length}件...`);
 
-  // 3. XMLパース
-  const parsedXml = await parseStringPromise(xmlData, { explicitArray: false, mergeAttrs: true });
-  const articleListRaw = parsedXml.PubmedArticleSet?.PubmedArticle;
+    const formData = new URLSearchParams({
+      db: 'pubmed',
+      id: chunkIds.join(','),
+      retmode: 'xml'
+    });
 
-  const articlesArray = Array.isArray(articleListRaw)
-    ? articleListRaw
-    : (articleListRaw ? [articleListRaw] : []);
+    try {
+      const fetchRes = await axios.post(fetchUrl, formData.toString(), {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      });
+      const xmlData = fetchRes.data;
+
+      // 3. XMLパース
+      const parsedXml = await parseStringPromise(xmlData, { explicitArray: false, mergeAttrs: true });
+      const articleListRaw = parsedXml.PubmedArticleSet?.PubmedArticle;
+      const batchArticles = Array.isArray(articleListRaw)
+        ? articleListRaw
+        : (articleListRaw ? [articleListRaw] : []);
+      articlesArray.push(...batchArticles);
+    } catch (err) {
+      console.warn(`[PubMed Fetcher] バッチ取得エラー (${i + 1}〜${i + chunkIds.length}):`, err.message);
+    }
+
+    // NCBI API レートリミット回避ウェイト
+    await new Promise(resolve => setTimeout(resolve, 350));
+  }
 
   const resultPapers = [];
 
