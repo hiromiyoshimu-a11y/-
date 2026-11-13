@@ -1092,6 +1092,44 @@ function parsePubDateToDate(dateStr) {
 /**
  * 論文リストのフィルタリング・ソート＆描画
  */
+// 抄録・臨床要約の共通見出し正規化＆バッジ化ヘルパー
+function formatSectionText(text) {
+  if (!text) return '';
+  let str = String(text);
+
+  // 1. Background and aims / 背景と目的 の完全統一
+  str = str.replace(/(?:Background and aims|Background and objectives|Background & aims|BACKGROUND AND AIMS|BACKGROUND AND OBJECTIVES|背景と目的|背景および目的|背景・目的|背景\/目的|【概要】および目的|【背景】および目的|【背景】そして目的|背景と\s*目的)[:：]?/gi, '【背景と目的】');
+  str = str.replace(/背景と\s*【目的】/g, '【背景と目的】');
+  str = str.replace(/【背景と目的】\s*そして目的[:：]?/g, '【背景と目的】');
+
+  // 2. Methods and results / 方法と結論 の完全統一
+  str = str.replace(/(?:Methods and results|Methods & results|METHODS AND RESULTS|METHODS & RESULTS|方法と結果|方法および結果|方法と結論|方法・結果)[:：]?/gi, '【方法と結論】');
+  str = str.replace(/【方法】\s*そして\s*\n*【結果】/g, '【方法と結論】');
+  str = str.replace(/【方法】\s*そして/g, '【方法と結論】');
+
+  // 3. Backgraand / Background / 概要 を 【背景】 に統一
+  str = str.replace(/(?:Backgraand|Background|BACKGROUND|【概要】)[:：]?/gi, '【背景】');
+  str = str.replace(/【概要】/g, '【背景】');
+
+  // 4. 単独見出しの統一（コロンの有無を問わず見出しとして置換）
+  str = str.replace(/(?<!【背景と)(?:Aims|Aim|Objectives|Objective|AIMS|OBJECTIVES)[:：]/gi, '【目的】');
+  str = str.replace(/(?<!【)(?:Methods|Method|METHODS|対象・方法|対象と方法)[:：]/gi, '【方法】');
+  str = str.replace(/(?<!【)(?:Results|Result|RESULTS|成績)[:：]/gi, '【結果】');
+  str = str.replace(/(?<!【)(?:Conclusions|Conclusion|CONCLUSIONS|考察)[:：]/gi, '【結論】');
+
+  // 二重括弧の解消
+  str = str.replace(/【+([^】]+)】+/g, '【$1】');
+
+  // 連続改行の圧縮
+  str = str.replace(/\n{2,}/g, '\n').trim();
+
+  // HTMLエスケープ後に見出しバッジ化
+  let escaped = escapeHtml(str);
+  escaped = escaped.replace(/\n*【(背景と目的|背景・目的|背景|目的|方法と結論|方法|結果|結論)】\n*/g, '<span class="abs-header-badge">【$1】</span>');
+
+  return escaped;
+}
+
 function renderPapers() {
   const paperListEl = document.getElementById('paperList');
   const searchText = document.getElementById('searchInput').value.toLowerCase().trim();
@@ -1240,7 +1278,7 @@ function renderPapers() {
         </div>
         <div class="card-title-ja">${escapeHtml(paper.titleJa || paper.title)}</div>
         <div class="card-title-en">(${escapeHtml(paper.title)})</div>
-        <div class="card-summary-box">${escapeHtml(paper.summaryJa || '要約準備中')}</div>
+        <div class="card-summary-box">${formatSectionText(paper.summaryJa || '要約準備中')}</div>
         <div class="card-footer">
           <span>抄録全訳・原文を見る</span>
           <span>➔</span>
@@ -1293,27 +1331,10 @@ window.openDetail = function(pmid) {
   const isBookmarked = bookmarks.includes(pmidStr);
 
   // 臨床要約 (summaryJa) の見出しバッジ化（【背景】【背景と目的】【方法と結論】等に対応）
-  let formattedSummaryJa = escapeHtml(paper.summaryJa || '要約準備中');
-  formattedSummaryJa = formattedSummaryJa
-    .replace(/【(概要|背景と目的|背景・目的|背景|目的|方法と結論|方法と結果|方法・結果|方法|結果|結論)】/g, '<span class="abs-header-badge">【$1】</span>');
+  let formattedSummaryJa = formatSectionText(paper.summaryJa || '要約準備中');
 
   // 抄録全訳 (abstractJa) の見出しバッジ化＆無駄な空白行完全排除
-  let rawAbsJa = paper.abstractJa || paper.abstract || '抄録の全訳がありません。';
-  rawAbsJa = rawAbsJa
-    .replace(/(?:Background and aims|Background and objectives|Background & aims|背景と目的|背景・目的|背景\/目的)[:：]/gi, '【背景と目的】')
-    .replace(/(?:Background|背景)[:：]/gi, '【背景】')
-    .replace(/(?:Aims|Aim|Objectives|Objective|目的)[:：]/gi, '【目的】')
-    .replace(/(?:Methods and results|Methods & results|方法と結果|方法と結論|方法・結果)[:：]/gi, '【方法と結論】')
-    .replace(/(?:Methods|Method|方法|対象・方法|対象と方法)[:：]/gi, '【方法】')
-    .replace(/(?:Results|Result|結果|成績)[:：]/gi, '【結果】')
-    .replace(/(?:Conclusions|Conclusion|結論|考察)[:：]/gi, '【結論】')
-    .replace(/\n{2,}/g, '\n') // 連続する改行を単一改行へ圧縮
-    .trim();
-
-  let formattedAbsJa = escapeHtml(rawAbsJa);
-  // 見出しバッジ前後の余分な改行を消去し、CSSのmarginのみでコンパクトにレイアウト
-  formattedAbsJa = formattedAbsJa
-    .replace(/\n*【(背景と目的|背景・目的|背景|目的|方法と結論|方法と結果|方法・結果|方法|結果|結論)】\n*/g, '<span class="abs-header-badge">【$1】</span>');
+  let formattedAbsJa = formatSectionText(paper.abstractJa || paper.abstract || '抄録の全訳がありません。');
 
   // 英語抄録 (abstractEn) の見出しバッジ化
   let formattedAbsEn = escapeHtml(paper.abstract || '');
