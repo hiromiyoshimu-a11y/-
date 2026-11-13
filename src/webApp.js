@@ -507,6 +507,7 @@ async function loadPaperData() {
 function applyPaperData(data) {
   allPapers = data.papers || [];
   updateJournalOptions();
+  populatePeriodSelect();
 
   const newCount = data.newCount || allPapers.filter(p => p.isNew).length;
   const unreadCount = allPapers.filter(p => !readPapers.includes(String(p.pmid))).length;
@@ -812,6 +813,60 @@ function updateJournalOptions() {
 }
 
 /**
+ * 表示期間セレクター（過去◯ヶ月 & 1ヶ月ごとの月別）を動的生成
+ */
+function populatePeriodSelect() {
+  const periodSelect = document.getElementById('periodSelect');
+  if (!periodSelect) return;
+
+  const savedVal = localStorage.getItem('ep_period') || '1y';
+
+  let html = `
+    <optgroup label="── 過去◯ヶ月 ──">
+      <option value="1m">📅 過去1ヶ月</option>
+      <option value="2m">📅 過去2ヶ月</option>
+      <option value="3m">📅 過去3ヶ月</option>
+      <option value="4m">📅 過去4ヶ月</option>
+      <option value="5m">📅 過去5ヶ月</option>
+      <option value="6m">📅 過去6ヶ月</option>
+      <option value="1y">📅 過去1年間（全件）</option>
+    </optgroup>
+  `;
+
+  // データから実際に存在する年月を降順で収集
+  const monthMap = new Map();
+  allPapers.forEach(paper => {
+    const d = parsePubDateToDate(paper.pubDate);
+    if (d) {
+      const y = d.getFullYear();
+      const m = d.getMonth() + 1;
+      const key = `${y}-${String(m).padStart(2, '0')}`;
+      monthMap.set(key, (monthMap.get(key) || 0) + 1);
+    }
+  });
+
+  const sortedMonths = Array.from(monthMap.keys()).sort().reverse();
+  if (sortedMonths.length > 0) {
+    html += `<optgroup label="── 1ヶ月ごとの月別 ──">`;
+    sortedMonths.forEach(ym => {
+      const [year, month] = ym.split('-');
+      const count = monthMap.get(ym);
+      html += `<option value="month:${ym}">🗓️ ${year}年${parseInt(month, 10)}月 (${count}件)</option>`;
+    });
+    html += `</optgroup>`;
+  }
+
+  periodSelect.innerHTML = html;
+
+  const validValues = Array.from(periodSelect.querySelectorAll('option')).map(o => o.value);
+  if (validValues.includes(savedVal)) {
+    periodSelect.value = savedVal;
+  } else {
+    periodSelect.value = '1y';
+  }
+}
+
+/**
  * イベントリスナー設定
  */
 function setupEventListeners() {
@@ -843,7 +898,7 @@ function setupEventListeners() {
   const periodSelect = document.getElementById('periodSelect');
   if (periodSelect) {
     const savedPeriod = localStorage.getItem('ep_period');
-    if (savedPeriod && ['3m', '6m', '1y'].includes(savedPeriod)) {
+    if (savedPeriod) {
       periodSelect.value = savedPeriod;
     }
     periodSelect.addEventListener('change', (e) => {
@@ -1318,14 +1373,23 @@ function renderPapers() {
     const isRead = readPapers.includes(pmidStr);
     const isBookmarked = bookmarks.includes(pmidStr);
 
-    // 期間フィルター（過去3ヶ月・過去6ヶ月・過去1年間）
+    // 期間フィルター（過去◯ヶ月、1ヶ月ごとの特定月、過去1年間）
     if (periodVal !== '1y') {
       const pDate = parsePubDateToDate(paper.pubDate);
       if (pDate) {
-        const daysLimit = periodVal === '3m' ? 92 : 185;
-        const cutoffTime = Date.now() - (daysLimit * 24 * 60 * 60 * 1000);
-        if (pDate.getTime() < cutoffTime) {
-          return false;
+        if (periodVal.startsWith('month:')) {
+          const ym = periodVal.replace('month:', '');
+          const pYm = `${pDate.getFullYear()}-${String(pDate.getMonth() + 1).padStart(2, '0')}`;
+          if (pYm !== ym) {
+            return false;
+          }
+        } else if (periodVal.endsWith('m')) {
+          const months = parseInt(periodVal, 10) || 1;
+          const daysLimit = Math.round(months * 30.5);
+          const cutoffTime = Date.now() - (daysLimit * 24 * 60 * 60 * 1000);
+          if (pDate.getTime() < cutoffTime) {
+            return false;
+          }
         }
       }
     }

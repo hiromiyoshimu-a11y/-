@@ -124,9 +124,15 @@
 
       <div class="secondary-filters">
         <select id="periodSelect" class="styled-select" aria-label="表示期間の選択" title="表示期間の選択">
-          <option value="3m">📅 過去3ヶ月</option>
-          <option value="6m">📅 過去6ヶ月</option>
-          <option value="1y" selected>📅 過去1年間</option>
+          <optgroup label="── 過去◯ヶ月 ──">
+            <option value="1m">📅 過去1ヶ月</option>
+            <option value="2m">📅 過去2ヶ月</option>
+            <option value="3m">📅 過去3ヶ月</option>
+            <option value="4m">📅 過去4ヶ月</option>
+            <option value="5m">📅 過去5ヶ月</option>
+            <option value="6m">📅 過去6ヶ月</option>
+            <option value="1y" selected>📅 過去1年間（全件）</option>
+          </optgroup>
         </select>
 
         <select id="sortSelect" class="styled-select" aria-label="並び替え順" title="並び替え順">
