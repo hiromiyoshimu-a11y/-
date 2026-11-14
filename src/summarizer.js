@@ -107,6 +107,8 @@ export function removeDesuMasuStrict(text) {
   s = s.replace(/ではありませんでしたであった/g, 'ではなかった')
        .replace(/ではありませんでした/g, 'ではなかった')
        .replace(/ではありません/g, 'ではない')
+       .replace(/ではないであった/g, 'ではなかった')
+       .replace(/ではありない/g, 'ではない')
        .replace(/説明されていません/g, '明確にされていない')
        .replace(/処方されませんでした/g, '処方されなかった')
        .replace(/されませんでしたであった/g, 'されなかった')
@@ -115,8 +117,13 @@ export function removeDesuMasuStrict(text) {
        .replace(/できませんでした/g, 'できなかった')
        .replace(/ありませんでしたであった/g, 'なかった')
        .replace(/ありませんでした/g, 'なかった')
+       .replace(/ありないであった/g, 'なかった')
+       .replace(/ありません/g, 'ない')
+       .replace(/ありない/g, 'ない')
+       .replace(/ないであった/g, 'なかった')
        .replace(/ませんでしたであった/g, 'なかった')
-       .replace(/ませんでした/g, 'なかった');
+       .replace(/ませんでした/g, 'なかった')
+       .replace(/ません/g, 'ない');
 
   // 4. 過去形・受け身の丁寧語（行われました・定義されました等）の完全常体化
   s = s.replace(/行われました/g, 'を行った')
