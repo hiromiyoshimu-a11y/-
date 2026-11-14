@@ -159,6 +159,20 @@
           <option value="sampleSize">👥 症例数順</option>
         </select>
       </div>
+
+      <!-- 臨床要約 表示切替（セグメントコントロール） -->
+      <div class="summary-display-toggle-container">
+        <div class="segmented-control" role="group" aria-label="臨床要約の表示切替">
+          <button type="button" id="summaryModeShowBtn" class="segment-btn active" data-mode="show" title="一覧カード内に臨床要約を表示">
+            <span class="segment-icon">📝</span>
+            <span class="segment-text">臨床要約 あり</span>
+          </button>
+          <button type="button" id="summaryModeHideBtn" class="segment-btn" data-mode="hide" title="臨床要約を折りたたんでタイトル・雑誌の一覧として表示">
+            <span class="segment-icon">📋</span>
+            <span class="segment-text">要約 なし (タイトル一覧)</span>
+          </button>
+        </div>
+      </div>
     </header>
 
     <!-- メイン論文リスト -->

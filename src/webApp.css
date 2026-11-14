@@ -519,6 +519,71 @@ body {
   width: 100%;
 }
 
+/* 臨床要約 表示切替コントロール（iOS風セグメントコントロール） */
+.summary-display-toggle-container {
+  width: 100%;
+  margin-top: 2px;
+}
+
+.segmented-control {
+  display: flex;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 9px;
+  padding: 3px;
+  gap: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.segment-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.segment-btn:hover {
+  color: var(--text-primary);
+}
+
+.segment-btn.active {
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(56, 189, 248, 0.35);
+  font-weight: 700;
+}
+
+/* 要約非表示（タイトル一覧）モード時のカード表示 */
+.hide-card-summary .card-summary-box {
+  display: none !important;
+}
+
+.hide-card-summary .paper-card {
+  padding: 10px 14px;
+  gap: 6px;
+}
+
+.hide-card-summary .card-title-ja {
+  margin-bottom: 2px;
+}
+
+.hide-card-summary .card-title-en {
+  margin-bottom: 6px;
+}
+
 .styled-select {
   flex: 1 1 50%;
   min-width: 0;
@@ -1036,6 +1101,10 @@ body.light-theme .abs-header-badge {
     border-radius: 0; /* フラットカードで画面横幅いっぱい（0pxマージン）に展開 */
     padding: 12px 10px;
     box-sizing: border-box;
+  }
+
+  .hide-card-summary .paper-card {
+    padding: 9px 10px;
   }
 
   /* 要約ボックスをカード左右端まで完全フルフラット展開 */

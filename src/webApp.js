@@ -1077,6 +1077,9 @@ function setupEventListeners() {
     sortSelect.addEventListener('change', renderPapers);
   }
 
+  // 臨床要約の表示・非表示セグメント切替コントロール
+  setupSummaryVisibilityToggle();
+
   const fontSelect = document.getElementById('fontSizeSelect');
   if (fontSelect) {
     fontSelect.addEventListener('change', (e) => {
@@ -1244,6 +1247,48 @@ function setupEventListeners() {
       await pullUserStateFromCloud(rawInput, true, true);
     });
   }
+}
+
+/**
+ * 臨床要約の表示・非表示（セグメントコントロール）設定
+ */
+function setupSummaryVisibilityToggle() {
+  const showBtn = document.getElementById('summaryModeShowBtn');
+  const hideBtn = document.getElementById('summaryModeHideBtn');
+  const paperListEl = document.getElementById('paperList');
+  if (!showBtn || !hideBtn || !paperListEl) return;
+
+  function updateUi(mode, isUserAction = false) {
+    if (mode === 'hide') {
+      showBtn.classList.remove('active');
+      hideBtn.classList.add('active');
+      paperListEl.classList.add('hide-card-summary');
+      localStorage.setItem('ep_paper_summary_visibility', 'hide');
+      if (isUserAction) {
+        showToast('📋 要約を非表示にしました（タイトル一覧表示）');
+      }
+    } else {
+      hideBtn.classList.remove('active');
+      showBtn.classList.add('active');
+      paperListEl.classList.remove('hide-card-summary');
+      localStorage.setItem('ep_paper_summary_visibility', 'show');
+      if (isUserAction) {
+        showToast('📝 臨床要約を表示しました');
+      }
+    }
+  }
+
+  // 保存済みの設定を初期反映
+  const savedMode = localStorage.getItem('ep_paper_summary_visibility') || 'show';
+  updateUi(savedMode, false);
+
+  showBtn.addEventListener('click', () => {
+    updateUi('show', true);
+  });
+
+  hideBtn.addEventListener('click', () => {
+    updateUi('hide', true);
+  });
 }
 
 function toggleTheme() {
@@ -1512,6 +1557,16 @@ function formatSectionText(text) {
 
 function renderPapers() {
   const paperListEl = document.getElementById('paperList');
+  if (!paperListEl) return;
+
+  // 臨床要約の表示・非表示クラスの同期
+  const currentSummaryMode = localStorage.getItem('ep_paper_summary_visibility') || 'show';
+  if (currentSummaryMode === 'hide') {
+    paperListEl.classList.add('hide-card-summary');
+  } else {
+    paperListEl.classList.remove('hide-card-summary');
+  }
+
   const searchText = document.getElementById('searchInput').value.toLowerCase().trim();
   const sortVal = document.getElementById('sortSelect')?.value || 'priority';
   const periodVal = document.getElementById('periodSelect')?.value || '1y';
