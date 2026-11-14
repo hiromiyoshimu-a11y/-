@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-11-13",
-  "totalCount": 1348,
+  "updatedAt": "2026-11-14",
+  "totalCount": 1349,
   "newCount": 2,
   "papers": [
     {
@@ -2026,6 +2026,28 @@
       "abstractJa": "【背景と目的】\n駆出率低下（HFrEF）を伴う心不全患者は、心房細動（AF）を併発している場合、心臓再同期療法（CRT）から得られる利益が少なくなる。  観察データは、房室結節アブレーション (AVNA) がこの集団における CRT の有効性を高める可能性を示唆している。  この試験は、HFrEFおよび永続性AF患者のCRT転帰に対するAVNAの効果を医療レート管理療法(MRCT)と比較して評価することを目的とした。  CAAN-AF試験は、HFrEF、永久AF、およびCRT除細動器（CRT-D）患者におけるAVNAの影響を評価する、国際的な前向き多施設ランダム化対照試験である。  参加者は、安静時心拍数 <90 bpm を対象とする AVNA または MRCT にランダムに (1:1) 割り当てられた。 すべての参加者がデバイスの最適化を受けました。  主要評価項目は、全死因死亡率と非致死性心不全事象の複合値であった。  副次評価項目には、心血管死亡率、予定外の入院、機器治療を必要とする心室不整脈、6分の歩行距離（6MWD）、生活の質などが含まれた。  結果：無益のため試験が早期に終了したため、合計 143 人の患者が無作為に割り付けられた（AVNA に 67 人、MRCT に 76 人）。  ベースラインの特徴はグループ全体で同様であった。  主要エンドポイント [イベント数 47 対 46;発生率比（IRR）、1.16。 95% 信頼区間 (CI)、0.60-2.24]。 二次転帰には、心血管死亡率（オッズ比、1.93; 95% CI 0.60-6.20）、予定外の入院（IRR、1.01; 95% CI 0.71-1.74）、機器治療を必要とする心室不整脈（IRR、0.68; 95% CI 0.17-2.63）が含まれる。 6MWD および SF-36 スコアも有意な差は示されないであった。  結論：永久性AFおよびCRT-D患者を対象としたこのランダム化試験では、MRCTと比較してAVNAによる全死因死亡率および非致死性心不全イベントの減少を示す証拠は見出されなかった。  トライアル登録: NCT01522898。",
       "isNew": false,
       "firstSeen": "2026-10-02"
+    },
+    {
+      "pmid": "43023359",
+      "title": "Modified Posterior Wall Ablation in Persistent Atrial Fibrillation: the BOX-AF Randomized Clinical Trial.",
+      "pubDate": "2026-Nov-13",
+      "journal": "Europace : European pacing, arrhythmias, and cardiac electrophysiology : journal of the working groups on cardiac pacing, arrhythmias, and cardiac cellular electrophysiology of the European Society of Cardiology",
+      "journalAbbr": "Europace",
+      "volumeIssuePage": "",
+      "authors": "Zhou G, Wu X, Zheng L, Li J, Xia Y, Lin Z, et al.",
+      "citation": "Zhou G, Wu X, Zheng L, Li J, Xia Y, Lin Z, et al.. Modified Posterior Wall Ablation in Persistent Atrial Fibrillation: the BOX-AF Randomized Clinical Trial.. Europace. 2026 Nov 13;:. doi: 10.1093/europace/euag318 doi.",
+      "doi": "10.1093/europace/euag318 doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43023359/",
+      "abstract": "AIMS:\nThe efficacy of left atrial posterior wall isolation (PWI) for persistent atrial fibrillation (AF) is controversial. We propose a modified left atrial posterior wall ablation strategy.\n\nOBJECTIVES:\nTo evaluate the efficacy and safety of modified posterior wall ablation in patients with persistent AF who underwent first-time radiofrequency catheter ablation.\n\nMETHODS AND RESULTS:\nIn this multicenter, single-blind randomized trial, 276 patients with persistent AF were assigned 1:1 to pulmonary vein isolation (PVI) with (BOX+) or without modified posterior wall ablation (BOX-). Seven participants withdrew, leaving 269 (BOX+, n=139; BOX-, n=130) for primary endpoint analysis. The primary endpoint was freedom from any documented atrial arrhythmia lasting > 30 seconds without antiarrhythmic drugs after a 3 -month blanking period. At 12-month follow-up, the primary endpoint occurred in 120 of 139 patients (86.3%) in the BOX+ group and 113 of 130 (86.9%) in the BOX- group (hazard ratio 1.046, 95% CI, 0.54 - 2.01; P = 0.894). The BOX+ group exhibited longer procedure time and ablation time. Acute successful PWI was achieved in 91 (65.5%) patients assigned to BOX+. In a nonprespecified, post-randomization analysis, arrhythmia-free survival was 93.4% in patients with acute successful PWI, 72.9% in those with attempted but unsuccessful PWI, and 86.9% in controls without attempted PWI (overall log-rank P=0.002). Adverse events were similar between groups.\n\nCONCLUSION:\nRoutine addition of modified posterior wall ablation did not improve overall outcomes of first-time ablation in persistent AF. However, achieving successful PWI was associated with significantly lower recurrence.",
+      "designRank": 1,
+      "studyTypeLabel": "無作為化比較試験 (RCT)",
+      "sampleSize": 139,
+      "isTargetJournal": true,
+      "titleJa": "持続性心房細動における修正後壁アブレーション: BOX-AF ランダム化臨床試験",
+      "summaryJa": "【背景】修正後壁アブレーションの有効性と安全性を評価する (無作為化比較試験 (RCT) / N = 139例)\n【方法】そして\n【結果】この多施設単一盲検ランダム化試験では、持続性 AF 患者 276 人が、修正後壁アブレーションを伴う (BOX+) または修正後壁アブレーションを伴わない (BOX-) 肺静脈隔離術 (PVI) に 1:1 でに割り付け…\n【結論】修正後壁アブレーションを定期的に追加しても、持続性 AF における初回アブレーションの全体的な転帰は改善されなかった",
+      "abstractJa": "目的: 持続性心房細動 (AF) に対する左心房後壁分離 (PWI) の有効性については議論の余地があります。  我々は、修正された左心房後壁アブレーション戦略を提案します。  目的: 初めて高周波カテーテルアブレーションを受けた持続性 AF 患者における修正後壁アブレーションの有効性と安全性を評価すること。  方法と結果：この多施設共同単一盲検ランダム化試験では、持続性AF患者276人が、後壁アブレーション修正あり（BOX+）またはなし（BOX-）の肺静脈隔離術（PVI）に1：1で割り当てられた。  7 人の参加者が参加を取りやめ、269 人 (BOX+、n=139、BOX-、n=130) が主要エンドポイント分析のために残された。 主要評価項目は、3 か月のブランク期間後に抗不整脈薬を使用しない場合でも、30 秒以上続く心房性不整脈が記録されていないことでした。  12か月の追跡調査で、主要評価項目はBOX+群では患者139人中120人（86.3％）、BOX-群では患者130人中113人（86.9％）で発生した（ハザード比1.046、95％CI、0.54～2.01、P＝0.894）。  BOX+ グループは、より長い処置時間とアブレーション時間を示しました。  急性成功した PWI は、BOX+ に割り当てられた 91 人 (65.5%) の患者で達成されました。  事前に指定されていない無作為化後の分析では、不整脈のない生存率は急性PWIに成功した患者では93.4%、PWIを試みたが成功しなかった患者では72.9%、PWIを試みなかった対照では86.9%であった（全体のログランクP=0.002）。  有害事象はグループ間で同様でした。 結論: 修正後壁アブレーションを定期的に追加しても、持続性 AF における初回アブレーションの全体的な転帰は改善されませんでした。  ただし、PWI の成功は再発の大幅な低下に関連していました。",
+      "isNew": true,
+      "firstSeen": "2026-11-14"
     },
     {
       "pmid": "41160038",
@@ -10890,7 +10912,7 @@
       "titleJa": "心房細動は心房細動の再考を引き起こす：AF エピソードの早期定着",
       "summaryJa": "【背景】持続性心房細動 (AF) を定義する 7 日の閾値は臨床的に確立されていますが、生物学的には恣意的である。 (観察研究・その他 / N = 154例)\n【方法】ACaSA 研究からの継続的なペースメーカ監視データが分析された。\n【結果】単腔デバイスまたは 100% ベースライン AF 負担の患者を除外した後、ペースメーカ装着者 281 人中 251 人が 204,775 患者日を貢献しました。\n【結論】デバイスによって検出された AF エピソードは、顕著な早期の定着を示し、エピソード期間が長くなるにつれて自然終了の可能性は徐々に低くなりる",
       "abstractJa": "背景: 持続性心房細動 (AF) を定義する 7 日の閾値は臨床的に確立されていますが、生物学的には恣意的です。  エピソードの終了がスケールフリーのダイナミクスに従うのか、それとも時間依存の定着に従うのかは依然として不明です。  目的: 大規模なペースメーカモニタリングを使用して、自然終了の確率を定量化し、エピソード持続時間への依存性を評価する。  方法: ACaSA 研究からの継続的なペースメーカ モニタリング データを分析しました。  デバイスによって検出された AF エピソードは、事前定義された連続性ルールを使用して日常の負担から再構築されました。  終了は、進行中のエピソードがその後 24 時間以内に終了するという条件付き確率としてモデル化されました。 持続時間依存性は共有虚弱ワイブル生存モデルを使用して評価され、エピソード持続時間の分布は Vuong 尤度比検定を使用して比較されました。  結果: 単腔デバイスまたはベースライン AF 負担 100% の患者を除外した後、ペースメーカ装着者 281 人中 251 人が 204,775 患者日を貢献しました。  デバイスで検出された心房細動は 154 人の患者で発生し、7,002 件の再構成エピソードが寄与しました。  終了確率は 1 時間の 91.1% から 12 時間の 72.1%、24 時間の 33.3%、7 日後の 4.3% に低下しました。  エピソードの継続時間は、スケールフリーのべき乗則モデルよりも対数正規分布の方が適切に記述されます。 結論: デバイスによって検出された AF エピソードは、顕著な早期定着を示し、エピソード期間が長くなるにつれて自然終了の可能性は徐々に低くなります。  これらの発見は、たとえ短い時間スケールであっても「心房細動が心房細動を引き起こす」という概念を支持し、24 時間を超えて持続する場合には、短期自然終了の可能性が大幅に低下した状態を特定することを示唆しています。  トライアル登録番号: NCT05127720。  政府ID: NCT05127720。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-13"
     },
     {
@@ -13596,7 +13618,7 @@
       "titleJa": "心房細動におけるコンピューター断層撮影法による左心房心筋内脂肪および低電圧ゾーン",
       "summaryJa": "【背景】はじめに: 左心房低電圧ゾーン (LVZ) は、心房線維症および心房細動 (AF) アブレーション後の不整脈の再発と関連しており、耐久性のある肺静脈隔離にもかかわらず、多… (観察研究・その他 / N = 51例)\n【方法】そして\n【結果】この単一施設の後ろ向き研究では、初めて高周波 AF アブレーションを受けた連続 145 人の患者が、術前のデュアルソース CT と洞調律における高密度左心房電圧マッピングを受けました。\n【結論】CT 由来の高密度 inFAT は左心房 LVZ と独立して関連しており、AF における不整脈原性心房基質の新規非侵襲性マーカーである可能性がありる",
       "abstractJa": "はじめに: 左心房低電圧ゾーン (LVZ) は、心房線維症および心房細動 (AF) アブレーション後の不整脈の再発と関連しており、耐久性のある肺静脈隔離にもかかわらず、多くの再発の原因となっていると考えられています。  しかし、不整脈原性心房基質の非侵襲性マーカーは、依然として十分に特徴づけられていない。  私たちは、コンピューター断層撮影法 (CT) 由来の左心房心筋内脂肪 (inFAT) と電気解剖学的に定義された LVZ との関連性を調査しようとしました。  方法と結果：この単一施設の後ろ向き研究では、初めて高周波AFアブレーションを受ける連続145人の患者が、術前の二源CTと洞調律における高密度左心房電位マッピングを受けた。 LVZ は、双極性電圧 < 0.5 mV の連続領域として定義されました。  ADAS 3D 後処理を使用して、総 inFAT、高密度 inFAT、脂肪と心筋の混合物を定量化しました。  LVZ は 51 人の患者 (35.2%) で特定されました。  LVZ のない患者と比較して、LVZ のある患者では持続性 AF の有病率が高く (58.8% 対 17.0%、p < 0.001)、左心房容積指数 (LAVi) がより高かった (74.41 [64.87-99.50] 対 62.99 [52.78-74.73] mL/m、p < 0.001)。 0.001）。  LVZ 患者はまた、総 inFAT、高濃度 inFAT、および脂肪心筋混合物の量が多く、総 inFAT および高濃度 inFAT の放射線密度値が低いことも示しました。 多変量ロジスティック回帰分析では、持続性 AF (調整済みオッズ比 [OR]: 5.389; 95% 信頼区間 [CI]: 2.162-13.433; p < 0.001) と高密度 inFAT ボリューム (調整済み OR: 3.439; 95% CI: 1.107-10.677; p = 0.033) は独立して維持されました。は LVZ の存在と関連していましたが、LAVi は関連しませんでした。  CT 由来の脂肪指標のうち、臨床共変量の調整後、高密度 inFAT のみが LVZ と独立した関連性を保持しました。  結論：CT由来のdense inFATは左心房LVZと独立して関連しており、AFにおける不整脈原性心房基質の新規非侵襲性マーカーである可能性がある。  基質誘導アブレーション戦略およびリスク階層化におけるその役割を決定するためには、前向き研究が必要です。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-13"
     },
     {
@@ -15708,28 +15730,6 @@
       "titleJa": "心室細動に対するトリガーベースと基質ベースのプルキンエ・デネットワーク：多施設研究からの洞察。",
       "summaryJa": "【背景】プルキンエ媒介性心室細動（VF）は、離散的な束性トリガーまたはびまん性の異常なプルキンエ基質から発生する可能性がある。 (観察研究・その他 / N = 19例)\n【方法】この後ろ向き多施設コホートでは、43 人の患者が高出力、短時間の高周波エネルギー (90 W 4 秒または 50 W 10 秒) を使用してプルキンエ標的 VF アブレーションを受けた。\n【結果】ベースラインの特徴はグループ間で類似していた。\n【結論】基質ベースのネットワーク解除は、心室頻拍/VF からの解放に関連していたが、伝導系損傷の割合が高くなりた。",
       "abstractJa": "背景:\nプルキンエ媒介性心室細動（VF）は、別個の束性トリガーまたはびまん性の異常なプルキンエ基質から発生する可能性がある。トリガーベースのネットワーク解除とサブストレートベースのネットワーク解除の相対的なパフォーマンスは依然として不確実である。\n\n目的:\nこの研究の目的は、VF に対するトリガーに焦点を当てたプルキンエ デネットワークと基質に基づいたプルキンエ デネットワークの結果を比較することであった。\n\n方法:\nこの後ろ向き多施設コホートでは、43 人の患者が、高出力、短時間の高周波エネルギー (90 W 4 秒または 50 W 10 秒) を使用したプルキンエ標的 VF アブレーションを受けた。患者はアブレーション戦略に従ってグループ分けされた。1) トリガーグループ (n = 19)、原因となる早発性心室複合体トリガー束のアブレーション。または 2) 基質グループ (n = 24)、すべての異常なプルキンエ様電位の除去。主要評価項目は、多形性心室頻拍/VFの再発であった。副次評価項目には伝導系合併症が含まれていた。追跡期間の中央値は12.2か月（第1四半期～第3四半期：8.8～18.8か月）であった。\n\n結果:\nベースラインの特徴はグループ間で類似していた。多形性心室頻拍/VFの発生率は、トリガーベースのアブレーション（19/19 [63.2%]; 95% CI: 38.4%-83.7%; HR: 0.20 [95% CI: 0.05-0.76]; P = 0.026)。どちらのアプローチも不整脈の負担を大幅に軽減した（トリガーグループ：3.9±0.8エピソードから0.4±0.2エピソード[P<0.001]、基質グループ：4.8±1.2エピソードから0.1±0.1エピソード[P<0.001]）。伝導合併症は異なり、基質患者24人中5人（20.8％）で新たな左脚ブロックが発生したが、トリガーグループでは1件の後束ブロックが発生した（19人中1人[5.3％]、P<0.001）。\n\n結論:\n基質ベースのネットワーク解除は、心室頻拍/VF からの解放に関連していたが、伝導系損傷の割合が高くなりた。トリガーに焦点を当てたアブレーションは、特定可能な早発性心室複合トリガーを持つ患者の初期戦略として機能し、基質修飾は難治性または非誘発性 VF のために確保されている。",
-      "isNew": false,
-      "firstSeen": "2026-11-12"
-    },
-    {
-      "pmid": "41518590",
-      "title": "Stereotactic radioablation for ventricular tachycardia in patients untreatable by catheter ablation: evidence of efficacy, safety, and impact on coronary arteries.",
-      "pubDate": "2026-Feb-03",
-      "journal": "Europace : European pacing, arrhythmias, and cardiac electrophysiology : journal of the working groups on cardiac pacing, arrhythmias, and cardiac cellular electrophysiology of the European Society of Cardiology",
-      "journalAbbr": "Europace",
-      "volumeIssuePage": "28(2)",
-      "authors": "Carbucicchio C, Schiavone M, Piperno G, Mancini ME, Cattani F, Sabatino M, et al.",
-      "citation": "Carbucicchio C, Schiavone M, Piperno G, Mancini ME, Cattani F, Sabatino M, et al.. Stereotactic radioablation for ventricular tachycardia in patients untreatable by catheter ablation: evidence of efficacy, safety, and impact on coronary arteries.. Europace. 2026 Feb 03;28(2):. doi: 10.1093/europace/euag004 doi.",
-      "doi": "10.1093/europace/euag004 doi",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41518590/",
-      "abstract": "AIMS:\nVentricular tachycardia (VT) in patients with structural heart disease can be life-threatening and may persist despite anti-arrhythmic therapy and catheter ablation. When standard treatments are ineffective or contraindicated, stereotactic arrhythmia radioablation (STAR) has emerged as a non-invasive salvage option.\n\nMETHODS AND RESULTS:\nThis prospective, single-centre study included 19 patients with structural heart disease and recurrent VT unresponsive to conventional therapy and who were ineligible for ablation. Patients were selected by a multidisciplinary team and underwent cardiac CT and electroanatomic mapping for substrate characterization. STAR was delivered in a single 25 Gy fraction using volumetric modulated arc therapy. Primary endpoints included safety (adverse events within 12 months) and efficacy (reduction in VT burden, assessed by ICD-recorded anti-tachycardia pacing [ATP] and shocks). During a median follow-up of 14 months [IQR 9-15], STAR was associated with a significant reduction in ICD therapies, with an average decrease of 81%. Mean ATP interventions/month dropped from 4.5 ± 6.5 to 0.8 ± 2.3 (P = 0.029), and total ICD therapies/month decreased from 4.8 ± 7.0 to 0.9 ± 2.5 (P = 0.032). Mild pulmonary injury and pericardial effusion occurred in 22.2% of patients. Most cases were asymptomatic; one patient (5.5%) required non-urgent pericardiocentesis. No significant changes in left ventricular function, valvular status, or coronary artery disease progression (assessed by CAD-RADS and PCAT analysis) were observed. One-year mortality was 33.3%; no deaths were directly attributable to STAR.\n\nCONCLUSION:\nSTAR shows promise as a safe, non-invasive option for patients with refractory VT and advanced cardiomyopathy. Larger multicentre studies are needed to confirm long-term outcomes and better define its clinical role.",
-      "designRank": 3,
-      "studyTypeLabel": "観察研究・その他",
-      "sampleSize": 19,
-      "isTargetJournal": true,
-      "titleJa": "カテーテルアブレーションでは治療できない患者における心室頻拍に対する定位放射線アブレーション：有効性、安全性、および冠動脈への影響の証拠。",
-      "summaryJa": "【背景】構造的心疾患患者における心室頻拍（VT）は生命を脅かす可能性があり、抗不整脈療法やカテーテルアブレーションにもかかわらず持続する場合がある。 (観察研究・その他 / N = 19例)\n【方法と結論】この前向き単一施設研究には、従来の治療法に反応せず、アブレーションの適応とならない構造的心疾患および再発性心室頻拍を有する患者19人が含まれていた。  患者は学際的なチームによって選択され、心臓 CT および基質の電気解剖学的マッピングを受けた。\n【結論】STARは、難治性VTおよび進行性心筋症の患者にとって、安全で非侵襲的な選択肢として有望である。",
-      "abstractJa": "目的:\n構造的心疾患患者の心室頻拍（VT）は生命を脅かす可能性があり、抗不整脈療法やカテーテルアブレーションにもかかわらず持続する場合がある。標準治療が無効または禁忌である場合、定位不整脈放射線アブレーション (STAR) が非侵襲的救済の選択肢として浮上している。\n\n【方法と結論】\nこの前向きの単一施設研究には、従来の治療法に反応せず、アブレーションの適応とならない、構造的心疾患および再発性心室頻拍を有する患者 19 人が含まれていた。患者は学際的なチームによって選択され、基質の特性評価のために心臓 CT および電気解剖学的マッピングを受けた。 STAR は、容積変調アーク療法を使用して 25 Gy の単回照射で照射された。主要評価項目には、安全性（12か月以内の有害事象）と有効性（ICDに記録された抗頻脈ペーシング[ATP]およびショックによって評価されるVT負担の軽減）が含まれた。追跡期間中央値 14 か月 [IQR 9-15] の間、STAR は ICD 治療の大幅な減少と関連しており、平均で 81% 減少した。平均 ATP 介入数/月は 4.5 ± 6.5 から 0.8 ± 2.3 (P = 0.029) に減少し、ICD 治療総数/月は 4.8 ± 7.0 から 0.9 ± 2.5 (P = 0.032) に減少した。軽度の肺損傷と心嚢液貯留が患者の 22.2% で発生した。ほとんどの症例は無症状であった。 1 人の患者 (5.5%) は緊急ではない心嚢穿刺が必要であった。左心室機能、弁の状態、または冠動脈疾患の進行（CAD-RADS および PCAT 分析によって評価）に有意な変化は観察されないであった。 1年死亡率は33.3%であった。 STAR に直接起因する死亡者はいないであった。\n\n結論:\nSTAR は、難治性 VT および進行性心筋症の患者にとって、安全で非侵襲的な選択肢として期待されている。長期的な転帰を確認し、その臨床的役割をより明確に定義するには、大規模な多施設共同研究が必要である。",
       "isNew": false,
       "firstSeen": "2026-11-12"
     },
@@ -18318,7 +18318,7 @@
       "citation": "Pittorru R, Kukavica D, Pierucci N, Llevadot-Sesmilo J, Bhagirath P, Trancuccio A, et al.. Myocardial fibrosis as an arrhythmogenic substrate: Integrating genetics, imaging, and invasive electrophysiology for sudden death risk stratification.. Heart Rhythm. 2026 Oct 17;:. doi: 10.1016/j.hrthm.2026.10.010 doi.",
       "doi": "10.1016/j.hrthm.2026.10.010 doi",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42887621/",
-      "abstract": "抄録なし (Abstract not available)",
+      "abstract": "Myocardial fibrosis is increasingly recognized as a dynamic, hierarchically organized substrate in which heterogeneous fibrogenic mechanisms, complex scar architecture, and tightly coupled micro- and macro-scale electrophysiological alterations converge to permit malignant ventricular arrhythmias (VA) and sudden cardiac death (SCD). This multidimensional substrate mandates an equally sophisticated diagnostic and therapeutic armamentarium, integrating genotype-specific phenotypic profiling and refined variant-level interpretation, advanced cardiac magnetic resonance (including T1 mapping, late gadolinium enhancement and radiomic textural analysis), emergent photon-counting detector computed tomography for quantitative tissue characterization, and high-resolution electroanatomic and functional mapping to capture the full spatial and temporal complexity of fibrosis-mediated arrhythmogenesis. Within this framework, contemporary paradigms for SCD prevention and ventricular tachycardia (VT) ablation must evolve beyond crude left ventricular ejection fraction or aggregate scar-burden thresholds toward disease-specific, multidimensional risk models that mirror the biological and electrophysiological intricacy of the fibrotic substrate, thereby enabling genuinely personalized, substrate-guided strategies for patient selection and procedural planning. On the genetic front, combining genotype-informed phenotypic profiling with granular assessment of mutational hotspots and improved adjudication of variants of uncertain significance holds promise for more accurate prediction of arrhythmic events and heart failure trajectories, while inflammation- and fibrosis-driven arrhythmogenic remodeling is emerging as a potential therapeutic target that warrants further translational investigation. In imaging, pixel-wise T1 mapping-derived quantification of diffuse fibrosis complements late gadolinium enhancement and elevated native T1 values have been linked to increased SCD risk across ischemic and non-ischaemic cardiomyopathies, whereas radiomic analysis of scar heterogeneity, including metrics such as fibrosis entropy and gray-zone burden, offers incremental prognostic value beyond left ventricular ejection fraction, total scar mass, and conventional thresholds, supporting a shift toward tissue-based risk stratification. Photon-counting detector computed tomography, with its higher spatial resolution, enhanced contrastdiscrimination, dose efficiency and multi-energy capabilities, may further refine detection of abnormal late enhancement and extracellular volume estimation, although current data remain exploratory, and future image-guided VT ablation strategies will likely depend on deeper integration of scar architecture with activation mapping, incorporating corridor geometry, ostial asymmetry and intramural accessibility to guide endocardial versus epicardial approaches. Regarding invasive and non-invasive mapping, early clinical experience with pentaspline and high-voltage pulsed field ablation systems suggests that these novel energy sources are feasible and potentially safe for VT substrate modification in non- ischaemic cardiomyopathy, particularly for large-footprint ablation or as bailout after radiofrequency failure, yet larger studies with longer follow-up are needed to define durability, safety and optimal patient selection. Among emerging non-invasive techniques, electrocardiographic imaging-derived regional activation dispersion shows promise for identifying conduction abnormalities associated with arrhythmogenic substrate in ischemic cardiomyopathy and may aid recognition of patients at heightened VT risk. Collectively, these advances across genetics, imaging and mapping are poised to enable more individualized, mechanism-based and substrate- guided strategies for arrhythmic risk stratification and VT treatment, with the ultimate goal of improving patient selection, procedural efficacy and long-term outcomes.",
       "designRank": 3,
       "studyTypeLabel": "観察研究・その他",
       "sampleSize": 0,
@@ -28712,6 +28712,28 @@
       "abstractJa": "背景:\n心室細動（VF）の引き金はよく知られているが、その維持に必要な基質は依然として解明されていない。我々は以前、VFの電気誘導から心停止までのVF全体にわたる動的な時空間変化を実証した。これらのデータは、VF ドライバーが遠位の RV および LV に存在するようであることを示唆している。ただし、これらの領域からの信号は継続的に記録されないであった。この研究の目的は、イヌの VF リズム維持の重要な基質についてのさらなる洞察を提供するために、固定バスケット電極を使用して誘導から心静止までのこれらの重要な領域をマッピングすることであった。\n\n方法:\n6 頭の健康な犬において、3 つの多極バスケット カテーテルが右心室遠位 (RV)、RV 流出路、および左心室遠位 (LV) に配置され、研究全体を通じて所定の位置に留まりた。 VFは、電気生理学的カテーテルからの直流印加によって誘発された。 VF の完全な電気生理学的分析を行うために、表面および心臓内の心電図をベースラインから VF 全体、および心停止まで同時に連続的に記録した。また、VF の 2 つの定義された段階、つまり初期 VF (VF の導入直後から 10 分まで) と後期 VF (10 分後から VF 終了および心静止まで) を介して、集中的なデータ分析も実行された。\n\n結果:\nVF は、平均 54 ± 9 分 (範囲 42 ～ 70 分) にわたって継続的にマッピングされた。初期段階での VF の開始直後、LV 遠位領域が VF の維持を推進しているように見えた。 VF の終末期に向けて、遠位 RV 領域が VF 持続の原因となっているように見えた。すべての犬歯において、表面心電図上の VF が継続している一方で、LV 内の VF が局所的に停止していることが観察された。逆に、RV でのその後の VF の自然終了は、心室補充調律への表面 ECG での VF の終了と関連していた。 VF の連続マッピングでは、40 分後にピークツーピークの心室心電図周期長 (p = 0.06) が増加し、心室心電図振幅 (p = 0.06) が減少する傾向が示された。表面 QRS 活動を識別できなくなると、RV と LV の両方で局所心室心筋捕捉が実証されたが、積極的な心室バーストペーシングにもかかわらず持続的な VF を再開できないであった。\n\n結論:\nこの研究では、健康な犬における血行力学的サポートなしでの電気的開始から自然発生的な VF 終了までの VF の進化について説明する。これらのデータは仮説を生み出すものであり、VF 維持に重要な基質が VF の段階に応じて遠位 RV と LV の両方に存在する可能性があることを示唆している。血行力学を裏付けてこれらの発見を再現し、そのような発見を臨床実践に移すには、さらなる研究が必要である。",
       "isNew": false,
       "firstSeen": "2026-11-12"
+    },
+    {
+      "pmid": "43022435",
+      "title": "Recovery From Persistent Phrenic Nerve Palsy Following Pulsed Field Ablation: A Case Report.",
+      "pubDate": "2026-Dec-11",
+      "journal": "Journal of arrhythmia",
+      "journalAbbr": "J Arrhythm",
+      "volumeIssuePage": "42(6):e70523",
+      "authors": "Hayashi T, Yamamoto S, Ohashi J, Sato M, Shiraki E, Watanabe Y, et al.",
+      "citation": "Hayashi T, Yamamoto S, Ohashi J, Sato M, Shiraki E, Watanabe Y, et al.. Recovery From Persistent Phrenic Nerve Palsy Following Pulsed Field Ablation: A Case Report.. J Arrhythm. 2026 Dec 11;42(6):e70523. doi: 10.1002/joa3.70523 doi.",
+      "doi": "10.1002/joa3.70523 doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43022435/",
+      "abstract": "Persistent phrenic nerve palsy is a rare but possible complication of pulsed field ablation. We report recovery of phrenic nerve function approximately 6 months after PulseSelect ablation and discuss potential mechanisms and preventive strategies, including the effects of repeated applications and their spatial distribution around the right superior pulmonary vein.",
+      "designRank": 99,
+      "studyTypeLabel": "症例報告 (Case Report)",
+      "sampleSize": 1,
+      "isTargetJournal": true,
+      "titleJa": "パルスフィールドアブレーション後の持続性横隔神経麻痺からの回復：症例報告",
+      "summaryJa": "【背景】持続性横隔神経麻痺は、まれではありますが、パルスフィールドアブレーションの合併症である可能性がありる (症例報告 (Case Report) / N = 1例)\n【方法】我々は、PulseSelect アブレーションの約 6 か月後に横隔神経機能が回復したことを報告し、反復適用の影響と右上肺静脈周囲の空間分布を含む潜在的なメカニズムと予防…\n【結果】我々は、PulseSelect アブレーションの約 6 か月後に横隔神経機能が回復したことを報告し、反復適用の影響と右上肺静脈周囲の空間分布を含む潜在的なメカニズムと予防戦略について議論しる\n【結論】我々は、PulseSelect アブレーションの約 6 か月後に横隔神経機能が回復したことを報告し、反復適用の影響と右上肺静脈周囲の空間分布を含む潜在的なメカニズムと予防戦略につい…",
+      "abstractJa": "持続性横隔神経麻痺は、まれではありますが、パルスフィールドアブレーションの合併症である可能性があります。我々は、PulseSelect アブレーションの約 6 か月後に横隔神経機能が回復したことを報告し、反復適用の影響と右上肺静脈周囲の空間分布を含む潜在的なメカニズムと予防戦略について議論します。",
+      "isNew": true,
+      "firstSeen": "2026-11-14"
     },
     {
       "pmid": "43010598",
