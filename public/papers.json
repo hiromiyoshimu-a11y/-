@@ -29681,5 +29681,14 @@
       "isNew": false,
       "firstSeen": "2026-11-12"
     }
-  ]
+  ],
+  "latestSyncInfo": {
+    "syncDate": "2026-11-14",
+    "newCount": 2,
+    "journalCounts": {
+      "Heart Rhythm": 1,
+      "J Cardiovasc Electrophysiol": 1
+    },
+    "message": "Heart Rhythm (1件)、J Cardiovasc Electrophysiol (1件) など2誌から最新論文 2件 を自動収集・要約しました！"
+  }
 }

@@ -74,6 +74,22 @@
           <span>🔗</span>
           <span>端末連携</span>
         </button>
+        <button id="openScheduleModalBtn" class="badge schedule-badge" title="収録主要13誌の発売日・刊行スケジュール" style="cursor: pointer; border: 1px solid var(--accent-blue); background: rgba(56, 189, 248, 0.12); color: var(--accent-blue); display: inline-flex; align-items: center; gap: 4px; font-weight: 600;">
+          <span>🗓️</span>
+          <span>雑誌発売日ガイド</span>
+        </button>
+      </div>
+
+      <!-- 新着収集通知バー（発売日に合わせて自動収集した際に表示） -->
+      <div id="newSyncNotificationBar" class="sync-notification-bar" style="display: none;">
+        <div class="sync-notif-left">
+          <span class="sync-notif-badge">🔔 発売・自動収集</span>
+          <span id="syncNotifMessage" class="sync-notif-text">最新論文を自動収集・要約しました</span>
+        </div>
+        <div class="sync-notif-actions">
+          <button type="button" id="viewNewPapersBtn" class="sync-notif-action-btn">新着を見る ➔</button>
+          <button type="button" id="closeNotifBtn" class="sync-notif-close-btn" title="通知を閉じる">✕</button>
+        </div>
       </div>
 
       <!-- 検索・フィルターエリア -->
@@ -117,6 +133,7 @@
             <!-- チェックボックス群が動的生成される -->
           </div>
           <div class="journal-dropdown-footer">
+            <button type="button" id="openScheduleFromDropdownBtn" class="schedule-link-btn">🗓️ 各誌の発売日ガイド</button>
             <button type="button" id="closeJournalFilterBtn" class="close-filter-btn">完了</button>
           </div>
         </div>
@@ -243,8 +260,39 @@
           </div>
 
           <div style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 24px;">
-            EP & PFA Papers v1.0.0<br>
+            EP & PFA Papers v1.1.0<br>
             Designed for Clinical Electrophysiologists
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 収録主要13誌 発売日・刊行スケジュール モーダル -->
+    <div id="scheduleModal" class="modal-overlay" style="display: none;">
+      <div class="modal-sheet" style="max-height: 85vh; max-width: 680px;">
+        <div class="modal-header">
+          <div>
+            <h3 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 0; display: flex; align-items: center; gap: 6px;">
+              <span>🗓️</span> 掲載主要13誌の発売日・刊行スケジュール
+            </h3>
+            <div style="font-size: 11px; color: var(--text-secondary); margin-top: 2px;">
+              各誌の発売・先行公開に合わせて自動巡回（月・火・木・金 朝06:00）実施中
+            </div>
+          </div>
+          <button id="closeScheduleModal" class="close-modal-btn">✕</button>
+        </div>
+        <div class="modal-body" style="padding: 14px;">
+          <div class="schedule-guide-intro">
+            <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+              <span>💡</span> 臨床医向け 発売・先行公開の仕組み
+            </div>
+            <div style="font-size: 12px; line-height: 1.6; color: var(--text-secondary);">
+              主要国際誌は冊子（Issue）の発売日を待たずに、査読通過段階で <strong>先行オンライン公開（Ahead of Print）</strong> されます。本アプリは各誌の発売曜日（火曜: Circulation/JAMA、木曜: NEJM/EHJ、月初: Heart Rhythm/Europace等）に合わせて最新論文を自動収集しています。
+            </div>
+          </div>
+
+          <div id="journalScheduleContainer" class="schedule-list">
+            <!-- 13誌のスケジュールカードが動的に挿入される -->
           </div>
         </div>
       </div>

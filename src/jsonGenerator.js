@@ -51,10 +51,34 @@ export function generateJsonReport(papers, outputPath = 'public/papers.json') {
     };
   });
 
+  const journalNewCounts = {};
+  processedPapers.forEach(p => {
+    if (p.isNew) {
+      const jName = p.journalAbbr || p.journal || '主要誌';
+      journalNewCounts[jName] = (journalNewCounts[jName] || 0) + 1;
+    }
+  });
+
+  const sortedNewJournals = Object.entries(journalNewCounts)
+    .sort((a, b) => b[1] - a[1]);
+
+  let syncSummaryMessage = '';
+  if (newCount > 0 && sortedNewJournals.length > 0) {
+    const topJournals = sortedNewJournals.slice(0, 3).map(([name, c]) => `${name} (${c}件)`).join('、');
+    const etc = sortedNewJournals.length > 3 ? ` など${sortedNewJournals.length}誌` : '';
+    syncSummaryMessage = `${topJournals}${etc}から新着論文 ${newCount}件 を自動収集・要約しました！`;
+  }
+
   const payload = {
     updatedAt: todayStr,
     totalCount: processedPapers.length,
     newCount: newCount,
+    latestSyncInfo: {
+      syncDate: todayStr,
+      newCount: newCount,
+      journalCounts: journalNewCounts,
+      message: syncSummaryMessage
+    },
     papers: processedPapers
   };
 

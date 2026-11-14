@@ -2,8 +2,9 @@ name: Weekly PubMed Catheter & PFA Ablation Paper Summarizer
 
 on:
   schedule:
-    # 毎週月曜日 朝 06:00 JST (日曜日 21:00 UTC) に自動実行
-    - cron: '0 21 * * 0'
+    # 主要雑誌の発売日（火曜: Circulation/JAMA、木曜: NEJM/EHJ、月曜: Heart Rhythm/Europace等月初・週末分、金曜: JACC EP/JCE等）に合わせて自動巡回
+    # 日本時間 朝 06:00 JST (前日 21:00 UTC) に自動実行
+    - cron: '0 21 * * 0,1,3,4'
   push:
     branches: [ main ]
   workflow_dispatch: # GitHub Web画面からの手動実行ボタンを有効化

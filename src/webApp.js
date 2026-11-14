@@ -4,6 +4,7 @@
  */
 
 import { SplashScreen } from '@capacitor/splash-screen';
+import { JOURNAL_SCHEDULES } from './journalScheduleData.js';
 
 let allPapers = [];
 let bookmarks = JSON.parse(localStorage.getItem('ep_paper_bookmarks') || '[]');
@@ -508,6 +509,8 @@ function applyPaperData(data) {
   allPapers = data.papers || [];
   updateJournalOptions();
   populatePeriodSelect();
+  renderSyncNotificationBar(data);
+  renderJournalScheduleModal();
 
   const newCount = data.newCount || allPapers.filter(p => p.isNew).length;
   const unreadCount = allPapers.filter(p => !readPapers.includes(String(p.pmid))).length;
@@ -867,6 +870,99 @@ function populatePeriodSelect() {
 }
 
 /**
+ * 新着収集通知バーの表示（雑誌発売・自動巡回収集の通知バッジ）
+ */
+function renderSyncNotificationBar(data) {
+  const bar = document.getElementById('newSyncNotificationBar');
+  if (!bar) return;
+
+  const newCount = data?.newCount || allPapers.filter(p => p.isNew).length;
+  if (newCount <= 0) {
+    bar.style.display = 'none';
+    return;
+  }
+
+  // 最新収集メッセージ
+  let msg = data?.latestSyncInfo?.message;
+  if (!msg) {
+    const journalCounts = {};
+    allPapers.filter(p => p.isNew).forEach(p => {
+      const j = p.journalAbbr || p.journal || '主要誌';
+      journalCounts[j] = (journalCounts[j] || 0) + 1;
+    });
+    const topJournals = Object.keys(journalCounts).slice(0, 3).join('・');
+    msg = `${topJournals || '各主要誌'}から新着論文 ${newCount}件 を自動収集・要約しました！`;
+  }
+
+  const msgEl = document.getElementById('syncNotifMessage');
+  if (msgEl) msgEl.textContent = msg;
+  bar.style.display = 'flex';
+}
+
+/**
+ * 掲載主要13誌の発売日・刊行スケジュール モーダルの描画
+ */
+function renderJournalScheduleModal() {
+  const container = document.getElementById('journalScheduleContainer');
+  if (!container) return;
+
+  // 各雑誌ごとの現在のアブレーション論文収録件数と最新掲載日を算出
+  const journalStats = new Map();
+  allPapers.forEach(p => {
+    const key = (p.journalAbbr || p.journal || '').toLowerCase();
+    const curr = journalStats.get(key) || { count: 0, latestDate: '' };
+    curr.count++;
+    if (p.pubDate && (!curr.latestDate || p.pubDate > curr.latestDate)) {
+      curr.latestDate = p.pubDate;
+    }
+    journalStats.set(key, curr);
+  });
+
+  container.innerHTML = JOURNAL_SCHEDULES.map(js => {
+    let freqClass = 'monthly';
+    if (js.frequency.includes('週刊')) freqClass = 'weekly';
+    else if (js.frequency.includes('隔月')) freqClass = 'bimonthly';
+
+    // 該当する収録データを探す
+    let stats = { count: 0, latestDate: '' };
+    for (const [k, v] of journalStats.entries()) {
+      if (js.name.toLowerCase().includes(k) || k.includes(js.id) || (js.id === 'hr' && k.includes('heart rhythm'))) {
+        stats.count += v.count;
+        if (v.latestDate && (!stats.latestDate || v.latestDate > stats.latestDate)) {
+          stats.latestDate = v.latestDate;
+        }
+      }
+    }
+
+    return `
+      <div class="schedule-card">
+        <div class="schedule-card-header">
+          <div class="schedule-card-title">
+            <span>📖</span> ${escapeHtml(js.name)}
+          </div>
+          <span class="schedule-card-freq ${freqClass}">${escapeHtml(js.frequency)}</span>
+        </div>
+        
+        <div class="schedule-timing-row">
+          <span class="schedule-timing-label">📅 発売・更新:</span>
+          <span class="schedule-timing-value">${escapeHtml(js.releaseTiming)}</span>
+        </div>
+
+        <div class="schedule-card-details">
+          <div><strong>🔬 主な注目領域:</strong> ${escapeHtml(js.epRelevance)}</div>
+        </div>
+
+        <div class="schedule-card-meta">
+          <span>🏛️ ${escapeHtml(js.publisher)}</span>
+          ${js.impactFactor !== 'N/A' ? `<span>📈 IF: ${escapeHtml(js.impactFactor)}</span>` : ''}
+          ${stats.count > 0 ? `<span style="color: var(--accent-blue); font-weight: 700;">📄 収録: ${stats.count}件 ${stats.latestDate ? `(最新: ${stats.latestDate})` : ''}</span>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/**
  * イベントリスナー設定
  */
 function setupEventListeners() {
@@ -1025,6 +1121,67 @@ function setupEventListeners() {
     syncBtn.addEventListener('click', () => {
       syncWithCloud(true);
       pullUserStateFromCloud(getSyncCode(), false, false);
+    });
+  }
+
+  // 🗓️ 雑誌発売日ガイド モーダル制御
+  const openScheduleModal = () => {
+    renderJournalScheduleModal();
+    const modal = document.getElementById('scheduleModal');
+    if (modal) modal.style.display = 'flex';
+    const journalDropdown = document.getElementById('journalFilterDropdown');
+    if (journalDropdown) {
+      journalDropdown.style.display = 'none';
+      const journalToggleBtn = document.getElementById('journalFilterToggleBtn');
+      if (journalToggleBtn) {
+        journalToggleBtn.classList.remove('open');
+        journalToggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    }
+  };
+
+  const openScheduleModalBtn = document.getElementById('openScheduleModalBtn');
+  if (openScheduleModalBtn) openScheduleModalBtn.addEventListener('click', openScheduleModal);
+
+  const openScheduleFromDropdownBtn = document.getElementById('openScheduleFromDropdownBtn');
+  if (openScheduleFromDropdownBtn) openScheduleFromDropdownBtn.addEventListener('click', openScheduleModal);
+
+  const closeScheduleModal = document.getElementById('closeScheduleModal');
+  if (closeScheduleModal) {
+    closeScheduleModal.addEventListener('click', () => {
+      const modal = document.getElementById('scheduleModal');
+      if (modal) modal.style.display = 'none';
+    });
+  }
+
+  const scheduleModal = document.getElementById('scheduleModal');
+  if (scheduleModal) {
+    scheduleModal.addEventListener('click', (e) => {
+      if (e.target.id === 'scheduleModal') {
+        scheduleModal.style.display = 'none';
+      }
+    });
+  }
+
+  // 🔔 新着収集通知バーのイベント
+  const viewNewPapersBtn = document.getElementById('viewNewPapersBtn');
+  if (viewNewPapersBtn) {
+    viewNewPapersBtn.addEventListener('click', () => {
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      tabBtns.forEach(b => {
+        if (b.dataset.filter === 'new') {
+          b.click();
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  const closeNotifBtn = document.getElementById('closeNotifBtn');
+  if (closeNotifBtn) {
+    closeNotifBtn.addEventListener('click', () => {
+      const notifBar = document.getElementById('newSyncNotificationBar');
+      if (notifBar) notifBar.style.display = 'none';
     });
   }
 
