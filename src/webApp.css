@@ -736,6 +736,7 @@ body.light-theme .paper-card.is-new {
   gap: 8px;
   position: relative;
   z-index: 10;
+  flex-shrink: 0;
 }
 
 .read-btn {
@@ -743,6 +744,8 @@ body.light-theme .paper-card.is-new {
   align-items: center;
   justify-content: center;
   gap: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
   background: var(--bg-primary);
   border: 1px solid var(--border-color);
   color: var(--text-secondary);
