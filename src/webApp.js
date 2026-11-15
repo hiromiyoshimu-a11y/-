@@ -563,7 +563,11 @@ async function loadPaperData() {
 
   if (data && data.papers) {
     applyPaperData(data);
-    localStorage.setItem('ep_papers_cache', JSON.stringify(data));
+    try {
+      localStorage.setItem('ep_papers_cache', JSON.stringify(data));
+    } catch (e) {
+      console.warn('Failed to cache papers in localStorage:', e);
+    }
   } else {
     paperListEl.innerHTML = `
       <div class="loading-state" style="text-align: center; padding: 28px 16px;">
@@ -650,7 +654,11 @@ window.syncWithCloud = async function(isManual = false) {
   if (latestData && Array.isArray(latestData.papers)) {
     const prevCount = allPapers.length;
     applyPaperData(latestData, isManual);
-    localStorage.setItem('ep_papers_cache', JSON.stringify(latestData));
+    try {
+      localStorage.setItem('ep_papers_cache', JSON.stringify(latestData));
+    } catch (e) {
+      console.warn('Failed to cache latest papers in localStorage:', e);
+    }
 
     if (isManual) {
       showToast(`✅ クラウド最新データ (${latestData.papers.length}件) を同期しました！`);
@@ -955,11 +963,32 @@ function renderSyncNotificationBar(data) {
   const modal = document.getElementById('syncAnnouncementModal');
   if (!modal) return;
 
+  if (localStorage.getItem('ep_disable_sync_popup') === '1') {
+    modal.style.display = 'none';
+    return;
+  }
+
   const newCount = data?.newCount || allPapers.filter(p => p.isNew).length;
   if (newCount <= 0) {
     modal.style.display = 'none';
     return;
   }
+
+  // 同じ更新日（updatedAt）の通知は、件数変動やタスクキル再起動があっても1回しか自動表示しない
+  const syncDateKey = String(data?.updatedAt || data?.latestSyncInfo?.syncDate || '').trim();
+  const notifKey = `${syncDateKey || 'init'}_${newCount}`;
+  if (
+    (syncDateKey && localStorage.getItem('ep_dismissed_sync_date') === syncDateKey) ||
+    localStorage.getItem('ep_dismissed_sync_notif') === notifKey
+  ) {
+    return;
+  }
+  modal.dataset.notifKey = notifKey;
+  modal.dataset.syncDateKey = syncDateKey;
+  if (syncDateKey) {
+    localStorage.setItem('ep_dismissed_sync_date', syncDateKey);
+  }
+  localStorage.setItem('ep_dismissed_sync_notif', notifKey);
 
   // 最新収集メッセージ
   let msg = data?.latestSyncInfo?.message;
@@ -972,14 +1001,6 @@ function renderSyncNotificationBar(data) {
     const topJournals = Object.keys(journalCounts).slice(0, 3).join('・');
     msg = `${topJournals || '各主要誌'}から新着論文 ${newCount}件 を自動収集・要約しました！`;
   }
-
-  // 同じ日・同じ新着件数の通知をすでに一度表示していれば再表示しない
-  const notifKey = `${data?.updatedAt || 'init'}_${newCount}`;
-  if (localStorage.getItem('ep_dismissed_sync_notif') === notifKey) {
-    return;
-  }
-  modal.dataset.notifKey = notifKey;
-  localStorage.setItem('ep_dismissed_sync_notif', notifKey);
 
   const msgEl = document.getElementById('syncNotifMessage');
   if (msgEl) msgEl.textContent = msg;
@@ -1335,12 +1356,24 @@ function setupEventListeners() {
   const syncAnnouncementModal = document.getElementById('syncAnnouncementModal');
   const dismissAnnouncement = () => {
     if (syncAnnouncementModal) {
+      if (syncAnnouncementModal.dataset.syncDateKey) {
+        localStorage.setItem('ep_dismissed_sync_date', syncAnnouncementModal.dataset.syncDateKey);
+      }
       if (syncAnnouncementModal.dataset.notifKey) {
         localStorage.setItem('ep_dismissed_sync_notif', syncAnnouncementModal.dataset.notifKey);
       }
       syncAnnouncementModal.style.display = 'none';
     }
   };
+
+  const disableNotifForeverBtn = document.getElementById('disableNotifForeverBtn');
+  if (disableNotifForeverBtn) {
+    disableNotifForeverBtn.addEventListener('click', () => {
+      localStorage.setItem('ep_disable_sync_popup', '1');
+      dismissAnnouncement();
+      showToast('🔕 お知らせの自動表示をオフにしました');
+    });
+  }
 
   const viewNewPapersBtn = document.getElementById('viewNewPapersBtn');
   if (viewNewPapersBtn) {
