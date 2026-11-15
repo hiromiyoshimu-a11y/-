@@ -1,17 +1,18 @@
 {
   "updatedAt": "2026-11-15",
-  "totalCount": 1348,
-  "newCount": 17,
+  "totalCount": 1349,
+  "newCount": 18,
   "latestSyncInfo": {
     "syncDate": "2026-11-15",
-    "newCount": 17,
+    "newCount": 18,
     "journalCounts": {
       "J Interv Card Electrophysiol": 9,
       "Nat Med": 1,
       "J Cardiovasc Electrophysiol": 6,
+      "J Arrhythm": 1,
       "Eur Heart J": 1
     },
-    "message": "J Interv Card Electrophysiol (9件)、J Cardiovasc Electrophysiol (6件)、Nat Med (1件) など4誌から新着論文 17件 を自動収集・要約しました！"
+    "message": "J Interv Card Electrophysiol (9件)、J Cardiovasc Electrophysiol (6件)、Nat Med (1件) など5誌から新着論文 18件 を自動収集・要約しました！"
   },
   "papers": [
     {
@@ -17217,6 +17218,28 @@
       "abstractJa": "背景:\nパルスフィールドアブレーション (PFA) は、心房性不整脈アブレーションにおける安全性が証明されている新興の非熱的アブレーションモダリティである。ただし、心室性不整脈 (VA) に対するその性能に関するデータは依然として限られている。\n\n目的:\n現実世界の米国多施設登録における複雑な VA に対する PFA の実現可能性、安全性、有効性を評価する。\n\n方法:\nこの後ろ向き研究には、メイヨークリニックの3つのセンターで心室頻拍（VT）または心室性期外収縮（PVC）のPFAを受けた連続患者が含まれた（2024年4月から2025年7月まで）。主要な実現可能性の成果は、意図した標的基質への PFA 損傷の送達の成功であった。主な有効性アウトカムには、急性処置の成功が含まれる。植込み型除細動器（ICD）ショックまたは複数回の抗頻脈ペーシング療法を必要とする持続的な心室頻拍再発。 PVC 負荷が 80% 以上削減される。安全性の結果には、処置上の合併症、弁機能、血栓塞栓性イベント、腎機能、伝導障害が含まれる。\n\n結果:\n26 人の患者が含まれた (PVC 13 人、VT 13 人)。すべての VT アブレーション (69.2% が完了、30.8% が部分的) および 92.3% の PVC アブレーションで急性成功が達成された。合併症は患者の 11.5% で発生した (一過性 LBBB [n = 1] および血管合併症 [n = 2])。血栓塞栓性イベント、心臓内血栓、または急性腎損傷は観察されなかった。僧帽弁装置付近の病変は、既存の弁膜症患者を含め、僧帽弁逆流を悪化させなかった。中央値365日の追跡調査の後、1人の患者がICDショックを必要とするVT再発を経験した。 VT アブレーション後の推定無再発生存率は 12 か月時点で 61.5% であった。 PVC 患者の 58.3% が 80% 以上の負担軽減を達成した。\n\n結論:\nVA に対する PFA は実行可能であり、非常に効果的であり、処置に関連した合併症の発生率は低いと考えられる。急性の成功率は高かったものの、長期的な結果は VT アブレーションでは許容範囲であり、PVC アブレーションでは比較的穏やかであり、技術とエネルギー供給戦略の継続的な改良の必要性が強調された。大規模な前向き研究が保証されている。",
       "isNew": false,
       "firstSeen": "2026-11-12"
+    },
+    {
+      "pmid": "43034665",
+      "title": "Successful Non-Coronary Cusp Ablation in Type B Wolff-Parkinson-White Syndrome With an rS Pattern in Lead V1.",
+      "pubDate": "2026-Dec-14",
+      "journal": "Journal of arrhythmia",
+      "journalAbbr": "J Arrhythm",
+      "volumeIssuePage": "42(6):e70527",
+      "authors": "Yamauchi Y, Sagawa Y, Murata K, Oda A, Aonuma K",
+      "citation": "Yamauchi Y, Sagawa Y, Murata K, Oda A, Aonuma K. Successful Non-Coronary Cusp Ablation in Type B Wolff-Parkinson-White Syndrome With an rS Pattern in Lead V1.. J Arrhythm. 2026 Dec 14;42(6):e70527. doi: 10.1002/joa3.70527 doi.",
+      "doi": "10.1002/joa3.70527 doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43034665/",
+      "abstract": "A Type B Wolff-Parkinson-White pattern with an rS morphology in Lead V1 suggested a right anterior or anterolateral accessory pathway, whereas detailed activation mapping identified a para-Hisian accessory pathway. Despite atypical ECG features, including relatively large initial r-wave amplitudes in Leads V1 and V2, radiofrequency ablation from the noncoronary cusp successfully eliminated the pathway. This case highlights the limitations of ECG-based localization and supports consideration of the noncoronary cusp when ablation from the right para-Hisian region is unsuccessful.",
+      "designRank": 3,
+      "studyTypeLabel": "観察研究・その他",
+      "sampleSize": 0,
+      "isTargetJournal": true,
+      "titleJa": "V1誘導にrsパターンを有するB型ウォルフ・パーキンソン・ホワイト症候群における非冠状動脈尖アブレーションの成功",
+      "summaryJa": "【背景】V1 誘導の rS 形態を伴う B 型 Wolff-Parkinson-White パターンは、右前部または前外側副経路を示唆しましたが、詳細な活性化マッピングにより傍ヒ… (観察研究・その他 / 症例数: 不明)\n【方法】V1 誘導および V2 誘導における比較的大きな初期 r 波振幅を含む非典型的な ECG 特徴にもかかわらず、非冠動脈尖からの高周波アブレーションにより経路を除去すること…\n【結果】V1 誘導および V2 誘導における比較的大きな初期 r 波振幅を含む非典型的な ECG 特徴にもかかわらず、非冠動脈尖からの高周波アブレーションにより経路を除去することに成功しました。\n【結論】この症例は、ECG に基づく位置特定の限界を強調しており、右傍組織領域からのアブレーションが失敗した場合の非冠状動脈尖の考慮を裏付けるものである",
+      "abstractJa": "V1 誘導の rS 形態を伴う B 型 Wolff-Parkinson-White パターンは、右前部または前外側副経路を示唆しましたが、詳細な活性化マッピングにより傍ヒス副経路が特定されました。 V1 誘導および V2 誘導における比較的大きな初期 r 波振幅を含む非典型的な ECG 特徴にもかかわらず、非冠動脈尖からの高周波アブレーションにより経路を除去することに成功しました。この症例は、ECG に基づく位置特定の限界を強調しており、右傍組織領域からのアブレーションが失敗した場合の非冠状動脈尖の考慮を裏付けています。",
+      "isNew": true,
+      "firstSeen": "2026-11-15"
     },
     {
       "pmid": "43031493",
