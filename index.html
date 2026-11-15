@@ -246,36 +246,127 @@
       </div>
     </div>
 
-    <!-- 医療免責事項 & アプリ情報モーダル (App Store 必須準拠) -->
+    <!-- アプリ情報 & 使い方ガイド & 医療免責事項モーダル -->
     <div id="disclaimerModal" class="modal-overlay" style="display: none;">
-      <div class="modal-sheet" style="max-height: 80vh;">
+      <div class="modal-sheet" style="max-height: 85vh; max-width: 680px;">
         <div class="modal-header">
-          <h3 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 0;">ℹ️ アプリ情報 & 医療免責事項</h3>
+          <h3 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 0;">ℹ️ アプリ情報・使い方ガイド</h3>
           <button id="closeDisclaimerModal" class="close-modal-btn">✕</button>
         </div>
-        <div class="modal-body" style="font-size: 13.5px; line-height: 1.8; color: var(--text-secondary);">
-          <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-md); border-left: 4px solid var(--accent-blue); margin-bottom: 16px;">
-            <strong style="color: var(--text-primary); display: block; margin-bottom: 6px;">⚖️ 医療免責事項 (Medical Disclaimer)</strong>
-            本アプリは、米国国立医学図書館（PubMed / NLM）が提供する公開医学論文の書誌情報およびAI要約を閲覧するための学術研究・情報提供支援ツールです。<br>
-            <strong>本アプリが提供する情報は、専門的な医学的アドバイス、診断、または治療の代替となるものではありません。</strong><br>
-            実際の臨床判断や治療方針の決定に際しては、必ず原著論文を精読し、担当の医師および医療専門家の判断に基づいてください。
+
+        <!-- タブ切り替えバー -->
+        <div class="info-modal-tabs">
+          <button type="button" id="infoTabGuideBtn" class="info-tab-btn active" data-tab="guide">📖 かんたん使い方ガイド</button>
+          <button type="button" id="infoTabAboutBtn" class="info-tab-btn" data-tab="about">⚖️ 医療免責・アプリ情報</button>
+        </div>
+
+        <div class="modal-body" style="font-size: 13.5px; line-height: 1.75; color: var(--text-secondary); padding-top: 12px;">
+          <!-- タブ1: かんたん使い方ガイド -->
+          <div id="infoTabGuideContent" class="info-tab-content">
+            <div class="guide-hero-box">
+              <div class="guide-hero-title">👋 はじめての方へ</div>
+              <p class="guide-hero-text">
+                このアプリは、不整脈・カテーテルアブレーションに関する世界中の主要13誌の最新英語論文を、自動で集めて日本語に翻訳・要約してお届けするアプリです。<br>
+                操作が苦手な方でも迷わず使えるよう、基本の使い方をまとめました。
+              </p>
+            </div>
+
+            <div class="guide-section-card">
+              <div class="guide-step-header">
+                <span class="guide-step-num">1</span>
+                <span class="guide-step-title">論文を読む・詳しい内容を見る</span>
+              </div>
+              <ul class="guide-list">
+                <li><strong>サッと要点を読む：</strong> 一覧のカードに書かれた<span class="guide-badge-blue">【背景】【方法】【結果】【結論】</span>を読むだけで、数秒で論文のポイントがわかります。</li>
+                <li><strong>全訳や原文を見る：</strong> 気になる論文のカードを<strong>指で軽くタップ（押す）</strong>すると、画面の下から詳しいページが開き、抄録の日本語全訳や英語の原文、PubMedの公式ページを見ることができます。</li>
+              </ul>
+            </div>
+
+            <div class="guide-section-card">
+              <div class="guide-step-header">
+                <span class="guide-step-num">2</span>
+                <span class="guide-step-title">読み終わった論文の整理（既読・お気に入り）</span>
+              </div>
+              <ul class="guide-list">
+                <li><span class="guide-pill">☐ 既読（非表示）</span> を押すと、その論文に「読んだ印」がつき、一覧から隠れます。未読の論文だけが残るので、どこまで読んだか迷いません。</li>
+                <li><span class="guide-hint">※ 間違えて押しても、上の <span class="guide-pill">☑ 既読のみ</span> タブからいつでも元に戻せます。</span></li>
+                <li><span class="guide-pill">🤍</span>（ハート）を押して赤（❤️）にすると、大事な論文を保存できます。保存した論文は上の <span class="guide-pill">❤️ ブックマーク</span> タブでまとめて見返せます。</li>
+              </ul>
+            </div>
+
+            <div class="guide-section-card">
+              <div class="guide-step-header">
+                <span class="guide-step-num">3</span>
+                <span class="guide-step-title">読みたい論文を探す・絞り込む</span>
+              </div>
+              <ul class="guide-list">
+                <li><strong>言葉で検索：</strong> 上の検索窓 <span class="guide-pill">🔍 タイトル・キーワード...</span> に「PFA」「AF」「高周波」などと入力すると、関係する論文だけが表示されます。</li>
+                <li><strong>種類で選ぶ：</strong> 横に並んだボタン（<span class="guide-pill">✨ 新着論文のみ</span>、<span class="guide-pill">🟢 RCT / 試験</span>、<span class="guide-pill">🔴 症例報告</span> など）を押すと、研究の種類ごとに絞り込めます。</li>
+                <li><strong>雑誌・期間・順番：</strong> <span class="guide-pill">📚 対象誌</span> で読みたい雑誌だけを選んだり、<span class="guide-pill">📅 過去1年間</span> や <span class="guide-pill">🔥 優先順</span> で期間や並び順を変えたりできます。</li>
+              </ul>
+            </div>
+
+            <div class="guide-section-card">
+              <div class="guide-step-header">
+                <span class="guide-step-num">4</span>
+                <span class="guide-step-title">論文が多くて見づらいとき（要約のオン・オフ）</span>
+              </div>
+              <ul class="guide-list">
+                <li>並び替えの下にある <span class="guide-pill">📝 臨床要約 あり ｜ 📋 要約 なし</span> を押してみてください。</li>
+                <li><strong>「要約 なし (タイトル一覧)」</strong> にすると、タイトルと雑誌名だけのスッキリした一覧になり、たくさんの論文を素早く見渡せます。（タイトルを押せばいつでも要約を読めます）</li>
+              </ul>
+            </div>
+
+            <div class="guide-section-card">
+              <div class="guide-step-header">
+                <span class="guide-step-num">5</span>
+                <span class="guide-step-title">文字の大きさ・明るさ・最新更新</span>
+              </div>
+              <ul class="guide-list">
+                <li><strong>文字を大きくする：</strong> 一番上の <span class="guide-pill">🔤 標準</span> を押すと、「大」「特大」に文字サイズを大きくできます。</li>
+                <li><strong>画面の明るさ：</strong> 右上の <span class="guide-pill">🌙</span>（月）を押すと、暗い画面と明るい画面（白背景）を切り替えられます。</li>
+                <li><strong>最新論文を取り込む：</strong> 画面を上から下に引っ張るか、<span class="guide-pill">🔄 最新同期</span> を押すと、最新の論文データを読み込みます。</li>
+                <li><strong>雑誌の発売日：</strong> <span class="guide-pill">🗓️ 雑誌発売日ガイド</span> を押すと、13誌が毎月・毎週いつ発売されるかを確認できます。</li>
+              </ul>
+            </div>
+
+            <div class="guide-section-card">
+              <div class="guide-step-header">
+                <span class="guide-step-num">6</span>
+                <span class="guide-step-title">他のスマホやパソコンとデータを共有する</span>
+              </div>
+              <ul class="guide-list">
+                <li><span class="guide-pill">🔗 端末連携</span> を押すと、あなた専用の<strong>10桁の連携コード</strong>が表示されます。</li>
+                <li>iPhoneとパソコン（Mac）やiPadなど、別の端末で同じコードを入力すると、既読マークや❤️ブックマークをそのまま引き継いで使えます。</li>
+              </ul>
+            </div>
           </div>
 
-          <div style="margin-bottom: 16px;">
-            <strong style="color: var(--text-primary); display: block; margin-bottom: 6px;">📚 データソース & 著作権</strong>
-            論文データは PubMed API (E-utilities) を通じて取得されています。各論文の抄録およびタイトルの著作権は、原著者および各出版元ジャーナルに帰属します。
-          </div>
+          <!-- タブ2: 医療免責事項 & アプリ情報 -->
+          <div id="infoTabAboutContent" class="info-tab-content" style="display: none;">
+            <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-md); border-left: 4px solid var(--accent-blue); margin-bottom: 16px;">
+              <strong style="color: var(--text-primary); display: block; margin-bottom: 6px;">⚖️ 医療免責事項 (Medical Disclaimer)</strong>
+              本アプリは、米国国立医学図書館（PubMed / NLM）が提供する公開医学論文の書誌情報およびAI要約を閲覧するための学術研究・情報提供支援ツールです。<br>
+              <strong>本アプリが提供する情報は、専門的な医学的アドバイス、診断、または治療の代替となるものではありません。</strong><br>
+              実際の臨床判断や治療方針の決定に際しては、必ず原著論文を精読し、担当の医師および医療専門家の判断に基づいてください。
+            </div>
 
-          <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 16px; text-align: center;">
-            <strong style="color: var(--text-primary); display: block; margin-bottom: 6px;">🤖 Android版アプリ (.apk) 直接ダウンロード</strong>
-            <a href="./EP-PFA-Papers.apk" download="EP-PFA-Papers.apk" style="display: inline-block; padding: 10px 20px; background: var(--accent-blue); color: #FFFFFF; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 13.5px; margin-top: 4px;">
-              📥 Android用アプリ (.apk) をダウンロード
-            </a>
-          </div>
+            <div style="margin-bottom: 16px;">
+              <strong style="color: var(--text-primary); display: block; margin-bottom: 6px;">📚 データソース & 著作権</strong>
+              論文データは PubMed API (E-utilities) を通じて取得されています。各論文の抄録およびタイトルの著作権は、原著者および各出版元ジャーナルに帰属します。
+            </div>
 
-          <div style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 24px;">
-            EP & PFA Papers v1.1.0<br>
-            Designed for Clinical Electrophysiologists
+            <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-md); border: 1px solid var(--border-color); margin-bottom: 16px; text-align: center;">
+              <strong style="color: var(--text-primary); display: block; margin-bottom: 6px;">🤖 Android版アプリ (.apk) 直接ダウンロード</strong>
+              <a href="./EP-PFA-Papers.apk" download="EP-PFA-Papers.apk" style="display: inline-block; padding: 10px 20px; background: var(--accent-blue); color: #FFFFFF; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 13.5px; margin-top: 4px;">
+                📥 Android用アプリ (.apk) をダウンロード
+              </a>
+            </div>
+
+            <div style="font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 24px;">
+              EP & PFA Papers v1.1.0<br>
+              Designed for Clinical Electrophysiologists
+            </div>
           </div>
         </div>
       </div>

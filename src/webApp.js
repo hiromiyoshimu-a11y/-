@@ -1099,7 +1099,38 @@ function setupEventListeners() {
   const infoBtn = document.getElementById('infoBtn');
   if (infoBtn) {
     infoBtn.addEventListener('click', () => {
-      document.getElementById('disclaimerModal').style.display = 'flex';
+      const modal = document.getElementById('disclaimerModal');
+      if (modal) {
+        modal.style.display = 'flex';
+        const body = modal.querySelector('.modal-body');
+        if (body) body.scrollTop = 0;
+      }
+    });
+  }
+
+  // アプリ情報モーダルのタブ切替（使い方ガイド ⇔ 医療免責・アプリ情報）
+  const infoTabGuideBtn = document.getElementById('infoTabGuideBtn');
+  const infoTabAboutBtn = document.getElementById('infoTabAboutBtn');
+  const infoTabGuideContent = document.getElementById('infoTabGuideContent');
+  const infoTabAboutContent = document.getElementById('infoTabAboutContent');
+
+  if (infoTabGuideBtn && infoTabAboutBtn && infoTabGuideContent && infoTabAboutContent) {
+    infoTabGuideBtn.addEventListener('click', () => {
+      infoTabGuideBtn.classList.add('active');
+      infoTabAboutBtn.classList.remove('active');
+      infoTabGuideContent.style.display = 'block';
+      infoTabAboutContent.style.display = 'none';
+      const body = document.querySelector('#disclaimerModal .modal-body');
+      if (body) body.scrollTop = 0;
+    });
+
+    infoTabAboutBtn.addEventListener('click', () => {
+      infoTabAboutBtn.classList.add('active');
+      infoTabGuideBtn.classList.remove('active');
+      infoTabAboutContent.style.display = 'block';
+      infoTabGuideContent.style.display = 'none';
+      const body = document.querySelector('#disclaimerModal .modal-body');
+      if (body) body.scrollTop = 0;
     });
   }
 
