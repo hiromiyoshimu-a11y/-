@@ -34,6 +34,16 @@
   <div id="app">
     <!-- モバイルヘッダー（スリム・ミニマル構成） -->
     <header class="app-header">
+      <!-- 隠れ検索バー（画面上端から下に引っ張ると表示） -->
+      <div id="searchRevealDrawer" class="search-reveal-drawer" aria-hidden="true">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="タイトル・キーワード・著者名..." autocomplete="off">
+          <button id="clearSearch" class="clear-btn" style="display: none;">✕</button>
+          <button id="closeSearchDrawerBtn" type="button" class="search-drawer-close-btn" title="検索バーを閉じる">閉じる</button>
+        </div>
+      </div>
+
       <div class="header-top">
         <div class="brand">
           <span class="icon">⚡</span>
@@ -43,6 +53,9 @@
           </div>
         </div>
         <div class="header-actions">
+          <button id="toggleSearchBtn" class="icon-btn" aria-label="検索バーを開く" title="キーワード検索を開く">
+            <span>🔍</span>
+          </button>
           <button id="syncOnlineBtn" class="icon-btn" aria-label="最新論文に同期" title="最新論文データをクラウドと同期">
             <span id="syncIcon" style="display: inline-block; transition: transform 0.6s ease;">🔄</span>
           </button>
@@ -60,13 +73,8 @@
         <span class="badge new-count-badge" id="newCountBadge" style="display: none; cursor: pointer;">✨ 今週の新着: 0件</span>
       </div>
 
-      <!-- 検索 & 表示カテゴリー・並び替え（ホーム画面） -->
+      <!-- 表示カテゴリー・並び替え・臨床要約切替（ホーム画面） -->
       <div class="search-and-filter-stack">
-        <div class="search-box">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="searchInput" placeholder="タイトル・キーワード・著者名..." autocomplete="off">
-          <button id="clearSearch" class="clear-btn" style="display: none;">✕</button>
-        </div>
         <div class="home-filter-sort-row">
           <select id="filterSelect" class="styled-select filter-main-select" aria-label="表示カテゴリーの選択" title="表示カテゴリーの選択">
             <option value="all" selected>📖 未読のみ</option>
@@ -84,6 +92,9 @@
             <option value="date_asc">🕰️ 掲載日 (古い順)</option>
             <option value="sampleSize">👥 症例数順</option>
           </select>
+          <button id="homeSummaryToggleBtn" type="button" class="home-summary-toggle-btn active" aria-pressed="true" title="臨床要約の表示・非表示を切り替え">
+            📝 要約あり
+          </button>
         </div>
       </div>
     </header>
@@ -206,9 +217,9 @@
                 <span class="guide-step-title">読みたい論文を探す・絞り込む</span>
               </div>
               <ul class="guide-list">
-                <li><strong>言葉で検索：</strong> 上の検索窓 <span class="guide-pill">🔍 タイトル・キーワード...</span> に「PFA」「AF」「高周波」などと入力すると、関係する論文だけが表示されます。</li>
-                <li><strong>種類で選ぶ：</strong> 横に並んだボタン（<span class="guide-pill">✨ 新着論文のみ</span>、<span class="guide-pill">🟢 RCT / 試験</span>、<span class="guide-pill">🔴 症例報告</span> など）を押すと、研究の種類ごとに絞り込めます。</li>
-                <li><strong>雑誌・期間・順番：</strong> <span class="guide-pill">📚 対象誌</span> で読みたい雑誌だけを選んだり、<span class="guide-pill">📅 過去1年間</span> や <span class="guide-pill">🔥 優先順</span> で期間や並び順を変えたりできます。</li>
+                <li><strong>言葉で検索（下に引っ張る）：</strong> 画面の上端を下に軽く引っ張る（または右上の <span class="guide-pill">🔍</span> を押す）と検索バーが現れ、「PFA」「AF」「高周波」などで検索できます。<br><span class="guide-hint">※ そのままさらに深く下に引っ張ると、最新論文の更新（同期）が行えます。</span></li>
+                <li><strong>種類・並び替え：</strong> ホーム画面のプルダウンから <span class="guide-pill">✨ 新着論文のみ</span> や <span class="guide-pill">🟢 RCT / 試験</span> などの絞り込み、および <span class="guide-pill">🔥 優先順</span>・<span class="guide-pill">🕒 掲載日順</span> などの並び替えができます。</li>
+                <li><strong>雑誌・期間：</strong> 右上の <span class="guide-pill">⚙️ 設定</span> の中から <span class="guide-pill">📚 対象誌</span> や <span class="guide-pill">📅 表示期間</span> を変更できます。</li>
               </ul>
             </div>
 
@@ -218,8 +229,8 @@
                 <span class="guide-step-title">論文が多くて見づらいとき（要約のオン・オフ）</span>
               </div>
               <ul class="guide-list">
-                <li>並び替えの下にある <span class="guide-pill">📝 臨床要約 あり ｜ 📋 要約 なし</span> を押してみてください。</li>
-                <li><strong>「要約 なし (タイトル一覧)」</strong> にすると、タイトルと雑誌名だけのスッキリした一覧になり、たくさんの論文を素早く見渡せます。（タイトルを押せばいつでも要約を読めます）</li>
+                <li>ホーム画面の並び替え横にある <span class="guide-pill">📝 要約あり</span> / <span class="guide-pill">📋 要約なし</span> ボタンを押すと、ワンタップで表示を切り替えられます。</li>
+                <li><strong>「要約なし」</strong> にすると、タイトルと雑誌名だけのスッキリした一覧になり、たくさんの論文を素早く見渡せます。（タイトルを押せばいつでも要約を読めます）</li>
               </ul>
             </div>
 
@@ -229,10 +240,10 @@
                 <span class="guide-step-title">文字の大きさ・明るさ・最新更新</span>
               </div>
               <ul class="guide-list">
-                <li><strong>文字を大きくする：</strong> 一番上の <span class="guide-pill">🔤 標準</span> を押すと、「大」「特大」に文字サイズを大きくできます。</li>
-                <li><strong>画面の明るさ：</strong> 右上の <span class="guide-pill">🌙</span>（月）を押すと、暗い画面と明るい画面（白背景）を切り替えられます。</li>
-                <li><strong>最新論文を取り込む：</strong> 画面を上から下に引っ張るか、<span class="guide-pill">🔄 最新同期</span> を押すと、最新の論文データを読み込みます。</li>
-                <li><strong>雑誌の発売日：</strong> <span class="guide-pill">🗓️ 雑誌発売日ガイド</span> を押すと、13誌が毎月・毎週いつ発売されるかを確認できます。</li>
+                <li><strong>文字を大きくする：</strong> <span class="guide-pill">⚙️ 設定</span> 内の「文字サイズ」から、「小・標準・大・特大」に調整できます。</li>
+                <li><strong>画面の明るさ：</strong> <span class="guide-pill">⚙️ 設定</span> 内の「画面モード」から、ダーク（暗い画面）とライト（白背景）を切り替えられます。</li>
+                <li><strong>最新論文を取り込む：</strong> 画面を上から下に深く引っ張るか、右上の <span class="guide-pill">🔄</span> を押すと、最新の論文データを読み込みます。</li>
+                <li><strong>雑誌の発売日：</strong> <span class="guide-pill">⚙️ 設定</span> 内の <span class="guide-pill">🗓️ 雑誌発売日ガイド</span> から、13誌の発売スケジュールを確認できます。</li>
               </ul>
             </div>
 

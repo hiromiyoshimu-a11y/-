@@ -51,8 +51,30 @@ async function initApp() {
   });
 }
 
+function setSearchDrawerOpen(open, focusInput = false) {
+  const drawer = document.getElementById('searchRevealDrawer');
+  const searchInput = document.getElementById('searchInput');
+  if (!drawer) return;
+
+  if (open) {
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    if (focusInput && searchInput) {
+      setTimeout(() => {
+        try { searchInput.focus(); } catch (_) {}
+      }, 60);
+    }
+  } else {
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    if (searchInput && document.activeElement === searchInput) {
+      searchInput.blur();
+    }
+  }
+}
+
 /**
- * 📲 下に引っ張って更新 (Pull to Refresh) 機能
+ * 📲 下に引っ張って検索表示 & さらに引っ張って更新 (2段階 Pull to Search / Refresh)
  */
 function initPullToRefresh() {
   const ptrEl = document.getElementById('pullToRefresh');
@@ -63,7 +85,36 @@ function initPullToRefresh() {
   let startY = 0;
   let isTracking = false;
   let isRefreshing = false;
+  let maxPullDistance = 0;
   const THRESHOLD = 85; // ピクセル（誤作動防止のため少し深めに設定）
+  const SEARCH_PULL_THRESHOLD = 20;
+
+  // 検索バー開閉ボタン・閉じるボタン・スクロール自動収納
+  const toggleSearchBtn = document.getElementById('toggleSearchBtn');
+  if (toggleSearchBtn) {
+    toggleSearchBtn.addEventListener('click', () => {
+      const drawer = document.getElementById('searchRevealDrawer');
+      const isOpen = drawer && drawer.classList.contains('is-open');
+      setSearchDrawerOpen(!isOpen, !isOpen);
+    });
+  }
+
+  const closeSearchDrawerBtn = document.getElementById('closeSearchDrawerBtn');
+  if (closeSearchDrawerBtn) {
+    closeSearchDrawerBtn.addEventListener('click', () => {
+      setSearchDrawerOpen(false, false);
+    });
+  }
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 45) {
+      const drawer = document.getElementById('searchRevealDrawer');
+      const searchInput = document.getElementById('searchInput');
+      if (drawer && drawer.classList.contains('is-open') && searchInput && !searchInput.value.trim() && document.activeElement !== searchInput) {
+        setSearchDrawerOpen(false, false);
+      }
+    }
+  }, { passive: true });
 
   window.addEventListener('touchstart', (e) => {
     if (isRefreshing) return;
@@ -76,6 +127,7 @@ function initPullToRefresh() {
     const isModalOpen = document.querySelector('.modal-overlay[style*="display: flex"]');
     if (window.scrollY <= 1 && !isModalOpen && e.touches.length === 1) {
       startY = e.touches[0].pageY;
+      maxPullDistance = 0;
       isTracking = true;
     } else {
       isTracking = false;
@@ -91,22 +143,35 @@ function initPullToRefresh() {
     if (diff > 25 && window.scrollY <= 0) {
       // 指の引きに抵抗感（ダンピング）を付加
       const pullDistance = Math.min((diff - 25) * 0.45, 85);
+      if (pullDistance > maxPullDistance) maxPullDistance = pullDistance;
       ptrEl.style.transition = 'none';
       ptrEl.style.transform = `translate(-50%, ${pullDistance}px)`;
       ptrEl.style.opacity = String(Math.min(pullDistance / 35, 1));
 
       if (pullDistance >= THRESHOLD * 0.7) {
+        ptrIcon.textContent = '⬇️';
         ptrIcon.style.transform = 'rotate(180deg)';
         ptrText.textContent = '離して最新論文を更新';
         ptrEl.classList.add('ptr-ready');
-      } else {
+      } else if (pullDistance >= SEARCH_PULL_THRESHOLD) {
+        const drawer = document.getElementById('searchRevealDrawer');
+        const isAlreadyOpen = drawer && drawer.classList.contains('is-open');
+        ptrIcon.textContent = isAlreadyOpen ? '⬇️' : '🔍';
         ptrIcon.style.transform = 'rotate(0deg)';
-        ptrText.textContent = '下に引っ張って更新';
+        ptrText.textContent = isAlreadyOpen
+          ? 'さらに下に引っ張って更新'
+          : '離すと検索を表示（さらに引くと更新）';
+        ptrEl.classList.remove('ptr-ready');
+      } else {
+        ptrIcon.textContent = '⬇️';
+        ptrIcon.style.transform = 'rotate(0deg)';
+        ptrText.textContent = '下に引っ張って検索 / 更新';
         ptrEl.classList.remove('ptr-ready');
       }
     } else if (diff < 0) {
       // 上にスクロールした場合は追従解除
       isTracking = false;
+      maxPullDistance = 0;
       ptrEl.style.transition = 'transform 0.2s ease, opacity 0.2s ease';
       ptrEl.style.transform = 'translate(-50%, -130%)';
       ptrEl.style.opacity = '0';
@@ -154,14 +219,20 @@ function initPullToRefresh() {
         }, 700);
       }
     } else {
-      // 閾値未満で指を離した場合はスムーズに戻す
+      // 閾値未満で指を離した場合：検索表示閾値を超えていれば検索バーを開く
+      const shouldOpenSearch = maxPullDistance >= SEARCH_PULL_THRESHOLD;
+      maxPullDistance = 0;
       ptrEl.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
       ptrEl.style.transform = 'translate(-50%, -130%)';
       ptrEl.style.opacity = '0';
       setTimeout(() => {
         ptrEl.style.transition = '';
+        ptrIcon.textContent = '⬇️';
         ptrIcon.style.transform = 'rotate(0deg)';
       }, 250);
+      if (shouldOpenSearch) {
+        setSearchDrawerOpen(true, true);
+      }
     }
   });
 }
@@ -1359,21 +1430,32 @@ function setupEventListeners() {
 function setupSummaryVisibilityToggle() {
   const showBtn = document.getElementById('summaryModeShowBtn');
   const hideBtn = document.getElementById('summaryModeHideBtn');
+  const homeToggleBtn = document.getElementById('homeSummaryToggleBtn');
   const paperListEl = document.getElementById('paperList');
-  if (!showBtn || !hideBtn || !paperListEl) return;
+  if (!paperListEl) return;
 
   function updateUi(mode, isUserAction = false) {
     if (mode === 'hide') {
-      showBtn.classList.remove('active');
-      hideBtn.classList.add('active');
+      if (showBtn) showBtn.classList.remove('active');
+      if (hideBtn) hideBtn.classList.add('active');
+      if (homeToggleBtn) {
+        homeToggleBtn.classList.remove('active');
+        homeToggleBtn.setAttribute('aria-pressed', 'false');
+        homeToggleBtn.textContent = '📋 要約なし';
+      }
       paperListEl.classList.add('hide-card-summary');
       localStorage.setItem('ep_paper_summary_visibility', 'hide');
       if (isUserAction) {
         showToast('📋 要約を非表示にしました（タイトル一覧表示）');
       }
     } else {
-      hideBtn.classList.remove('active');
-      showBtn.classList.add('active');
+      if (hideBtn) hideBtn.classList.remove('active');
+      if (showBtn) showBtn.classList.add('active');
+      if (homeToggleBtn) {
+        homeToggleBtn.classList.add('active');
+        homeToggleBtn.setAttribute('aria-pressed', 'true');
+        homeToggleBtn.textContent = '📝 要約あり';
+      }
       paperListEl.classList.remove('hide-card-summary');
       localStorage.setItem('ep_paper_summary_visibility', 'show');
       if (isUserAction) {
@@ -1386,13 +1468,24 @@ function setupSummaryVisibilityToggle() {
   const savedMode = localStorage.getItem('ep_paper_summary_visibility') || 'show';
   updateUi(savedMode, false);
 
-  showBtn.addEventListener('click', () => {
-    updateUi('show', true);
-  });
+  if (showBtn) {
+    showBtn.addEventListener('click', () => {
+      updateUi('show', true);
+    });
+  }
 
-  hideBtn.addEventListener('click', () => {
-    updateUi('hide', true);
-  });
+  if (hideBtn) {
+    hideBtn.addEventListener('click', () => {
+      updateUi('hide', true);
+    });
+  }
+
+  if (homeToggleBtn) {
+    homeToggleBtn.addEventListener('click', () => {
+      const current = localStorage.getItem('ep_paper_summary_visibility') || 'show';
+      updateUi(current === 'hide' ? 'show' : 'hide', true);
+    });
+  }
 }
 
 function setTheme(theme) {

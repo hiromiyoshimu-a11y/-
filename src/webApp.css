@@ -1766,6 +1766,48 @@ body.light-theme .ptr-indicator {
   transform: scale(0.96);
 }
 
+/* 隠れ検索バー（画面上端から下に引っ張ると表示） */
+.search-reveal-drawer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-bottom: 0;
+  pointer-events: none;
+  transition: max-height 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease, margin-bottom 0.2s ease;
+}
+
+.search-reveal-drawer.is-open {
+  max-height: 52px;
+  opacity: 1;
+  margin-bottom: 8px;
+  pointer-events: auto;
+}
+
+.search-reveal-drawer .search-box {
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 0 !important;
+  height: 38px;
+}
+
+.search-drawer-close-btn {
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.search-drawer-close-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-blue);
+}
+
 .search-and-filter-stack {
   display: flex;
   flex-direction: column;
@@ -1774,18 +1816,12 @@ body.light-theme .ptr-indicator {
   margin-top: 2px;
 }
 
-.search-and-filter-stack .search-box {
-  width: 100%;
-  min-width: 0;
-  margin-bottom: 0 !important;
-  height: 36px;
-}
-
 .home-filter-sort-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 6px;
   width: 100%;
+  align-items: center;
 }
 
 .filter-main-select,
@@ -1803,11 +1839,39 @@ body.light-theme .ptr-indicator {
   padding: 0 8px;
 }
 
+.home-summary-toggle-btn {
+  height: 36px;
+  padding: 0 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.home-summary-toggle-btn.active {
+  background: rgba(56, 189, 248, 0.16);
+  border-color: rgba(56, 189, 248, 0.5);
+  color: var(--accent-blue);
+}
+
 @media (max-width: 480px) {
   .filter-main-select,
   .sort-main-select {
     font-size: 11.5px !important;
     padding: 0 6px;
+  }
+
+  .home-summary-toggle-btn {
+    font-size: 11.5px;
+    padding: 0 8px;
   }
 }
 
