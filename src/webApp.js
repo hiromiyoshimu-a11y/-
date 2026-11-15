@@ -1735,18 +1735,19 @@ function formatSectionText(text) {
   str = str.replace(/【方法】\s*そして\s*\n*【結果】/g, '【方法と結論】');
   str = str.replace(/【方法】\s*そして/g, '【方法と結論】');
 
-  // 3. Backgraand / Background / 概要 を 【背景】 に統一
+  // 3. Backgraand / Background / 概要 / 背景: を 【背景】 に統一
   str = str.replace(/(?:Backgraand|Background|BACKGROUND|【概要】)[:：]?/gi, '【背景】');
+  str = str.replace(/(?<!【)(?:背景)[:：]/g, '【背景】');
   str = str.replace(/【概要】/g, '【背景】');
 
-  // 4. 単独見出しの統一（コロンの有無を問わず見出しとして置換）
-  str = str.replace(/(?<!【背景と)(?:Aims|Aim|Objectives|Objective|AIMS|OBJECTIVES)[:：]/gi, '【目的】');
-  str = str.replace(/(?<!【)(?:Methods|Method|METHODS|対象・方法|対象と方法)[:：]/gi, '【方法】');
-  str = str.replace(/(?<!【)(?:Results|Result|RESULTS|成績)[:：]/gi, '【結果】');
-  str = str.replace(/(?<!【)(?:Conclusions|Conclusion|CONCLUSIONS|考察)[:：]/gi, '【結論】');
+  // 4. 単独見出しの統一（日本語「目的:」「方法:」「結果:」「結論:」および英語見出しに対応）
+  str = str.replace(/(?<!【背景と)(?:Aims|Aim|Objectives|Objective|AIMS|OBJECTIVES|目的)[:：]/gi, '【目的】');
+  str = str.replace(/(?<!【)(?:Methods|Method|METHODS|対象・方法|対象と方法|方法)[:：]/gi, '【方法】');
+  str = str.replace(/(?<!【)(?:Results|Result|RESULTS|成績|結果)[:：]/gi, '【結果】');
+  str = str.replace(/(?<!【)(?:Conclusions|Conclusion|CONCLUSIONS|考察|結論)[:：]/gi, '【結論】');
 
-  // 二重括弧の解消
-  str = str.replace(/【+([^】]+)】+/g, '【$1】');
+  // 二重括弧の解消 & 見出し直後の余分なコロン削除
+  str = str.replace(/【+([^】]+)】+[:：]?/g, '【$1】');
 
   // 連続改行の圧縮
   str = str.replace(/\n{2,}/g, '\n').trim();
