@@ -675,6 +675,7 @@ body.light-theme .paper-card.is-new {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
   margin-bottom: 8px;
 }
 
@@ -683,6 +684,8 @@ body.light-theme .paper-card.is-new {
   gap: 6px;
   align-items: center;
   flex-wrap: wrap;
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .new-badge {

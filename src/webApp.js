@@ -1189,7 +1189,16 @@ function setupEventListeners() {
 
   const sortSelect = document.getElementById('sortSelect');
   if (sortSelect) {
-    sortSelect.addEventListener('change', renderPapers);
+    const savedSort = localStorage.getItem('ep_paper_sort_order');
+    if (savedSort && Array.from(sortSelect.options).some(opt => opt.value === savedSort)) {
+      sortSelect.value = savedSort;
+    } else {
+      sortSelect.value = 'date_desc';
+    }
+    sortSelect.addEventListener('change', () => {
+      localStorage.setItem('ep_paper_sort_order', sortSelect.value);
+      renderPapers();
+    });
   }
 
   // 臨床要約の表示・非表示セグメント切替コントロール
@@ -1805,7 +1814,7 @@ function renderPapers() {
   }
 
   const searchText = document.getElementById('searchInput').value.toLowerCase().trim();
-  const sortVal = document.getElementById('sortSelect')?.value || 'priority';
+  const sortVal = document.getElementById('sortSelect')?.value || localStorage.getItem('ep_paper_sort_order') || 'date_desc';
   const periodVal = document.getElementById('periodSelect')?.value || '1y';
 
   const unreadCount = allPapers.filter(p => !readPapers.includes(String(p.pmid))).length;
