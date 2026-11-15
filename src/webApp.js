@@ -63,13 +63,18 @@ function initPullToRefresh() {
   let startY = 0;
   let isTracking = false;
   let isRefreshing = false;
-  const THRESHOLD = 65; // ピクセル
+  const THRESHOLD = 85; // ピクセル（誤作動防止のため少し深めに設定）
 
   window.addEventListener('touchstart', (e) => {
     if (isRefreshing) return;
+    // ボタン・セレクト・入力欄などの操作要素やヘッダー上部のタップ時は引っ張り更新を無効化
+    if (e.target && e.target.closest('button, select, input, a, .header-top, .header-actions')) {
+      isTracking = false;
+      return;
+    }
     // 画面が最上部にあり、モーダルが開いていない場合のみ監視
     const isModalOpen = document.querySelector('.modal-overlay[style*="display: flex"]');
-    if (window.scrollY <= 2 && !isModalOpen && e.touches.length === 1) {
+    if (window.scrollY <= 1 && !isModalOpen && e.touches.length === 1) {
       startY = e.touches[0].pageY;
       isTracking = true;
     } else {
@@ -82,14 +87,15 @@ function initPullToRefresh() {
     const currentY = e.touches[0].pageY;
     const diff = currentY - startY;
 
-    if (diff > 0 && window.scrollY <= 0) {
+    // 25px以上の明確な下引っ張りのみ反応させる（わずかな指ブレでの誤発動防止）
+    if (diff > 25 && window.scrollY <= 0) {
       // 指の引きに抵抗感（ダンピング）を付加
-      const pullDistance = Math.min(diff * 0.45, 80);
+      const pullDistance = Math.min((diff - 25) * 0.45, 85);
       ptrEl.style.transition = 'none';
       ptrEl.style.transform = `translate(-50%, ${pullDistance}px)`;
       ptrEl.style.opacity = String(Math.min(pullDistance / 35, 1));
 
-      if (pullDistance >= THRESHOLD * 0.75) {
+      if (pullDistance >= THRESHOLD * 0.7) {
         ptrIcon.style.transform = 'rotate(180deg)';
         ptrText.textContent = '離して最新論文を更新';
         ptrEl.classList.add('ptr-ready');
@@ -1100,6 +1106,20 @@ function setupEventListeners() {
   if (infoBtn) {
     infoBtn.addEventListener('click', () => {
       const modal = document.getElementById('disclaimerModal');
+      if (modal) {
+        modal.style.display = 'flex';
+        const body = modal.querySelector('.modal-body');
+        if (body) body.scrollTop = 0;
+      }
+    });
+  }
+
+  const metaGuideBtn = document.getElementById('metaGuideBtn');
+  if (metaGuideBtn) {
+    metaGuideBtn.addEventListener('click', () => {
+      const modal = document.getElementById('disclaimerModal');
+      const guideBtn = document.getElementById('infoTabGuideBtn');
+      if (guideBtn) guideBtn.click();
       if (modal) {
         modal.style.display = 'flex';
         const body = modal.querySelector('.modal-body');
