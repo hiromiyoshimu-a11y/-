@@ -1150,14 +1150,12 @@ function setupEventListeners() {
     if (e.target.id === 'detailModal') closeModal();
   });
 
-  // ③ 設定画面から「使い方ガイド & アプリ情報」を開く
+  // ③ 設定画面から「かんたん使い方ガイド」を開く
   const settingsGuideBtn = document.getElementById('settingsGuideBtn');
   if (settingsGuideBtn) {
     settingsGuideBtn.addEventListener('click', () => {
       closeSettings();
-      const modal = document.getElementById('disclaimerModal');
-      const guideBtn = document.getElementById('infoTabGuideBtn');
-      if (guideBtn) guideBtn.click();
+      const modal = document.getElementById('guideModal');
       if (modal) {
         modal.style.display = 'flex';
         const body = modal.querySelector('.modal-body');
@@ -1166,36 +1164,42 @@ function setupEventListeners() {
     });
   }
 
-  // アプリ情報モーダルのタブ切替（使い方ガイド ⇔ 医療免責・アプリ情報）
-  const infoTabGuideBtn = document.getElementById('infoTabGuideBtn');
-  const infoTabAboutBtn = document.getElementById('infoTabAboutBtn');
-  const infoTabGuideContent = document.getElementById('infoTabGuideContent');
-  const infoTabAboutContent = document.getElementById('infoTabAboutContent');
-
-  if (infoTabGuideBtn && infoTabAboutBtn && infoTabGuideContent && infoTabAboutContent) {
-    infoTabGuideBtn.addEventListener('click', () => {
-      infoTabGuideBtn.classList.add('active');
-      infoTabAboutBtn.classList.remove('active');
-      infoTabGuideContent.style.display = 'block';
-      infoTabAboutContent.style.display = 'none';
-      const body = document.querySelector('#disclaimerModal .modal-body');
-      if (body) body.scrollTop = 0;
+  const closeGuideModal = document.getElementById('closeGuideModal');
+  if (closeGuideModal) {
+    closeGuideModal.addEventListener('click', () => {
+      const modal = document.getElementById('guideModal');
+      if (modal) modal.style.display = 'none';
     });
+  }
 
-    infoTabAboutBtn.addEventListener('click', () => {
-      infoTabAboutBtn.classList.add('active');
-      infoTabGuideBtn.classList.remove('active');
-      infoTabAboutContent.style.display = 'block';
-      infoTabGuideContent.style.display = 'none';
-      const body = document.querySelector('#disclaimerModal .modal-body');
-      if (body) body.scrollTop = 0;
+  const guideModal = document.getElementById('guideModal');
+  if (guideModal) {
+    guideModal.addEventListener('click', (e) => {
+      if (e.target.id === 'guideModal') {
+        guideModal.style.display = 'none';
+      }
+    });
+  }
+
+  // ④ 設定画面から「医療免責事項・アプリ情報」を開く
+  const settingsDisclaimerBtn = document.getElementById('settingsDisclaimerBtn');
+  if (settingsDisclaimerBtn) {
+    settingsDisclaimerBtn.addEventListener('click', () => {
+      closeSettings();
+      const modal = document.getElementById('disclaimerModal');
+      if (modal) {
+        modal.style.display = 'flex';
+        const body = modal.querySelector('.modal-body');
+        if (body) body.scrollTop = 0;
+      }
     });
   }
 
   const closeDisclaimerModal = document.getElementById('closeDisclaimerModal');
   if (closeDisclaimerModal) {
     closeDisclaimerModal.addEventListener('click', () => {
-      document.getElementById('disclaimerModal').style.display = 'none';
+      const modal = document.getElementById('disclaimerModal');
+      if (modal) modal.style.display = 'none';
     });
   }
 

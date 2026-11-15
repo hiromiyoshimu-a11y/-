@@ -60,23 +60,31 @@
         <span class="badge new-count-badge" id="newCountBadge" style="display: none; cursor: pointer;">✨ 今週の新着: 0件</span>
       </div>
 
-      <!-- 検索 & 表示カテゴリー（プルダウン） -->
-      <div class="search-and-filter-row">
+      <!-- 検索 & 表示カテゴリー・並び替え（ホーム画面） -->
+      <div class="search-and-filter-stack">
         <div class="search-box">
           <span class="search-icon">🔍</span>
           <input type="text" id="searchInput" placeholder="タイトル・キーワード・著者名..." autocomplete="off">
           <button id="clearSearch" class="clear-btn" style="display: none;">✕</button>
         </div>
-        <select id="filterSelect" class="styled-select filter-main-select" aria-label="表示カテゴリーの選択" title="表示カテゴリーの選択">
-          <option value="all" selected>📖 未読のみ</option>
-          <option value="new">✨ 新着論文のみ</option>
-          <option value="rct">🟢 RCT / 試験</option>
-          <option value="prospective">🔵 前向き研究</option>
-          <option value="case">🔴 症例報告</option>
-          <option value="bookmarks">❤️ ブックマーク</option>
-          <option value="read" id="readTabBtn">☑ 既読のみ (0)</option>
-          <option value="show_all" id="showAllTabBtn">📋 全件表示 (0)</option>
-        </select>
+        <div class="home-filter-sort-row">
+          <select id="filterSelect" class="styled-select filter-main-select" aria-label="表示カテゴリーの選択" title="表示カテゴリーの選択">
+            <option value="all" selected>📖 未読のみ</option>
+            <option value="new">✨ 新着論文のみ</option>
+            <option value="rct">🟢 RCT / 試験</option>
+            <option value="prospective">🔵 前向き研究</option>
+            <option value="case">🔴 症例報告</option>
+            <option value="bookmarks">❤️ ブックマーク</option>
+            <option value="read" id="readTabBtn">☑ 既読のみ (0)</option>
+            <option value="show_all" id="showAllTabBtn">📋 全件表示 (0)</option>
+          </select>
+          <select id="sortSelect" class="styled-select sort-main-select" aria-label="並び替え順" title="並び替え順">
+            <option value="priority">🔥 優先順 (RCT/症例)</option>
+            <option value="date_desc">🕒 掲載日 (新しい順)</option>
+            <option value="date_asc">🕰️ 掲載日 (古い順)</option>
+            <option value="sampleSize">👥 症例数順</option>
+          </select>
+        </div>
       </div>
     </header>
 
@@ -151,22 +159,15 @@
       </div>
     </div>
 
-    <!-- アプリ情報 & 使い方ガイド & 医療免責事項モーダル -->
-    <div id="disclaimerModal" class="modal-overlay" style="display: none;">
+    <!-- ③ かんたん使い方ガイド モーダル -->
+    <div id="guideModal" class="modal-overlay" style="display: none;">
       <div class="modal-sheet" style="max-height: 85vh; max-width: 680px;">
         <div class="modal-header">
-          <h3 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 0;">ℹ️ アプリ情報・使い方ガイド</h3>
-          <button id="closeDisclaimerModal" class="close-modal-btn">✕</button>
-        </div>
-
-        <!-- タブ切り替えバー -->
-        <div class="info-modal-tabs">
-          <button type="button" id="infoTabGuideBtn" class="info-tab-btn active" data-tab="guide">📖 かんたん使い方ガイド</button>
-          <button type="button" id="infoTabAboutBtn" class="info-tab-btn" data-tab="about">⚖️ 医療免責・アプリ情報</button>
+          <h3 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 0;">📖 かんたん使い方ガイド</h3>
+          <button id="closeGuideModal" class="close-modal-btn">✕</button>
         </div>
 
         <div class="modal-body" style="font-size: 13.5px; line-height: 1.75; color: var(--text-secondary); padding-top: 12px;">
-          <!-- タブ1: かんたん使い方ガイド -->
           <div id="infoTabGuideContent" class="info-tab-content">
             <div class="guide-hero-box">
               <div class="guide-hero-title">👋 はじめての方へ</div>
@@ -246,9 +247,20 @@
               </ul>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <!-- タブ2: 医療免責事項 & アプリ情報 -->
-          <div id="infoTabAboutContent" class="info-tab-content" style="display: none;">
+    <!-- ④ 医療免責事項 & アプリ情報モーダル -->
+    <div id="disclaimerModal" class="modal-overlay" style="display: none;">
+      <div class="modal-sheet" style="max-height: 85vh; max-width: 680px;">
+        <div class="modal-header">
+          <h3 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 0;">⚖️ 医療免責事項・アプリ情報</h3>
+          <button id="closeDisclaimerModal" class="close-modal-btn">✕</button>
+        </div>
+
+        <div class="modal-body" style="font-size: 13.5px; line-height: 1.75; color: var(--text-secondary); padding-top: 12px;">
+          <div id="infoTabAboutContent" class="info-tab-content">
             <div style="background: var(--bg-secondary); padding: 14px; border-radius: var(--radius-md); border-left: 4px solid var(--accent-blue); margin-bottom: 16px;">
               <strong style="color: var(--text-primary); display: block; margin-bottom: 6px;">⚖️ 医療免責事項 (Medical Disclaimer)</strong>
               本アプリは、米国国立医学図書館（PubMed / NLM）が提供する公開医学論文の書誌情報およびAI要約を閲覧するための学術研究・情報提供支援ツールです。<br>
@@ -349,36 +361,25 @@
               </div>
             </div>
 
-            <!-- ⑤ 表示期間 & ⑥ 優先順 -->
-            <div class="settings-row-2col">
-              <div class="settings-item-block">
-                <label for="periodSelect" class="settings-label">⑤ 表示期間</label>
-                <select id="periodSelect" class="styled-select settings-select" aria-label="表示期間の選択">
-                  <optgroup label="── 過去◯ヶ月 ──">
-                    <option value="1m">📅 過去1ヶ月</option>
-                    <option value="2m">📅 過去2ヶ月</option>
-                    <option value="3m">📅 過去3ヶ月</option>
-                    <option value="4m">📅 過去4ヶ月</option>
-                    <option value="5m">📅 過去5ヶ月</option>
-                    <option value="6m">📅 過去6ヶ月</option>
-                    <option value="1y" selected>📅 過去1年間（全件）</option>
-                  </optgroup>
-                </select>
-              </div>
-              <div class="settings-item-block">
-                <label for="sortSelect" class="settings-label">⑥ 優先順（並び替え）</label>
-                <select id="sortSelect" class="styled-select settings-select" aria-label="並び替え順">
-                  <option value="priority">🔥 優先順 (RCT/症例)</option>
-                  <option value="date_desc">🕒 掲載日 (新しい順)</option>
-                  <option value="date_asc">🕰️ 掲載日 (古い順)</option>
-                  <option value="sampleSize">👥 症例数順</option>
-                </select>
-              </div>
+            <!-- ⑤ 表示期間 -->
+            <div class="settings-item-block">
+              <label for="periodSelect" class="settings-label">⑤ 表示期間</label>
+              <select id="periodSelect" class="styled-select settings-select" aria-label="表示期間の選択">
+                <optgroup label="── 過去◯ヶ月 ──">
+                  <option value="1m">📅 過去1ヶ月</option>
+                  <option value="2m">📅 過去2ヶ月</option>
+                  <option value="3m">📅 過去3ヶ月</option>
+                  <option value="4m">📅 過去4ヶ月</option>
+                  <option value="5m">📅 過去5ヶ月</option>
+                  <option value="6m">📅 過去6ヶ月</option>
+                  <option value="1y" selected>📅 過去1年間（全件）</option>
+                </optgroup>
+              </select>
             </div>
 
-            <!-- ⑦ 臨床要約（あり・なし） -->
+            <!-- ⑥ 臨床要約（あり・なし） -->
             <div class="settings-item-block">
-              <div class="settings-label">⑦ 臨床要約の表示（一覧画面）</div>
+              <div class="settings-label">⑥ 臨床要約の表示（一覧画面）</div>
               <div class="segmented-control" role="group" aria-label="臨床要約の表示切替">
                 <button type="button" id="summaryModeShowBtn" class="segment-btn active" data-mode="show">
                   <span class="segment-icon">📝</span>
@@ -392,13 +393,13 @@
             </div>
           </div>
 
-          <!-- セクションB: 画面の見た目設定（⑧〜⑨） -->
+          <!-- セクションB: 画面の見た目設定（⑦〜⑧） -->
           <div class="settings-group">
             <div class="settings-group-title">🎨 画面・文字の設定</div>
             <div class="settings-row-2col">
-              <!-- ⑧ 文字サイズ選択 -->
+              <!-- ⑦ 文字サイズ選択 -->
               <div class="settings-item-block">
-                <label for="fontSizeSelect" class="settings-label">⑧ 文字サイズ</label>
+                <label for="fontSizeSelect" class="settings-label">⑦ 文字サイズ</label>
                 <select id="fontSizeSelect" class="styled-select settings-select" aria-label="文字サイズ設定">
                   <option value="small">🔤 小</option>
                   <option value="normal" selected>🔤 標準</option>
@@ -406,9 +407,9 @@
                   <option value="xlarge">🔤 特大</option>
                 </select>
               </div>
-              <!-- ⑨ ダークモード選択 -->
+              <!-- ⑧ ダークモード選択 -->
               <div class="settings-item-block">
-                <div class="settings-label">⑨ 画面モード</div>
+                <div class="settings-label">⑧ 画面モード</div>
                 <div class="segmented-control" role="group" aria-label="テーマ切り替え">
                   <button type="button" id="themeDarkBtn" class="segment-btn active" data-theme="dark">
                     <span>🌙</span> ダーク
@@ -421,7 +422,7 @@
             </div>
           </div>
 
-          <!-- セクションC: 連携・ガイド（①〜③） -->
+          <!-- セクションC: 連携・ガイド（①〜④） -->
           <div class="settings-group">
             <div class="settings-group-title">🧭 ガイド・端末連携</div>
             <div class="settings-action-list">
@@ -449,13 +450,25 @@
                 <span class="settings-action-arrow">➔</span>
               </button>
 
-              <!-- ③ 使い方ガイド -->
+              <!-- ③ かんたん使い方ガイド -->
               <button type="button" id="settingsGuideBtn" class="settings-action-row">
                 <div class="settings-action-left">
                   <span class="settings-action-icon">📖</span>
                   <div>
-                    <div class="settings-action-title">③ かんたん使い方ガイド & アプリ情報</div>
-                    <div class="settings-action-desc">初心者向けの操作説明・医療免責事項・Android版案内</div>
+                    <div class="settings-action-title">③ かんたん使い方ガイド</div>
+                    <div class="settings-action-desc">初心者向けの操作説明・基本の使い方</div>
+                  </div>
+                </div>
+                <span class="settings-action-arrow">➔</span>
+              </button>
+
+              <!-- ④ 医療免責事項・アプリ情報 -->
+              <button type="button" id="settingsDisclaimerBtn" class="settings-action-row">
+                <div class="settings-action-left">
+                  <span class="settings-action-icon">⚖️</span>
+                  <div>
+                    <div class="settings-action-title">④ 医療免責事項・アプリ情報</div>
+                    <div class="settings-action-desc">免責事項・データソース・Android版案内</div>
                   </div>
                 </div>
                 <span class="settings-action-arrow">➔</span>
