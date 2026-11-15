@@ -32,150 +32,51 @@
   </div>
 
   <div id="app">
-    <!-- モバイルヘッダー -->
+    <!-- モバイルヘッダー（スリム・ミニマル構成） -->
     <header class="app-header">
       <div class="header-top">
         <div class="brand">
           <span class="icon">⚡</span>
           <div>
             <h1>EP & PFA Papers</h1>
-            <p class="sub-title">カテーテル / パルスフィールドアブレーション 最新論文ナビ</p>
+            <p class="sub-title">カテーテル / PFA 不整脈論文ナビ</p>
           </div>
         </div>
-        <div class="header-actions" style="display: flex; gap: 8px; align-items: center;">
-          <select id="fontSizeSelect" class="styled-select font-size-select" aria-label="文字サイズ設定" title="文字サイズ変更">
-            <option value="small">🔤 小</option>
-            <option value="normal" selected>🔤 標準</option>
-            <option value="large">🔤 大</option>
-            <option value="xlarge">🔤 特大</option>
-          </select>
-          <button id="deviceSyncBtn" class="icon-btn" aria-label="端末間データ同期 (10桁コード)" title="端末間データ同期 (iPhone / Mac / Android)">
-            <span class="theme-icon">🔗</span>
+        <div class="header-actions">
+          <button id="syncOnlineBtn" class="icon-btn" aria-label="最新論文に同期" title="最新論文データをクラウドと同期">
+            <span id="syncIcon" style="display: inline-block; transition: transform 0.6s ease;">🔄</span>
           </button>
-          <button id="infoBtn" class="icon-btn" aria-label="医療免責事項・アプリ情報" title="医療免責事項・アプリ情報">
-            <span class="theme-icon">ℹ️</span>
-          </button>
-          <button id="themeToggle" class="icon-btn" aria-label="テーマ切り替え">
-            <span class="theme-icon">🌙</span>
+          <button id="openSettingsBtn" class="settings-pill-btn" aria-label="設定を開く" title="設定・ガイド・絞り込み">
+            <span>⚙️</span>
+            <span>設定</span>
           </button>
         </div>
       </div>
 
-      <!-- メタバー -->
+      <!-- スリムなメタ情報バー -->
       <div class="meta-bar">
-        <span class="badge date-badge" id="updatedDateBadge">📅 最終更新: 2026-09-29</span>
-        <span class="badge count-badge" id="paperCountBadge">📄 50件の最新論文</span>
-        <span class="badge new-count-badge" id="newCountBadge" style="display: none;">✨ 今週の新着: 0件</span>
-        <button id="syncOnlineBtn" class="badge sync-badge" title="最新論文データをクラウドと同期" style="cursor: pointer; border: 1px solid var(--accent-blue); background: var(--accent-blue-bg); color: var(--accent-blue); display: inline-flex; align-items: center; gap: 4px; font-weight: 600;">
-          <span id="syncIcon" style="display: inline-block; transition: transform 0.6s ease;">🔄</span>
-          <span id="syncText">最新同期</span>
-        </button>
-        <button id="metaDeviceSyncBtn" class="badge sync-badge" title="10桁コードでiPhone・Mac・Android間の既読/ブックマークを同期" style="cursor: pointer; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-primary); display: inline-flex; align-items: center; gap: 4px; font-weight: 600;">
-          <span>🔗</span>
-          <span>端末連携</span>
-        </button>
-        <button id="openScheduleModalBtn" class="badge schedule-badge" title="収録主要13誌の発売日・刊行スケジュール" style="cursor: pointer; border: 1px solid var(--accent-blue); background: rgba(56, 189, 248, 0.12); color: var(--accent-blue); display: inline-flex; align-items: center; gap: 4px; font-weight: 600;">
-          <span>🗓️</span>
-          <span>雑誌発売日ガイド</span>
-        </button>
-        <button id="metaGuideBtn" class="badge guide-badge" title="はじめての使い方ガイド" style="cursor: pointer; border: 1px solid #10B981; background: rgba(16, 185, 129, 0.12); color: #10B981; display: inline-flex; align-items: center; gap: 4px; font-weight: 600;">
-          <span>📖</span>
-          <span>使い方ガイド</span>
-        </button>
+        <span class="badge date-badge" id="updatedDateBadge">📅 更新: 読込中</span>
+        <span class="badge count-badge" id="paperCountBadge">📄 未読 0件</span>
+        <span class="badge new-count-badge" id="newCountBadge" style="display: none; cursor: pointer;">✨ 今週の新着: 0件</span>
       </div>
 
-      <!-- 新着収集通知バー（発売日に合わせて自動収集した際に表示） -->
-      <div id="newSyncNotificationBar" class="sync-notification-bar" style="display: none;">
-        <div class="sync-notif-left">
-          <span class="sync-notif-badge">🔔 発売・自動収集</span>
-          <span id="syncNotifMessage" class="sync-notif-text">最新論文を自動収集・要約しました</span>
-        </div>
-        <div class="sync-notif-actions">
-          <button type="button" id="viewNewPapersBtn" class="sync-notif-action-btn">新着を見る ➔</button>
-          <button type="button" id="closeNotifBtn" class="sync-notif-close-btn" title="通知を閉じる">✕</button>
-        </div>
-      </div>
-
-      <!-- 検索・フィルターエリア -->
-      <div class="search-container">
+      <!-- 検索 & 表示カテゴリー（プルダウン） -->
+      <div class="search-and-filter-row">
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input type="text" id="searchInput" placeholder="タイトル・キーワード・著者名で検索..." autocomplete="off">
+          <input type="text" id="searchInput" placeholder="タイトル・キーワード・著者名..." autocomplete="off">
           <button id="clearSearch" class="clear-btn" style="display: none;">✕</button>
         </div>
-      </div>
-
-      <!-- フィルタータブ・タブ -->
-      <div class="filter-tabs-scroll">
-        <button class="tab-btn active" data-filter="all">📖 未読のみ</button>
-        <button class="tab-btn highlight-tab" data-filter="new">✨ 新着論文のみ</button>
-        <button class="tab-btn" data-filter="rct">🟢 RCT / 試験</button>
-        <button class="tab-btn" data-filter="prospective">🔵 前向き研究</button>
-        <button class="tab-btn" data-filter="case">🔴 症例報告</button>
-        <button class="tab-btn" data-filter="bookmarks">❤️ ブックマーク</button>
-        <button class="tab-btn" data-filter="read" id="readTabBtn">☑ 既読のみ (0)</button>
-        <button class="tab-btn" data-filter="show_all" id="showAllTabBtn">📋 全件表示 (既読含む)</button>
-      </div>
-
-      <!-- 雑誌複数選択フィルターボタン & チェックボックスドロップダウン -->
-      <div class="journal-filter-section">
-        <button id="journalFilterToggleBtn" type="button" class="journal-filter-toggle-btn" aria-expanded="false" title="表示する雑誌を複数選択">
-          <span class="btn-icon">📚</span>
-          <span id="journalFilterLabel" class="btn-text">対象誌: すべて選択中</span>
-          <span class="dropdown-arrow">▼</span>
-        </button>
-
-        <div id="journalFilterDropdown" class="journal-filter-dropdown" style="display: none;">
-          <div class="journal-dropdown-header">
-            <span class="dropdown-title">📚 表示する雑誌（複数選択可）</span>
-            <div class="journal-quick-actions">
-              <button type="button" id="selectAllJournalsBtn" class="quick-btn">✓ 全選択</button>
-              <button type="button" id="clearAllJournalsBtn" class="quick-btn">✕ 全解除</button>
-            </div>
-          </div>
-          <div id="journalCheckboxList" class="journal-checkbox-list">
-            <!-- チェックボックス群が動的生成される -->
-          </div>
-          <div class="journal-dropdown-footer">
-            <button type="button" id="openScheduleFromDropdownBtn" class="schedule-link-btn">🗓️ 各誌の発売日ガイド</button>
-            <button type="button" id="closeJournalFilterBtn" class="close-filter-btn">完了</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="secondary-filters">
-        <select id="periodSelect" class="styled-select" aria-label="表示期間の選択" title="表示期間の選択">
-          <optgroup label="── 過去◯ヶ月 ──">
-            <option value="1m">📅 過去1ヶ月</option>
-            <option value="2m">📅 過去2ヶ月</option>
-            <option value="3m">📅 過去3ヶ月</option>
-            <option value="4m">📅 過去4ヶ月</option>
-            <option value="5m">📅 過去5ヶ月</option>
-            <option value="6m">📅 過去6ヶ月</option>
-            <option value="1y" selected>📅 過去1年間（全件）</option>
-          </optgroup>
+        <select id="filterSelect" class="styled-select filter-main-select" aria-label="表示カテゴリーの選択" title="表示カテゴリーの選択">
+          <option value="all" selected>📖 未読のみ</option>
+          <option value="new">✨ 新着論文のみ</option>
+          <option value="rct">🟢 RCT / 試験</option>
+          <option value="prospective">🔵 前向き研究</option>
+          <option value="case">🔴 症例報告</option>
+          <option value="bookmarks">❤️ ブックマーク</option>
+          <option value="read" id="readTabBtn">☑ 既読のみ (0)</option>
+          <option value="show_all" id="showAllTabBtn">📋 全件表示 (0)</option>
         </select>
-
-        <select id="sortSelect" class="styled-select" aria-label="並び替え順" title="並び替え順">
-          <option value="priority">🔥 優先順 (RCT/症例)</option>
-          <option value="date_desc">🕒 掲載日 (新しい順)</option>
-          <option value="date_asc">🕰️ 掲載日 (古い順)</option>
-          <option value="sampleSize">👥 症例数順</option>
-        </select>
-      </div>
-
-      <!-- 臨床要約 表示切替（セグメントコントロール） -->
-      <div class="summary-display-toggle-container">
-        <div class="segmented-control" role="group" aria-label="臨床要約の表示切替">
-          <button type="button" id="summaryModeShowBtn" class="segment-btn active" data-mode="show" title="一覧カード内に臨床要約を表示">
-            <span class="segment-icon">📝</span>
-            <span class="segment-text">臨床要約 あり</span>
-          </button>
-          <button type="button" id="summaryModeHideBtn" class="segment-btn" data-mode="hide" title="臨床要約を折りたたんでタイトル・雑誌の一覧として表示">
-            <span class="segment-icon">📋</span>
-            <span class="segment-text">要約 なし (タイトル一覧)</span>
-          </button>
-        </div>
       </div>
     </header>
 
@@ -403,6 +304,181 @@
           <div id="journalScheduleContainer" class="schedule-list">
             <!-- 13誌のスケジュールカードが動的に挿入される -->
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⚙️ 統合設定モーダル（①端末同期・②雑誌発売日ガイド・③使い方ガイド・④対象誌・⑤表示期間・⑥優先順・⑦臨床要約・⑧文字サイズ・⑨ダークモード） -->
+    <div id="settingsModal" class="modal-overlay" style="display: none;">
+      <div class="modal-sheet" style="max-height: 88vh; max-width: 640px;">
+        <div class="modal-header">
+          <h3 style="font-size: 16px; font-weight: 700; color: var(--text-primary); margin: 0; display: flex; align-items: center; gap: 6px;">
+            <span>⚙️</span> アプリ設定・ガイド・絞り込み
+          </h3>
+          <button id="closeSettingsModal" class="close-modal-btn">✕</button>
+        </div>
+
+        <div class="modal-body settings-modal-body">
+          <!-- セクションA: 表示・絞り込み設定（④〜⑦） -->
+          <div class="settings-group">
+            <div class="settings-group-title">🔍 表示・絞り込み設定</div>
+
+            <!-- ④ 対象誌 -->
+            <div class="settings-item-block">
+              <div class="settings-label">④ 対象誌（13誌）</div>
+              <div class="journal-filter-section" style="margin-bottom: 0;">
+                <button id="journalFilterToggleBtn" type="button" class="journal-filter-toggle-btn" aria-expanded="false" title="表示する雑誌を複数選択">
+                  <span class="btn-icon">📚</span>
+                  <span id="journalFilterLabel" class="btn-text">対象誌: すべて選択中</span>
+                  <span class="dropdown-arrow">▼</span>
+                </button>
+                <div id="journalFilterDropdown" class="journal-filter-dropdown" style="display: none; position: static; margin-top: 6px; box-shadow: none;">
+                  <div class="journal-dropdown-header">
+                    <span class="dropdown-title">📚 表示する雑誌（複数選択可）</span>
+                    <div class="journal-quick-actions">
+                      <button type="button" id="selectAllJournalsBtn" class="quick-btn">✓ 全選択</button>
+                      <button type="button" id="clearAllJournalsBtn" class="quick-btn">✕ 全解除</button>
+                    </div>
+                  </div>
+                  <div id="journalCheckboxList" class="journal-checkbox-list"></div>
+                  <div class="journal-dropdown-footer">
+                    <button type="button" id="openScheduleFromDropdownBtn" class="schedule-link-btn">🗓️ 各誌の発売日ガイド</button>
+                    <button type="button" id="closeJournalFilterBtn" class="close-filter-btn">完了</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ⑤ 表示期間 & ⑥ 優先順 -->
+            <div class="settings-row-2col">
+              <div class="settings-item-block">
+                <label for="periodSelect" class="settings-label">⑤ 表示期間</label>
+                <select id="periodSelect" class="styled-select settings-select" aria-label="表示期間の選択">
+                  <optgroup label="── 過去◯ヶ月 ──">
+                    <option value="1m">📅 過去1ヶ月</option>
+                    <option value="2m">📅 過去2ヶ月</option>
+                    <option value="3m">📅 過去3ヶ月</option>
+                    <option value="4m">📅 過去4ヶ月</option>
+                    <option value="5m">📅 過去5ヶ月</option>
+                    <option value="6m">📅 過去6ヶ月</option>
+                    <option value="1y" selected>📅 過去1年間（全件）</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="settings-item-block">
+                <label for="sortSelect" class="settings-label">⑥ 優先順（並び替え）</label>
+                <select id="sortSelect" class="styled-select settings-select" aria-label="並び替え順">
+                  <option value="priority">🔥 優先順 (RCT/症例)</option>
+                  <option value="date_desc">🕒 掲載日 (新しい順)</option>
+                  <option value="date_asc">🕰️ 掲載日 (古い順)</option>
+                  <option value="sampleSize">👥 症例数順</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ⑦ 臨床要約（あり・なし） -->
+            <div class="settings-item-block">
+              <div class="settings-label">⑦ 臨床要約の表示（一覧画面）</div>
+              <div class="segmented-control" role="group" aria-label="臨床要約の表示切替">
+                <button type="button" id="summaryModeShowBtn" class="segment-btn active" data-mode="show">
+                  <span class="segment-icon">📝</span>
+                  <span class="segment-text">臨床要約 あり</span>
+                </button>
+                <button type="button" id="summaryModeHideBtn" class="segment-btn" data-mode="hide">
+                  <span class="segment-icon">📋</span>
+                  <span class="segment-text">要約 なし (一覧)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- セクションB: 画面の見た目設定（⑧〜⑨） -->
+          <div class="settings-group">
+            <div class="settings-group-title">🎨 画面・文字の設定</div>
+            <div class="settings-row-2col">
+              <!-- ⑧ 文字サイズ選択 -->
+              <div class="settings-item-block">
+                <label for="fontSizeSelect" class="settings-label">⑧ 文字サイズ</label>
+                <select id="fontSizeSelect" class="styled-select settings-select" aria-label="文字サイズ設定">
+                  <option value="small">🔤 小</option>
+                  <option value="normal" selected>🔤 標準</option>
+                  <option value="large">🔤 大</option>
+                  <option value="xlarge">🔤 特大</option>
+                </select>
+              </div>
+              <!-- ⑨ ダークモード選択 -->
+              <div class="settings-item-block">
+                <div class="settings-label">⑨ 画面モード</div>
+                <div class="segmented-control" role="group" aria-label="テーマ切り替え">
+                  <button type="button" id="themeDarkBtn" class="segment-btn active" data-theme="dark">
+                    <span>🌙</span> ダーク
+                  </button>
+                  <button type="button" id="themeLightBtn" class="segment-btn" data-theme="light">
+                    <span>☀️</span> ライト
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- セクションC: 連携・ガイド（①〜③） -->
+          <div class="settings-group">
+            <div class="settings-group-title">🧭 ガイド・端末連携</div>
+            <div class="settings-action-list">
+              <!-- ① 端末同期 -->
+              <button type="button" id="settingsDeviceSyncBtn" class="settings-action-row">
+                <div class="settings-action-left">
+                  <span class="settings-action-icon">🔗</span>
+                  <div>
+                    <div class="settings-action-title">① 端末同期（10桁コード連携）</div>
+                    <div class="settings-action-desc">iPhone・Mac・Android間で既読やブックマークを引き継ぐ</div>
+                  </div>
+                </div>
+                <span class="settings-action-arrow">➔</span>
+              </button>
+
+              <!-- ② 雑誌発売日ガイド -->
+              <button type="button" id="settingsScheduleBtn" class="settings-action-row">
+                <div class="settings-action-left">
+                  <span class="settings-action-icon">🗓️</span>
+                  <div>
+                    <div class="settings-action-title">② 雑誌発売日ガイド</div>
+                    <div class="settings-action-desc">掲載主要13誌の発売曜日・先行公開スケジュール</div>
+                  </div>
+                </div>
+                <span class="settings-action-arrow">➔</span>
+              </button>
+
+              <!-- ③ 使い方ガイド -->
+              <button type="button" id="settingsGuideBtn" class="settings-action-row">
+                <div class="settings-action-left">
+                  <span class="settings-action-icon">📖</span>
+                  <div>
+                    <div class="settings-action-title">③ かんたん使い方ガイド & アプリ情報</div>
+                    <div class="settings-action-desc">初心者向けの操作説明・医療免責事項・Android版案内</div>
+                  </div>
+                </div>
+                <span class="settings-action-arrow">➔</span>
+              </button>
+            </div>
+          </div>
+
+          <div style="margin-top: 10px; text-align: center;">
+            <button type="button" id="settingsDoneBtn" class="settings-done-btn">完了して一覧に戻る</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 🔔 発売・自動収集 アナウンスポップアップウィンドウ -->
+    <div id="syncAnnouncementModal" class="modal-overlay popup-center-overlay" style="display: none;">
+      <div class="popup-window-card">
+        <div class="popup-window-badge">🔔 発売・自動収集のお知らせ</div>
+        <h3 class="popup-window-title">最新論文を収集・要約しました</h3>
+        <p id="syncNotifMessage" class="popup-window-desc">最新論文が追加されました。</p>
+        <div class="popup-window-actions">
+          <button type="button" id="viewNewPapersBtn" class="popup-btn-primary">✨ 新着論文を見る ➔</button>
+          <button type="button" id="closeNotifBtn" class="popup-btn-secondary">閉じる</button>
         </div>
       </div>
     </div>

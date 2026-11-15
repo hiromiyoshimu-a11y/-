@@ -561,15 +561,16 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 6px 10px;
+  gap: 4px;
+  padding: 6px 6px;
   border: none;
   background: transparent;
   color: var(--text-secondary);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   border-radius: 6px;
   cursor: pointer;
+  white-space: nowrap;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
   -webkit-tap-highlight-color: transparent;
@@ -1741,4 +1742,278 @@ body.light-theme .ptr-indicator {
 .guide-hint {
   font-size: 11.5px;
   color: var(--text-muted);
+}
+
+/* ============================================================
+   スリムヘッダー：設定ボタン & 検索・プルダウン1行化
+   ============================================================ */
+.settings-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.35);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  height: 34px;
+}
+
+.settings-pill-btn:active {
+  transform: scale(0.96);
+}
+
+.search-and-filter-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  margin-top: 2px;
+}
+
+.search-and-filter-row .search-box {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-bottom: 0 !important;
+  height: 38px;
+}
+
+.filter-main-select {
+  flex: 0 0 auto !important;
+  max-width: 155px !important;
+  width: auto !important;
+  height: 38px;
+  font-size: 12.5px !important;
+  font-weight: 600;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0 8px;
+}
+
+@media (max-width: 480px) {
+  .filter-main-select {
+    max-width: 138px !important;
+    font-size: 11.5px !important;
+    padding: 0 6px;
+  }
+}
+
+/* ============================================================
+   ⚙️ 統合設定モーダルスタイル
+   ============================================================ */
+.settings-modal-body {
+  padding: 14px 16px 24px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.settings-group {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings-group-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 6px;
+}
+
+.settings-item-block {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.settings-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.settings-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.settings-select {
+  flex: none !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  height: 38px;
+  font-size: 12.5px !important;
+  padding: 0 8px !important;
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.settings-action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.settings-action-row:hover {
+  border-color: var(--accent-blue);
+}
+
+.settings-action-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.settings-action-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.settings-action-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.settings-action-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 1px;
+}
+
+.settings-action-arrow {
+  color: var(--text-muted);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.settings-done-btn {
+  width: 100%;
+  padding: 11px;
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ============================================================
+   🔔 発売・自動収集 ポップアップウィンドウ
+   ============================================================ */
+.popup-center-overlay {
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 20px;
+}
+
+.popup-window-card {
+  background: var(--bg-card);
+  border: 1px solid var(--accent-blue);
+  border-radius: var(--radius-lg);
+  padding: 22px 20px;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  animation: popupScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popupScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.popup-window-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: var(--accent-blue);
+  border-radius: 20px;
+  font-size: 11.5px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.popup-window-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 8px;
+}
+
+.popup-window-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 0 18px;
+}
+
+.popup-window-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.popup-btn-primary {
+  width: 100%;
+  padding: 11px;
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.popup-btn-secondary {
+  width: 100%;
+  padding: 9px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
 }

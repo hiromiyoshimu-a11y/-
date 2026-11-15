@@ -876,15 +876,15 @@ function populatePeriodSelect() {
 }
 
 /**
- * 新着収集通知バーの表示（雑誌発売・自動巡回収集の通知バッジ）
+ * 新着収集アナウンスのポップアップウィンドウ表示
  */
 function renderSyncNotificationBar(data) {
-  const bar = document.getElementById('newSyncNotificationBar');
-  if (!bar) return;
+  const modal = document.getElementById('syncAnnouncementModal');
+  if (!modal) return;
 
   const newCount = data?.newCount || allPapers.filter(p => p.isNew).length;
   if (newCount <= 0) {
-    bar.style.display = 'none';
+    modal.style.display = 'none';
     return;
   }
 
@@ -900,9 +900,16 @@ function renderSyncNotificationBar(data) {
     msg = `${topJournals || '各主要誌'}から新着論文 ${newCount}件 を自動収集・要約しました！`;
   }
 
+  // すでに同じメッセージ（または本日の更新）を閉じていれば再表示しない
+  const notifKey = `${data?.updatedAt || ''}_${msg}`;
+  if (localStorage.getItem('ep_dismissed_sync_notif') === notifKey) {
+    return;
+  }
+  modal.dataset.notifKey = notifKey;
+
   const msgEl = document.getElementById('syncNotifMessage');
   if (msgEl) msgEl.textContent = msg;
-  bar.style.display = 'flex';
+  modal.style.display = 'flex';
 }
 
 /**
@@ -986,15 +993,22 @@ function setupEventListeners() {
     renderPapers();
   });
 
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      tabBtns.forEach(b => b.classList.remove('active'));
-      e.target.classList.add('active');
-      currentFilterTab = e.target.dataset.filter;
+  const filterSelect = document.getElementById('filterSelect');
+  if (filterSelect) {
+    filterSelect.addEventListener('change', (e) => {
+      currentFilterTab = e.target.value;
       renderPapers();
     });
-  });
+  }
+
+  const newCountBadge = document.getElementById('newCountBadge');
+  if (newCountBadge) {
+    newCountBadge.addEventListener('click', () => {
+      currentFilterTab = 'new';
+      if (filterSelect) filterSelect.value = 'new';
+      renderPapers();
+    });
+  }
 
   // 期間選択
   const periodSelect = document.getElementById('periodSelect');
@@ -1095,28 +1109,49 @@ function setupEventListeners() {
     });
   }
 
-  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+  // ⑨ ダークモード / ライトモード切替ボタン
+  const themeDarkBtn = document.getElementById('themeDarkBtn');
+  const themeLightBtn = document.getElementById('themeLightBtn');
+  if (themeDarkBtn && themeLightBtn) {
+    themeDarkBtn.addEventListener('click', () => setTheme('dark'));
+    themeLightBtn.addEventListener('click', () => setTheme('light'));
+  }
+
+  // ⚙️ 統合設定モーダルの開閉
+  const settingsModal = document.getElementById('settingsModal');
+  const openSettingsBtn = document.getElementById('openSettingsBtn');
+  const closeSettingsModal = document.getElementById('closeSettingsModal');
+  const settingsDoneBtn = document.getElementById('settingsDoneBtn');
+
+  const closeSettings = () => {
+    if (settingsModal) settingsModal.style.display = 'none';
+  };
+
+  if (openSettingsBtn && settingsModal) {
+    openSettingsBtn.addEventListener('click', () => {
+      settingsModal.style.display = 'flex';
+      const body = settingsModal.querySelector('.modal-body');
+      if (body) body.scrollTop = 0;
+    });
+  }
+  if (closeSettingsModal) closeSettingsModal.addEventListener('click', closeSettings);
+  if (settingsDoneBtn) settingsDoneBtn.addEventListener('click', closeSettings);
+  if (settingsModal) {
+    settingsModal.addEventListener('click', (e) => {
+      if (e.target.id === 'settingsModal') closeSettings();
+    });
+  }
 
   document.getElementById('closeModal').addEventListener('click', closeModal);
   document.getElementById('detailModal').addEventListener('click', (e) => {
     if (e.target.id === 'detailModal') closeModal();
   });
 
-  const infoBtn = document.getElementById('infoBtn');
-  if (infoBtn) {
-    infoBtn.addEventListener('click', () => {
-      const modal = document.getElementById('disclaimerModal');
-      if (modal) {
-        modal.style.display = 'flex';
-        const body = modal.querySelector('.modal-body');
-        if (body) body.scrollTop = 0;
-      }
-    });
-  }
-
-  const metaGuideBtn = document.getElementById('metaGuideBtn');
-  if (metaGuideBtn) {
-    metaGuideBtn.addEventListener('click', () => {
+  // ③ 設定画面から「使い方ガイド & アプリ情報」を開く
+  const settingsGuideBtn = document.getElementById('settingsGuideBtn');
+  if (settingsGuideBtn) {
+    settingsGuideBtn.addEventListener('click', () => {
+      closeSettings();
       const modal = document.getElementById('disclaimerModal');
       const guideBtn = document.getElementById('infoTabGuideBtn');
       if (guideBtn) guideBtn.click();
@@ -1178,8 +1213,9 @@ function setupEventListeners() {
     });
   }
 
-  // 🗓️ 雑誌発売日ガイド モーダル制御
+  // ② 雑誌発売日ガイド モーダル制御
   const openScheduleModal = () => {
+    closeSettings();
     renderJournalScheduleModal();
     const modal = document.getElementById('scheduleModal');
     if (modal) modal.style.display = 'flex';
@@ -1194,8 +1230,8 @@ function setupEventListeners() {
     }
   };
 
-  const openScheduleModalBtn = document.getElementById('openScheduleModalBtn');
-  if (openScheduleModalBtn) openScheduleModalBtn.addEventListener('click', openScheduleModal);
+  const settingsScheduleBtn = document.getElementById('settingsScheduleBtn');
+  if (settingsScheduleBtn) settingsScheduleBtn.addEventListener('click', openScheduleModal);
 
   const openScheduleFromDropdownBtn = document.getElementById('openScheduleFromDropdownBtn');
   if (openScheduleFromDropdownBtn) openScheduleFromDropdownBtn.addEventListener('click', openScheduleModal);
@@ -1217,37 +1253,47 @@ function setupEventListeners() {
     });
   }
 
-  // 🔔 新着収集通知バーのイベント
+  // 🔔 発売・自動収集アナウンスポップアップのイベント
+  const syncAnnouncementModal = document.getElementById('syncAnnouncementModal');
+  const dismissAnnouncement = () => {
+    if (syncAnnouncementModal) {
+      if (syncAnnouncementModal.dataset.notifKey) {
+        localStorage.setItem('ep_dismissed_sync_notif', syncAnnouncementModal.dataset.notifKey);
+      }
+      syncAnnouncementModal.style.display = 'none';
+    }
+  };
+
   const viewNewPapersBtn = document.getElementById('viewNewPapersBtn');
   if (viewNewPapersBtn) {
     viewNewPapersBtn.addEventListener('click', () => {
-      const tabBtns = document.querySelectorAll('.tab-btn');
-      tabBtns.forEach(b => {
-        if (b.dataset.filter === 'new') {
-          b.click();
-        }
-      });
+      dismissAnnouncement();
+      currentFilterTab = 'new';
+      const filterSelectEl = document.getElementById('filterSelect');
+      if (filterSelectEl) filterSelectEl.value = 'new';
+      renderPapers();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
   const closeNotifBtn = document.getElementById('closeNotifBtn');
   if (closeNotifBtn) {
-    closeNotifBtn.addEventListener('click', () => {
-      const notifBar = document.getElementById('newSyncNotificationBar');
-      if (notifBar) notifBar.style.display = 'none';
+    closeNotifBtn.addEventListener('click', dismissAnnouncement);
+  }
+  if (syncAnnouncementModal) {
+    syncAnnouncementModal.addEventListener('click', (e) => {
+      if (e.target.id === 'syncAnnouncementModal') dismissAnnouncement();
     });
   }
 
-  // 🔗 端末間データ同期モーダル制御
+  // ① 🔗 端末間データ同期モーダル制御
   const openSyncModal = () => {
+    closeSettings();
     initDeviceSyncCode();
     document.getElementById('deviceSyncModal').style.display = 'flex';
   };
-  const deviceSyncBtn = document.getElementById('deviceSyncBtn');
-  if (deviceSyncBtn) deviceSyncBtn.addEventListener('click', openSyncModal);
-  const metaDeviceSyncBtn = document.getElementById('metaDeviceSyncBtn');
-  if (metaDeviceSyncBtn) metaDeviceSyncBtn.addEventListener('click', openSyncModal);
+  const settingsDeviceSyncBtn = document.getElementById('settingsDeviceSyncBtn');
+  if (settingsDeviceSyncBtn) settingsDeviceSyncBtn.addEventListener('click', openSyncModal);
 
   const closeDeviceSyncModal = document.getElementById('closeDeviceSyncModal');
   if (closeDeviceSyncModal) {
@@ -1342,19 +1388,25 @@ function setupSummaryVisibilityToggle() {
   });
 }
 
-function toggleTheme() {
-  const isLight = document.body.classList.toggle('light-theme');
-  const icon = document.querySelector('.theme-icon');
-  icon.textContent = isLight ? '☀️' : '🌙';
-  localStorage.setItem('ep_theme', isLight ? 'light' : 'dark');
+function setTheme(theme) {
+  const darkBtn = document.getElementById('themeDarkBtn');
+  const lightBtn = document.getElementById('themeLightBtn');
+  if (theme === 'light') {
+    document.body.classList.add('light-theme');
+    if (lightBtn) lightBtn.classList.add('active');
+    if (darkBtn) darkBtn.classList.remove('active');
+    localStorage.setItem('ep_theme', 'light');
+  } else {
+    document.body.classList.remove('light-theme');
+    if (darkBtn) darkBtn.classList.add('active');
+    if (lightBtn) lightBtn.classList.remove('active');
+    localStorage.setItem('ep_theme', 'dark');
+  }
 }
 
 function loadThemePreference() {
-  const pref = localStorage.getItem('ep_theme');
-  if (pref === 'light') {
-    document.body.classList.add('light-theme');
-    document.querySelector('.theme-icon').textContent = '☀️';
-  }
+  const pref = localStorage.getItem('ep_theme') || 'dark';
+  setTheme(pref);
 }
 
 const MONTH_MAP = {
