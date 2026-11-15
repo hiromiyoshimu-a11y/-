@@ -511,11 +511,13 @@ async function loadPaperData() {
 /**
  * 取得したデータをUIへ反映
  */
-function applyPaperData(data) {
+function applyPaperData(data, skipPopup = false) {
   allPapers = data.papers || [];
   updateJournalOptions();
   populatePeriodSelect();
-  renderSyncNotificationBar(data);
+  if (!skipPopup) {
+    renderSyncNotificationBar(data);
+  }
   renderJournalScheduleModal();
 
   const newCount = data.newCount || allPapers.filter(p => p.isNew).length;
@@ -576,7 +578,7 @@ window.syncWithCloud = async function(isManual = false) {
 
   if (latestData && Array.isArray(latestData.papers)) {
     const prevCount = allPapers.length;
-    applyPaperData(latestData);
+    applyPaperData(latestData, isManual);
     localStorage.setItem('ep_papers_cache', JSON.stringify(latestData));
 
     if (isManual) {
@@ -900,12 +902,13 @@ function renderSyncNotificationBar(data) {
     msg = `${topJournals || '各主要誌'}から新着論文 ${newCount}件 を自動収集・要約しました！`;
   }
 
-  // すでに同じメッセージ（または本日の更新）を閉じていれば再表示しない
-  const notifKey = `${data?.updatedAt || ''}_${msg}`;
+  // 同じ日・同じ新着件数の通知をすでに一度表示していれば再表示しない
+  const notifKey = `${data?.updatedAt || 'init'}_${newCount}`;
   if (localStorage.getItem('ep_dismissed_sync_notif') === notifKey) {
     return;
   }
   modal.dataset.notifKey = notifKey;
+  localStorage.setItem('ep_dismissed_sync_notif', notifKey);
 
   const msgEl = document.getElementById('syncNotifMessage');
   if (msgEl) msgEl.textContent = msg;
