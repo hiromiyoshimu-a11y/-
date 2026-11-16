@@ -10,6 +10,7 @@ let allPapers = [];
 let bookmarks = JSON.parse(localStorage.getItem('ep_paper_bookmarks') || '[]');
 let readPapers = JSON.parse(localStorage.getItem('ep_paper_read') || '[]');
 let currentFilterTab = 'all';
+let currentDomainFilter = localStorage.getItem('ep_paper_domain_filter') || 'all';
 let selectedJournals = null; // Set of selected journal keys. null = initial state (all selected)
 
 let deferredPrompt;
@@ -19,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function initApp() {
+  // 大容量の論文キャッシュがlocalStorageを圧迫しiOSで他設定が消えるのを防ぐ
+  try { localStorage.removeItem('ep_papers_cache'); } catch (_) {}
   initDeviceSyncCode();
   setupEventListeners();
   loadThemePreference();
@@ -520,23 +523,8 @@ const REMOTE_DATA_URLS = [
  */
 async function loadPaperData() {
   const paperListEl = document.getElementById('paperList');
-  
-  // 1. まずローカルストレージの最新キャッシュをチェック（オフラインでも瞬時に起動）
-  const cachedDataStr = localStorage.getItem('ep_papers_cache');
-  if (cachedDataStr) {
-    try {
-      const cached = JSON.parse(cachedDataStr);
-      if (cached && Array.isArray(cached.papers) && cached.papers.length > 0) {
-        console.log('Loaded from local storage cache:', cached.papers.length, 'papers');
-        applyPaperData(cached);
-        return;
-      }
-    } catch (e) {
-      console.warn('Failed to parse cached papers:', e);
-    }
-  }
 
-  // 2. キャッシュがなければアプリバンドル内のローカル papers.json を読み込む
+  // アプリバンドル内のローカル papers.json を読み込む（Service Worker / Capacitor キャッシュ利用）
   let currentPath = window.location.pathname;
   if (!currentPath.endsWith('/') && !currentPath.includes('.html')) {
     currentPath += '/';
@@ -563,11 +551,6 @@ async function loadPaperData() {
 
   if (data && data.papers) {
     applyPaperData(data);
-    try {
-      localStorage.setItem('ep_papers_cache', JSON.stringify(data));
-    } catch (e) {
-      console.warn('Failed to cache papers in localStorage:', e);
-    }
   } else {
     paperListEl.innerHTML = `
       <div class="loading-state" style="text-align: center; padding: 28px 16px;">
@@ -583,11 +566,35 @@ async function loadPaperData() {
   }
 }
 
+const DEVICE_DOMAIN_RE = /(ペースメーカ|ペースメーカー|\bICD\b|\bS-ICD\b|\bEV-ICD\b|\bCRT-D\b|\bCRT-P\b|\bCRTD\b|\bCRTP\b|左脚領域ペーシング|左脚ペーシング|ヒス束ペーシング|刺激伝導系ペーシング|\bLBBAP\b|\bLBBP\b|\bHBP\b|\bCSP\b|心臓再同期療法|両心室ペーシング|リードレス|Micra|Aveir|房室ブロック|洞不全症候群|徐脈|植込み型除細動器|植込み型心臓モニタ|\bICM\b|\bILR\b|ループレコーダ|リード抜去|デバイス感染|pacemaker|pacing|leadless|cardiac resynchronization|conduction system pacing|left bundle branch|his bundle|defibrillator|bradycardia|atrioventricular block|sick sinus|lead extraction|loop recorder)/gi;
+const EP_DOMAIN_RE = /(アブレーション|パルスフィールド|\bPFA\b|高周波|クライオ|冷凍凝固|電気生理学的検査|電気生理|\bEPS\b|マッピング|頻脈|頻拍|肺静脈隔離|\bPVI\b|心房細動|心房粗動|心房頻拍|上室|PSVT|AVNRT|AVRT|WPW|心室頻拍|心室細動|心室性期外収縮|心室期外収縮|左心耳|\bLAAO\b|\bPVC\b|\bVT\b|\bVF\b|\bAF\b|\bAFL\b|ablation|pulsed field|electrophysiolog|mapping|pulmonary vein|tachycardia|fibrillation|flutter|arrhythmia|supraventricular|premature ventricular)/gi;
+const EP_SUPRAVENTRICULAR_RE = /(心房細動|心房粗動|心房頻拍|発作性上室|上室性|上室頻拍|肺静脈隔離|左心耳|\bLAAO\b|\bPVI\b|\bAF\b|\bAFL\b|\bAT\b|\bSVT\b|\bPSVT\b|\bAVNRT\b|\bAVRT\b|\bWPW\b|副伝導路|房室結節|atrial fibrillation|atrial flutter|atrial tachycardia|supraventricular|pulmonary vein|left atrial)/gi;
+const EP_VENTRICULAR_RE = /(心室頻拍|心室細動|心室性期外収縮|心室期外収縮|心室性|心室不整脈|流出路|プルキンエ|乳頭筋|\bVT\b|\bVF\b|\bPVC\b|\bPVCs\b|\bRVOT\b|\bLVOT\b|ventricular tachycardia|ventricular fibrillation|premature ventricular|ventricular arrhythmia|outflow tract|brugada|ブルガダ|\bARVC\b)/gi;
+
+function classifyPaperDomain(paper) {
+  if (paper._domain) return;
+  const titleTxt = `${paper.title || ''} ${paper.titleJa || ''}`;
+  const bodyTxt = `${paper.summaryJa || ''} ${paper.abstractJa || ''}`;
+  const devScore = (titleTxt.match(DEVICE_DOMAIN_RE) || []).length * 3 + (bodyTxt.match(DEVICE_DOMAIN_RE) || []).length;
+  const epScore = (titleTxt.match(EP_DOMAIN_RE) || []).length * 3 + (bodyTxt.match(EP_DOMAIN_RE) || []).length;
+
+  if (devScore > epScore) {
+    paper._domain = 'device';
+    paper._epRegion = null;
+  } else {
+    paper._domain = 'ep';
+    const svScore = (titleTxt.match(EP_SUPRAVENTRICULAR_RE) || []).length * 3 + (bodyTxt.match(EP_SUPRAVENTRICULAR_RE) || []).length;
+    const vScore = (titleTxt.match(EP_VENTRICULAR_RE) || []).length * 3 + (bodyTxt.match(EP_VENTRICULAR_RE) || []).length;
+    paper._epRegion = (vScore > svScore) ? 'ventricular' : 'supraventricular';
+  }
+}
+
 /**
  * 取得したデータをUIへ反映
  */
 function applyPaperData(data, skipPopup = false) {
   allPapers = data.papers || [];
+  allPapers.forEach(classifyPaperDomain);
   updateJournalOptions();
   populatePeriodSelect();
   if (!skipPopup) {
@@ -654,11 +661,6 @@ window.syncWithCloud = async function(isManual = false) {
   if (latestData && Array.isArray(latestData.papers)) {
     const prevCount = allPapers.length;
     applyPaperData(latestData, isManual);
-    try {
-      localStorage.setItem('ep_papers_cache', JSON.stringify(latestData));
-    } catch (e) {
-      console.warn('Failed to cache latest papers in localStorage:', e);
-    }
 
     if (isManual) {
       showToast(`✅ クラウド最新データ (${latestData.papers.length}件) を同期しました！`);
@@ -956,17 +958,64 @@ function populatePeriodSelect() {
   }
 }
 
+function getCookieVal(name) {
+  try {
+    const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : '';
+  } catch (_) {
+    return '';
+  }
+}
+
+function setCookieVal(name, value) {
+  try {
+    document.cookie = `${name}=${encodeURIComponent(value)}; max-age=31536000; path=/; SameSite=Lax`;
+  } catch (_) {}
+}
+
+function isSyncNotifDismissed(syncDateKey, notifKey) {
+  try {
+    if (localStorage.getItem('ep_disable_sync_popup') === '1' || getCookieVal('ep_disable_sync_popup') === '1') {
+      return true;
+    }
+    const dismissedDateLS = localStorage.getItem('ep_dismissed_sync_date') || '';
+    const dismissedDateCK = getCookieVal('ep_dismissed_sync_date') || '';
+    const maxDismissedDate = dismissedDateLS > dismissedDateCK ? dismissedDateLS : dismissedDateCK;
+    // すでに同日またはより新しい日付の通知を閉じていれば、古いローカルデータでも再表示しない
+    if (syncDateKey && maxDismissedDate && syncDateKey <= maxDismissedDate) {
+      return true;
+    }
+    if (localStorage.getItem('ep_dismissed_sync_notif') === notifKey || getCookieVal('ep_dismissed_sync_notif') === notifKey) {
+      return true;
+    }
+  } catch (_) {}
+  return false;
+}
+
+function markSyncNotifDismissed(syncDateKey, notifKey) {
+  try {
+    if (syncDateKey) {
+      const prevLS = localStorage.getItem('ep_dismissed_sync_date') || '';
+      const prevCK = getCookieVal('ep_dismissed_sync_date') || '';
+      const prevMax = prevLS > prevCK ? prevLS : prevCK;
+      if (syncDateKey >= prevMax) {
+        localStorage.setItem('ep_dismissed_sync_date', syncDateKey);
+        setCookieVal('ep_dismissed_sync_date', syncDateKey);
+      }
+    }
+    if (notifKey) {
+      localStorage.setItem('ep_dismissed_sync_notif', notifKey);
+      setCookieVal('ep_dismissed_sync_notif', notifKey);
+    }
+  } catch (_) {}
+}
+
 /**
  * 新着収集アナウンスのポップアップウィンドウ表示
  */
 function renderSyncNotificationBar(data) {
   const modal = document.getElementById('syncAnnouncementModal');
   if (!modal) return;
-
-  if (localStorage.getItem('ep_disable_sync_popup') === '1') {
-    modal.style.display = 'none';
-    return;
-  }
 
   const newCount = data?.newCount || allPapers.filter(p => p.isNew).length;
   if (newCount <= 0) {
@@ -977,18 +1026,13 @@ function renderSyncNotificationBar(data) {
   // 同じ更新日（updatedAt）の通知は、件数変動やタスクキル再起動があっても1回しか自動表示しない
   const syncDateKey = String(data?.updatedAt || data?.latestSyncInfo?.syncDate || '').trim();
   const notifKey = `${syncDateKey || 'init'}_${newCount}`;
-  if (
-    (syncDateKey && localStorage.getItem('ep_dismissed_sync_date') === syncDateKey) ||
-    localStorage.getItem('ep_dismissed_sync_notif') === notifKey
-  ) {
+  if (isSyncNotifDismissed(syncDateKey, notifKey)) {
+    modal.style.display = 'none';
     return;
   }
   modal.dataset.notifKey = notifKey;
   modal.dataset.syncDateKey = syncDateKey;
-  if (syncDateKey) {
-    localStorage.setItem('ep_dismissed_sync_date', syncDateKey);
-  }
-  localStorage.setItem('ep_dismissed_sync_notif', notifKey);
+  markSyncNotifDismissed(syncDateKey, notifKey);
 
   // 最新収集メッセージ
   let msg = data?.latestSyncInfo?.message;
@@ -1093,6 +1137,23 @@ function setupEventListeners() {
     filterSelect.addEventListener('change', (e) => {
       currentFilterTab = e.target.value;
       renderPapers();
+    });
+  }
+
+  const domainFilterBar = document.getElementById('domainFilterBar');
+  if (domainFilterBar) {
+    const pills = Array.from(domainFilterBar.querySelectorAll('.domain-pill-btn'));
+    const syncActivePill = (val) => {
+      pills.forEach(btn => btn.classList.toggle('active', btn.dataset.domain === val));
+    };
+    syncActivePill(currentDomainFilter);
+    pills.forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentDomainFilter = btn.dataset.domain || 'all';
+        try { localStorage.setItem('ep_paper_domain_filter', currentDomainFilter); } catch (_) {}
+        syncActivePill(currentDomainFilter);
+        renderPapers();
+      });
     });
   }
 
@@ -1365,12 +1426,7 @@ function setupEventListeners() {
   const syncAnnouncementModal = document.getElementById('syncAnnouncementModal');
   const dismissAnnouncement = () => {
     if (syncAnnouncementModal) {
-      if (syncAnnouncementModal.dataset.syncDateKey) {
-        localStorage.setItem('ep_dismissed_sync_date', syncAnnouncementModal.dataset.syncDateKey);
-      }
-      if (syncAnnouncementModal.dataset.notifKey) {
-        localStorage.setItem('ep_dismissed_sync_notif', syncAnnouncementModal.dataset.notifKey);
-      }
+      markSyncNotifDismissed(syncAnnouncementModal.dataset.syncDateKey, syncAnnouncementModal.dataset.notifKey);
       syncAnnouncementModal.style.display = 'none';
     }
   };
@@ -1378,7 +1434,8 @@ function setupEventListeners() {
   const disableNotifForeverBtn = document.getElementById('disableNotifForeverBtn');
   if (disableNotifForeverBtn) {
     disableNotifForeverBtn.addEventListener('click', () => {
-      localStorage.setItem('ep_disable_sync_popup', '1');
+      try { localStorage.setItem('ep_disable_sync_popup', '1'); } catch (_) {}
+      setCookieVal('ep_disable_sync_popup', '1');
       dismissAnnouncement();
       showToast('🔕 お知らせの自動表示をオフにしました');
     });
@@ -1880,6 +1937,14 @@ function renderPapers() {
     if (currentFilterTab === 'case' && paper.designRank !== 99) return false;
     if (currentFilterTab === 'bookmarks' && !isBookmarked) return false;
 
+    // 分野・領域フィルター（EP/アブレーション 上室性・心室性 / デバイス）
+    if (currentDomainFilter && currentDomainFilter !== 'all') {
+      if (currentDomainFilter === 'device' && paper._domain !== 'device') return false;
+      if (currentDomainFilter === 'ep' && paper._domain !== 'ep') return false;
+      if (currentDomainFilter === 'ep_sv' && (paper._domain !== 'ep' || paper._epRegion !== 'supraventricular')) return false;
+      if (currentDomainFilter === 'ep_v' && (paper._domain !== 'ep' || paper._epRegion !== 'ventricular')) return false;
+    }
+
     // 複数雑誌チェックボックスフィルター
     if (selectedJournals) {
       if (selectedJournals.size === 0) {
@@ -1945,12 +2010,21 @@ function renderPapers() {
     else if (paper.designRank === 99) designBadgeClass = 'case';
 
     const sampleStr = paper.sampleSize > 0 ? `N=${paper.sampleSize.toLocaleString()}例` : 'N不明';
+    let domainBadgeHtml = '';
+    if (paper._domain === 'device') {
+      domainBadgeHtml = '<span class="domain-badge device">🔋 デバイス</span>';
+    } else if (paper._epRegion === 'ventricular') {
+      domainBadgeHtml = '<span class="domain-badge ep-v">⚡ 心室性</span>';
+    } else {
+      domainBadgeHtml = '<span class="domain-badge ep-sv">🫀 上室性</span>';
+    }
 
     return `
       <div class="paper-card ${paper.isNew ? 'is-new' : ''} ${isRead ? 'is-read' : ''}" onclick="openDetail('${paper.pmid}')">
         <div class="paper-card-header">
           <div class="card-badges">
             ${paper.isNew ? '<span class="new-badge">✨ NEW 新着</span>' : ''}
+            ${domainBadgeHtml}
             <span class="design-badge ${designBadgeClass}">${paper.studyTypeLabel}</span>
             <span class="sample-badge">👥 ${sampleStr}</span>
           </div>
