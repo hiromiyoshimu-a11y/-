@@ -12,6 +12,7 @@ let readPapers = JSON.parse(localStorage.getItem('ep_paper_read') || '[]');
 let currentFilterTab = 'all';
 let currentDomainFilter = localStorage.getItem('ep_paper_domain_filter') || 'all';
 let selectedJournals = null; // Set of selected journal keys. null = initial state (all selected)
+let currentDetailPaper = null;
 
 let deferredPrompt;
 
@@ -1374,6 +1375,8 @@ function setupEventListeners() {
     });
   }
 
+  setupTranslationReportSystem();
+
   const syncBtn = document.getElementById('syncOnlineBtn');
   if (syncBtn) {
     syncBtn.addEventListener('click', () => {
@@ -1852,10 +1855,55 @@ function normalizeJotaiStyle(text) {
   return s;
 }
 
+const MEDICAL_TERM_FIXES = [
+  [/Posterior Pulmonary Vein Isolation Lesion Spacing and Left Atrial Posterior Wall Narrowing During Pulsed Field Ablation/gi, 'パルスフィールドアブレーション中の肺静脈隔離後方の間隔と左房後壁の狭小化'],
+  [/Closed-Loop Stimulation\s*[（(]CLS[）)]/gi, 'Closed-Loop S刺激 (CLS)'],
+  [/Closed-Loop Stimulation/gi, 'Closed-Loop S刺激'],
+  [/(?:the )?U\.S\. Food and Drug Administration/gi, 'FDA'],
+  [/HD Grid Mapping Catheter/gi, 'HD Grid'],
+  [/HD Grid\s*マッピングカテーテル/gi, 'HD Grid'],
+  [/maze\s*ablation|メイズアブレーション|迷路アブレーション/gi, 'メイズ手術'],
+  [/right ventricular apical leads?/gi, '右室心尖部リード'],
+  [/右室心尖リード/g, '右室心尖部リード'],
+  [/conduction system pacing/gi, '刺激伝導系ペーシング'],
+  [/left bundle branch area pacing/gi, '左脚領域ペーシング'],
+  [/dual-chamber pacemakers?|デュアルチャンバーペースメーカー/gi, 'デュアルチャンバーペースメーカ'],
+  [/cardiac implantable electronic devices?|心臓植込み型電子デバイス/gi, '心臓植込み型デバイス'],
+  [/lattice-tip/gi, 'ラティスチップ'],
+  [/real-world|現実世界/gi, 'リアルワールド'],
+  [/radiofrequency applications?|高周波アプリケーション|RFアプリケーション/gi, '高周波通電'],
+  [/sinus rate/gi, '洞結節rate'],
+  [/sinus arrest/gi, '洞停止'],
+  [/acute procedural success/gi, '急性期手技成功'],
+  [/left atrial posterior wall/gi, '左房後壁'],
+  [/rhythm control/gi, 'リズムコントロール'],
+  [/blanking period/gi, 'ブランキング期間'],
+  [/left atrial catheter dwell times?|左心房カテーテルの?滞留時間|左房カテーテル滞留時間/gi, '左房滞在時間'],
+  [/バリパルス/g, 'Varipulse'],
+  [/蛍光透視|透視検査/g, '透視'],
+  [/傾向スコアマッチング/g, 'プロペンシティスコアマッチング'],
+  [/リエントリーサーキット|再入回路/g, 'リエントリー回路'],
+  [/critical Purkinje potentials?/gi, '重要なプルキンエ電位'],
+  [/深部鎮静|深い鎮静/g, '深鎮静'],
+  [/freedom from recurrence|再発からの自由/gi, '非再発'],
+  [/TEE-induced mechanical injury/gi, 'TEEによる機械的損傷'],
+  [/処置時間/g, '手技時間'],
+  [/回顧的|遡及的(?!に報告)/g, '後ろ向き'],
+];
+
+function normalizeMedicalTerms(text) {
+  if (!text) return '';
+  let s = String(text);
+  for (const [pattern, replacement] of MEDICAL_TERM_FIXES) {
+    s = s.replace(pattern, replacement);
+  }
+  return s;
+}
+
 // 抄録・臨床要約の共通見出し正規化＆バッジ化ヘルパー
 function formatSectionText(text) {
   if (!text) return '';
-  let str = normalizeJotaiStyle(String(text));
+  let str = normalizeJotaiStyle(normalizeMedicalTerms(String(text)));
 
   // 1. Background and aims / 背景と目的 の完全統一
   str = str.replace(/(?:Background and aims|Background and objectives|Background & aims|BACKGROUND AND AIMS|BACKGROUND AND OBJECTIVES|背景と目的|背景および目的|背景・目的|背景\/目的|【概要】および目的|【背景】および目的|【背景】そして目的|背景と\s*目的)[:：]?/gi, '【背景と目的】');
@@ -2118,6 +2166,7 @@ window.toggleBookmark = function(pmid) {
 window.openDetail = function(pmid) {
   const paper = allPapers.find(p => String(p.pmid) === String(pmid));
   if (!paper) return;
+  currentDetailPaper = paper;
 
   // iOS Safari 対策: モーダル開閉時のフォントサイズクラス再確定
   loadFontSizePreference();
@@ -2185,11 +2234,180 @@ window.openDetail = function(pmid) {
     </div>
   `;
 
+  const suggestBar = document.getElementById('selectionSuggestBar');
+  if (suggestBar) suggestBar.style.display = 'none';
   document.getElementById('detailModal').style.display = 'flex';
 };
 
 function closeModal() {
+  const suggestBar = document.getElementById('selectionSuggestBar');
+  if (suggestBar) suggestBar.style.display = 'none';
   document.getElementById('detailModal').style.display = 'none';
+}
+
+const REPORT_NTFY_TOPIC = 'ep_pfa_translation_reports_y3liigs4';
+
+function openTranslationReportModal(prefillEn = '', paperCtx = null) {
+  const modal = document.getElementById('translationReportModal');
+  const enEl = document.getElementById('reportOriginalEn');
+  const jaEl = document.getElementById('reportSuggestedJa');
+  const noteEl = document.getElementById('reportNote');
+  const ctxEl = document.getElementById('reportPaperContext');
+  if (!modal || !enEl || !jaEl) return;
+
+  enEl.value = prefillEn || '';
+  jaEl.value = '';
+  if (noteEl) noteEl.value = '';
+
+  if (ctxEl && paperCtx) {
+    ctxEl.textContent = `📄 対象論文: ${(paperCtx.titleJa || paperCtx.title || '').slice(0, 60)} (PMID: ${paperCtx.pmid})`;
+    ctxEl.style.display = 'block';
+    modal.dataset.pmid = String(paperCtx.pmid || '');
+    modal.dataset.titleJa = String(paperCtx.titleJa || paperCtx.title || '');
+  } else if (ctxEl) {
+    ctxEl.style.display = 'none';
+    modal.dataset.pmid = '';
+    modal.dataset.titleJa = '';
+  }
+
+  modal.style.display = 'flex';
+  const body = modal.querySelector('.modal-body');
+  if (body) body.scrollTop = 0;
+
+  setTimeout(() => {
+    try {
+      if (prefillEn) jaEl.focus();
+      else enEl.focus();
+    } catch (_) {}
+  }, 80);
+}
+
+function setupTranslationReportSystem() {
+  const settingsBtn = document.getElementById('settingsReportTranslationBtn');
+  if (settingsBtn) {
+    settingsBtn.addEventListener('click', () => {
+      const sm = document.getElementById('settingsModal');
+      if (sm) sm.style.display = 'none';
+      openTranslationReportModal('', null);
+    });
+  }
+
+  const reportModal = document.getElementById('translationReportModal');
+  const closeReportBtn = document.getElementById('closeTranslationReportModal');
+  if (closeReportBtn && reportModal) {
+    closeReportBtn.addEventListener('click', () => {
+      reportModal.style.display = 'none';
+    });
+  }
+  if (reportModal) {
+    reportModal.addEventListener('click', (e) => {
+      if (e.target.id === 'translationReportModal') {
+        reportModal.style.display = 'none';
+      }
+    });
+  }
+
+  // 英語原文のテキスト選択を検知して提案バーを表示
+  const suggestBar = document.getElementById('selectionSuggestBar');
+  const suggestBtn = document.getElementById('selectionSuggestBtn');
+  const suggestPreview = document.getElementById('selectionSuggestPreview');
+  let lastSelectedEnText = '';
+
+  const checkEnglishSelection = () => {
+    const detailModal = document.getElementById('detailModal');
+    if (!suggestBar || !detailModal || detailModal.style.display !== 'flex') {
+      if (suggestBar) suggestBar.style.display = 'none';
+      return;
+    }
+    const sel = window.getSelection();
+    const text = sel ? sel.toString().trim() : '';
+    if (!text || text.length > 300) {
+      suggestBar.style.display = 'none';
+      return;
+    }
+    const anchorEl = sel.anchorNode && (sel.anchorNode.nodeType === 1 ? sel.anchorNode : sel.anchorNode.parentElement);
+    const focusEl = sel.focusNode && (sel.focusNode.nodeType === 1 ? sel.focusNode : sel.focusNode.parentElement);
+    const inEnglishBox = (anchorEl && anchorEl.closest('.section-content.en')) || (focusEl && focusEl.closest('.section-content.en'));
+    if (!inEnglishBox) {
+      suggestBar.style.display = 'none';
+      return;
+    }
+    lastSelectedEnText = text;
+    if (suggestPreview) {
+      suggestPreview.textContent = text.length > 26 ? `${text.slice(0, 26)}…` : text;
+    }
+    suggestBar.style.display = 'flex';
+  };
+
+  let selTimer = null;
+  document.addEventListener('selectionchange', () => {
+    clearTimeout(selTimer);
+    selTimer = setTimeout(checkEnglishSelection, 140);
+  });
+
+  if (suggestBtn) {
+    suggestBtn.addEventListener('click', () => {
+      if (!lastSelectedEnText) return;
+      openTranslationReportModal(lastSelectedEnText, currentDetailPaper);
+    });
+  }
+
+  const submitBtn = document.getElementById('submitTranslationReportBtn');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', async () => {
+      const originalEn = (document.getElementById('reportOriginalEn')?.value || '').trim();
+      const suggestedJa = (document.getElementById('reportSuggestedJa')?.value || '').trim();
+      const note = (document.getElementById('reportNote')?.value || '').trim();
+
+      if (!originalEn) {
+        showToast('⚠️ もとの英単語・フレーズを入力してください');
+        return;
+      }
+      if (!suggestedJa) {
+        showToast('⚠️ 正しい日本語を入力してください');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = '送信中...';
+
+      const payload = {
+        id: `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+        createdAt: new Date().toISOString(),
+        originalEn,
+        suggestedJa,
+        note,
+        pmid: reportModal?.dataset.pmid || '',
+        titleJa: reportModal?.dataset.titleJa || '',
+      };
+
+      try {
+        const res = await fetch(`https://ntfy.sh/${REPORT_NTFY_TOPIC}`, {
+          method: 'POST',
+          headers: {
+            'Title': `Translation Report: ${originalEn.slice(0, 40)}`,
+          },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        try {
+          const hist = JSON.parse(localStorage.getItem('ep_translation_reports_history') || '[]');
+          hist.unshift(payload);
+          localStorage.setItem('ep_translation_reports_history', JSON.stringify(hist.slice(0, 50)));
+        } catch (_) {}
+
+        if (reportModal) reportModal.style.display = 'none';
+        showToast('✅ ご報告ありがとうございます！製作者へ送信しました');
+      } catch (err) {
+        console.error('Translation report send failed:', err);
+        showToast('⚠️ 送信に失敗しました。通信環境をご確認ください');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '📤 製作者へ報告を送信する';
+      }
+    });
+  }
 }
 
 window.sharePaper = async function(pmid) {

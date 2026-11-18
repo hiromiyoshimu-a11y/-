@@ -8,7 +8,8 @@
     "start": "node src/index.js",
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "export-reports": "node src/exportTranslationReports.js"
   },
   "dependencies": {
     "@capacitor/cli": "^8.5.3",

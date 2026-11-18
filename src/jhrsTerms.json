@@ -205,7 +205,7 @@
   },
   {
     "en": "blanking period",
-    "ja": "ブランキング時間"
+    "ja": "ブランキング期間"
   },
   {
     "en": "body surface potential mapping",
@@ -1966,5 +1966,145 @@
   {
     "en": "β blockers",
     "ja": "β遮断薬"
+  },
+  {
+    "en": "maze ablation",
+    "ja": "メイズ手術"
+  },
+  {
+    "en": "Closed-Loop Stimulation (CLS)",
+    "ja": "Closed-Loop S刺激 (CLS)"
+  },
+  {
+    "en": "right ventricular apical leads",
+    "ja": "右室心尖部リード"
+  },
+  {
+    "en": "conduction system pacing",
+    "ja": "刺激伝導系ペーシング"
+  },
+  {
+    "en": "left bundle branch area pacing",
+    "ja": "左脚領域ペーシング"
+  },
+  {
+    "en": "dual-chamber pacemakers",
+    "ja": "デュアルチャンバーペースメーカ"
+  },
+  {
+    "en": "the U.S. Food and Drug Administration",
+    "ja": "FDA"
+  },
+  {
+    "en": "cardiac implantable electronic devices",
+    "ja": "心臓植込み型デバイス"
+  },
+  {
+    "en": "lattice-tip",
+    "ja": "ラティスチップ"
+  },
+  {
+    "en": "real-world",
+    "ja": "リアルワールド"
+  },
+  {
+    "en": "radiofrequency applications",
+    "ja": "高周波通電"
+  },
+  {
+    "en": "sinus rate",
+    "ja": "洞結節rate"
+  },
+  {
+    "en": "sinus arrest",
+    "ja": "洞停止"
+  },
+  {
+    "en": "noninducibility",
+    "ja": "非誘発性"
+  },
+  {
+    "en": "inducibility",
+    "ja": "誘発性"
+  },
+  {
+    "en": "acute procedural success",
+    "ja": "急性期手技成功"
+  },
+  {
+    "en": "Left atrial posterior wall",
+    "ja": "左房後壁"
+  },
+  {
+    "en": "retrospective",
+    "ja": "後ろ向き"
+  },
+  {
+    "en": "prospective",
+    "ja": "前向き"
+  },
+  {
+    "en": "rhythm control",
+    "ja": "リズムコントロール"
+  },
+  {
+    "en": "left atrial catheter dwell times",
+    "ja": "左房滞在時間"
+  },
+  {
+    "en": "Varipulse",
+    "ja": "Varipulse"
+  },
+  {
+    "en": "Fluoroscopy",
+    "ja": "透視"
+  },
+  {
+    "en": "skin-to-skin",
+    "ja": "skin-to-skin"
+  },
+  {
+    "en": "optics",
+    "ja": "視覚"
+  },
+  {
+    "en": "propensity score matching",
+    "ja": "プロペンシティスコアマッチング"
+  },
+  {
+    "en": "reentrant circuit",
+    "ja": "リエントリー回路"
+  },
+  {
+    "en": "HD Grid Mapping Catheter",
+    "ja": "HD Grid"
+  },
+  {
+    "en": "critical Purkinje potentials",
+    "ja": "重要なプルキンエ電位"
+  },
+  {
+    "en": "tributaries",
+    "ja": "分枝"
+  },
+  {
+    "en": "deep sedation",
+    "ja": "深鎮静"
+  },
+  {
+    "en": "freedom from recurrence",
+    "ja": "非再発"
+  },
+  {
+    "en": "TEE-induced mechanical injury",
+    "ja": "TEEによる機械的損傷"
+  },
+  {
+    "en": "procedure time",
+    "ja": "手技時間"
+  },
+  {
+    "en": "Multivariable",
+    "ja": "多変量"
   }
 ]

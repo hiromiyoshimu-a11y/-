@@ -2171,3 +2171,126 @@ body.light-theme .domain-badge.device {
   font-weight: 600;
   cursor: pointer;
 }
+
+/* ============================================================
+   📝 英語原文選択時の翻訳提案バー & 報告モーダル
+   ============================================================ */
+.selection-suggest-bar {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(15, 23, 42, 0.94);
+  border-top: 1px solid var(--accent-blue);
+  display: flex;
+  justify-content: center;
+  z-index: 30;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+body.light-theme .selection-suggest-bar {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.selection-suggest-btn {
+  width: 100%;
+  max-width: 480px;
+  padding: 10px 14px;
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.report-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px 24px !important;
+}
+
+.report-intro {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.report-context-pill {
+  font-size: 11.5px;
+  color: var(--accent-blue);
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: var(--radius-md);
+  padding: 6px 10px;
+  line-height: 1.4;
+}
+
+.report-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.report-label {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.report-required {
+  font-size: 10px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: #EF4444;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.report-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 9px 11px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 13.5px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.report-input:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+}
+
+.report-submit-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 4px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--accent-blue);
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.report-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
