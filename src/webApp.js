@@ -1857,8 +1857,8 @@ function normalizeJotaiStyle(text) {
 
 const MEDICAL_TERM_FIXES = [
   [/Posterior Pulmonary Vein Isolation Lesion Spacing and Left Atrial Posterior Wall Narrowing During Pulsed Field Ablation/gi, 'パルスフィールドアブレーション中の肺静脈隔離後方の間隔と左房後壁の狭小化'],
-  [/Closed-Loop Stimulation\s*[（(]CLS[）)]/gi, 'Closed-Loop S刺激 (CLS)'],
-  [/Closed-Loop Stimulation/gi, 'Closed-Loop S刺激'],
+  [/Closed-Loop Stimulation\s*[（(]CLS[）)]/gi, 'Closed-Loop刺激 (CLS)'],
+  [/Closed-Loop Stimulation|閉ループ刺激|クローズドループ刺激/gi, 'Closed-Loop刺激'],
   [/(?:the )?U\.S\. Food and Drug Administration/gi, 'FDA'],
   [/HD Grid Mapping Catheter/gi, 'HD Grid'],
   [/HD Grid\s*マッピングカテーテル/gi, 'HD Grid'],
@@ -2121,7 +2121,7 @@ function renderPapers() {
         <div class="card-date-journal">
           📅 ${paper.pubDate} | 📖 ${escapeHtml(getJournalDisplayName(paper))}
         </div>
-        <div class="card-title-ja">${escapeHtml(paper.titleJa || paper.title)}</div>
+        <div class="card-title-ja">${escapeHtml(normalizeMedicalTerms(paper.titleJa || paper.title))}</div>
         <div class="card-title-en">(${escapeHtml(paper.title)})</div>
         <div class="card-summary-box">${formatSectionText(paper.summaryJa || '要約準備中')}</div>
         <div class="card-footer">
@@ -2188,7 +2188,7 @@ window.openDetail = function(pmid) {
     .replace(/\b(BACKGROUND AND AIMS|BACKGROUND AND OBJECTIVES|BACKGROUND & AIMS|BACKGROUND|OBJECTIVES?|AIMS?|METHODS AND RESULTS|METHODS & RESULTS|METHODS|RESULTS|CONCLUSIONS?):\n?/gi, '<span class="abs-header-badge" style="text-transform:uppercase;">$1</span>');
 
   modalBody.innerHTML = `
-    <div class="detail-title-ja">${escapeHtml(paper.titleJa || paper.title)}</div>
+    <div class="detail-title-ja">${escapeHtml(normalizeMedicalTerms(paper.titleJa || paper.title))}</div>
     <div class="detail-title-en">(${escapeHtml(paper.title)})</div>
 
     <div class="action-row" style="flex-wrap: wrap; gap: 8px;">
