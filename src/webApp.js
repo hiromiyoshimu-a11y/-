@@ -1673,6 +1673,8 @@ function normalizeJotaiStyle(text) {
   s = s.replace(/([でとも])ありる/g, '$1ある');
   s = s.replace(/ありる(?=[。、\n\r\t 　\)]|$)/g, 'ある');
   s = s.replace(/ありる/g, 'ある');
+  s = s.replace(/なりる(?=[。、\n\r\t 　\)]|$)/g, 'なる');
+  s = s.replace(/としてるる/g, 'として');
   s = s.replace(/([高低大少重軽長短深浅明確有意])くなりる/g, '$1くなる');
   
   // 動詞の「〜しる」誤変換修復
@@ -1885,7 +1887,8 @@ const MEDICAL_TERM_FIXES = [
   [/left atrial catheter dwell times?|左心房カテーテルの?滞留時間|左房カテーテル滞留時間/gi, '左房滞在時間'],
   [/バリパルス/g, 'Varipulse'],
   [/蛍光透視|透視検査/g, '透視'],
-  [/皮膚から皮膚まで|皮膚対皮膚/g, 'skin-to-skin'],
+  [/「?肌と肌の?」?|皮膚から皮膚まで|皮膚対皮膚/g, 'skin-to-skin'],
+  [/生理学から光学/g, '生理学から視覚'],
   [/傾向スコアマッチング|傾向スコアと一致した/g, 'プロペンシティスコアマッチング'],
   [/リエントリーサーキット|リエントラント回路|再入回路/gi, 'リエントリー回路'],
   [/critical Purkinje potentials?|臨界プルキンエ電位/gi, '重要なプルキンエ電位'],
