@@ -68,7 +68,7 @@ jobs:
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew assembleDebug
+          ./gradlew assembleDebug --no-daemon || ./gradlew assembleDebug --no-daemon
 
       - name: Copy APK to public/ and Build Web Assets
         run: |
