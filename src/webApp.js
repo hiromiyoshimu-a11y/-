@@ -1899,6 +1899,19 @@ const MEDICAL_TERM_FIXES = [
   [/処置時間/g, '手技時間'],
   [/多変数/g, '多変量'],
   [/回顧的|遡及的(?!に報告)/g, '後ろ向き'],
+  [/remote monitoring/gi, '遠隔モニタリング'],
+  [/atrial tachycardia/gi, '心房頻拍'],
+  [/\bdurability\b|耐久性/gi, 'デュラビリティ'],
+  [/\bbidirectional\b|双方向性/gi, '両方向性'],
+  [/双方向(?!(?:性|ブロック))/g, '両方向'],
+  [/false tendons?|偽腱索|偽腱|仮性腱(?!索)/gi, '仮性腱索'],
+  [/Activation mapping|活性化マップ/g, 'アクチベーションマップ'],
+  [/activation mapping|活性化マッピング|興奮マッピング|アクティベーションマッピング/gi, 'アクチベーションマッピング'],
+  [/moderat(?:e|or) band|調節帯|モデレータバンド/gi, 'モデレーターバンド'],
+  [/linear ablation|線形アブレーション|線状アブレーション/gi, '線状焼灼'],
+  [/left atrial dilat(?:at)?ion|左心房拡張|左心房拡大|左房拡張/gi, '左房拡大'],
+  [/recurrence-free rate|無再発率|再発回避率/gi, '非再発率'],
+  [/crista terminalis|分界稜|分界陵/gi, 'クリスタ・ターミナーリス'],
 ];
 
 function normalizeMedicalTerms(text) {

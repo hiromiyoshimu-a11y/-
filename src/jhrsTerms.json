@@ -1017,7 +1017,7 @@
   },
   {
     "en": "linear ablation",
-    "ja": "線状焼灼（アブレーション）"
+    "ja": "線状焼灼"
   },
   {
     "en": "linkage analysis",
@@ -2106,5 +2106,49 @@
   {
     "en": "Multivariable",
     "ja": "多変量"
+  },
+  {
+    "en": "remote monitoring",
+    "ja": "遠隔モニタリング"
+  },
+  {
+    "en": "atrial tachycardia",
+    "ja": "心房頻拍"
+  },
+  {
+    "en": "durability",
+    "ja": "デュラビリティ"
+  },
+  {
+    "en": "bidirectional",
+    "ja": "両方向性"
+  },
+  {
+    "en": "false tendons",
+    "ja": "仮性腱索"
+  },
+  {
+    "en": "activation mapping",
+    "ja": "アクチベーションマッピング"
+  },
+  {
+    "en": "moderator band",
+    "ja": "モデレーターバンド"
+  },
+  {
+    "en": "moderate band",
+    "ja": "モデレーターバンド"
+  },
+  {
+    "en": "left atrial dilatation",
+    "ja": "左房拡大"
+  },
+  {
+    "en": "recurrence-free rate",
+    "ja": "非再発率"
+  },
+  {
+    "en": "crista terminalis",
+    "ja": "クリスタ・ターミナーリス"
   }
 ]
