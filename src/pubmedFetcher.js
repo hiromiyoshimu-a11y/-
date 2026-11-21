@@ -270,10 +270,21 @@ export async function fetchCatheterAblationPapers(daysPast = 365, maxResults = 1
       const pagination = article.Pagination?.MedlinePgn || '';
 
       // 掲載日 (Publication Date)
+      // ※ PubDate (冊子/号の年月) に Day が無い月刊誌等で ArticleDate (電子公開日) の Day だけを混ぜると
+      // 「2026-Dec-07 (実際は 2026-Jul-07)」のような誤った日付になるため、絶対に混在させない。
+      const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const toMonthAbbr = (m) => {
+        if (!m) return '';
+        const s = String(m).trim();
+        const num = parseInt(s, 10);
+        if (!isNaN(num) && num >= 1 && num <= 12) return MONTH_NAMES[num - 1];
+        return s;
+      };
+
       const pubDateObj = journalIssue?.PubDate;
-      let pubYear = pubDateObj?.Year || '';
-      let pubMonth = pubDateObj?.Month || '';
-      let pubDay = pubDateObj?.Day || '';
+      let pubYear = pubDateObj?.Year ? String(pubDateObj.Year) : '';
+      let pubMonth = pubDateObj?.Month ? toMonthAbbr(pubDateObj.Month) : '';
+      let pubDay = pubDateObj?.Day ? String(pubDateObj.Day).padStart(2, '0') : '';
 
       if (!pubYear && pubDateObj?.MedlineDate) {
         const match = pubDateObj.MedlineDate.match(/\d{4}/);
@@ -281,11 +292,18 @@ export async function fetchCatheterAblationPapers(daysPast = 365, maxResults = 1
         pubMonth = pubDateObj.MedlineDate;
       }
 
-      if (article.ArticleDate) {
-        const eDate = Array.isArray(article.ArticleDate) ? article.ArticleDate[0] : article.ArticleDate;
-        if (!pubYear) pubYear = eDate.Year || '';
-        if (!pubMonth) pubMonth = eDate.Month || '';
-        if (!pubDay) pubDay = eDate.Day || '';
+      const eDateRaw = article.ArticleDate
+        ? (Array.isArray(article.ArticleDate) ? article.ArticleDate[0] : article.ArticleDate)
+        : null;
+      const eYear = eDateRaw?.Year ? String(eDateRaw.Year) : '';
+      const eMonth = eDateRaw?.Month ? toMonthAbbr(eDateRaw.Month) : '';
+      const eDay = eDateRaw?.Day ? String(eDateRaw.Day).padStart(2, '0') : '';
+
+      // PubDate に日 (Day) が無い場合、または電子公開日 (ArticleDate) が完全な年月日を持つ場合は電子公開日を優先する
+      if (eYear && eMonth && eDay && (!pubDay || !pubYear || !pubMonth)) {
+        pubYear = eYear;
+        pubMonth = eMonth;
+        pubDay = eDay;
       }
 
       const formattedPubDate = [pubYear, pubMonth, pubDay].filter(Boolean).join('-');
