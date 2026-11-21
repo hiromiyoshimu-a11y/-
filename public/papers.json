@@ -1,12 +1,15 @@
 {
-  "updatedAt": "2026-11-20",
-  "totalCount": 1355,
-  "newCount": 0,
+  "updatedAt": "2026-11-21",
+  "totalCount": 1356,
+  "newCount": 2,
   "latestSyncInfo": {
-    "syncDate": "2026-11-20",
-    "newCount": 0,
-    "journalCounts": {},
-    "message": ""
+    "syncDate": "2026-11-21",
+    "newCount": 2,
+    "journalCounts": {
+      "Circ Arrhythm Electrophysiol": 1,
+      "J Arrhythm": 1
+    },
+    "message": "Circ Arrhythm Electrophysiol (1件)、J Arrhythm (1件)から新着論文 2件 を自動収集・要約しました！"
   },
   "papers": [
     {
@@ -5410,7 +5413,7 @@
       "citation": "Pizzi D, Fazzini L, Pugliesi GM, Faizan MA, Rehman T, Meshkati H, et al.. Prognostic impact of ventricular arrhythmia timing in acute coronary syndromes treated with percutaneous coronary intervention: A systematic review and network meta-analysis.. Heart Rhythm. 2026 Oct 23;:. doi: 10.1016/j.hrthm.2026.10.040 doi.",
       "doi": "10.1016/j.hrthm.2026.10.040 doi",
       "url": "https://pubmed.ncbi.nlm.nih.gov/42913972/",
-      "abstract": "BACKGROUND:\nVentricular arrhythmias (VA) often complicate acute coronary syndromes. The prognostic impact of VA timing relative to percutaneous coronary intervention (PCI) remains unclear.\n\nOBJECTIVE:\nTo assess the prognostic significance of VA based on their timing of occurrence in relation to PCI.\n\nMETHODS:\nSystematic review and meta-analysis of observational studies reporting all-cause mortality with and without VA (sustained or hemodynamically unstable ventricular fibrillation/ventricular tachycardia) in acute coronary syndrome patients undergoing PCI. The endpoints analyzed were short-term (30 days/in-hospital) and long-term (1 year) mortality. A network meta-analysis comparing VA before PCI, VA during PCI, and VA after PCI with the group not experiencing VA as a reference was conducted.\n\nRESULTS:\nTwelve studies comprising 49,963 patients were included, of whom 3475 (7.0%) experienced VA. VA was associated with increased short- (OR, 5.04; 95% CI, 3.78-6.72) and long-term mortality (OR, 2.92; 95% CI, 2.20-3.86). In patients alive at discharge/30 days, subsequent long-term mortality risk did not differ between those with and without VA (OR, 0.97; 95% CI, 0.62-1.52). The network meta-analysis showed that all VA timings were associated with a significantly higher risk compared with the group not experiencing VA. Sensitivity analysis found that VA after is associated with higher short-term mortality than earlier VA (OR, 3.37; 95% CI, 1.46-7.82).\n\nCONCLUSION:\nVA substantially increases the risk of death in patients with acute coronary syndrome undergoing PCI. The mortality risk emerges as being associated with the timing of VA occurrence, with VA after PCI associated with the highest risk. These findings highlight the prognostic relevance of arrhythmic events across the entire peri-procedural window, underscoring the need for refined risk stratification.",
+      "abstract": "BACKGROUND:\nVentricular arrhythmias (VA) often complicate acute coronary syndromes. The prognostic impact of VA timing relative to percutaneous coronary intervention (PCI) remains unclear.\n\nOBJECTIVE:\nTo assess the prognostic significance of VA based on their timing of occurrence in relation to PCI.\n\nMETHODS:\nSystematic review and meta-analysis of observational studies reporting all-cause mortality with and without VA (sustained or hemodynamically unstable ventricular tachycardia/ventricular fibrillation) in acute coronary syndrome patients undergoing PCI. The endpoints analyzed were short-term (30 days/in-hospital) and long-term (1 year) mortality. A network meta-analysis comparing VA before PCI, VA during PCI, and VA after PCI with the group not experiencing VA as a reference was conducted.\n\nRESULTS:\nTwelve studies comprising 49,963 patients were included, of whom 3,475 (7.0%) experienced VA. VA was associated with increased short- (OR, 5.04; 95% CI, 3.78-6.72) and long-term mortality (OR, 2.92; 95% CI, 2.20-3.86). In patients alive at discharge/30 days, subsequent long-term mortality risk did not differ between those with and without VA (OR, 0.97; 95% CI, 0.62-1.52). The network meta-analysis showed that all VA timings were associated with a significantly higher risk compared with the group not experiencing VA. Sensitivity analysis found that VA after is associated with higher short-term mortality than earlier VA (OR, 3.37; 95% CI, 1.46-7.82).\n\nCONCLUSION:\nVA substantially increases the risk of death in patients with acute coronary syndrome undergoing PCI. The mortality risk emerges as being associated with the timing of VA occurrence, with VA after PCI associated with the highest risk. These findings highlight the prognostic relevance of arrhythmic events across the entire peri-procedural window, underscoring the need for refined risk stratification.",
       "designRank": 3,
       "studyTypeLabel": "観察研究・その他",
       "sampleSize": 49963,
@@ -13320,28 +13323,6 @@
       "firstSeen": "2026-11-15"
     },
     {
-      "pmid": "42302957",
-      "title": "Fluoroless high-density pulsed field vs radiofrequency ablation for atrial fibrillation guided by left atrial intracardiac echocardiography: The HALO protocol.",
-      "pubDate": "2026-Sep-16",
-      "journal": "Heart rhythm",
-      "journalAbbr": "Heart Rhythm",
-      "volumeIssuePage": "23(9):1907-1914",
-      "authors": "Saad GP, Slater C, Fernandes JA, Vignoli Dos Santos G, Oliveira LA, Saad EB",
-      "citation": "Saad GP, Slater C, Fernandes JA, Vignoli Dos Santos G, Oliveira LA, Saad EB. Fluoroless high-density pulsed field vs radiofrequency ablation for atrial fibrillation guided by left atrial intracardiac echocardiography: The HALO protocol.. Heart Rhythm. 2026 Sep 16;23(9):1907-1914. doi: 10.1016/j.hrthm.2026.06.011 doi.",
-      "doi": "10.1016/j.hrthm.2026.06.011 doi",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42302957/",
-      "abstract": "BACKGROUND:\nPulsed field ablation (PFA) is an alternative energy source to radiofrequency ablation (RFA) for atrial fibrillation (AF) with favorable safety and efficiency; however, outcomes are dependent on technique, lesion density, and tissue-contact assessment.\n\nOBJECTIVE:\nThis study aimed to compare outcomes of AF ablation using PFA vs RFA when performed in an identical fluoroless workflow incorporating electroanatomic mapping and intracardiac echocardiography (ICE) using the high-density antral left atrial (LA) ICE-guided overlapping protocol.\n\nMETHODS:\nThis was a retrospective analysis of 192 patients undergoing AF ablation guided by LA ICE for contact assessment. PFA (n = 62) used high-density antral pulmonary vein overlapping lesions, whereas RFA (n = 130) combined ICE tissue enhancement with contact-force guidance. Lesion delivery was guided by spatial density and contact quality.\n\nRESULTS:\nMean follow-up was 10.6 ± 4.3 months. Arrhythmia recurrence was lower with PFA (4.8%) than RFA (13.1%; 95% confidence interval, 0.09-1.15; P = .082). In paroxysmal AF, recurrence was significantly lower with PFA (2.1%) than RFA (15.8%; 95% confidence interval, 0.01-0.83; P = .011). In persistent AF, recurrence rates were similar (P = .569) despite a 3.5-fold higher proportion of redo procedures in the RFA group (P = .001) and more frequent posterior wall isolation in the PFA group (46.8% vs 20.8%; P < .001). Procedure duration was significantly shorter with PFA. No major complications occurred.\n\nCONCLUSION:\nIn a standardized fluoroless high-density antral LA ICE-guided overlapping workflow, PFA achieved better short-term rhythm control in paroxysmal AF and significantly shorter procedure times. In persistent AF, outcomes were comparable with RFA. Lesion strategy and quality are critical determinants of ablation success beyond energy source selection alone.",
-      "designRank": 3,
-      "studyTypeLabel": "観察研究・その他",
-      "sampleSize": 62,
-      "isTargetJournal": true,
-      "titleJa": "左心房心内心エコー検査による心房細動に対する無蛍光高密度パルスフィールドと高周波アブレーション: HALO プロトコル",
-      "summaryJa": "【背景】パルスフィールドアブレーション（PFA）は、安全性と効率が良好な心房細動（AF）に対する高周波アブレーション（RFA）の代替エネルギー源である。ただし、結果は技術に依存する (観察研究・その他 / N = 62 例)\n【方法】これは、接触評価のために LA ICE の指導により AF アブレーションを受けた 192 人の患者の遡及的分析であった。\n【結果】平均追跡期間は10.6±4.3ヶ月であった。\n【結論】標準化されたフルオロレス高密度前庭LA ICE誘導オーバーラップワークフローにおいて、PFAは発作性AFにおける短期リズム制御の向上と処置時間の大幅な短縮を達成した。",
-      "abstractJa": "背景:\nパルスフィールドアブレーション (PFA) は、安全性と効率が良好な心房細動 (AF) に対する高周波アブレーション (RFA) の代替エネルギー源である。ただし、結果は技術、病変密度、組織接触の評価によって異なりる。\n\n目的:\nこの研究は、電気解剖学的マッピングと高密度左心室前部 (LA) ICE ガイド オーバーラップ プロトコルを使用した心臓内心エコー検査 (ICE) を組み込んだ同一のフルオロレス ワークフローで実施した場合の、PFA と RFA を使用した AF アブレーションの結果を比較することを目的とした。\n\n方法:\nこれは、接触評価のために LA ICE の指導を受けて AF アブレーションを受けた 192 人の患者の遡及的分析であった。 PFA (n = 62) は高密度前庭部肺静脈重複病変を使用したが、RFA (n = 130) は ICE 組織強化と接触力ガイダンスを組み合わせた。病変の送達は、空間密度と接触の質によって決まった。\n\n結果:\n平均追跡期間は10.6±4.3ヶ月であった。不整脈の再発は、RFA (13.1%; 95% 信頼区間、0.09-1.15; P = 0.082) よりも PFA (4.8%) の方が低かった。発作性 AF では、再発率は RFA (15.8%、95% 信頼区間、0.01-0.83、P = 0.011) よりも PFA (2.1%) の方が有意に低かった。持続性AFでは、RFA群ではやり直しの割合が3.5倍高く（P = 0.001）、PFA群では後壁分離がより頻繁であったにも関わらず（P = 0.569）、再発率は同様であった（46.8% vs 20.8%; P < 0.001）。処置期間は PFA を使用すると大幅に短縮された。大きな合併症は発生しなかった。\n\n結論:\n標準化されたフルオロレス高密度前庭LA ICE誘導オーバーラップワークフローにおいて、PFAは発作性AFにおける短期リズム制御の向上と処置時間の大幅な短縮を達成した。持続性 AF では、結果は RFA と同等であった。病変の戦略と質は、エネルギー源の選択だけではなく、アブレーションの成功を決定する重要な要素である。",
-      "isNew": false,
-      "firstSeen": "2026-11-12"
-    },
-    {
       "pmid": "41823943",
       "title": "Combined Analysis of Cardiac Repolarization Entropy and Magnetic Resonance Imaging Enhances Risk Stratification of Patients Receiving a Primary-Prevention ICD.",
       "pubDate": "2026-Jul-14",
@@ -16642,6 +16623,28 @@
       "firstSeen": "2026-11-12"
     },
     {
+      "pmid": "43059580",
+      "title": "Dynamic Risk Assessment of Severe Ventricular Arrhythmia in Patients With Implantable Defibrillators and Reduced Left Ventricular Ejection Fraction.",
+      "pubDate": "2026-Nov-20",
+      "journal": "Circulation. Arrhythmia and electrophysiology",
+      "journalAbbr": "Circ Arrhythm Electrophysiol",
+      "volumeIssuePage": ":e015093",
+      "authors": "Diz-Díaz J, Lillo-Castellano JM, La Rosa G, Soto-Pérez M, Martínez-Ferrer J, Ricoy E, et al.",
+      "citation": "Diz-Díaz J, Lillo-Castellano JM, La Rosa G, Soto-Pérez M, Martínez-Ferrer J, Ricoy E, et al.. Dynamic Risk Assessment of Severe Ventricular Arrhythmia in Patients With Implantable Defibrillators and Reduced Left Ventricular Ejection Fraction.. Circ Arrhythm Electrophysiol. 2026 Nov 20;:e015093. doi: 10.1161/CIRCEP.125.015093 doi.",
+      "doi": "10.1161/CIRCEP.125.015093 doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43059580/",
+      "abstract": "BACKGROUND:\nDevice shocks are associated with an adverse prognosis in patients with implantable cardioverter-defibrillators. This study aimed to develop and validate a predictive model based on dynamic changes in intracardiac electrograms to assess the risk of polymorphic ventricular tachycardia or ventricular fibrillation (VF) events in patients with implantable cardioverter-defibrillators and heart failure with reduced ejection fraction (HFrEF).\n\nMETHODS:\nExperimental studies were conducted in pigs with HFrEF (N=8) to characterize intracardiac electrogram and surface ECG changes during HF decompensation. Sham-operated animals (N=6) were used as controls. In patients, the study used data from 2 independent cohorts of patients with ICDs. The first cohort included 5089 patients from 50 centers (199 218 tracings), leveraging electrical parameters associated with HFrEF decompensation in the experimental model to train and internally validate a dynamic convolutional neural network model for polymorphic ventricular tachycardia/VF prediction. External validation was performed in a second cohort of 2040 patients from 7 centers (369 845 tracings).\n\nRESULTS:\nIn pigs, HFrEF decompensation was associated with QRS prolongation on surface ECG tracings and reduced bipolar R-wave amplitude in intracardiac electrograms. Hemodynamic and electrical alterations of HFrEF decompensation significantly increased the risk of inducible VF episodes compared with sham-operated controls (87.5% versus 0%, respectively; <0.001). In a clinical setting, a convolutional neural network-derived model predicted first VF or polymorphic ventricular tachycardia events by analyzing temporal patterns of R-wave amplitude, QRS duration, and premature ventricular complex burden. This approach yielded areas under the receiver operating characteristic curve of 0.787 (0.753-0.817) for the training cohort and 0.725 (0.709-0.739) for the external validation cohort. Dynamic risk prediction using the convolutional neural network model significantly outperformed static risk assessment based on clinical variables (area under the receiver operating characteristic curve, 0.617 [0.602-0.632]).\n\nCONCLUSIONS:\nA convolutional neural network-derived model, grounded in the pathophysiology of HFrEF, provides dynamic risk assessment of VF or polymorphic ventricular tachycardia events in patients with implantable cardioverter-defibrillator devices.",
+      "designRank": 3,
+      "studyTypeLabel": "観察研究・その他",
+      "sampleSize": 8,
+      "isTargetJournal": true,
+      "titleJa": "植込み型除細動器を装着し、左心室駆出率が低下した患者における重度の心室不整脈の動的リスク評価",
+      "summaryJa": "【背景】デバイスショックは予後不良と関連している (観察研究・その他 / N = 8例)\n【方法】実験研究は、HFrEF のブタ (N=8) で行い、HF 代償不全中の心臓内心電図と表面 ECG 変化を特徴付けました。\n【結果】ブタでは、HFrEF の代償不全は、表面 ECG トレース上の QRS 延長と心臓内電位図における双極性 R 波振幅の減少と関連していました。\n【結論】HFrEF の病態生理学に基づいた畳み込みニューラル ネットワーク由来のモデルは、植込み型除細動器を装着した患者における VF または多形性心室頻拍イベントの動的リスク評価を提供し…",
+      "abstractJa": "背景: 植込み型除細動器を使用している患者では、デバイスショックは予後不良と関連しています。  この研究は、植込み型除細動器装着患者および駆出率低下心不全（HFrEF）患者における多型性心室頻拍または心室細動（VF）イベントのリスクを評価するために、心内電位図の動的な変化に基づく予測モデルを開発および検証することを目的としました。  方法: 実験研究は、HFrEF のブタ (N=8) で行われ、HF 代償不全中の心内電位図と表面 ECG 変化を特徴付けました。  偽手術動物(N=6)を対照として使用した。  患者を対象とした研究では、ICD患者の2つの独立したコホートからのデータが使用されました。 最初のコホートには、50 の施設からの 5,089 人の患者 (199 218 件の追跡) が含まれ、実験モデルで HFrEF 代償不全に関連する電気パラメーターを利用して、多型性心室頻拍/VF 予測のための動的畳み込みニューラル ネットワーク モデルをトレーニングおよび内部検証しました。  外部検証は、7 つの施設からの患者 2,040 人の第 2 コホートで実施されました (369,845 件の追跡)。  結果: ブタでは、HFrEF の代償不全は表面 ECG トレースにおける QRS 延長と心臓内電位図における双極 R 波振幅の減少と関連していた。  HFrEF 代償不全の血行力学的変化および電気的変化は、偽手術対照と比較して誘発性 VF エピソードのリスクを有意に増加させました (それぞれ 87.5% 対 0%; <0.001)。 臨床現場では、畳み込みニューラル ネットワーク由来のモデルが、R 波振幅、QRS 持続時間、および期外収縮負荷の時間的パターンを分析することにより、初発 VF または多形性心室頻拍イベントを予測しました。  このアプローチにより、受信者動作特性曲線の下の領域は、トレーニング コホートでは 0.787 (0.753 ～ 0.817)、外部検証コホートでは 0.725 (0.709 ～ 0.739) となりました。  畳み込みニューラル ネットワーク モデルを使用した動的リスク予測は、臨床変数に基づく静的リスク評価を大幅に上回りました (受信者動作特性曲線の下の面積、0.617 [0.602-0.632])。 結論：HFrEFの病態生理学に基づいた畳み込みニューラルネットワーク由来のモデルは、植込み型除細動器を装着した患者におけるVFまたは多形性心室頻拍イベントの動的リスク評価を提供する。",
+      "isNew": true,
+      "firstSeen": "2026-11-21"
+    },
+    {
       "pmid": "42619471",
       "title": "Clinical Presentation and Prognosis of Pathogenic Variants in Young-Onset Atrial Fibrillation.",
       "pubDate": "2026-Oct-20",
@@ -17256,6 +17259,28 @@
       "abstractJa": "背景:\nパルスフィールドアブレーション (PFA) は、心房性不整脈アブレーションにおける安全性が証明されている新興の非熱的アブレーションモダリティである。ただし、心室性不整脈 (VA) に対するその性能に関するデータは依然として限られている。\n\n目的:\n現実世界の米国多施設登録における複雑な VA に対する PFA の実現可能性、安全性、有効性を評価する。\n\n方法:\nこの後ろ向き研究には、メイヨークリニックの3つのセンターで心室頻拍（VT）または心室性期外収縮（PVC）のPFAを受けた連続患者が含まれた（2024年4月から2025年7月まで）。主要な実現可能性の成果は、意図した標的基質への PFA 損傷の送達の成功であった。主な有効性アウトカムには、急性処置の成功が含まれる。植込み型除細動器（ICD）ショックまたは複数回の抗頻脈ペーシング療法を必要とする持続的な心室頻拍再発。 PVC 負荷が 80% 以上削減される。安全性の結果には、処置上の合併症、弁機能、血栓塞栓性イベント、腎機能、伝導障害が含まれる。\n\n結果:\n26 人の患者が含まれた (PVC 13 人、VT 13 人)。すべての VT アブレーション (69.2% が完了、30.8% が部分的) および 92.3% の PVC アブレーションで急性成功が達成された。合併症は患者の 11.5% で発生した (一過性 LBBB [n = 1] および血管合併症 [n = 2])。血栓塞栓性イベント、心臓内血栓、または急性腎損傷は観察されなかった。僧帽弁装置付近の病変は、既存の弁膜症患者を含め、僧帽弁逆流を悪化させなかった。中央値365日の追跡調査の後、1人の患者がICDショックを必要とするVT再発を経験した。 VT アブレーション後の推定無再発生存率は 12 か月時点で 61.5% であった。 PVC 患者の 58.3% が 80% 以上の負担軽減を達成した。\n\n結論:\nVA に対する PFA は実行可能であり、非常に効果的であり、処置に関連した合併症の発生率は低いと考えられる。急性の成功率は高かったものの、長期的な結果は VT アブレーションでは許容範囲であり、PVC アブレーションでは比較的穏やかであり、技術とエネルギー供給戦略の継続的な改良の必要性が強調された。大規模な前向き研究が保証されている。",
       "isNew": false,
       "firstSeen": "2026-11-12"
+    },
+    {
+      "pmid": "43061305",
+      "title": "Rising Atrial Fibrillation Mortality Trends in Hypertensive Patients Aged 25 and Older: A CDC Wonder Database Analysis.",
+      "pubDate": "2026-Dec-18",
+      "journal": "Journal of arrhythmia",
+      "journalAbbr": "J Arrhythm",
+      "volumeIssuePage": "42(6):e70458",
+      "authors": "Naveed MA, Ali T, Ali A, Ahmed SR, Azeem B, Mansoor RI, et al.",
+      "citation": "Naveed MA, Ali T, Ali A, Ahmed SR, Azeem B, Mansoor RI, et al.. Rising Atrial Fibrillation Mortality Trends in Hypertensive Patients Aged 25 and Older: A CDC Wonder Database Analysis.. J Arrhythm. 2026 Dec 18;42(6):e70458. doi: 10.1002/joa3.70458 doi.",
+      "doi": "10.1002/joa3.70458 doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43061305/",
+      "abstract": "BACKGROUND:\nAtrial fibrillation (AF) is a leading arrhythmia contributing to cardiovascular mortality, particularly among individuals with Hypertension (HTN), yet long-term trends and disparities remain underexplored. We analyzed national patterns and sociodemographic differences in AF-related mortality among US adults aged 25 years or older from 1999 to 2023.\n\nMETHODS:\nWe used CDC WONDER mortality data (1999-2023) to analyze AF-related deaths among US adults aged ≥ 25 with HTN. Age-adjusted mortality rates (AAMR) per 100 000 and average annual percent changes (AAPC) were calculated using Joinpoint regression to assess overall and subgroup-specific trends.\n\nRESULTS:\nAF accounted for 1 108 265 deaths among adults with HTN, with AAMRs increasing from 3.8 in 1999 to 35.9 in 2023 (AAPC: 6.03%). The sharpest rise occurred from 2018 to 2021, with an APC of 14.57%, coinciding with the COVID-19 pandemic. Men had higher AAMRs than women (20.5 vs. 17.1). Racial disparities were evident, with non-Hispanic Whites having the highest AAMR (20.1), followed by non-Hispanic Blacks (15.1), Hispanics (11.3), and non-Hispanic Others (10.7). Regional variation showed that the West had the highest AAMR (20.8), while Vermont recorded the highest state rate (28.7), and Nevada had the lowest (11.4). Rural areas exhibited higher mortality rates than urban areas (17.8 vs. 16.1), with rural AAMRs increasing at a faster rate (AAPC: 10.61%).\n\nCONCLUSION:\nThe rising burden of AF-related mortality in hypertensive patients, especially among men, non-Hispanic Whites, and rural populations, signals a critical public health concern. Immediate, equity-focused interventions are needed to mitigate disparities and reduce AF-related mortality across the United States.",
+      "designRank": 3,
+      "studyTypeLabel": "観察研究・その他",
+      "sampleSize": 0,
+      "isTargetJournal": true,
+      "titleJa": "25 歳以上の高血圧患者における心房細動死亡率の上昇: CDC Wonder Database 分析",
+      "summaryJa": "【背景】心房細動（AF）は、特に高血圧症（HTN）患者の心血管系死亡に寄与する主な不整脈ですが、長期的な傾向と格差は依然として解明されていない。 (観察研究・その他 / 症例数: 不明)\n【方法】CDC WONDERの死亡率データ（1999～2023年）を使用して、HTNを患う25歳以上の米国成人におけるAF関連死亡を分析した。\n【結果】成人HTN患者の死亡のうち心房細動による死亡は1,108,265人であり、AAMRは1999年の3.8人から2023年には35.9人に増加した（AAPC：6.03％）。\n【結論】高血圧患者、特に男性、非ヒスパニック系白人、地方の人々の間でAF関連死亡率の増加は、公衆衛生上の重大な懸念を示している",
+      "abstractJa": "背景: 心房細動（AF）は、特に高血圧症（HTN）患者の心血管系死亡に寄与する主要な不整脈であるが、長期的な傾向と格差は依然として解明されていない。  我々は、1999年から2023年までの25歳以上の米国成人におけるAF関連死亡率の国家パターンと社会人口学的差異を分析した。方法：CDC WONDER死亡率データ（1999年から2023年）を使用して、HTNを有する25歳以上の米国成人におけるAF関連死亡を分析した。  10 万人あたりの年齢調整死亡率 (AAMR) と平均年間変化率 (AAPC) は、ジョインポイント回帰を使用して計算され、全体的およびサブグループ固有の傾向が評価されました。 結果： HTN 成人の死亡のうち心房細動による死亡は 1,108,265 人であり、AAMR は 1999 年の 3.8 人から 2023 年には 35.9 人に増加した（AAPC: 6.03%）。  最も急激に上昇したのは 2018 年から 2021 年で、APC は 14.57% で、これは新型コロナウイルス感染症のパンデミックと一致しました。  男性は女性よりもAAMRが高かった（20.5対17.1）。  人種間の格差は明らかで、AAMRが最も高かったのは非ヒスパニック系白人（20.1）で、次いで非ヒスパニック系黒人（15.1）、ヒスパニック系（11.3）、非ヒスパニック系その他（10.7）となった。  地域的なばらつきからは、西部が最も高い AAMR (20.8) を示し、バーモント州が最高の州率 (28.7) を記録し、ネバダ州が最低 (11.4) でした。  農村地域は都市地域よりも高い死亡率を示し(17.8対16.1)、農村地域のAAMRはより速い速度で増加しました(AAPC: 10.61%)。 結論: 高血圧患者、特に男性、非ヒスパニック系白人、農村部の人口における心房細動関連死亡率の増加は、公衆衛生上の重大な懸念を示している。  格差を緩和し、全米の心房細動関連死亡率を減らすためには、公平性に焦点を当てた即時介入が必要である。",
+      "isNew": true,
+      "firstSeen": "2026-11-21"
     },
     {
       "pmid": "43045045",
