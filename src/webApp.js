@@ -1543,12 +1543,12 @@ function setupSummaryVisibilityToggle() {
       if (homeToggleBtn) {
         homeToggleBtn.classList.remove('active');
         homeToggleBtn.setAttribute('aria-pressed', 'false');
-        homeToggleBtn.textContent = '📋 要約なし';
+        homeToggleBtn.textContent = '📋 タイトルのみ';
       }
       paperListEl.classList.add('hide-card-summary');
       localStorage.setItem('ep_paper_summary_visibility', 'hide');
       if (isUserAction) {
-        showToast('📋 要約を非表示にしました（タイトル一覧表示）');
+        showToast('📋 タイトルのみの一覧表示に切り替えました');
       }
     } else {
       if (hideBtn) hideBtn.classList.remove('active');
@@ -1556,12 +1556,12 @@ function setupSummaryVisibilityToggle() {
       if (homeToggleBtn) {
         homeToggleBtn.classList.add('active');
         homeToggleBtn.setAttribute('aria-pressed', 'true');
-        homeToggleBtn.textContent = '📝 要約あり';
+        homeToggleBtn.textContent = '📝 ポイントあり';
       }
       paperListEl.classList.remove('hide-card-summary');
       localStorage.setItem('ep_paper_summary_visibility', 'show');
       if (isUserAction) {
-        showToast('📝 臨床要約を表示しました');
+        showToast('📝 論文のポイントを表示しました');
       }
     }
   }
@@ -1962,6 +1962,70 @@ function formatSectionText(text) {
   return escaped;
 }
 
+const PLACEHOLDER_POINT_RE = /^(?:対象集団および治療介入プロトコル|主要評価項目および臨床経過の観察|臨床上の有用性と課題を検討|研究目的と対象|臨床知見の詳細については原著参照|心血管疾患治療における臨床アプローチの検証|要約準備中)[。．.]?$/;
+
+// 論文のポイント（箇条書き3〜4点）HTML生成ヘルパー
+function formatPaperPointsHtml(summaryText, includeHeader = true) {
+  if (!summaryText) {
+    return `${includeHeader ? '<div class="points-box-header">💡 論文のポイント</div>' : ''}<ul class="paper-points-list"><li>要約準備中</li></ul>`;
+  }
+  let str = normalizeJotaiStyle(normalizeMedicalTerms(String(summaryText)));
+  // 先頭・末尾のメタ情報タグ（(無作為化比較試験... / N = ...例) 等）を除去
+  str = str.replace(/\s*\((?:無作為化比較試験|前向き研究|後ろ向き研究|観察研究|症例報告)[^)]*?(?:N\s*=|症例数)[^)]*\)/g, '');
+
+  // すでに「・」の箇条書き形式ならそのまま使う
+  const rawLines = str.split('\n').map(l => l.trim()).filter(Boolean);
+  let points = [];
+  if (rawLines.length >= 2 && rawLines.every(l => /^[・•\-]/.test(l))) {
+    points = rawLines.map(l => l.replace(/^[・•\-]\s*/, '').trim()).filter(Boolean).slice(0, 4);
+  } else {
+    // 【背景】【方法】【結果】【結論】から要点を抽出して3〜4点の箇条書きに整理
+    const sectionMap = {};
+    const regex = /【(背景と目的|背景・目的|背景|目的|方法と結論|方法|結果|結論)】([\s\S]*?)(?=【(?:背景と目的|背景・目的|背景|目的|方法と結論|方法|結果|結論)】|$)/g;
+    let m;
+    while ((m = regex.exec(str)) !== null) {
+      const key = m[1];
+      let body = m[2].replace(/\n+/g, ' ').replace(/\s{2,}/g, ' ').trim();
+      if (body && !PLACEHOLDER_POINT_RE.test(body)) {
+        sectionMap[key] = body;
+      }
+    }
+
+    const candidates = [
+      sectionMap['方法'] || sectionMap['背景と目的'] || sectionMap['背景・目的'] || sectionMap['背景'] || sectionMap['目的'],
+      sectionMap['結果'] || sectionMap['方法と結論'],
+      sectionMap['結論'],
+    ].filter(Boolean);
+
+    // もし上記が1件以下しか取れなければ他のセクションも補完
+    if (candidates.length <= 1) {
+      for (const val of Object.values(sectionMap)) {
+        if (!candidates.includes(val)) candidates.push(val);
+      }
+    }
+
+    const seen = new Set();
+    for (const c of candidates) {
+      const cleaned = c.replace(/^および目的[:：]?\s*/, '').trim();
+      if (!cleaned || PLACEHOLDER_POINT_RE.test(cleaned)) continue;
+      const key = cleaned.slice(0, 24);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      points.push(cleaned);
+      if (points.length >= 4) break;
+    }
+
+    if (points.length === 0) {
+      const fallback = str.replace(/【[^】]+】/g, '').trim();
+      if (fallback) points.push(fallback);
+    }
+  }
+
+  const headerHtml = includeHeader ? '<div class="points-box-header">💡 論文のポイント</div>' : '';
+  const itemsHtml = points.map(p => `<li>${escapeHtml(p)}</li>`).join('');
+  return `${headerHtml}<ul class="paper-points-list">${itemsHtml}</ul>`;
+}
+
 function renderPapers() {
   const paperListEl = document.getElementById('paperList');
   if (!paperListEl) return;
@@ -2146,7 +2210,7 @@ function renderPapers() {
         </div>
         <div class="card-title-ja">${escapeHtml(normalizeMedicalTerms(paper.titleJa || paper.title))}</div>
         <div class="card-title-en">(${escapeHtml(paper.title)})</div>
-        <div class="card-summary-box">${formatSectionText(paper.summaryJa || '要約準備中')}</div>
+        <div class="card-summary-box">${formatPaperPointsHtml(paper.summaryJa || '', true)}</div>
         <div class="card-footer">
           <span>抄録全訳・原文を見る</span>
           <span>➔</span>
@@ -2199,8 +2263,8 @@ window.openDetail = function(pmid) {
   const isRead = readPapers.includes(pmidStr);
   const isBookmarked = bookmarks.includes(pmidStr);
 
-  // 臨床要約 (summaryJa) の見出しバッジ化（【背景】【背景と目的】【方法と結論】等に対応）
-  let formattedSummaryJa = formatSectionText(paper.summaryJa || '要約準備中');
+  // 論文のポイント (summaryJa) をパターンA（箇条書き3〜4点）へ整形
+  let formattedPointsHtml = formatPaperPointsHtml(paper.summaryJa || '要約準備中', false);
 
   // 抄録全訳 (abstractJa) の見出しバッジ化＆無駄な空白行完全排除
   let formattedAbsJa = formatSectionText(paper.abstractJa || paper.abstract || '抄録の全訳がありません。');
@@ -2242,8 +2306,8 @@ window.openDetail = function(pmid) {
     </div>
 
     <div class="section-block">
-      <div class="section-title">💡 臨床要約 (4項目ポイント)</div>
-      <div class="section-content">${formattedSummaryJa}</div>
+      <div class="section-title">💡 論文のポイント</div>
+      <div class="section-content">${formattedPointsHtml}</div>
     </div>
 
     <div class="section-block">

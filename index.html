@@ -92,8 +92,8 @@
             <option value="date_asc">🕰️ 掲載日 (古い順)</option>
             <option value="sampleSize">👥 症例数順</option>
           </select>
-          <button id="homeSummaryToggleBtn" type="button" class="home-summary-toggle-btn active" aria-pressed="true" title="臨床要約の表示・非表示を切り替え">
-            📝 要約あり
+          <button id="homeSummaryToggleBtn" type="button" class="home-summary-toggle-btn active" aria-pressed="true" title="論文のポイント表示・非表示を切り替え">
+            📝 ポイントあり
           </button>
         </div>
         <!-- 分野・領域絞り込み（EP/アブレーション 上室性・心室性 / デバイス） -->
@@ -208,7 +208,7 @@
                 <span class="guide-step-title">論文を読む・詳しい内容を見る</span>
               </div>
               <ul class="guide-list">
-                <li><strong>サッと要点を読む：</strong> 一覧のカードに書かれた<span class="guide-badge-blue">【背景】【方法】【結果】【結論】</span>を読むだけで、数秒で論文のポイントがわかります。</li>
+                <li><strong>サッと要点を読む：</strong> 一覧のカードに書かれた <span class="guide-badge-blue">💡 論文のポイント</span>（箇条書き3〜4点）を読むだけで、数秒で論文の要点がわかります。</li>
                 <li><strong>全訳や原文を見る：</strong> 気になる論文のカードを<strong>指で軽くタップ（押す）</strong>すると、画面の下から詳しいページが開き、抄録の日本語全訳や英語の原文、PubMedの公式ページを見ることができます。</li>
               </ul>
             </div>
@@ -240,11 +240,11 @@
             <div class="guide-section-card">
               <div class="guide-step-header">
                 <span class="guide-step-num">4</span>
-                <span class="guide-step-title">論文が多くて見づらいとき（要約のオン・オフ）</span>
+                <span class="guide-step-title">論文が多くて見づらいとき（ポイントのオン・オフ）</span>
               </div>
               <ul class="guide-list">
-                <li>ホーム画面の並び替え横にある <span class="guide-pill">📝 要約あり</span> / <span class="guide-pill">📋 要約なし</span> ボタンを押すと、ワンタップで表示を切り替えられます。</li>
-                <li><strong>「要約なし」</strong> にすると、タイトルと雑誌名だけのスッキリした一覧になり、たくさんの論文を素早く見渡せます。（タイトルを押せばいつでも要約を読めます）</li>
+                <li>ホーム画面の並び替え横にある <span class="guide-pill">📝 ポイントあり</span> / <span class="guide-pill">📋 タイトルのみ</span> ボタンを押すと、ワンタップで表示を切り替えられます。</li>
+                <li><strong>「タイトルのみ」</strong> にすると、タイトルと雑誌名だけのスッキリした一覧になり、たくさんの論文を素早く見渡せます。（タイトルを押せばいつでもポイントや全訳を読めます）</li>
               </ul>
             </div>
 
@@ -402,17 +402,17 @@
               </select>
             </div>
 
-            <!-- ⑥ 臨床要約（あり・なし） -->
+            <!-- ⑥ 論文のポイント（あり・なし） -->
             <div class="settings-item-block">
-              <div class="settings-label">⑥ 臨床要約の表示（一覧画面）</div>
-              <div class="segmented-control" role="group" aria-label="臨床要約の表示切替">
+              <div class="settings-label">⑥ 論文のポイント表示（一覧画面）</div>
+              <div class="segmented-control" role="group" aria-label="論文のポイント表示切替">
                 <button type="button" id="summaryModeShowBtn" class="segment-btn active" data-mode="show">
                   <span class="segment-icon">📝</span>
-                  <span class="segment-text">臨床要約 あり</span>
+                  <span class="segment-text">ポイントあり</span>
                 </button>
                 <button type="button" id="summaryModeHideBtn" class="segment-btn" data-mode="hide">
                   <span class="segment-icon">📋</span>
-                  <span class="segment-text">要約 なし (一覧)</span>
+                  <span class="segment-text">タイトルのみ</span>
                 </button>
               </div>
             </div>
