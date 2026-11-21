@@ -63,6 +63,18 @@ export const JOURNAL_SCHEDULES = [
     badgeClass: 'badge-ep'
   },
   {
+    id: 'hr_o2',
+    name: 'Heart Rhythm O2',
+    category: '不整脈専門誌（HRS公式オープンアクセス誌）',
+    frequency: '隔月刊（Bimonthly）',
+    releaseDay: '隔月1日頃',
+    releaseTiming: '年6回発行（Articles in Pressは採択後随時オンライン公開）',
+    epRelevance: '米国不整脈学会（HRS）のオープンアクセス公式誌。PFA・デバイス・臨床EP研究を幅広く掲載',
+    impactFactor: '2.5',
+    publisher: 'Heart Rhythm Society (Elsevier)',
+    badgeClass: 'badge-ep'
+  },
+  {
     id: 'europace',
     name: 'EP Europace',
     category: '不整脈専門誌（EHRA公式誌）',

@@ -687,9 +687,14 @@ const PREDEFINED_JOURNALS = [
     match: (t, a) => t.includes('interv card') || a.includes('interv card') || t.includes('jice') || a.includes('jice')
   },
   {
+    key: 'heart_rhythm_o2',
+    label: 'Heart Rhythm O2（Heart Rhythm O2）',
+    match: (t, a) => t.includes('heart rhythm o2') || a.includes('heart rhythm o2')
+  },
+  {
     key: 'heart_rhythm',
     label: 'Heart Rhythm（Heart Rhythm）',
-    match: (t, a) => (t.includes('heart rhythm') || a.includes('heart rhythm')) && !t.includes('case') && !a.includes('case')
+    match: (t, a) => (t.includes('heart rhythm') || a.includes('heart rhythm')) && !t.includes('case') && !a.includes('case') && !t.includes('o2') && !a.includes('o2')
   },
   {
     key: 'europace',
