@@ -2150,5 +2150,45 @@
   {
     "en": "crista terminalis",
     "ja": "クリスタ・ターミナーリス"
+  },
+  {
+    "en": "laboratory",
+    "ja": "血管造影室"
+  },
+  {
+    "en": "systemic right ventricle",
+    "ja": "体循環を担う解剖学的右室"
+  },
+  {
+    "en": "congenitally corrected transposition of the great arteries",
+    "ja": "修正大血管転移"
+  },
+  {
+    "en": "posterior wall isolation",
+    "ja": "後壁隔離"
+  },
+  {
+    "en": "left ventricular summit",
+    "ja": "LVサミット"
+  },
+  {
+    "en": "ST-segment Elevation",
+    "ja": "ST上昇"
+  },
+  {
+    "en": "manual compression",
+    "ja": "用手圧迫"
+  },
+  {
+    "en": "reconnection",
+    "ja": "再伝導"
+  },
+  {
+    "en": "re-isolate",
+    "ja": "再隔離"
+  },
+  {
+    "en": "Receiver operator curve",
+    "ja": "ROC曲線"
   }
 ]

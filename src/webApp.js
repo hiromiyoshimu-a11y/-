@@ -1917,6 +1917,18 @@ const MEDICAL_TERM_FIXES = [
   [/left atrial dilat(?:at)?ion|左心房拡張|左心房拡大|左房拡張/gi, '左房拡大'],
   [/recurrence-free rate|無再発率|再発回避率/gi, '非再発率'],
   [/crista terminalis|分界稜|分界陵/gi, 'クリスタ・ターミナーリス'],
+  [/Venous Vascular Closure System Versus Conventional Figure of Eight Suture Following Single Shot Device Pulmonary Vein Isolation/gi, 'シングルショットデバイスによる肺静脈隔離における静脈閉鎖システムと従来の八の字縫合の比較'],
+  [/静脈血管閉鎖システムとシングルショットデバイス肺静脈隔離後の\s*8\s*本の縫合糸による従来の図/g, 'シングルショットデバイスによる肺静脈隔離における静脈閉鎖システムと従来の八の字縫合の比較'],
+  [/(?:catheterization|electrophysiology|EP)\s+laboratory|カテーテル検査室|電気生理検査室|電気生理学検査室|EPラボ/gi, '血管造影室'],
+  [/systemic right ventricle|体循環右室|体心室右室/gi, '体循環を担う解剖学的右室'],
+  [/congenitally corrected transposition of the great arteries|先天性修正大血管転位/gi, '修正大血管転移'],
+  [/posterior wall isolation|左房後壁隔離|左心房後壁隔離/gi, '後壁隔離'],
+  [/left ventricular summit|左室サミット|左心室サミット/gi, 'LVサミット'],
+  [/ST-segment Elevation|ST部分上昇|STセグメント上昇/gi, 'ST上昇'],
+  [/manual compression|手動圧迫|手圧迫/gi, '用手圧迫'],
+  [/\breconnection\b|再接続/gi, '再伝導'],
+  [/re-?isolat(?:e|ion)|再分離/gi, '再隔離'],
+  [/Receiver operator curve|Receiver operating characteristic(?:\s+curve)?|受信者動作特性曲線/gi, 'ROC曲線'],
 ];
 
 function normalizeMedicalTerms(text) {
@@ -1969,7 +1981,25 @@ function formatSectionText(text) {
 
 const PLACEHOLDER_POINT_RE = /^(?:対象集団および治療介入プロトコル|主要評価項目および臨床経過の観察|臨床上の有用性と課題を検討|研究目的と対象|臨床知見の詳細については原著参照|心血管疾患治療における臨床アプローチの検証|要約準備中)[。．.]?$/;
 
-// 論文のポイント（箇条書き3〜4点）HTML生成ヘルパー
+function cleanPointFragment(raw) {
+  if (!raw) return '';
+  let s = raw
+    .replace(/\n+/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/^(?:そして|また|さらに|しかし|一方|なお|ただし|そのため|その結果|背景|目的|方法|結果|結論|対象と方法|対象・方法|および目的)[:：、。\s]*/g, '')
+    .replace(/でに/g, 'で')
+    .replace(/をを/g, 'を')
+    .replace(/がが/g, 'が')
+    .replace(/(?:\.\.\.|…)+[。．.]?$/g, '')
+    .trim();
+  // 短すぎる断片や助詞止め（「CSで」「そして」等）を除外
+  if (s.length < 14 || /^(?:そして|また|さらに|しかし|なお)$/.test(s) || /(?:で|に|を|が|は|と|の|へ|から|より)$/.test(s)) {
+    return '';
+  }
+  return s;
+}
+
+// 論文のポイント（3〜4行の要約段落）HTML生成ヘルパー
 function formatPaperPointsHtml(summaryText, includeHeader = true) {
   if (!summaryText) {
     return `${includeHeader ? '<div class="points-box-header">💡 論文のポイント</div>' : ''}<p class="paper-points-paragraph">要約準備中</p>`;
@@ -1982,15 +2012,18 @@ function formatPaperPointsHtml(summaryText, includeHeader = true) {
   const rawLines = str.split('\n').map(l => l.trim()).filter(Boolean);
   let points = [];
   if (rawLines.length >= 2 && rawLines.every(l => /^[・•\-]/.test(l))) {
-    points = rawLines.map(l => l.replace(/^[・•\-]\s*/, '').trim()).filter(Boolean).slice(0, 4);
+    points = rawLines
+      .map(l => cleanPointFragment(l.replace(/^[・•\-]\s*/, '')))
+      .filter(Boolean)
+      .slice(0, 4);
   } else {
-    // 【背景】【方法】【結果】【結論】から要点を抽出して3〜4点の箇条書きに整理
+    // 【背景】【方法】【結果】【結論】から要点を抽出して3〜4行の段落に整理
     const sectionMap = {};
     const regex = /【(背景と目的|背景・目的|背景|目的|方法と結論|方法|結果|結論)】([\s\S]*?)(?=【(?:背景と目的|背景・目的|背景|目的|方法と結論|方法|結果|結論)】|$)/g;
     let m;
     while ((m = regex.exec(str)) !== null) {
       const key = m[1];
-      let body = m[2].replace(/\n+/g, ' ').replace(/\s{2,}/g, ' ').trim();
+      const body = cleanPointFragment(m[2]);
       if (body && !PLACEHOLDER_POINT_RE.test(body)) {
         sectionMap[key] = body;
       }
@@ -2011,7 +2044,7 @@ function formatPaperPointsHtml(summaryText, includeHeader = true) {
 
     const seen = new Set();
     for (const c of candidates) {
-      const cleaned = c.replace(/^および目的[:：]?\s*/, '').trim();
+      const cleaned = cleanPointFragment(c);
       if (!cleaned || PLACEHOLDER_POINT_RE.test(cleaned)) continue;
       const key = cleaned.slice(0, 24);
       if (seen.has(key)) continue;
@@ -2021,7 +2054,7 @@ function formatPaperPointsHtml(summaryText, includeHeader = true) {
     }
 
     if (points.length === 0) {
-      const fallback = str.replace(/【[^】]+】/g, '').trim();
+      const fallback = cleanPointFragment(str.replace(/【[^】]+】/g, ''));
       if (fallback) points.push(fallback);
     }
   }
