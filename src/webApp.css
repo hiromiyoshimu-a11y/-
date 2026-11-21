@@ -862,17 +862,10 @@ body.light-theme .points-box-header {
   color: #0284C7;
 }
 
-.paper-points-list {
+.paper-points-paragraph {
   margin: 0;
-  padding-left: 16px;
-  list-style-type: disc;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.paper-points-list li {
-  line-height: 1.55;
+  line-height: 1.65;
+  color: var(--text-secondary);
 }
 
 .card-footer {

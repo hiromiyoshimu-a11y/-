@@ -1967,7 +1967,7 @@ const PLACEHOLDER_POINT_RE = /^(?:対象集団および治療介入プロトコ�
 // 論文のポイント（箇条書き3〜4点）HTML生成ヘルパー
 function formatPaperPointsHtml(summaryText, includeHeader = true) {
   if (!summaryText) {
-    return `${includeHeader ? '<div class="points-box-header">💡 論文のポイント</div>' : ''}<ul class="paper-points-list"><li>要約準備中</li></ul>`;
+    return `${includeHeader ? '<div class="points-box-header">💡 論文のポイント</div>' : ''}<p class="paper-points-paragraph">要約準備中</p>`;
   }
   let str = normalizeJotaiStyle(normalizeMedicalTerms(String(summaryText)));
   // 先頭・末尾のメタ情報タグ（(無作為化比較試験... / N = ...例) 等）を除去
@@ -2022,8 +2022,10 @@ function formatPaperPointsHtml(summaryText, includeHeader = true) {
   }
 
   const headerHtml = includeHeader ? '<div class="points-box-header">💡 論文のポイント</div>' : '';
-  const itemsHtml = points.map(p => `<li>${escapeHtml(p)}</li>`).join('');
-  return `${headerHtml}<ul class="paper-points-list">${itemsHtml}</ul>`;
+  const paragraph = points
+    .map(p => (/[。．.!?！？]$/.test(p) ? p : `${p}。`))
+    .join('');
+  return `${headerHtml}<p class="paper-points-paragraph">${escapeHtml(paragraph || '要約準備中')}</p>`;
 }
 
 function renderPapers() {
