@@ -4,11 +4,12 @@ on:
   workflow_dispatch:
   push:
     branches: [ main ]
-    paths:
-      - '.github/workflows/build_android_apk.yml'
-      - 'index.html'
-      - 'src/webApp.js'
-      - 'src/webApp.css'
+    paths-ignore:
+      - 'outputs/**'
+      - 'ios/**'
+      - 'scratch/**'
+      - '**/*.md'
+      - 'public/papers.json'
 
 permissions:
   contents: write
@@ -22,6 +23,9 @@ concurrency:
 jobs:
   build-android:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
