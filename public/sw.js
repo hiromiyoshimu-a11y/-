@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ep-papers-pwa-v48';
+const CACHE_NAME = 'ep-papers-pwa-v49';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
