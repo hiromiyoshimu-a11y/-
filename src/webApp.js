@@ -1924,11 +1924,13 @@ const MEDICAL_TERM_FIXES = [
   [/congenitally corrected transposition of the great arteries|先天性修正大血管転位/gi, '修正大血管転移'],
   [/posterior wall isolation|左房後壁隔離|左心房後壁隔離/gi, '後壁隔離'],
   [/left ventricular summit|左室サミット|左心室サミット/gi, 'LVサミット'],
-  [/ST-segment Elevation|ST部分上昇|STセグメント上昇/gi, 'ST上昇'],
+  [/ST-segment Elevation|ST部分上昇|ST\s*セグメント上昇/gi, 'ST上昇'],
   [/manual compression|手動圧迫|手圧迫/gi, '用手圧迫'],
   [/\breconnection\b|再接続/gi, '再伝導'],
   [/re-?isolat(?:e|ion)|再分離/gi, '再隔離'],
   [/Receiver operator curve|Receiver operating characteristic(?:\s+curve)?|受信者動作特性曲線/gi, 'ROC曲線'],
+  [/\bentrainment\b|エントレインメント（乗っ取り）/gi, 'エントレインメント'],
+  [/surgical window|外科的窓|外科窓|手術窓/gi, '外科的開窓'],
 ];
 
 function normalizeMedicalTerms(text) {

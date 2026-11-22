@@ -597,7 +597,7 @@
   },
   {
     "en": "entrainment",
-    "ja": "エントレインメント（乗っ取り）"
+    "ja": "エントレインメント"
   },
   {
     "en": "epicardial approach",
@@ -2174,6 +2174,10 @@
   {
     "en": "ST-segment Elevation",
     "ja": "ST上昇"
+  },
+  {
+    "en": "surgical window",
+    "ja": "外科的開窓"
   },
   {
     "en": "manual compression",
