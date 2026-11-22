@@ -7,8 +7,9 @@ dotenv.config();
  * 生成されたExcelレポートをメール送信
  * @param {string} filePath 添付するExcelファイルのパス
  * @param {number} paperCount 論文数
+ * @param {string} [xDraftsText] X投稿用の下書きテキスト（任意）
  */
-export async function sendEmailNotification(filePath, paperCount) {
+export async function sendEmailNotification(filePath, paperCount, xDraftsText = '') {
   const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, NOTIFICATION_EMAIL } = process.env;
   const recipientEmail = NOTIFICATION_EMAIL || 'hiromiyoshimu@gmail.com';
 
@@ -47,7 +48,7 @@ export async function sendEmailNotification(filePath, paperCount) {
 - 症例報告（Case Report）は下位に掲載しています。
 
 添付のExcelファイルをご確認ください。各論文には日本語5行要約および引用用テキスト（Vancouver形式）、PubMed直リンクが含まれております。
-
+${xDraftsText ? `\n${xDraftsText}\n` : ''}
 --
 自動送信システム (Antigravity PubMed Workflow)`,
     attachments: [

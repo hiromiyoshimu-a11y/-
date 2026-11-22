@@ -6,6 +6,7 @@ import { summarizePapers } from './summarizer.js';
 import { generateExcelReport } from './excelGenerator.js';
 import { generateJsonReport } from './jsonGenerator.js';
 import { sendEmailNotification } from './mailer.js';
+import { buildXPostDrafts } from './xDraftGenerator.js';
 
 dotenv.config();
 
@@ -63,8 +64,9 @@ async function main() {
       console.warn(`[Main] latest_catheter_ablation_papers.xlsx が開かれているためコピーをスキップしました。`);
     }
 
-    // 4. メール通知 (環境変数設定時のみ)
-    await sendEmailNotification(datedFilePath, summarizedPapers.length);
+    // 4. X投稿用下書き生成 & メール通知 (環境変数設定時のみ)
+    const { text: xDraftsText } = buildXPostDrafts(summarizedPapers);
+    await sendEmailNotification(datedFilePath, summarizedPapers.length, xDraftsText);
 
     console.log('\n✅ 処理が完了しました！');
     console.log(`📄 生成ファイル: ${datedFilePath}`);
