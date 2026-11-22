@@ -74,16 +74,18 @@ jobs:
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon || ./gradlew assembleDebug --no-daemon
 
-      - name: Copy APK to public/ and Build Web Assets
+      - name: Prepare APK and Publish to GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cp android/app/build/outputs/apk/debug/app-debug.apk public/EP-PFA-Papers.apk
-          npm run build
+          cp android/app/build/outputs/apk/debug/app-debug.apk EP-PFA-Papers.apk
+          gh release create latest-apk EP-PFA-Papers.apk --title "Latest Android APK" --notes "Latest Android APK build." --latest || gh release upload latest-apk EP-PFA-Papers.apk --clobber
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: EP-PFA-Papers-Android-APK
-          path: public/EP-PFA-Papers.apk
+          path: EP-PFA-Papers.apk
           retention-days: 90
 
       - name: Setup Pages
