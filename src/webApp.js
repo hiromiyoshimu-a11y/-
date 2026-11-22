@@ -2543,11 +2543,13 @@ window.sharePaper = async function(pmid) {
   const paper = allPapers.find(p => String(p.pmid) === String(pmid));
   if (!paper) return;
 
-  const title = paper.titleJa || paper.title;
+  const title = normalizeMedicalTerms(paper.titleJa || paper.title);
   const url = paper.url || `https://pubmed.ncbi.nlm.nih.gov/${paper.pmid}/`;
+  const noteUrl = 'https://note.com/dreamy_weasel596/n/n862b06f366b9';
+  const shareText = `【最新医学論文】${title} (${getJournalDisplayName(paper)})\n\n📱 EP & PFA Papers アプリ詳細\n${noteUrl}`;
   const shareData = {
     title: title,
-    text: `【最新医学論文】${title} (${getJournalDisplayName(paper)})`,
+    text: shareText,
     url: url
   };
 
@@ -2564,7 +2566,7 @@ window.sharePaper = async function(pmid) {
 
   // フォールバック: クリップボードにURLコピー
   if (navigator.clipboard) {
-    navigator.clipboard.writeText(`${title}\n${url}`).then(() => {
+    navigator.clipboard.writeText(`${shareText}\nPubMed: ${url}`).then(() => {
       showToast('🔗 論文リンクをクリップボードにコピーしました！');
     });
   }
