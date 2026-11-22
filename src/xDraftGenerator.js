@@ -2,7 +2,6 @@ import fs from 'fs';
 import path from 'path';
 
 const NOTE_URL = 'https://note.com/dreamy_weasel596/n/n862b06f366b9';
-const WEB_URL = 'https://hiromiyoshimu-a11y.github.io/-/';
 
 /**
  * X (Twitter) の加重文字数を計算する（URL=23、ASCII=1、全角=2、上限280）
@@ -19,7 +18,7 @@ export function xWeightedLength(text) {
 }
 
 /**
- * 指定加重文字数以内に文字列を丸める
+ * 指定加重文字数以内に文字列を丸める（どうしても収まらない極長タイトル用の最終フォールバック）
  */
 function truncateByWeighted(str, maxWeighted) {
   let out = '';
@@ -33,25 +32,6 @@ function truncateByWeighted(str, maxWeighted) {
     w += cw;
   }
   return out;
-}
-
-/**
- * summaryJa から X 向けの簡潔な臨床ポイントを抽出する
- */
-function extractClinicalSnippet(paper) {
-  const raw = String(paper.summaryJa || '')
-    .replace(/【[^】]+】/g, '')
-    .replace(/\([^)]*N\s*=\s*\d+[^)]*\)/g, '')
-    .replace(/\s+/g, ' ')
-    .trim();
-  if (!raw) return '';
-  const sentences = raw.split(/(?<=。)/).filter(Boolean);
-  // 結論寄りの文または先頭文を優先
-  const last = sentences[sentences.length - 1] || '';
-  if (sentences.length >= 2 && last.length >= 15 && last.length <= 75) {
-    return last.trim();
-  }
-  return sentences[0] ? sentences[0].trim() : raw;
 }
 
 function shortenJournal(paper) {
@@ -101,38 +81,65 @@ function scorePaperForX(paper) {
   return score;
 }
 
-function buildSinglePaperDraft(label, paper, url, tags) {
+/**
+ * 1本紹介ドラフト（タイトルを途中で切らずに全文入れる）
+ */
+function buildSinglePaperDraft(label, paper, tags) {
   const jShort = shortenJournal(paper);
   const header = `${label}（${jShort}）\n`;
-  const footer = `\n\n日本語ポイント・抄録全訳👇\n${url}\n${tags}`;
-  const remaining = 280 - xWeightedLength(header + footer) - 4;
+  const title = String(paper.titleJa || paper.title || '').trim();
 
-  const titleMax = Math.min(110, Math.floor(remaining * 0.48));
-  const titlePart = truncateByWeighted(paper.titleJa || paper.title, titleMax);
+  const footers = [
+    `\n\n日本語ポイント・抄録全訳👇\n${NOTE_URL}\n${tags}`,
+    `\n\n詳細・全訳👇\n${NOTE_URL}\n#循環器内科 #不整脈`,
+    `\n\n${NOTE_URL}\n#循環器内科`
+  ];
 
-  const snippet = extractClinicalSnippet(paper);
-  const pointMax = Math.max(40, remaining - xWeightedLength(titlePart) - 6);
-  const pointPart = snippet ? `\n💡 ${truncateByWeighted(snippet, pointMax)}` : '';
+  for (const footer of footers) {
+    const candidate = `${header}${title}${footer}`;
+    if (xWeightedLength(candidate) <= 280) {
+      return candidate;
+    }
+  }
 
-  return `${header}${titlePart}${pointPart}${footer}`;
-}
-
-function buildDigestDraft(papers, url, tags) {
-  const header = '今週の不整脈・EP主要誌ピックアップ⚡\n';
-  const footer = `\n日本語ポイント＆全訳はこちら👇\n${url}\n${tags}`;
-  const budget = 280 - xWeightedLength(header + footer) - 6;
-  const perItem = Math.floor(budget / Math.max(1, papers.length));
-
-  const lines = papers.map((p, idx) => {
-    const prefix = `${['①', '②', '③'][idx] || `${idx + 1}.`}${shortenJournal(p)}：`;
-    const body = truncateByWeighted(p.titleJa || p.title, Math.max(24, perItem - xWeightedLength(prefix) - 2));
-    return `${prefix}${body}`;
-  });
-  return `${header}${lines.join('\n')}${footer}`;
+  const minFooter = footers[footers.length - 1];
+  const remaining = 280 - xWeightedLength(header + minFooter);
+  return `${header}${truncateByWeighted(title, Math.max(40, remaining))}${minFooter}`;
 }
 
 /**
- * 論文配列から X 投稿用の半自動下書き3パターンを生成する
+ * まとめ紹介ドラフト（途中で切れない本数だけ、各論文のフルタイトルを入れる）
+ */
+function buildDigestDraft(papers, tags) {
+  const header = '今週の不整脈・EP主要誌ピックアップ⚡\n';
+  const footer = `\n\n日本語ポイント・抄録全訳👇\n${NOTE_URL}\n${tags}`;
+  const budget = 280 - xWeightedLength(header + footer);
+  const bullets = ['①', '②', '③'];
+
+  const selectedLines = [];
+  let used = 0;
+
+  for (const p of papers) {
+    if (selectedLines.length >= 3) break;
+    const title = String(p.titleJa || p.title || '').trim();
+    const line = `${bullets[selectedLines.length]}${shortenJournal(p)}：${title}`;
+    const lineCost = xWeightedLength(line) + (selectedLines.length > 0 ? 1 : 0);
+    if (used + lineCost <= budget) {
+      selectedLines.push(line);
+      used += lineCost;
+    }
+  }
+
+  // 1本も入らなかった場合のフォールバック
+  if (selectedLines.length === 0 && papers.length > 0) {
+    return buildSinglePaperDraft('【今週のピックアップ】', papers[0], tags);
+  }
+
+  return `${header}${selectedLines.join('\n')}${footer}`;
+}
+
+/**
+ * 論文配列から X 投稿用の半自動下書き3パターンを生成する（リンクはすべて note に統一）
  * @param {Array} papers
  * @returns {{ text: string, drafts: Array<{title: string, body: string, weightedLength: number}> }}
  */
@@ -151,16 +158,16 @@ export function buildXPostDrafts(papers = []) {
 
   const drafts = [
     {
-      title: '案1：注目論文 1本紹介（note記事誘導 / 火〜水曜向け）',
-      body: buildSinglePaperDraft('【注目論文】', pick1, NOTE_URL, '#循環器内科 #不整脈 #アブレーション')
+      title: '案1：注目論文 1本紹介（火〜水曜向け）',
+      body: buildSinglePaperDraft('【注目論文】', pick1, '#循環器内科 #不整脈 #アブレーション')
     },
     {
-      title: '案2：今週の主要誌まとめ 3本（Web版誘導 / 木〜金曜向け）',
-      body: buildDigestDraft([pick1, pick2, pick3], WEB_URL, '#循環器内科 #不整脈')
+      title: '案2：今週の主要誌ピックアップ（木〜金曜向け）',
+      body: buildDigestDraft([pick1, pick2, pick3], '#循環器内科 #不整脈')
     },
     {
-      title: '案3：別論文 1本紹介（デバイス・VT等 / 週末向け）',
-      body: buildSinglePaperDraft('【EP論文ピック】', pick2, WEB_URL, '#循環器内科 #不整脈 #PFA')
+      title: '案3：別論文 1本紹介（週末向け）',
+      body: buildSinglePaperDraft('【EP論文ピック】', pick2, '#循環器内科 #不整脈 #PFA')
     }
   ].map((d) => ({
     ...d,
