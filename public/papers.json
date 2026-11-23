@@ -1,12 +1,14 @@
 {
-  "updatedAt": "2026-11-22",
+  "updatedAt": "2026-11-23",
   "totalCount": 1390,
-  "newCount": 0,
+  "newCount": 1,
   "latestSyncInfo": {
-    "syncDate": "2026-11-22",
-    "newCount": 0,
-    "journalCounts": {},
-    "message": ""
+    "syncDate": "2026-11-23",
+    "newCount": 1,
+    "journalCounts": {
+      "J Arrhythm": 1
+    },
+    "message": "J Arrhythm (1件)から新着論文 1件 を自動収集・要約しました！"
   },
   "papers": [
     {
@@ -7512,6 +7514,28 @@
       "firstSeen": "2026-11-12"
     },
     {
+      "pmid": "43067977",
+      "title": "Clinical and Patient-Centered Outcomes of Catheter Ablation According to Symptom Status in Very Elderly Patients With Atrial Fibrillation: A Subgroup Analysis of the REHEALTH AF Registry.",
+      "pubDate": "2026-Nov-20",
+      "journal": "Journal of arrhythmia",
+      "journalAbbr": "J Arrhythm",
+      "volumeIssuePage": "42(6):e70525",
+      "authors": "Hirata S, Okumura Y, Nagashima K, Watanabe R, Yokoyama K, Matsumoto N, et al.",
+      "citation": "Hirata S, Okumura Y, Nagashima K, Watanabe R, Yokoyama K, Matsumoto N, et al.. Clinical and Patient-Centered Outcomes of Catheter Ablation According to Symptom Status in Very Elderly Patients With Atrial Fibrillation: A Subgroup Analysis of the REHEALTH AF Registry.. J Arrhythm. 2026 Nov 20;42(6):e70525. doi: 10.1002/joa3.70525 doi.",
+      "doi": "10.1002/joa3.70525 doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43067977/",
+      "abstract": "BACKGROUND:\nCatheter ablation can improve symptoms and functional status in very elderly patients with atrial fibrillation. However, it is uncertain if baseline symptom status can pinpoint those who will benefit the most.\n\nMETHODS:\nThis exploratory subgroup analysis examined data from the REHEALTH AF registry, which included patients aged 80 and above with non-valvular atrial fibrillation. Patients were categorized by baseline symptom status and compared based on treatment strategy: catheter ablation versus non-ablation management.\n\nRESULTS:\nOf 703 patients, 238 were asymptomatic, while 465 were symptomatic. Catheter ablation did not significantly reduce the primary composite endpoint in either asymptomatic (adjusted hazard ratio, 1.39; 95% confidence interval, 0.39-4.92; = 0.61) or symptomatic patients (adjusted hazard ratio, 0.66; 95% confidence interval, 0.36-1.20; = 0.17), with no significant interaction between treatment and symptoms. Exploratory analyses indicated ablation was associated with more favorable changes in a wider range of 1-year patient-centered measures among symptomatic patients, such as quality of life, self-rated health, Mini-Mental State Examination score, frailty distribution, N-terminal pro-B-type natriuretic peptide level, and left atrial diameter. In asymptomatic patients, improvements were mainly seen in self-rated health and N-terminal pro-B-type natriuretic peptide level.\n\nCONCLUSIONS:\nIn very elderly patients with atrial fibrillation, baseline symptom status did not identify those with a clear short-term event reduction following catheter ablation. Nevertheless, exploratory analyses revealed more favorable changes across various patient-centered measures in symptomatic patients, although formal evidence of effect modification was limited.\n\nTRIAL REGISTRATION:\nUniversity Hospital Medical Information Network Clinical Trials Registry, UMIN000047023.",
+      "designRank": 3,
+      "studyTypeLabel": "観察研究・その他",
+      "sampleSize": 703,
+      "isTargetJournal": true,
+      "titleJa": "心房細動の超高齢患者における症状状態に応じたカテーテルアブレーションの臨床的および患者中心の転帰：REHEALTH AF レジストリのサブグループ分析",
+      "summaryJa": "【背景】カテーテルアブレーションは超高齢者の症状と機能状態を改善が可能である (観察研究・その他 / N = 703例)\n【方法】この探索的サブグループ分析では、80 歳以上の非弁膜症性心房細動患者を含む REHEALTH AF レジストリのデータを検査しました。\n【結果】患者703人のうち、238人が無症状で、465人が症状があった。\n【結論】非常に高齢の心房細動患者では、ベースラインの症状状態から、カテーテルアブレーション後の明らかな短期イベントの減少がみられる患者は特定されなかった",
+      "abstractJa": "背景: カテーテルアブレーションは、心房細動を患う超高齢患者の症状と機能状態を改善することができます。  ただし、ベースラインの症状の状態から最も恩恵を受ける人を特定できるかどうかは不明です。  方法: この探索的サブグループ分析では、80 歳以上の非弁膜症性心房細動患者を含む REHEALTH AF レジストリからのデータを調べました。  患者はベースラインの症状状態によって分類され、カテーテルアブレーション管理と非アブレーション管理という治療戦略に基づいて比較されました。  結果: 患者 703 人のうち、238 人は無症状で、465 人は症状がありました。 カテーテルアブレーションは、無症候性患者（調整ハザード比、1.39; 95%信頼区間、0.39-4.92; = 0.61）または症候性患者（調整ハザード比、0.66; 95%信頼区間、0.36-1.20; = 0.17）のいずれにおいても主要複合評価項目を有意に低下させることはなく、治療と症状の間に有意な相互作用は見られなかった。  探索的分析により、アブレーションは、生活の質、健康自己評価、ミニメンタルステート検査スコア、虚弱分布、N末端プロB型ナトリウム利尿ペプチドレベル、左心房径など、症候性患者における1年間の患者中心の測定値のより好ましい変化と関連していることが示された。 無症候性患者では、主に自己評価の健康状態とN末端プロB型ナトリウム利尿ペプチドレベルに改善が見られました。  結論：超高齢の心房細動患者では、ベースラインの症状状態から、カテーテルアブレーション後の明らかな短期イベントの減少がみられる患者は特定されなかった。  それにもかかわらず、探索的分析により、症状のある患者における患者中心のさまざまな措置全体でより好ましい変化が明らかになったが、効果の修正に関する正式な証拠は限られていた。  治験登録: 大学病院医療情報ネットワーク臨床試験登録、UMIN000047023。",
+      "isNew": true,
+      "firstSeen": "2026-11-23"
+    },
+    {
       "pmid": "43014626",
       "title": "Pulsed Field or Cryoballoon Pulmonary Vein Isolation for Atrial Fibrillation in Heart Failure with Reduced Ejection Fraction.",
       "pubDate": "2026-Nov-11",
@@ -13272,28 +13296,6 @@
       "titleJa": "不整脈誘発表現型の特徴付けのための構造的心疾患における再分極異常の心電図イメージング",
       "summaryJa": "【背景】心電図イメージング（ECGI）により、3次元の活性化および再分極シーケンスの非攻撃的評価が可能になる。 (観察研究・その他 / N = 71例)\n【方法】構造的心疾患(SHD)を診断し、心筋瘢痕および心室頻拍(VT)状態との関係を評価する。\n\n方法:\n252 電極CT-ECGI受患者\n【結果】71名の患者が含まれた：瘢痕+/VT+の患者39名（虚血性28.3%、LVEF 41.2%±17.5%）、瘢痕+/VT-の患者14名（虚血性37.5%、LVEF 33.3%±10.6%）、LVEF/VT-障害のある患者9名（LVEF 21.\n【結論】SHDにおけるECGI由来のARI変化は、瘢痕の存在、貫壁性、およびVTの歴史と関連している。",
       "abstractJa": "背景:\n心電図イメージング (ECGI) により、3 次元の活性化および再分極シーケンスの非侵襲的評価が可能になりる。 ECGI によって心筋瘢痕に関連した再分極異常を検出し、不整脈誘発表現型を区別できるかどうかは体系的に調査されていない。\n\n目的:\nこの研究は、構造的心疾患 (SHD) 患者の洞調律における ECGI 由来の活性化時間と活性化回復間隔 (ARI) 指標を比較し、心筋瘢痕および心室頻拍 (VT) 状態との関係を評価することを目的とした。\n\n方法:\n252電極コンピュータ断層撮影ECGIおよび遅延造影磁気共鳴画像法を受けた患者を検討し、心筋瘢痕、左室駆出率（LVEF）、および再入性VTの病歴に従って分類した。再構築された単極活性化および再分極マップ、および派生した ARI マップは、3 次元磁気共鳴画像瘢痕モデルと同時登録された。 ARI 持続時間、ARI 分散、および活性化時間分散を心室レベルおよび分節レベルで推定し、グループおよび組織タイプ間で比較した。\n\n結果:\n71人の患者が含まれた：瘢痕+/VT+の患者39人（虚血性28.3％、LVEF 41.2％±17.5％）、瘢痕+/VT-の患者14人（虚血性37.5％、LVEF 33.3％±10.6％）、LVEF/VT-障害のある患者9人（LVEF 21.9％±17.5％） 5.6%)、および 9 対照 (LVEF 59.2% ± 7.1%)。洞調律では、ARI の持続時間と分散はグループと組織タイプ間で有意に異なった (すべて P < 0.05)。分節性 ARI は瘢痕領域で最も長く、心内膜下瘢痕 (16.5 ミリ秒 [IQR 16.1]) および瘢痕のない心筋層 (15.8 ミリ秒 [IQR 20.3]) よりも経壁瘢痕 (22.0 ミリ秒 [IQR 26.3]) および心外膜下瘢痕 (20.6 ミリ秒 [IQR 22.8]) で分散が高かった。P < .001）。瘢痕領域内の ARI 分散は、瘢痕 +/VT- コホートよりも瘢痕 +/VT+ の方が有意に高かった (β = -8.4 ミリ秒、P = 0.009)。活性化の分散は、正常な心筋と比較して瘢痕部位で有意に増加したが（β = -5.3 ms; P < 0.001）、VT 状態を識別する傾向のみを示した（P = 0.059）。重度の左心室機能不全は、明白な心筋瘢痕がない場合でも、対照と比較して有意に延長したARIおよび分散指標の上昇と関連していた。\n\n結論:\nSHD における ECGI 由来の ARI 変化は、瘢痕の存在、貫壁性、および VT 歴と関連している。心筋瘢痕に関連した部分的な ARI の分散は、不整脈原性リスクの補完的な非侵襲性マーカーとして機能する可能性がある。",
-      "isNew": false,
-      "firstSeen": "2026-11-12"
-    },
-    {
-      "pmid": "42758258",
-      "title": "High-density mapping of his-ventricular intervals: impact of recording site and sex-specific differences.",
-      "pubDate": "2026-Sep-18",
-      "journal": "Journal of interventional cardiac electrophysiology : an international journal of arrhythmias and pacing",
-      "journalAbbr": "J Interv Card Electrophysiol",
-      "volumeIssuePage": "69(6):1493-1501",
-      "authors": "Serban T, du Fay de Lavallaz J, Knecht S, Spreen D, Subin B, Stump R, et al.",
-      "citation": "Serban T, du Fay de Lavallaz J, Knecht S, Spreen D, Subin B, Stump R, et al.. High-density mapping of his-ventricular intervals: impact of recording site and sex-specific differences.. J Interv Card Electrophysiol. 2026 Sep 18;69(6):1493-1501. doi: 10.1007/s10840-026-02438-z doi.",
-      "doi": "10.1007/s10840-026-02438-z doi",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/42758258/",
-      "abstract": "BACKGROUND:\nAccurate assessment of the His-ventricular (HV) interval is essential to diagnosing infranodal conduction disease, but the influence of recording site and sex on HV values is not well defined.\n\nOBJECTIVE:\nTo evaluate the impact of measurement location and sex on HV interval values using high-density (HD) mapping catheters in patients undergoing atrial fibrillation (AF) ablation.\n\nMETHODS:\nWe prospectively studied patients in sinus rhythm undergoing AF ablation. HV intervals were measured with a decapolar catheter and a HD mapping catheter at the end of the procedure. HD-based HV intervals were classified as proximal (HV), distal (HV), and right bundle (HV) recordings. Conduction velocities and sex-specific differences were analyzed.\n\nRESULTS:\nA total of 67 patients (mean age 64 ± 10 years, 33%women) were evaluated. The clinical HV interval was 45 ± 9 ms and shorter in women (40 ms vs. 47 ms, p 55 ms) were more often detected using HV than HV or HV. Conduction velocities did not differ by sex and correlated poorly with surface ECG parameters.\n\nCONCLUSION:\nHV interval measurements vary significantly by recording site and sex. Proximal measurements reveal longer HV intervals and detect more conduction delays, while women have systematically shorter HV intervals. Anatomical precision and sex-specific interpretation are important for accurate diagnosis of infranodal conduction delay.",
-      "designRank": 3,
-      "studyTypeLabel": "観察研究・その他",
-      "sampleSize": 67,
-      "isTargetJournal": true,
-      "titleJa": "彼の心室間隔の高密度マッピング: 記録部位と性別固有の違いの影響",
-      "summaryJa": "【背景】結節下伝導疾患の診断にはヒス室（HV）間隔の正確な評価が不可欠であるが、記録部位や性別がHV値に及ぼす影響は十分に定義されていない。\n\nOBJECT (観察研究・その他 / N = 67 例)\n【方法】心房細動（AF）アブレーションを受ける。\n\n方法:\n私たちは、AF アブレーションを受けている洞調律患者を前向きに研究した。\n【結果】合計67人の患者(平均年齢64±10歳、女性33%)が評価された。\n【結論】HV 間隔の測定値は、記録部位と性別によって大きく異なりる。",
-      "abstractJa": "背景:\n結節下伝導疾患の診断にはヒス心室 (HV) 間隔の正確な評価が不可欠であるが、HV 値に対する記録部位と性別の影響は十分に定義されていない。\n\n目的:\n心房細動 (AF) アブレーションを受けている患者において高密度 (HD) マッピング カテーテルを使用して、測定位置と性別が HV 間隔値に及ぼす影響を評価する。\n\n方法:\n私たちは、AF アブレーションを受けている洞調律患者を前向きに研究した。 HV 間隔は、手順の最後に十極カテーテルと HD マッピング カテーテルを使用して測定された。 HD ベースの HV 間隔は、近位 (HV)、遠位 (HV)、および右束 (HV) 記録として分類された。伝導速度と性特異的な差異が分析された。\n\n結果:\n合計 67 人の患者 (平均年齢 64 ± 10 歳、女性 33%) が評価された。臨床的な HV 間隔は 45 ± 9 ミリ秒で、女性ではより短い (40 ミリ秒対 47 ミリ秒、p 55 ミリ秒) ことが、HV または HV よりも HV を使用して検出されることが多かった。伝導速度は性別によって差がなく、表面心電図パラメータとの相関は低かった。\n\n結論:\nHV 間隔の測定値は、記録部位と性別によって大きく異なりる。近接測定により、より長い HV 間隔が明らかになり、より多くの伝導遅延が検出されるが、女性は体系的に HV 間隔が短くなる。解剖学的精度と性別特有の解釈は、節下伝導遅延の正確な診断のために重要である。",
       "isNew": false,
       "firstSeen": "2026-11-12"
     },
