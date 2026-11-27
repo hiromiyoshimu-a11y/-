@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-11-26",
+  "updatedAt": "2026-11-27",
   "totalCount": 1395,
-  "newCount": 16,
+  "newCount": 7,
   "latestSyncInfo": {
-    "syncDate": "2026-11-26",
-    "newCount": 16,
+    "syncDate": "2026-11-27",
+    "newCount": 7,
     "journalCounts": {
-      "JACC Clin Electrophysiol": 5,
-      "Europace": 5,
-      "Heart Rhythm": 5,
-      "J Arrhythm": 1
+      "Heart Rhythm": 1,
+      "Europace": 2,
+      "J Cardiovasc Electrophysiol": 3,
+      "J Interv Card Electrophysiol": 1
     },
-    "message": "JACC Clin Electrophysiol (5件)、Europace (5件)、Heart Rhythm (5件) など4誌から新着論文 16件 を自動収集・要約しました！"
+    "message": "J Cardiovasc Electrophysiol (3件)、Europace (2件)、Heart Rhythm (1件) など4誌から新着論文 7件 を自動収集・要約しました！"
   },
   "papers": [
     {
@@ -319,28 +319,6 @@
       "titleJa": "肺静脈隔離のためのパルスフィールドアブレーションと熱アブレーション: ランダム化比較試験のネットワークメタ分析",
       "summaryJa": "【背景】パルスフィールドアブレーション（PFA）は、心房細動（AF）アブレーションにおける従来のエネルギー源（ES）に代わる有望な代替手段として最近浮上している。 (無作為化比較試験 (RCT) / N = 4,162 例)\n【方法と結論】開始から 2026 年 3 月まで、PubMed、Cochrane、EMBASE を使用した系統的なネットワーク メタ分析が実行された。  最初の試みの肺静脈隔離術におけるさまざまな ES を比較したランダム化比較試験が含まれていた。\n【結論】今回のデータは、最初の経カテーテル AF アブレーションを受ける患者において、PFA は従来の温熱技術と比較して良好な有効性と処置効率に関連している可能性があることを示しており、同時にほぼ同等の安全性プロファイルを示している。",
       "abstractJa": "【目的】\n パルスフィールドアブレーション (PFA) は、心房細動 (AF) アブレーション用の従来のエネルギー源 (ES) に代わる有望な代替手段として最近登場した。  ただし、PFA と、高周波 (RFA)、クライオバルーン (CBA)、レーザー バルーン アブレーション (LBA) などの他の ES との比較データは依然として限られている。このネットワーク メタ分析 (CRD420251054760) は、AF アブレーションにおける PFA と熱 ES の結果を比較することを目的としている。  【方法と結論】 開始から 2026 年 3 月まで、PubMed、Cochrane、EMBASE を使用した体系的なネットワーク メタ分析が実行された。  最初の試みの肺静脈隔離術におけるさまざまな ES を比較したランダム化比較試験が含まれていた。  データ抽出は PRISMA ガイドラインに従って実行された。 主要アウトカムは、12か月の追跡調査での持続性心房性頻脈性不整脈（ATA）の再発であった。  安全性と効率性の結果もグループ間で比較された。  4,162 人の患者を対象とした 18 件の研究が含まれた。  PFA と比較して、熱アブレーション技術は 12 か月の追跡調査で ATA 再発のリスクが高いことが示された (RFA: RR 1.48 (95% CI 1.10-2.00); CBA: 1.43 (95% CI 1.07-1.92); LBA: RR 1.29 (CI 95% 0.84-1.98))。  PFA は経カテーテル ES の中で最も短い処置時間を示したが、RFA は有意に短い透視時間を示した。  主要な手術周囲合併症については、有意差は記録されなかった。 発作性AF患者のみを対象とした研究と、現代の技術を使用した研究に限定したサブグループ分析では、一貫した知見が得られた。  結論：今回のデータは、最初の経カテーテル AF アブレーションを受ける患者において、PFA は従来の温熱技術と比較して有利な有効性と処置効率に関連している可能性があることを示しており、同時に、広く同等の安全性プロファイルを示している。",
-      "isNew": false,
-      "firstSeen": "2026-11-12"
-    },
-    {
-      "pmid": "40884774",
-      "title": "Biomarker-Based ABC-AF Risk Scores for Personalized Treatment to Reduce Stroke or Death in Atrial Fibrillation: A Registry-Based, Multicenter, Randomized, Controlled Study.",
-      "pubDate": "2025-Nov-25",
-      "journal": "Circulation",
-      "journalAbbr": "Circulation",
-      "volumeIssuePage": "152(21):1457-1469",
-      "authors": "Oldgren J, Hijazi Z, Arheden H, Björkenheim A, Frykman V, Janzon M, et al.",
-      "citation": "Oldgren J, Hijazi Z, Arheden H, Björkenheim A, Frykman V, Janzon M, et al.. Biomarker-Based ABC-AF Risk Scores for Personalized Treatment to Reduce Stroke or Death in Atrial Fibrillation: A Registry-Based, Multicenter, Randomized, Controlled Study.. Circulation. 2025 Nov 25;152(21):1457-1469. doi: 10.1161/CIRCULATIONAHA.125.076725 doi.",
-      "doi": "10.1161/CIRCULATIONAHA.125.076725 doi",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/40884774/",
-      "abstract": "BACKGROUND:\nThe clinical use of risk scores to guide treatment decisions and improve clinical outcomes has rarely been prospectively evaluated. This study aimed to evaluate whether a biomarker-based ABC-AF risk score-guided multidimensional treatment strategy improves long-term outcomes in patients with AF.\n\nMETHODS:\nThe multicenter, registry-based, randomized, controlled, open-label study enrolled adults with AF. In the ABC-AF strategy arm, the investigator was informed of each individual's ABC-AF score risks for stroke and bleeding, which were used as decision support to tailor treatment recommendations, including preference for type of direct oral anticoagulant treatment. In the standard of care arm, patient management was at the discretion of the investigator. Primary outcome was a composite of stroke or death. Secondary outcomes included stroke, death, major bleeding events, and their composite outcome.\n\nRESULTS:\nThe intention-to-treat population comprised 3933 patients with a median age of 73.7 years; 33.6% were women, 51.3% had paroxysmal AF, 11.2% had a previous stroke or transient ischemic attack, and 85.7% had oral anticoagulant treatment. After randomization, 97.8% in the ABC-AF strategy arm and 92.6% in the standard of care arm received OACs (<0.0001). Enrollment was prematurely terminated owing to safety concerns with a trend toward higher mortality in patients with CHADS-VASc scores of ≥3, and the study was therefore underpowered for its primary objective. Over a median follow-up of 2.6 years, 175 primary events (3.18/100 patient-years [100PY]) occurred in the ABC-AF strategy and 148 (2.67/100PY) in the standard of care arm (hazard ratio [HR], 1.19 [95% CI, 0.96-1.48]; =0.12). Major bleeding events were 152 (2.82/100PY) versus 141 (2.61/100PY; HR, 1.08 [95% CI, 0.86-1.36]; =0.50), stroke 48 (0.87/100PY) versus 41 (0.74/100PY; HR, 1.18 [95% CI, 0.78-1.79]; =0.44), death 136 (2.44/100PY) versus 113 (2.02/100PY; HR, 1.21 [95% CI, 0.94-1.55]; =0.13), and rates of composite stroke, death, or major bleeding 277 (5.21/100PY) versus 244 (4.55/100PY; HR, 1.14 [95% CI, 0.96-1.36]; =0.13). Primary outcome results were similar across ABC-AF score subgroups (interaction =0.98).\n\nCONCLUSIONS:\nThe individually tailored multidimensional treatment strategy, based on ABC-AF risk scores, did not improve clinical outcomes compared with usual guideline-based care in patients with AF. The results emphasize the need for prospective testing of the use of risk stratification and precision medicine tools in different clinical settings before implementation in routine care.\n\nREGISTRATION:\nURL: https://www.clinicaltrials.gov; Unique identifier: NCT03753490.",
-      "designRank": 1,
-      "studyTypeLabel": "無作為化比較試験 (RCT)",
-      "sampleSize": 3933,
-      "isTargetJournal": true,
-      "titleJa": "心房細動における脳卒中または死亡を軽減するための個別治療のためのバイオマーカーに基づくABC-AFリスクスコア：レジストリベースの多施設無作為化対照研究",
-      "summaryJa": "【背景】治療の決定を導き、臨床転帰を改善するためのリスクスコアの臨床使用は、前向きに評価されることはほとんどない。 (無作為化比較試験 (RCT) / N = 3,933例)\n【方法】この多施設共同、登録ベース、無作為化対照非盲検研究には、AFを患う成人が登録された。\n【結果】治療意思のある集団は 3,933 人の患者で構成され、年齢中央値は 73.7 歳であった。\n【結論】ABC-AFリスクスコアに基づいて個別に調整された多次元治療戦略は、AF患者における通常のガイドラインに基づく治療と比較して臨床転帰を改善しなかった",
-      "abstractJa": "【背景】\n 治療の決定を導き、臨床転帰を改善するためのリスクスコアの臨床使用は、前向きに評価されることはほとんどない。  この研究は、バイオマーカーに基づくABC-AFリスクスコアに基づく多次元治療戦略がAF患者の長期転帰を改善するかどうかを評価することを目的とした。  方法：この多施設共同、登録ベース、無作為化対照非盲検研究には、AFを患う成人が登録された。  ABC-AF戦略部門では、研究者は脳卒中と出血に対する各個人のABC-AFスコアのリスクを知らされ、直接経口抗凝固薬治療の種類の好みなど、治療の推奨を調整するための意思決定のサポートとして使用された。  標準治療部門では、患者管理は研究者の裁量に任されていた。 主要転帰は脳卒中または死亡の複合であった。  二次アウトカムには、脳卒中、死亡、大出血イベント、およびそれらの複合アウトカムが含まれる。  結果: 治療意思のある集団は 3,933 人の患者で構成され、年齢中央値は 73.7 歳であった。 33.6%が女性、51.3%が発作性AF、11.2%が脳卒中または一過性虚血発作の既往があり、85.7%が経口抗凝固薬治療を受けていた。  無作為化後、ABC-AF戦略群では97.8%、標準治療群では92.6%がOACを受けた(<0.0001)。  CHADS-VAScスコアが3以上の患者では死亡率が高くなる傾向にあるという安全上の懸念から、登録は時期尚早に終了され、そのためこの研究はその主目的に対して不十分であった。 追跡期間中央値2.6年で、ABC-AF戦略では175件（3.18/100患者年[100PY]）の主要イベントが発生し、標準治療群では148件（2.67/100PY）が発生した（ハザード比[HR]、1.19[95％CI、0.96-1.48]; =0.12）。  主な出血事象は 152 件（2.82/100PY）対 141 件（2.61/100PY; HR、1.08 [95% CI、0.86-1.36]; =0.50）、脳卒中 48 件（0.87/100PY）対 41 件（0.74/100PY; HR、1.18 [95% CI、0.78-1.79]; =0.44)、死亡 136 人 (2.44/100PY) 対 113 人 (2.02/100PY; HR、1.21 [95% CI, 0.94-1.55]; =0.13)、複合脳卒中、死亡、または大出血の割合 277 人 (5.21/100PY) vs 244 (4.55/100PY; HR、1.14 [95% CI、0.96-1.36]; =0.13)。  主要結果の結果は、ABC-AF スコアサブグループ全体で同様であった (交互作用 =0.98)。 結論：ABC-AFリスクスコアに基づいて個別に調整された多次元治療戦略は、AF患者における通常のガイドラインに基づく治療と比較して臨床転帰を改善しなかった。  この結果は、日常診療に導入する前に、さまざまな臨床現場でリスク層別化と精密医療ツールの使用について前向きにテストする必要性を強調している。  登録: URL: https://www.clinicaltrials.gov;一意の識別子: NCT03753490。",
       "isNew": false,
       "firstSeen": "2026-11-12"
     },
@@ -1507,7 +1485,7 @@
       "titleJa": "左脚枝ペーシング結果に対するペーシングリードデザインの比較: LEAD-LBBP ランダム化臨床試験",
       "summaryJa": "【背景】スタイレット駆動リード (SDL) は、左脚ペーシング (LBBP) での植込み中の左脚捕捉 (LLC) の損失の増加とリードの損傷に関連している。 (無作為化比較試験 (RCT) / N = 226例)\n【方法】LEAD-LBBP (左脚ペーシング結果に関するペーシングリードデザインの比較: LEAD_LBBP ランダム化臨床試験) は、LLL または SDL に対して 1:1 …\n【結果】患者226人（平均年齢74.9±9.6歳、女性97人[44％]）のうち、113人がLLLグループに、113人がSDLグループにランダムに割り付けられた。\n【結論】LBBP レシピエントでは、LLL と比較して SDL の方が追跡調査中の LLC の発生率が高く、急性 LBBP 処置の成功率が低く、移植中の急性リード損傷が大きかった",
       "abstractJa": "背景: スタイレット駆動リード (SDL) は、左脚ペーシング (LBBP) における植込み中の左脚捕捉 (LLC) の損失の増加とリードの損傷に関連しています。  目的: この研究では、ルーメンレスリード (LLL) または SDL を受け取るように無作為に割り付けられた LBBP レシピエントにおける LLC とペーシング結果の違いを調べました。  方法：LEAD-LBBP（左脚枝ペーシング結果に関するペーシングリードデザインの比較：LEAD_LBBPランダム化臨床試験）は、LBBPレシピエントを対象とした多施設盲検ランダム化臨床試験で、LLLまたはSDLに対して1：1の比率でブロックランダム化が行われた。  主要評価項目は、両グループにおけるLLCの発生率でした。 副次評価項目には、急性LBBP成功率、新しいリードを必要とする急性リード損傷、ペーシングパラメータ、合併症、臨床転帰（新規発症心房細動[AF]、心不全入院、全死因死亡率）が含まれた。  結果：患者226名（平均年齢74.9±9.6歳、女性97名[44％]）のうち、113名がLLLグループに、113名がSDLグループにランダムに割り付けられた。  主要評価項目である12カ月時点のLLCは36人（16％）の患者で発生し、LLLと比較してSDLの方が頻度が高く（22％対10％、P＝0.011）、リスクが2.7倍増加した（HR：2.72、95％CI：1.34-5.54、P＝0.006）。  SDL は、急性 LBBP 成功率の低下 (96% LLL 対 85% SDL; P = 0.007)、および急性リード損傷の高い発生率 (10% SDL 対 3% LLL; P = 0.027; OR: 3.95; 95% CI: 1.07-14.58) とも関連していました。 ペーシングパラメーター、全体的な合併症、および臨床転帰は、SDL グループと LLL グループの間で同等でした (P > 0.05)。  結論: LBBP レシピエントでは、LLL と比較して SDL の方が追跡調査中の LLC の発生率が高く、急性 LBBP 処置の成功率が低く、移植中の急性リード損傷が大きかった。  これらの発見は、LBBP におけるリード選択に重要な意味を持ちます (左脚枝ペーシング結果に関するペーシングリード設計の比較: LEAD_LBBP ランダム化臨床試験 [LEAD-LBBP]; NCT06318130)。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -4635,28 +4613,6 @@
       "firstSeen": "2026-11-12"
     },
     {
-      "pmid": "41655229",
-      "title": "Workflow and sedation choice with the PFA variable-loop circular catheter in real-world AF procedures: insights from the prospective multi-centre VARIPURE clinical study.",
-      "pubDate": "2026-Feb-03",
-      "journal": "Europace : European pacing, arrhythmias, and cardiac electrophysiology : journal of the working groups on cardiac pacing, arrhythmias, and cardiac cellular electrophysiology of the European Society of Cardiology",
-      "journalAbbr": "Europace",
-      "volumeIssuePage": "28(2)",
-      "authors": "Sommer P, Kronborg MB, Sebag F, Sohns C, De Potter T, Bessière F, et al.",
-      "citation": "Sommer P, Kronborg MB, Sebag F, Sohns C, De Potter T, Bessière F, et al.. Workflow and sedation choice with the PFA variable-loop circular catheter in real-world AF procedures: insights from the prospective multi-centre VARIPURE clinical study.. Europace. 2026 Feb 03;28(2):. doi: 10.1093/europace/euag025 doi.",
-      "doi": "10.1093/europace/euag025 doi",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41655229/",
-      "abstract": "抄録なし (Abstract not available)",
-      "designRank": 2,
-      "studyTypeLabel": "前向き研究 (Prospective)",
-      "sampleSize": 0,
-      "isTargetJournal": true,
-      "titleJa": "実際の AF 処置における PFA 可変ループ円形カテーテルを使用したワークフローと鎮静の選択: 前向き多施設 VARIPURE 臨床研究からの洞察",
-      "summaryJa": "【背景】実際の AF 処置における PFA 可変ループ円形カテーテルを使用したワークフローと鎮静の選択: 前向き多施設 VARIPURE 臨床研究からの洞察。 (前向き研究(Prospective) / 症例数：不明)\n【方法】対象集団および治療介入プロトコル\n【結果】主要評価項目および臨床経過の観察\n【結論】実際の AF 処置における PFA 可変ループ円形カテーテルを使用したワークフローと鎮静の選択: 前向き多施設 VARIPURE 臨床研究からの洞察。",
-      "abstractJa": "Workflow and sedation choice with the PFA variable-loop circular catheter in real-world AF procedures: insights from the prospective multi-centre VARIPURE clinical study.。\n詳細な抄録本文はPubMed原文リンクをご参照ください。",
-      "isNew": false,
-      "firstSeen": "2026-11-12"
-    },
-    {
       "pmid": "41177321",
       "title": "Association of blood inflammatory biomarkers with the incidence of atrial fibrillation among senior adults: An 8-year prospective cohort study.",
       "pubDate": "2025-Oct-31",
@@ -4741,7 +4697,7 @@
       "titleJa": "心房細動と院外心停止との関連性の調査：デンマーク全国一致コホート研究",
       "summaryJa": "【背景】心房細動（AF）は差し迫った世界的流行であり、院外心停止（OHCA）は高い死亡率と関連している。 (観察研究・その他 / N = 309,010例)\n【方法】これは、デンマークの心停止登録簿（2001年6月1日から2022年12月31日まで）を使用した、18歳から85歳までの個人を対象としたデンマークの全国規模の対応コホート研…\n【結果】AF の診断/照合時からの累積発生率、OHCA および全死因死亡率の HR として表される。\n【結論】調査結果は、虚血性心疾患および心不全の調整後であっても、AF が依然として OHCA の危険因子であることを示唆している",
       "abstractJa": "背景: 心房細動（AF）は差し迫った世界的流行であり、院外心停止（OHCA）は高い死亡率と関連している。  AFとOHCAを関連付ける証拠が新たに発表されているが、研究は共通の危険因子、特に虚血性心疾患や心不全によって課題が提起されている。  目的：この研究は、虚血性心疾患と心不全の危険因子を考慮して、AFとOHCAの関連性を調査することを目的としました。  方法：これは、デンマークの心停止登録簿（2001年6月1日から2022年12月31日まで）を使用した、18歳から85歳までの個人を対象としたデンマークの全国対応コホート研究でした。  曝露は心房細動の診断であり、転帰はOHCAと全死因死亡であった。 性別、誕生年、虚血性心疾患、心不全、糖尿病、癌、肥大型心筋症、拡張型心筋症、スタチン使用状況に基づいて、AF患者と非AF患者の1:4マッチングが行われた。  多変量 Cox 回帰モデルが使用され、結果は AF 診断/照合時からの累積発生率、OHCA および全死因死亡率の HR として表示されました。  結果： この研究には647万人が参加し、そのうち36万8,639人が心房細動を患っていた。  合計 309,010 人の AF 患者 (同期間に新たに診断された患者のみ) が 1,236,040 人の非 AF 患者と照合されました。  OHCAの調整後HRと全死因死亡率は、非AF患者と比較してAF患者の方が高かった（それぞれ1.66 [95% CI: 1.62-1.70]および1.79 [95% CI: 1.78-1.81]）。 結論：調査結果は、虚血性心疾患および心不全に対する調整後であっても、AF が OHCA の危険因子であり続けることを示唆しています。  今後の研究では、OHCAのリスクが最も高いAF患者のサブセットを調査し、この患者グループに合わせた予防努力を行う必要がある。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -5029,6 +4985,28 @@
       "abstractJa": "背景:\n心房細動（AF）に対するカテーテルアブレーション後の転帰に対する高齢の影響は依然として不明である。この系統的レビューとメタ分析では、イベント発生までの時間再構成を使用して、高齢者と非高齢者の間で長期的な有効性と安全性を比較した。\n\n方法:\n2026 年 1 月までの比較研究として、PubMed、Scopus、Embase、Web of Science の包括的な検索が実施された。主な結果は心房細動の再発であった。副次的アウトカムには、死亡、脳卒中、処置上の合併症が含まれる。ペアワイズメタアナリシスの推定リスク比 (RR)、および個々の患者レベルのイベント発生までの時間データは、カプラン マイヤー曲線から再構成され、ハザード比 (HR) が計算された。\n\n結果:\n22,921 人の患者を対象とした 28 件の研究が分析に含まれた。高齢患者は、非高齢患者と比較して、AF再発リスクが有意に高かった（RR 1.174、95% CI 1.068-1.290、P < 0.001、I = 55%）。これは、80歳以上（RR 1.155、95% CI 1.057-1.263; P = 0.001）および75歳以上（RR 1.224、95% CI 1.039-1.441; P = 0.015）を含む年齢サブグループ全体で一貫しており、サブグループ間に有意差はなかった（P = 0.54）。イベント発生までの時間解析により、75 年以上 (HR 1.147、95% CI 1.037-1.268; P = 0.008) および 80 年以上 (HR 1.127、95% CI) を含むこれらの所見 (HR 1.138、95% CI 1.055-1.227; P = 0.001) が確認された1.005-1.264;P = 0.040)。高齢患者では、全死因死亡（RR 3.978、95% CI 2.852-5.547; P < 0.001）、脳卒中（RR 2.136、95% CI 1.336-3.414; P = 0.002）、心血膜/タンポナーデ（RR 1.610、95%）のリスクも高かった。 CI 1.061-2.442; P = 0.025）、房食道瘻（RR 4.398、95% CI 1.638-11.811; P = 0.003）、肺静脈狭窄（RR 4.022、95% CI 1.281-12.632; P = 0.017）、心膜炎（RR 1.830、95% CI 0.653-5.129; P = 0.250）、血管合併症（RR 1.183、95% CI 0.854-1.637; P = 0.312）、または横隔神経麻痺（RR）には有意差はなかった。 1.449、95% CI 0.985-2.130、P = 0.059)。\n\n結論:\n高齢患者では、カテーテルアブレーション後に心房細動の再発が多く、死亡や脳卒中などの重大な合併症のリスクが増加しており、個別のリスク評価と共有された意思決定の必要性が強調されている。",
       "isNew": false,
       "firstSeen": "2026-11-12"
+    },
+    {
+      "pmid": "43085557",
+      "title": "Risk of Stroke and Transient Ischemic Attack After Pulsed Field Ablation Compared with Thermal Ablation for Atrial Fibrillation: A Meta-Analysis.",
+      "pubDate": "2026-Nov-25",
+      "journal": "Heart rhythm",
+      "journalAbbr": "Heart Rhythm",
+      "volumeIssuePage": "",
+      "authors": "Rodrigues Oliveira VM, Barbosa LM, Anastácio Alcântara RW, Ferreira Tartuce Filho PR, Tartuce LP, Carlos da Costa Darrieux F",
+      "citation": "Rodrigues Oliveira VM, Barbosa LM, Anastácio Alcântara RW, Ferreira Tartuce Filho PR, Tartuce LP, Carlos da Costa Darrieux F. Risk of Stroke and Transient Ischemic Attack After Pulsed Field Ablation Compared with Thermal Ablation for Atrial Fibrillation: A Meta-Analysis.. Heart Rhythm. 2026 Nov 25;:. doi: 10.1016/j.hrthm.2026.11.039 doi.",
+      "doi": "10.1016/j.hrthm.2026.11.039 doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43085557/",
+      "abstract": "BACKGROUND:\nWhether pulsed field ablation (PFA) carries a cerebrovascular risk different from that of thermal ablation has been questioned since an adjudicated cohort reported a higher 30-day incidence of stroke or transient ischemic attack (TIA) with PFA. Previous meta-analyses addressed this question only as a secondary outcome, with pooling methods poorly suited to rare events.\n\nOBJECTIVES:\nTo compare the incidence of stroke or TIA after PFA and thermal ablation for atrial fibrillation.\n\nMETHODS:\nWe searched PubMed, Embase and the Cochrane Library through September 2026 for studies comparing PFA with thermal ablation for atrial fibrillation (AF). The primary endpoint was the composite of stroke or TIA within 30 days; secondary endpoints were stroke and TIA within 30 days, and all endpoints over the full follow-up. Effects were pooled as random-effects Peto odds ratios (ORs).\n\nRESULTS:\nTwenty-eight studies comprising 21,915 patients were included. Within 30 days, stroke or TIA occurred in 24 of 6,688 patients after PFA and in 17 of 10,973 after thermal ablation (OR 2.18; 95% CI 1.13-4.22; I = 0%). In paroxysmal AF, the estimate was in the same direction but not significant (OR 2.76; 95% CI 0.85-8.93). Stroke (OR 1.43; 95% CI 0.36-5.73) and TIA (OR 2.09; 95% CI 0.37-11.67) did not differ, nor did any endpoint over the full follow-up.\n\nCONCLUSIONS:\nPFA was associated with an approximately 2-fold higher incidence of stroke or TIA within 30 days than thermal ablation. This result should be considered hypothesis-generating. Prospective studies with systematic neurological assessment are warranted.",
+      "designRank": 3,
+      "studyTypeLabel": "観察研究・その他",
+      "sampleSize": 21915,
+      "isTargetJournal": true,
+      "titleJa": "心房細動に対する熱アブレーションと比較したパルスフィールドアブレーション後の脳卒中および一過性虚血発作のリスク: メタ分析",
+      "summaryJa": "【背景】パルスフィールドアブレーション（PFA）が熱アブレーションとは異なる脳血管リスクを伴うかどうかは、判定されたコホートがPFAを使用した場合の脳卒中または一過性脳虚血発作（… (観察研究・その他 / N = 21,915例)\n【方法】まれなイベントにはあまり適していない。\n【結果】21,915 人の患者を含む 28 件の研究が含まれていました。\n【結論】PFA は、熱アブレーションよりも 30 日以内の脳卒中または TIA の発生率が約 2 倍高かった",
+      "abstractJa": "背景：パルスフィールドアブレーション（PFA）が熱アブレーションとは異なる脳血管リスクを伴うかどうかは、判定されたコホートがPFAを使用した場合の脳卒中または一過性脳虚血発作（TIA）の30日間の発生率が高いと報告したため、疑問視されてきた。  以前のメタ分析では、この問題は副次的な結果としてのみ扱われ、プール手法は稀な事象にはあまり適していませんでした。  目的: 心房細動に対する PFA および熱アブレーション後の脳卒中または TIA の発生率を比較すること。  方法：心房細動（AF）に対するPFAと熱アブレーションを比較した研究について、2026年9月までPubMed、Embaseおよびコクランライブラリを検索した。 主要エンドポイントは、30日以内の脳卒中またはTIAの複合でした。副次評価項目は、30 日以内の脳卒中と TIA であり、完全な追跡期間にわたるすべての評価項目でした。  効果は変量効果のペト オッズ比 (OR) としてプールされました。  結果: 21,915 人の患者を含む 28 件の研究が含まれました。  30日以内に、PFA後は6,688人中24人、熱アブレーション後は10,973人中17人で脳卒中またはTIAが発生した(OR 2.18; 95% CI 1.13-4.22; I = 0%)。  発作性 AF では、推定値は同じ方向でしたが、有意ではありませんでした (OR 2.76; 95% CI 0.85-8.93)。  脳卒中（OR 1.43; 95% CI 0.36-5.73）とTIA（OR 2.09; 95% CI 0.37-11.67）には差異はなく、完全な追跡期間にわたるどのエンドポイントにも差異はありませんでした。 結論: PFA は、熱アブレーションよりも 30 日以内の脳卒中または TIA の発生率が約 2 倍高かった。  この結果は仮説生成とみなされるべきです。  体系的な神経学的評価を伴う前向き研究が正当化されます。",
+      "isNew": true,
+      "firstSeen": "2026-11-27"
     },
     {
       "pmid": "42666933",
@@ -5603,6 +5581,28 @@
       "firstSeen": "2026-11-12"
     },
     {
+      "pmid": "43094252",
+      "title": "When is a PVI \"successful\"? Characterising OCEAN/ALONE-AF Enrolment Criteria with Continuous Rhythm Monitoring.",
+      "pubDate": "2026-Nov-26",
+      "journal": "Europace : European pacing, arrhythmias, and cardiac electrophysiology : journal of the working groups on cardiac pacing, arrhythmias, and cardiac cellular electrophysiology of the European Society of Cardiology",
+      "journalAbbr": "Europace",
+      "volumeIssuePage": "",
+      "authors": "Briosa E Gala A, Kueffer T, Ur Rehman Iqbal S, Badertscher P, Knecht S, Kozhuharov N, et al.",
+      "citation": "Briosa E Gala A, Kueffer T, Ur Rehman Iqbal S, Badertscher P, Knecht S, Kozhuharov N, et al.. When is a PVI \"successful\"? Characterising OCEAN/ALONE-AF Enrolment Criteria with Continuous Rhythm Monitoring.. Europace. 2026 Nov 26;:. doi: 10.1093/europace/euag330 doi.",
+      "doi": "10.1093/europace/euag330 doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43094252/",
+      "abstract": "BACKGROUND AND AIMS:\nThe OCEAN/ALONE-AF trials demonstrated low stroke risk in patients deemed AF-free 12 months post-ablation using intermittent Holter monitoring. Whether these patients had true AF freedom or had undetected AF remains unknown. We characterised the rhythm phenotype selected by this enrolment strategy.\n\nMETHODS:\nSINGLE-SHOT CHAMPION and COMPARE-CRYO are randomised trials in paroxysmal AF patients undergoing ablation, with implantable cardiac monitors (ICM) used for continuous rhythm monitoring. This post-hoc analysis included patients with no clinical atrial tachyarrhythmia (ATA) recurrence within 12 months and CHA2DS2-VA ≥1. Monte Carlo simulations (n=5,000) using individual-level ICM data replicated the OCEAN/ALONE-AF eligibility criteria (two simulated 48-hour Holter). Misclassification rates and ATA burden were quantified.\n\nRESULTS:\nOf 411 patients, 232 were eligible (172 cryoballoon ablation, 60 pulsed-field ablation). Simulated intermittent Holter monitoring classified as ATA-free 223 patients (96.1%; 95% simulation interval [SI] 94.4-97.8%); however, 67 patients (30.0% 95% SI 28.8-31.3%) had ATA on ICM. Among these 223 patients, ATA burden was very low (1.0%) in 0.7%. In an exploratory analysis, misclassification was numerically higher in patients with CHA2DS2-VA≥3 (33.4% vs. 27.4%). Findings were robust across sensitivity analyses.\n\nCONCLUSIONS:\nApproximately one-third of patients deemed ATA-free by OCEAN/ALONE-AF criteria had undetected ATA recurrence on ICM, with very low ATA burden (<0.1%). These findings suggest that the low stroke rates in OCEAN/ALONE-AF may reflect successful arrhythmia burden suppression rather than complete arrhythmia eradication, with intermittent Holter monitoring serving as a pragmatic surrogate for a low-burden state.",
+      "designRank": 3,
+      "studyTypeLabel": "観察研究・その他",
+      "sampleSize": 5000,
+      "isTargetJournal": true,
+      "titleJa": "PVI が「成功」したのはいつですか?継続的なリズムモニタリングによる OCEAN/ALONE-AF 登録基準の特徴付け",
+      "summaryJa": "【背景】と目的: OCEAN/ALONE-AF 試験は、次のような人々の脳卒中リスクが低いことを実証しました (観察研究・その他 / N = 5,000例)\n【方法】SINGLE-SHOT CHAMPION および COMPARE-CRYO は、アブレーションを受けている発作性 AF 患者を対象としたランダム化試験で、継続的なリズムモ…\n【結果】411 人の患者のうち、232 人が適格であった (クライオバルーン アブレーション 172 人、パルスフィールド アブレーション 60 人)。\n【結論】OCEAN/ALONE-AF 基準により ATA がないとみなされた患者の約 3 分の 1 は、ICM で検出されなかった ATA 再発があり、ATA 負荷は非常に低かった (<0…",
+      "abstractJa": "背景と目的: OCEAN/ALONE-AF 試験は、間欠的なホルター モニタリングを使用して、アブレーション後 12 か月で AF がないとみなされた患者における脳卒中リスクが低いことを実証しました。  これらの患者が真の心房細動の自由を持っていたのか、それとも検出されずに心房細動があったのかは不明のままである。  我々は、この登録戦略によって選択されたリズム表現型を特徴付けました。  方法: SINGLE-SHOT CHAMPION と COMPARE-CRYO は、アブレーションを受けている発作性 AF 患者を対象としたランダム化試験で、継続的なリズムモニタリングに植込み型心臓モニター (ICM) が使用されます。  この事後分析には、12 か月以内に臨床的心房性頻脈性不整脈 (ATA) の再発がなく、CHA2DS2-VA ≥1 の患者が含まれていました。 個人レベルの ICM データを使用したモンテカルロ シミュレーション (n=5,000) は、OCEAN/ALONE-AF の適格基準を再現しました (2 つのシミュレートされた 48 時間ホルター)。  誤分類率と ATA 負荷が定量化されました。  結果: 411 人の患者のうち、232 人が適格でした (クライオバルーン アブレーション 172 人、パルスフィールド アブレーション 60 人)。  模擬断続的ホルターモニタリングはATAフリーとして分類された患者223名（96.1%、95%シミュレーション間隔[SI] 94.4-97.8%）。ただし、67 人の患者 (30.0% 95% SI 28.8-31.3%) は ICM で ATA を患っていました。  これら 223 人の患者のうち、ATA 負荷は 0.7% で非常に低かった (1.0%)。  探索的分析では、CHA2DS2-VA≧3の患者で誤分類が数値的に高かった(33.4% vs. 27.4%)。  結果は感度分析全体にわたって堅牢でした。 結論: OCEAN/ALONE-AF 基準で ATA がないとみなされた患者の約 3 分の 1 は、ICM で検出されなかった ATA 再発があり、ATA 負荷は非常に低かった (<0.1%)。  これらの所見は、OCEAN/ALONE-AFにおける低脳卒中率は、不整脈の完全な根絶ではなく、不整脈負荷の抑制に成功したことを反映している可能性があり、間欠的なホルターモニタリングが低負荷状態の実用的な代用として機能することを示唆している。",
+      "isNew": true,
+      "firstSeen": "2026-11-27"
+    },
+    {
       "pmid": "41416696",
       "title": "Long-term outcomes of subcutaneous implantable cardioverter defibrillators: the French nationwide HONEST study.",
       "pubDate": "2026-Apr-01",
@@ -6083,7 +6083,7 @@
       "titleJa": "心房細動および心不全患者における脳血管損傷",
       "summaryJa": "【背景】心不全 (HF) および心房細動 (AF) の患者は、脳血管病変のリスクが高くなりる (観察研究・その他 / N = 2,712例)\n【方法】そして\n【結果】私たちは、標準化された脳MRIを受けたSwiss-AF研究の参加者2712人を分析し、AFの診断と心不全の病歴に基づいて分類した。\n【結論】AF と HF は独立して虚血性脳病変の有病率の高さと関連しており、両方の症状を有する患者で最も大きな負担が観察される",
       "abstractJa": "目的: 心不全 (HF) および心房細動 (AF) の患者は、脳血管病変のリスクが高くなります。  AF と HF が相乗的にこのリスクを増幅させるかどうかは不明です。  この研究では、心不全と心房細動の関連性と、磁気共鳴画像法（MRI）で検出される脳血管病変の有病率との相互作用を調査しました。  方法と結果：標準化された脳MRIを受けたSwiss-AF研究の参加者2712人を分析し、AFの診断と心不全の病歴に基づいて分類した。  脳 MRI では、大きな非皮質梗塞および皮質梗塞、小さな非皮質梗塞、および白質高信号 (WMH) を評価しました。 ロジスティック回帰モデルを使用して、AF、HF、およびそれらと脳血管病変との相互作用の間の関連性を分析し、事前に選択された共変量を調整しました。  平均年齢は73歳、30.8％が女性でした。  虚血性脳梗塞およびWMHの有病率は、AFおよびHFの状態によって定義されるグループ全体で増加した（脳梗塞：AF-/HF- 22.8%、AF-/HF + 30.2%、AF+/HF- 34.6%、AF+/HF + 44.6%、WMH：AF-/HF- 43.2%、AF-/HF + 49.7%、 AF+/HF- 50.4%、AF+/HF+ 65.6%)。  どの脳病変サブタイプについても、AF と HF の間に有意な相互作用は観察されませんでした。 AF と HF (オッズ比、95% 信頼区間、P 値) はどちらも独立して脳梗塞 (AF: 1.78、1.48-2.16、P < 0.001; HF: 1.32、1.06-1.64、P < 0.001) および WMH (AF: 1.71、1.44-2.03、P < 0.001) と関連していた。 0.001; HF: 1.45、1.17-1.80、P < 0.001)。  結論: AF と HF は独立して虚血性脳病変の有病率の高さと関連しており、両方の状態の患者で最も大きな負担が観察されます。  脳血管病変に関しては、AF と HF の間に相互作用は見つかりませんでした。  臨床試験登録情報: https://www.clinicaltrials.gov;一意の識別子: NCT02105844。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -6523,7 +6523,7 @@
       "titleJa": "高齢患者の心房細動に対するパルスフィールドアブレーションの安全性と有効性",
       "summaryJa": "【背景】高齢者の心房細動（AF）に対するパルスフィールドアブレーション（PFA）の安全性と臨床効​​果に関するデータ (観察研究・その他 / N = 1,611例)\n【方法】多施設 SENTINEL 登録のこのサブ研究には、オーストラリアとニュージーランドの 13 施設にわたるペンタスプリン PFA システムによる初回の AF アブレーション…\n【結果】患者1,611人のうち、769人（48％）が65歳未満、573人（36％）が65～74歳、269人（17％）が75歳以上であった。\n【結論】この大規模な多施設研究では、心房細動に対するPFA後の術式合併症率の低さと同等の臨床転帰が年齢層全体で観察され、年齢のみに基づいてカテゴリー的に除外するのではなく、心房細動アブレー…",
       "abstractJa": "背景: 高齢患者の心房細動 (AF) に対するパルスフィールドアブレーション (PFA) の安全性と臨床効​​果に関するデータは限られています。  目的: 75 歳以上の患者の AF に対する PFA の安全性、有効性、医療利用への影響を評価する。  方法：多施設SENTINELレジストリのこのサブ研究には、オーストラリアとニュージーランドの13施設にわたるペンタスプラインPFAシステムによる初回AFアブレーションを受けた連続患者が含まれていた。  転帰は65歳未満、65～74歳、75歳以上の患者間で比較された。  主要エンドポイントは、主要な手術合併症と医療利用（心房性不整脈による計画外の再入院、電気的除細動、カテーテルアブレーションの繰り返しの複合）でした。 結果：患者1,611人のうち、769人（48％）が65歳未満、573人（36％）が65～74歳、269人（17％）が75歳以上であった。  75 歳以上の患者では、併存疾患の負担が大きく、非発作性 AF および左心房拡張の有病率が高かった。  主要な手術合併症はまれであり、年齢層全体で同様でした (それぞれ 0.9%、0.2%、0.7%; p=0.48)。  追跡期間中央値426日にわたって、医療利用率（10.8%、12.0%、10.0%、p=0.61）と不整脈再発（17.2%、19.5%、19.3%、p=0.39）は年齢グループ全体で同等でした。  75 歳以上の年齢は、多変量調整および傾向スコアのマッチング後の医療利用または不整脈の再発と独立した関連性はありませんでした。 結論：この大規模な多施設研究では、心房細動に対するPFA後の術式合併症率の低さと同等の臨床転帰が年齢層全体で観察され、年齢のみに基づいてカテゴリー的に除外するのではなく、心房細動アブレーションの患者を個別に選択することを裏付けるものとなった。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -7628,16 +7628,16 @@
     },
     {
       "pmid": "43014626",
-      "title": "Pulsed Field or Cryoballoon Pulmonary Vein Isolation for Atrial Fibrillation in Heart Failure with Reduced Ejection Fraction.",
+      "title": "Pulsed field or cryoballoon pulmonary vein isolation for atrial fibrillation in heart failure with reduced ejection fraction.",
       "pubDate": "2026-Nov-11",
       "journal": "Heart rhythm",
       "journalAbbr": "Heart Rhythm",
       "volumeIssuePage": "",
       "authors": "Boehmer AA, Zylla MM, Feickert S, Hillmann HAK, Dyrda K, Lussier S, et al.",
-      "citation": "Boehmer AA, Zylla MM, Feickert S, Hillmann HAK, Dyrda K, Lussier S, et al.. Pulsed Field or Cryoballoon Pulmonary Vein Isolation for Atrial Fibrillation in Heart Failure with Reduced Ejection Fraction.. Heart Rhythm. 2026 Nov 11;:. doi: 10.1016/j.hrthm.2026.11.009 doi.",
+      "citation": "Boehmer AA, Zylla MM, Feickert S, Hillmann HAK, Dyrda K, Lussier S, et al.. Pulsed field or cryoballoon pulmonary vein isolation for atrial fibrillation in heart failure with reduced ejection fraction.. Heart Rhythm. 2026 Nov 11;:. doi: 10.1016/j.hrthm.2026.11.009 doi.",
       "doi": "10.1016/j.hrthm.2026.11.009 doi",
       "url": "https://pubmed.ncbi.nlm.nih.gov/43014626/",
-      "abstract": "BACKGROUND:\nAtrial fibrillation (AF) and heart failure with reduced ejection fraction (HFrEF) frequently coexist, worsening prognosis. While catheter ablation confers clinical benefits in this high-risk population, comparative data between novel non-thermal pulsed field ablation (PFA) and established cryoballoon ablation (CBA) for AF-therapy in patients with HFrEF are limited.\n\nOBJECTIVE:\nTo compare the efficacy and safety of PFA- with CBA-based pulmonary vein isolation (PVI) in patients with AF and HFrEF (left ventricular ejection fraction ≤40%).\n\nMETHODS:\nThis retrospective, international multicenter study included patients with HFrEF undergoing first-time PVI-only procedures between 2018 and 2025. Propensity-score matching (1:1 ratio) was applied to balance baseline characteristics. The primary efficacy endpoint was the first recurrence of any atrial tachyarrhythmia after a 3-month blanking period. Secondary measures included safety events and procedural efficiency.\n\nRESULTS:\nA total of 700 patients from 12 German and Canadian centers were included, with 420 patients analyzed following propensity-score matching. At 12 months, freedom from atrial tachyarrhythmia recurrence with PFA was comparable to CBA (Kaplan-Meier estimates, 65.0% vs. 67.8%; hazard ratio, 1.09; 95% CI, 0.77 to 1.55; P=0.61). No statistically significant differences in observed safety outcomes were detected. PFA significantly improved procedural efficiency with shorter total procedure duration (58±22min vs. 72±22min; P<0.001), left-atrial dwell time (42±16min vs. 52±17min; P<0.001) and lower contrast dye use (0 ml [IQR 0-15] vs. 47 ml [IQR 30-56], P<0.001).\n\nCONCLUSIONS:\nIn patients with AF and HFrEF, PFA-based PVI achieves similar rhythm-control efficacy and safety compared with CBA, while significantly enhancing procedural efficiency.",
+      "abstract": "BACKGROUND:\nAtrial fibrillation (AF) and heart failure with reduced ejection fraction (HFrEF) frequently coexist, worsening the prognosis. Although catheter ablation confers clinical benefits in this high-risk population, comparative data between novel nonthermal pulsed field ablation (PFA) and established cryoballoon ablation (CBA) for AF therapy in patients with HFrEF are limited.\n\nOBJECTIVE:\nTo compare the efficacy and safety of PFA with CBA-based pulmonary vein isolation (PVI) in patients with AF and HFrEF (left ventricular ejection fraction ≤ 40%).\n\nMETHODS:\nThis retrospective, international, multicenter study included patients with HFrEF undergoing first-time PVI-only procedures between 2018 and 2025. Propensity-score matching (1:1 ratio) was applied to balance baseline characteristics. The primary efficacy endpoint was the first recurrence of any atrial tachyarrhythmia after a 3-month blanking period. Secondary measures included safety events and procedural efficiency.\n\nRESULTS:\nA total of 700 patients from 12 German and Canadian centers were included, with 420 patients analyzed after propensity-score matching. At 12 months, freedom from atrial tachyarrhythmia recurrence with PFA was comparable to that with CBA (Kaplan-Meier estimates, 65.0% vs 67.8%; hazard ratio, 1.09; 95% confidence interval, 0.77-1.55; P = .61). No statistically significant differences in observed safety outcomes were detected. PFA significantly improved procedural efficiency, with a shorter total procedure duration (58 ± 22 minutes vs 72 ± 22 minutes; P < .001), left-atrial dwell time (42 ± 16 minutes vs 52 ± 17 minutes; P < .001), and lower contrast dye use (0 mL [interquartile range, 0-15] vs 47 mL [interquartile range, 30-56]; P < .001).\n\nCONCLUSION:\nIn patients with AF and HFrEF, PFA-based PVI achieves a similar rhythm-control efficacy and safety compared with CBA, while significantly enhancing procedural efficiency.\n\nGOV IDENTIFIER:\nNCT07181291.",
       "designRank": 3,
       "studyTypeLabel": "観察研究・その他",
       "sampleSize": 700,
@@ -10791,7 +10791,7 @@
       "titleJa": "論および患者の特徴に従った心房細動スクリーニングの収率: AFFECT-EU/AF-SCREEN コラボレーション内で心房細動のスクリーニングを受けた 34,165 人の個人参加者データのメタ分析",
       "summaryJa": "【背景】心房細動 (AF) スクリーニングは、予防治療の早期開始により有害な転帰を軽減する可能性がありる (観察研究・その他 / N = 165例)\n【方法】そして\n【結果】研究レベルでランダム切片を備えた一般化線形混合モデルを使用して、12のヨーロッパおよび北米の研究コホートの個々の参加者データのメタ分析を実施しました。\n【結論】このメタ分析では、AF スクリーニングの収率は患者の特徴とスクリーニング方法によって大きく異なりました",
       "abstractJa": "目的: 心房細動 (AF) スクリーニングは、予防治療の早期開始により有害な転帰を軽減する可能性があります。  ただし、さまざまなスクリーニング戦略の収量を知るためには、より多くのデータが必要です。  この研究は、患者の特性とスクリーニング方法がスクリーニングの収率にどのように影響するかを評価することを目的としていました。  方法と結果：研究レベルでランダム切片を備えた一般化線形混合モデルを使用して、12のヨーロッパおよび北米の研究コホートの個々の参加者データのメタ分析を実施しました。 AFのスクリーニングを受けた34,165人の参加者（年齢73.4±7.5歳、女性53.5％）を対象としたこのメタ分析では、より集中的なアプローチによりスクリーニング収率が増加し、単一時点スクリーニングの0.83％［95％信頼区間（CI）：0.24-2.87］から、単一時点スクリーニングの5.06％（95％信頼区間：3.55-7.17）の範囲であった。断続的（つまり、単一タイムポイントの繰り返し）スクリーニング、短期継続モニタリング（30日以下）では4.81％（95％CI：3.79-6.08）、長期継続モニタリング（>30日）では最大30.39％（95％CI：28.06-32.84）。  高齢、男性、高血圧、心不全（HF）が検出と関連していた。  スクリーニング方法と年齢、性別、HF、CHADS2 スコア、および NT-proBNP の間には、有意な相互作用が観察されました。 これらの危険因子は、より集中的な方法と比較して、単一時点のスクリーニングによる AF 検出に対してより強い影響を及ぼしました。  結論: このメタ分析では、AF スクリーニングの収率は患者の特徴とスクリーニング方法によって大きく異なりました。  高齢、男性、心不全は独立して、特に単一時点のスクリーニングを受けた患者において、より高いAF検出と関連していた。  私たちの発見は、臨床現場で個々の対象集団に合わせてスクリーニングアプローチを調整することを裏付けています。  スクリーニング後の臨床転帰を評価するためのさらなる研究が必要であり、進行中である。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -11495,7 +11495,7 @@
       "titleJa": "PLN 心筋症および PKP2 心筋症における心室の活性化と再分極の心電図イメージング",
       "summaryJa": "【背景】12 誘導心電図は不整脈原性右室心筋症の診断によく使用されるが、空間的な詳細が欠けている。 (観察研究・その他 / N = 131例)\n【方法】ECGI を使用して、対照および PKP2/PLN キャリアにおける心臓の活性化と再分極を推定しました。\n【結果】者は131名（40[27;54]歳、女性55％）で、対照20名と表現型が欠如または可変である変異体保有者111名（PKP2 54名、PLN 57名）であった。\n【結論】再分極の遅延は、より重度の表現型疾患の発現と関連していました",
       "abstractJa": "背景: 12 誘導心電図は、不整脈原性右室心筋症の診断に一般的に使用されていますが、空間的な詳細が欠けています。  心電図画像法 (ECGI) は、心臓の電気活動の包括的な評価を提供し、電気的異常をより適切に検出して、疾患発現のリスクのある個人を特定できる可能性があります。  目的: 対照と比較して、プラコフィリン 2 (PKP2) およびホスホランバン (PLN) 病原性変異保有者の活性化と再分極を特徴付けること。  方法: ECGI を使用して、対照および PKP2/PLN キャリアの心臓の活性化と再分極を推定しました。 対照被験者で最も頻繁に観察されたパターンは、正常な活性化/再分極として分類されました。右心室/左心室 (RV/LV) の活性化/再分極の遅れなどの明確なパターン。  結果: 131 人の対象者 (40 [27;54] 歳、女性 55%) が含まれた: 対照 20 人、および表現型が欠如または可変である変異体保有者 111 人 (PKP2 54 人、PLN 57 人)。  心室性不整脈は、正常な再分極と比較してRV再分極が遅れたPKP2キャリアでより頻繁に発生し(85% vs 21%、P<0.001)、正常な再分極と比較してLV再分極が遅れたPLNキャリアでより頻繁に発生しました(38% vs 0%、P=0.003)。 V1～V3におけるT波反転（TWI）は、正常な再分極と比較してRV再分極が遅れたPKP2キャリアでより頻繁に観察され（77％対0％、P<0.001）、V4～V6のTWIは正常な再分極と比較してLV再分極が遅れたPLNキャリアでより一般的でした（50％対4％、P＝0.001）。  再分極の遅延も、発症前のPLNキャリアの31%で確認されました。  活性化の遅延は、より重篤な表現型とは関連していませんでした。  結論: 再分極の遅延は、より重度の表現型疾患の発現と関連していました。  RV/LV 再分極の遅延も、発症前のバリアントキャリアのサブセットで確認されたため、ECGI は病原性バリアントキャリアの早期リスク層別化に役立つ可能性があります。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -13171,6 +13171,28 @@
       "firstSeen": "2026-11-21"
     },
     {
+      "pmid": "43094115",
+      "title": "Safety and Efficacy of Linear Ablation for Peri-Mitral Annular Atrial Flutter Using the Pentaspline Pulse Field Ablation Catheter.",
+      "pubDate": "2026-Nov-25",
+      "journal": "Journal of cardiovascular electrophysiology",
+      "journalAbbr": "J Cardiovasc Electrophysiol",
+      "volumeIssuePage": "",
+      "authors": "Oates CP, Grubman S, Whang W, Turagam MK, Musikantow D, Lampert J, et al.",
+      "citation": "Oates CP, Grubman S, Whang W, Turagam MK, Musikantow D, Lampert J, et al.. Safety and Efficacy of Linear Ablation for Peri-Mitral Annular Atrial Flutter Using the Pentaspline Pulse Field Ablation Catheter.. J Cardiovasc Electrophysiol. 2026 Nov 25;:. doi: 10.1111/jce.70569 doi.",
+      "doi": "10.1111/jce.70569 doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43094115/",
+      "abstract": "BACKGROUND:\nDespite widespread use of the pentaspline pulse field ablation (PFA) catheter to treat atrial fibrillation, there is limited data supporting its feasibility, safety, and effectiveness in creating linear lesions to treat peri-mitral atrial flutter (AFL).\n\nOBJECTIVE:\nTo assess the safety and efficacy of using the pentaspline PFA catheter to treat peri-mitral AFL.\n\nMETHODS:\nWe performed a single-center retrospective review of consecutive patients receiving catheter ablation using the pentaspline PFA catheter to treat peri-mitral macroreentrant AFL.\n\nRESULTS:\nA total of 80 patients underwent catheter ablation for clinical peri-mitral AFL. Ablation was guided by electroanatomic mapping in all patients. AFL was treated with a lateral mitral line in 38 patients (47.5%), an anteroseptal mitral line in 31 patients (38.8%), a septal mitral line in 6 patients (7.5%), and an anterolateral mitral line in 5 patients (6.3%). Acute procedural success was achieved in 70 patients (87.5%) using the pentaspline catheter; the remaining 10 patients (12.5%) required additional radiofrequency ablation to achieve procedural success. Acute complications occurred in 4 (5.0%) patients: 2 (2.5%) patients sustained electrical isolation of the left atrial appendage, 1 (1.3%) had transient hematuria, and 1 (1.3%) had pericarditis. After a median follow-up of 322 days (IQR 192-432), 42 patients (52.5%) had recurrent AFL. Of these patients, 26 patients underwent a repeat ablation procedure-all demonstrated electrical breakthrough across the prior mitral line.\n\nCONCLUSIONS:\nWhile the pentaspline catheter can achieve acute procedural success when treating peri-mitral AFL with linear ablation of the mitral annulus, the long-term efficacy of this treatment strategy is modest.",
+      "designRank": 3,
+      "studyTypeLabel": "観察研究・その他",
+      "sampleSize": 80,
+      "isTargetJournal": true,
+      "titleJa": "ペンタスプライン パルス フィールド アブレーション カテーテルを使用した僧帽弁周囲輪状心房粗動に対する線形アブレーションの安全性と有効性",
+      "summaryJa": "【背景】心房細動を治療するためにペンタスプラインパルスフィールドアブレーション（PFA）カテーテルが広く使用されているにもかかわらず、僧帽弁周囲心房粗動（AFL）を治療するための… (観察研究・その他 / N = 80例)\n【方法】われわれは、僧帽弁周囲マクロリエントラントAFLを治療するためにペンタスプラインPFAカテーテルを使用したカテーテルアブレーションを受けている連続患者の単一施設の遡及的レ…\n【結果】合計 80 人の患者が臨床僧帽弁周囲 AFL に対してカテーテル アブレーションを受けました。\n【結論】ペンタスプライン カテーテルは、僧帽弁輪の線形アブレーションで僧帽弁周囲 AFL を治療する場合に、手技上の大幅な成功を収めることができるが、この治療戦略の長期的な有効性はそれほど…",
+      "abstractJa": "背景: 心房細動を治療するためにペンタスプラインパルスフィールドアブレーション（PFA）カテーテルが広く使用されているにもかかわらず、僧帽弁周囲心房粗動（AFL）を治療するための線状病変の作成におけるその実現可能性、安全性、および有効性を裏付けるデータは限られています。  目的: 僧帽弁周囲 AFL の治療にペンタスプライン PFA カテーテルを使用する安全性と有効性を評価すること。  方法：僧帽弁周囲マクロリエントラントAFLを治療するためにペンタスプラインPFAカテーテルを使用したカテーテルアブレーションを受けている連続患者の単一施設の遡及的レビューを実施した。  結果: 合計 80 人の患者が臨床僧帽弁周囲 AFL に対してカテーテル アブレーションを受けました。  アブレーションはすべての患者において電気解剖学的マッピングによって誘導されました。 AFLは、38人の患者（47.5％）で側方僧帽弁ライン、31人の患者（38.8％）で前中隔僧帽弁ライン、6人の患者（7.5％）で中隔僧帽弁ライン、5人の患者（6.3％）で前外側僧帽弁ラインで治療された。  ペンタスプライン カテーテルを使用した患者 70 人 (87.5%) で急性処置の成功が達成されました。残りの 10 人の患者 (12.5%) は、手術を成功させるために追加の高周波アブレーションが必要でした。  急性合併症は 4 名 (5.0%) の患者で発生しました。2 名 (2.5%) の患者は左心耳の電気的隔離を維持し、1 名 (1.3%) には一過性の血尿があり、1 名 (1.3%) には心膜炎がありました。  中央値322日の追跡調査後(IQR 192-432)、42人の患者(52.5%)がAFLを再発した。 これらの患者のうち、26 人の患者が再度のアブレーション処置を受け、全員が以前の僧帽弁ラインを横切る電気的ブレークスルーを示しました。  結論: ペンタスプライン カテーテルは、僧帽弁輪の線形アブレーションを伴う僧帽弁周囲 AFL の治療において、手技上の大きな成功を収めることができますが、この治療戦略の長期的な有効性はそれほど高くありません。",
+      "isNew": true,
+      "firstSeen": "2026-11-27"
+    },
+    {
       "pmid": "42946316",
       "title": "Acute effects of cardioneuroablation on ventricular arrhythmia inducibility and refractoriness in patients with functional bradyarrhythmias: The Roman 4 study.",
       "pubDate": "2026-Oct-27",
@@ -13563,28 +13585,6 @@
       "titleJa": "心室頻拍アブレーション後の精神的外傷と健康関連の生活の質",
       "summaryJa": "【背景】植込み型除細動器（ICD）は心室頻拍（VT）の第一選択治療である。ただし、ICDショックは健康関連の生活の質（HRQoL）およびpsの低下と関連している（観察研究・その他 / N = 61例）\n【方法】多くの場合、VTアブレーションが提案されるほど重篤である。\n【結果】回帰分析では、アウトカム尺度に関してグループ間に有意な差異は示されなかった。\n【結論】仮説に反して、追跡調査におけるアウトカム尺度に関する有意差は群間で検出されなかった。",
       "abstractJa": "背景:\n植込み型除細動器 (ICD) は心室頻拍 (VT) の第一選択治療である。ただし、ICD ショックは、健康関連の生活の質 (HRQoL) および心理的幸福度の低下と関連している。臨床的には、ICD 患者の HRQoL および心理的外傷は、VT アブレーションが提案されるほど重度であることがよくある。 HRQoL、特に心理的外傷レベルは、医学的治療を受けた ICD レシピエントと比較して、VT アブレーションを受けた ICD レシピエントでは評価されていない。\n\n方法:\n61名の参加者が登録された。参加者は、ベースライン（採用時）および6か月の追跡調査時に、全体的なHRQoL [SF-36精神的健康要素の概要（MCS）および身体的要素の概要]、うつ病および不安[病院不安およびうつ病尺度（HADS-A）]、およびトラウマ[改訂版事象尺度の影響（IES-R）]の測定を完了した。階層回帰分析を使用して仮説を評価した。\n\n結果:\n回帰分析では、結果の尺度に関してグループ間の有意な差は示されなかった。グループ内効果により、アブレーションを受けた参加者はメンタルヘルスのHRQoL MCS (p = 0.002)、IES-R Total (p = 0.005)、侵入 (p = 0.005)、および過覚醒 (p = 0.007)の下位尺度が改善されたことが示唆された。アブレーションを受けなかった患者では、HRQoLの改善は見られなかったが、HADS-A (p = 0.02)、IES-R Total (p = 0.04)、侵入 (p = 0.04)、および過覚醒 (p = 0.02) が改善された。\n\n結論:\n仮説に反して、追跡調査における転帰測定値に関する有意差は群間で検出されなかった。グループ内効果は、アブレーションを受けたICDレシピエントでは、アブレーションを受けなかった人よりもHRQoLと精神的苦痛に関して良好な結果をもたらすことを示唆している。グループ間に差がないことは、アブレーションがアブレーションサブグループ内のHRQoLと苦痛を改善するかどうか、そしてどのように改善するかをよりよく理解するためにさらなる研究の必要性を強調している。",
-      "isNew": false,
-      "firstSeen": "2026-11-12"
-    },
-    {
-      "pmid": "41725237",
-      "title": "Pulsed Field Versus Radiofrequency Ablation in Concomitant Pulmonary Vein Isolation and LAA Occlusion: Impact on Peridevice Leak and Procedural Efficiency.",
-      "pubDate": "2026-Feb-22",
-      "journal": "Journal of cardiovascular electrophysiology",
-      "journalAbbr": "J Cardiovasc Electrophysiol",
-      "volumeIssuePage": "37(4):768-776",
-      "authors": "Atasi MM, Hubbard S, Campbell C, Noujaim C, Massad CM, Khalil MA, et al.",
-      "citation": "Atasi MM, Hubbard S, Campbell C, Noujaim C, Massad CM, Khalil MA, et al.. Pulsed Field Versus Radiofrequency Ablation in Concomitant Pulmonary Vein Isolation and LAA Occlusion: Impact on Peridevice Leak and Procedural Efficiency.. J Cardiovasc Electrophysiol. 2026 Feb 22;37(4):768-776. doi: 10.1111/jce.70286 doi.",
-      "doi": "10.1111/jce.70286 doi",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41725237/",
-      "abstract": "BACKGROUND:\nConcomitant pulmonary vein isolation (PVI) and left atrial appendage occlusion (LAAO) is increasingly performed in patients with atrial fibrillation (AF) at elevated thromboembolic risk. Radiofrequency ablation (RFA) has been the conventional approach, but pulsed field ablation (PFA) may reduce tissue edema, procedural duration, and peridevice leak (PDL).\n\nOBJECTIVE:\nTo compare safety, efficacy, and PDL rates between PFA + LAAO and RFA + LAAO.\n\nMETHODS:\nIn this single-center, retrospective study, 175 consecutive patients undergoing LAAO with or without concomitant PVI between September 2021 and May 2025 were included: RFA + LAAO (n = 61), PFA + LAAO (n = 39), and LAAO-only (n = 75). Procedural data, device characteristics, and complications were collected. The primary endpoint was PDL at 45-day follow-up transesophageal echocardiography (TEE). Secondary endpoints included procedure duration, vascular and esophageal complications, device-related thrombosis, and arrhythmia recurrence.\n\nRESULTS:\nBaseline characteristics were generally balanced, although RFA + LAAO patients were younger. No large PDL (> 5 mm) was observed. At 45 days, small PDL (≤ 5 mm) was significantly higher in RFA + LAAO (23%) vs. PFA + LAAO (5.1%) and LAAO-only (9.3%; p = 0.015). Mean procedure duration was shorter with PFA + LAAO (67.1 ± 10.4 min) compared with RFA + LAAO (99.6 ± 12.8 min; p < 0.001). Major complications and device-related thrombosis were rare. Minor complications and AF recurrence were comparable across groups.\n\nCONCLUSIONS:\nConcomitant PFA + LAAO is associated with lower PDL incidence and shorter procedural times compared with RFA + LAAO, without compromising safety.",
-      "designRank": 3,
-      "studyTypeLabel": "観察研究・その他",
-      "sampleSize": 61,
-      "isTargetJournal": true,
-      "titleJa": "肺静脈隔離および LAA 閉塞を伴うパルスフィールドと高周波アブレーション: ペリデバイスのリークと処置効率への影響",
-      "summaryJa": "【背景】肺静脈隔離術（PVI）と左心耳閉塞症（LAAO）の併用が増加している（観察研究・その他 / N = 61例）\n【方法】血栓塞栓リスクが高い心房細動（AF）のある患者。\n【結果】RFA + LAAO 患者の方が若かったにもかかわらず、ベースラインの特徴は全体的にバランスが取れていた。\n【結論】PFA + LAAO の併用は、安全性を損なうことなく、RFA + LAAO と比較して PDL 発生率が低く、処置時間が短縮される。",
-      "abstractJa": "背景:\n肺静脈隔離術（PVI）と左心耳閉塞術（LAAO）を併用することは、血栓塞栓リスクが高い心房細動（AF）患者でるる行われている。高周波アブレーション (RFA) が従来のアプローチであったが、パルスフィールド アブレーション (PFA) は、組織の浮腫、処置期間、およびペリデバイス リーク (PDL) を軽減できる可能性がある。\n\n目的:\nPFA + LAAO と RFA + LAAO の間で安全性、有効性、PDL 率を比較する。\n\n方法:\nこの単一施設の後ろ向き研究には、2021年9月から2025年5月までにPVIを併用するか否かでLAAOを受けた連続175人の患者が含まれた：RFA + LAAO (n = 61)、PFA + LAAO (n = 39)、LAAOのみ (n = 75)。手順データ、デバイスの特性、合併症が収集された。主要評価項目は、45 日間の追跡経食道心エコー検査 (TEE) での PDL であった。副次評価項目には、処置期間、血管および食道の合併症、デバイス関連の血栓症、不整脈の再発などが含まれた。\n\n結果:\nRFA + LAAO 患者の方が若かったにもかかわらず、ベースラインの特徴は全体的にバランスが取れていた。大きなＰＤＬ（＞５ｍｍ）は観察されなかった。 45日時点で、小さなPDL（≤ 5 mm）は、RFA + LAAO（23%）とPFA + LAAO（5.1%）およびLAAOのみ（9.3%; p = 0.015）で有意に高かった。平均処置時間は、RFA + LAAO (99.6 ± 12.8 分; p < 0.001) と比較して、PFA + LAAO (67.1 ± 10.4 分) の方が短かった。重大な合併症やデバイス関連の血栓症はほとんどなかった。軽度の合併症と心房細動の再発はグループ間で同等であった。\n\n結論:\nPFA + LAAO の併用は、安全性を損なうことなく、RFA + LAAO と比較して PDL 発生率が低く、処置時間が短縮される。",
       "isNew": false,
       "firstSeen": "2026-11-12"
     },
@@ -15085,6 +15085,28 @@
       "firstSeen": "2026-11-12"
     },
     {
+      "pmid": "43094282",
+      "title": "Impact of Real-Time Tissue Proximity Indicator Visualization and Pulsed Field Tag Coloring on Lesion Delivery and Procedural Workflow During Atrial Fibrillation Ablation Using the VARIPULSE Catheter.",
+      "pubDate": "2026-Nov-25",
+      "journal": "Journal of cardiovascular electrophysiology",
+      "journalAbbr": "J Cardiovasc Electrophysiol",
+      "volumeIssuePage": "",
+      "authors": "Trajkovska N, Khalaph M, Darma A, El Hamriti M, Fink T, Sciacca V, et al.",
+      "citation": "Trajkovska N, Khalaph M, Darma A, El Hamriti M, Fink T, Sciacca V, et al.. Impact of Real-Time Tissue Proximity Indicator Visualization and Pulsed Field Tag Coloring on Lesion Delivery and Procedural Workflow During Atrial Fibrillation Ablation Using the VARIPULSE Catheter.. J Cardiovasc Electrophysiol. 2026 Nov 25;:. doi: 10.1111/jce.70572 doi.",
+      "doi": "10.1111/jce.70572 doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43094282/",
+      "abstract": "INTRODUCTION:\nThe updated VARIPULSE™ software (V8.1.1.944) introduces a real-time tissue proximity indicator, enhanced VISITAG™ differentiation of complete versus incomplete applications, and grid-based color coding for lesion assessment during pulsed field ablation (PFA). Its impact on procedural workflow and lesion delivery remains insufficiently defined.\n\nMETHODS AND RESULTS:\nWe compared 55 pulmonary vein isolation procedures performed with the updated software and 91 procedures performed with the previous version (V8.1.0.325) in 146 consecutive patients with atrial fibrillation. The updated software was associated with a higher number of PFA applications per procedure (19.76 ± 4.10 vs. 17.74 ± 3.90; p < 0.001), with more applications across all pulmonary veins, without increases in fluoroscopy time, radiation dose, or procedure duration (54.06 ± 14.99 vs. 56.64 ± 17.23 min; p = 0.046). Procedure time decreased further after an initial learning curve of 30 cases. First-pass isolation of all pulmonary veins was achieved in 83.6% versus 78.0% of procedures (p = 0.41).\n\nCONCLUSION:\nThese findings suggest modified, proximity-guided lesion delivery without a relevant workflow penalty.",
+      "designRank": 3,
+      "studyTypeLabel": "観察研究・その他",
+      "sampleSize": 30,
+      "isTargetJournal": true,
+      "titleJa": "VARIPULSE カテーテルを使用した心房細動アブレーション中の、リアルタイムの組織近接インジケーターの視覚化とパルス フィールド タグのカラーリングが病変送達と処置ワークフローに及ぼす影響",
+      "summaryJa": "【背景】はじめに: 更新された VARIPULSE™ ソフトウェア (V8.1.1.944) には、リアルタイムの組織近接インジケーター、完全なアプリケーションと不完全なアプリケ… (観察研究・その他 / N = 30例)\n【方法】そして\n【結果】私たちは、連続 146 人の心房細動患者を対象に、更新されたソフトウェアで実行された 55 件の肺静脈隔離処置と、以前のバージョン (V8.1.0.325) で実行された 91 件の処置を比較しました。\n【結論】これらの所見は、関連するワークフローのペナルティを伴うことなく、修正された近接ガイドによる病変送達が可能であることを示唆している",
+      "abstractJa": "はじめに: 更新された VARIPULSE™ ソフトウェア (V8.1.1.944) には、リアルタイムの組織近接インジケーター、完全なアプリケーションと不完全なアプリケーションの強化された VISITAG™ の区別、およびパルスフィールド アブレーション (PFA) 中の病変評価のためのグリッドベースのカラーコーディングが導入されています。  手術のワークフローと病変の伝達に対するその影響は、依然として不十分に定義されています。  方法と結果: 連続146人の心房細動患者を対象に、更新されたソフトウェアで実行された55の肺静脈隔離処置と、以前のバージョン(V8.1.0.325)で実行された91の処置を比較しました。  更新されたソフトウェアは、手順あたりの PFA アプリケーションの数が増加しました (19.76 ± 4.10 対 17.74±3.90; p < 0.001）、透視時間、放射線量、または処置時間の増加なしで、すべての肺静脈にわたってより多くの適用を行った（54.06 ± 14.99 対 56.64 ± 17.23 分; p = 0.046）。  30 症例の最初の学習曲線の後、処置時間はさらに短縮されました。  すべての肺静脈の初回通過分離は、手順の 83.6% 対 78.0% で達成されました (p = 0.41)。  結論: これらの発見は、関連するワークフローのペナルティを伴うことなく、修正された近接ガイドによる病変送達を示唆しています。",
+      "isNew": true,
+      "firstSeen": "2026-11-27"
+    },
+    {
       "pmid": "42690569",
       "title": "Clinical and experimental evaluation of averaged impedance drop during radiofrequency catheter ablation.",
       "pubDate": "2026-Sep-03",
@@ -15965,28 +15987,6 @@
       "firstSeen": "2026-11-12"
     },
     {
-      "pmid": "41731932",
-      "title": "Real-Time 3D Mapping Corrects Fluoroscopic Misperception During Pulmonary Vein Isolation by Pulsed Field Ablation.",
-      "pubDate": "2026-Feb-23",
-      "journal": "Journal of cardiovascular electrophysiology",
-      "journalAbbr": "J Cardiovasc Electrophysiol",
-      "volumeIssuePage": "37(4):801-810",
-      "authors": "Massoullié G, Abu-Alrub S, Jean F, Boudias A, Catalan PA, Riocreux C, et al.",
-      "citation": "Massoullié G, Abu-Alrub S, Jean F, Boudias A, Catalan PA, Riocreux C, et al.. Real-Time 3D Mapping Corrects Fluoroscopic Misperception During Pulmonary Vein Isolation by Pulsed Field Ablation.. J Cardiovasc Electrophysiol. 2026 Feb 23;37(4):801-810. doi: 10.1111/jce.70290 doi.",
-      "doi": "10.1111/jce.70290 doi",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41731932/",
-      "abstract": "BACKGROUND:\nPulsed field ablation (PFA) for pulmonary vein isolation (PVI) is mainly guided by fluoroscopy. A novel electroanatomical module enables real-time 3D mapping (3D-EAM) integrated with the PFA catheter.\n\nOBJECTIVES:\nTo assess the contribution of 3D-EAM to pulmonary vein (PV) targeting accuracy and lesion coverage during PFA.\n\nMETHODS:\nAmong 66 consecutive prospective cases, two sequential phases were conducted: a 3D-blinded mapping phase (n = 21), in which anatomical maps were created but withheld from operators, and a real-time 3D-EAM guidance phase (n = 45), where live mapping was used during ablation. A retrospective cohort of fluoroscopy-only PFA procedures (n = 77) served as a control. Lesion coverage and procedural metrics were compared across groups, and post-procedural operator assessments were collected in the 3D-blinded phase.\n\nRESULTS:\nIn the 3D-blinded phase, 5 of 21 procedures (23.8%) failed to isolate at least one PV during the first attempt. Additionally, 47.6% of operators reported they would have altered their strategy using 3D-EAM guidance. Overall lesion coverage was judged satisfactory in 77 of 84 PVs (91.5%). In the real-time 3D-EAM phase, no veins were missed. Compared with fluoroscopy-only and 3D-blinded procedures, 3D-EAM guidance significantly reduced the number of PVI applications (33.6 ± 7.8 vs. 38.4 ± 9.0 and 39.3 ± 10.5; p = 0.007) but increased left atrial dwell time (23.6 ± 7.2 vs. 16.7 ± 4.3 min; p < 0.001).\n\nCONCLUSIONS:\nReal-time 3D-EAM guidance improved PV targeting, reduced unnecessary applications, and eliminated missed veins. Integration of 3D mapping into PFA workflows is safe, feasible, and may enhance procedural quality. Larger studies are warranted to determine effects on long-term arrhythmia recurrence and durability.",
-      "designRank": 3,
-      "studyTypeLabel": "観察研究・その他",
-      "sampleSize": 21,
-      "isTargetJournal": true,
-      "titleJa": "リアルタイム 3D マッピングは、パルスフィールドアブレーションによる肺静脈隔離中の透視上の誤認識を修正する",
-      "summaryJa": "【背景】肺静脈隔離術（PVI）のためのパルスフィールドアブレーション（PFA）は主に透視下で行われる。 (観察研究・その他 / N = 21例)\n【方法】66 件の連続した前向き症例のうち、解剖学的マップの作成はオペレータには提供されなかった 3D ブラインドマッピングフェーズ (n = 21) と、リアルタイム 3D マッピングフェーズの 2 つの連続フェーズが実施された。\n【結果】3D盲検段階では、21の手順のうち5つ(23.8%)が最初の試行中に少なくとも1つのPVを分離できなかった。\n【結論】リアルタイム 3D-EAM ガイダンスにより、PV ターゲティングが改善され、不要なアプリケーションが削減され、静脈の見逃しがなくなった。",
-      "abstractJa": "背景:\n肺静脈隔離（PVI）のためのパルスフィールドアブレーション（PFA）は、主に蛍光透視法によって行われる。新しい電気解剖学的モジュールにより、PFA カテーテルと統合されたリアルタイム 3D マッピング (3D-EAM) が可能になりる。\n\n目的:\nPFA 中の肺静脈 (PV) ターゲティング精度と病変範囲に対する 3D-EAM の寄与を評価する。\n\n方法:\n66 件の連続した前向き症例のうち、2 つの連続フェーズが実施された。1 つは解剖学的マップが作成されたがオペレーターには差し控えられた 3D ブラインドマッピングフェーズ (n = 21)、もう 1 つはアブレーション中にライブマッピングが使用されたリアルタイム 3D-EAM ガイダンスフェーズ (n = 45) である。蛍光透視のみの PFA 処置の遡及的コホート (n = 77) が対照として機能した。病変範囲と手術の指標をグループ間で比較し、手術後の術者の評価を 3D 盲検段階で収集した。\n\n結果:\n3D 盲検段階では、21 の手順のうち 5 つ (23.8%) が最初の試行で少なくとも 1 つの PV を分離できなかった。さらに、オペレーターの 47.6% が、3D-EAM ガイダンスを使用して戦略を変更したであろうと報告した。全体的な病変範囲は、84 PV のうち 77 (91.5%) で満足のいくものであると判断された。リアルタイム 3D-EAM フェーズでは、静脈が見逃されることはなかった。透視のみおよび 3D 盲検法と比較して、3D-EAM ガイダンスは PVI 適用数を大幅に減らした (33.6 ± 7.8 対 38.4 ± 9.0 および 39.3 ± 10.5; p = 0.007) が、左心房滞留時間は増加した (23.6 ± 7.2 対 16.7 ± 4.3 分; p < 0.001)。\n\n結論:\nリアルタイム 3D-EAM ガイダンスにより、PV ターゲティングが改善され、不必要なアプリケーションが削減され、静脈の見逃しがなくなった。 3D マッピングの PFA ワークフローへの統合は安全かつ実現可能であり、手順の品質を向上させる可能性がある。長期的な不整脈の再発と耐久性への影響を判断するには、大規模な研究が必要である。",
-      "isNew": false,
-      "firstSeen": "2026-11-12"
-    },
-    {
       "pmid": "42693666",
       "title": "Long-Term Performance of Single-Chamber Atrioventricular-Synchronous Leadless Pacing: Results From 4 Years of Serial Follow-up.",
       "pubDate": "2026-Sep-03",
@@ -16071,7 +16071,7 @@
       "titleJa": "心室頻拍アブレーションにおける再分極と活性化マッピング: REDEEM 研究",
       "summaryJa": "【背景】心室頻拍 (VT) アブレーションについては、いくつかの洞調律基質マッピング戦略が説明されている。目的: この研究の目的は、新しい洞調律マッピングを評価することであった (観察研究・その他 / N = 20例)\n【方法】再分極と活性化マッピング (再分極脱分極マッピング [REDEEM]) の両方に基づいて重要な地峡部位を特定しる。\n【結果】20 個のマップされた VT を持つ合計 20 人の患者が含まれました。\n【結論】REDEEM 法は実行可能であり、VT 峡部部位との解剖学的関連を示しる",
       "abstractJa": "背景: 心室頻拍 (VT) アブレーションに対するいくつかの洞調律基質マッピング戦略が説明されています。  目的: この研究の目的は、再分極と活性化マッピング (再分極脱分極マッピング [REDEEM]) の両方に基づいて重要な峡部部位を特定するための新しい洞調律マッピング方法を評価することでした。  方法: 2 つのセンターで VT アブレーションを受けた患者を遡及的に分析した。  ローカル アクティベーション タイム (LAT) マップは、LAT を最終偏向 (LAT) 方法に設定して実行されました。  各 LAT マップは 8 つの等時線に分割されました。  減速ゾーン (DZ) は、10 mm 以内の 3 つ以上の等時線として定義されました。  単極再分極マッピングはワイアット法を使用して実行されました。 1 cm 以内の 2 つの連続した領域の再分極時間の差が 100 ミリ秒を超える場合、急な再分極不均一性を「再分極崖」と定義しました。  結果: 20 個のマップされた VT を持つ合計 20 人の患者が含まれました。  VT 出口部位または拡張期チャネルの境界は、20 個の VT (100.0%) では再分極崖と重なり、14 個の VT (70.0%) では DZ と重なっていました。  VT 入口部位は、2 つの VT (10.0%) では再分極崖と重なっており、18 つの VT (90.0%) では DZ と重なっていることがわかりました。  中部地峡は、19 の VT (95.0%) で DZ と再分極崖を接続する領域で見つかりました。  地峡部位の再分極崖の陽性的中率は 63.2%、地峡部位の DZ の陽性的中率は 40.1% でした。 結論：REDEEM 法は実行可能であり、VT 峡部との解剖学的関連を示しています。  この仮説生成研究は、前向きの検証を保証するメカニズムの洞察を提供します。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -17901,6 +17901,28 @@
       "firstSeen": "2026-11-12"
     },
     {
+      "pmid": "35771400",
+      "title": "Ventricular nanosecond pulsed electric field delivery using active fixation leads: a proof-of-concept preclinical study.",
+      "pubDate": "2022-Jun-30",
+      "journal": "Journal of interventional cardiac electrophysiology : an international journal of arrhythmias and pacing",
+      "journalAbbr": "J Interv Card Electrophysiol",
+      "volumeIssuePage": "69(7):1617-1627",
+      "authors": "Tan NY, Ladas TP, Christopoulos G, Sugrue AM, van Zyl M, Ladejobi AO, et al.",
+      "citation": "Tan NY, Ladas TP, Christopoulos G, Sugrue AM, van Zyl M, Ladejobi AO, et al.. Ventricular nanosecond pulsed electric field delivery using active fixation leads: a proof-of-concept preclinical study.. J Interv Card Electrophysiol. 2022 Jun 30;69(7):1617-1627. doi: 10.1007/s10840-022-01268-z doi.",
+      "doi": "10.1007/s10840-022-01268-z doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35771400/",
+      "abstract": "BACKGROUND:\nMid-myocardial ventricular arrhythmias are challenging to treat. Cardiac electroporation via pulsed electric fields (PEFs) offers significant promise. We therefore tested PEF delivery using screw-in pacemaker leads as proof-of-concept.\n\nMETHODS:\nIn 5 canine models, we applied nanosecond PEF (pulse width 300 ns) across the right ventricular (RV) septum using a single lead bipolar configuration (n = 2) and between two leads (n = 3). We recorded electrograms (EGMs) prior to, immediately post, and 5 min after PEF. Cardiac magnetic resonance imaging (cMRI) and histopathology were performed at 2 weeks and 1 month.\n\nRESULTS:\nNanosecond PEF induced minimal extracardiac stimulation and frequent ventricular ectopy that terminated post-treatment; no canines died with PEF delivery. With 1 lead, energy delivery ranged from 0.64 to 7.28 J. Transient ST elevations were seen post-PEF. No myocardial delayed enhancement (MDE) was seen on cMRI. No lesions were noted on the RV septum at autopsy. With 2 leads, energy delivery ranged from 56.3 to 144.9 J. Persistent ST elevations and marked EGM amplitude decreases developed post-PEF. MDE was seen along the septum 2 weeks and 1 month post-PEF. There were discrete fibrotic lesions along the septum; pathology revealed dense connective tissue with < 5% residual cardiomyocytes.\n\nCONCLUSIONS:\nVentricular electroporation is feasible and safe with an active fixation device. Reversible changes were seen with lower energy PEF delivery, whereas durable lesions were created at higher energies.",
+      "designRank": 3,
+      "studyTypeLabel": "観察研究・その他",
+      "sampleSize": 2,
+      "isTargetJournal": true,
+      "titleJa": "アクティブ固定リードを使用した心室ナノ秒パルスフィールド送達: 概念実証の前臨床研究",
+      "summaryJa": "【背景】心筋中央部の心室性不整脈は治療が困難である。 (観察研究・その他 / N = 2例)\n【方法】5匹のイヌモデルにおいて、シングルリードバイポーラ構成（n = 2）を使用して右心室（RV）中隔を横切って、および2本のリード間（n = 3）にナノ秒PEF（パルス幅30…\n【結果】ナノ秒 PEF は最小限の心外刺激と頻繁な心室異所性を誘発し、治療後に終了しました。\n【結論】心室エレクトロポレーションは、能動的固定装置を使用すれば実行可能かつ安全である",
+      "abstractJa": "背景: 心筋中央部の心室性不整脈は治療が困難です。  パルスフィールド (PEF) による心臓エレクトロポレーションは、大きな可能性をもたらします。  したがって、概念実証としてねじ込み式ペースメーカ リードを使用して PEF 送達をテストしました。  方法：5頭のイヌモデルにおいて、シングルリード双極構成（n = 2）を使用して右心室（RV）中隔を横切り、および2つのリード間（n = 3）でナノ秒PEF（パルス幅300 ns）を適用しました。  PEF の前、直後、および PEF の 5 分後に心電図 (EGM) を記録しました。  心臓磁気共鳴画像法 (cMRI) と病理組織検査を 2 週間と 1 か月後に実施しました。  結果: ナノ秒 PEF は最小限の心外刺激と頻繁な心室異所性を誘発し、治療後に終了しました。 PEF分娩で死亡した犬はいなかった。 1 リードの場合、エネルギー送達は 0.64 ～ 7.28 J の範囲でした。PEF 後に一時的な ST 上昇が見られました。  cMRI では心筋遅延造影 (MDE) は見られませんでした。  剖検では右室中隔に病変は認められませんでした。  2 つのリード線の場合、エネルギー送達は 56.3 ～ 144.9 J の範囲でした。持続的な ST 上昇と顕著な EGM 振幅の減少が PEF 後に発生しました。  PEF の 2 週間後と 1 か月後に、中隔に沿って MDE が見られました。  中隔に沿って別個の線維性病変があった。病理検査により、残存心筋細胞が 5% 未満の高密度の結合組織が明らかになりました。  結論: 心室エレクトロポレーションは、能動的固定装置を使用すれば実行可能かつ安全です。  より低いエネルギーのPEF送達では可逆的な変化が見られたが、より高いエネルギーでは耐久性のある損傷が生成された。",
+      "isNew": true,
+      "firstSeen": "2026-11-27"
+    },
+    {
       "pmid": "42743395",
       "title": "Feasibility, Safety, and Efficacy of Pulsed Field Ablation for Ventricular Arrhythmias: Insights From a Large Health System Registry in the United States.",
       "pubDate": "2026-Sep-15",
@@ -17923,6 +17945,50 @@
       "firstSeen": "2026-11-12"
     },
     {
+      "pmid": "43094292",
+      "title": "Patient Characteristics Associated with Size and Location of Left Atrial Low Voltage Areas in Atrial Fibrillation Patients Undergoing Pulmonary Vein Isolation.",
+      "pubDate": "2026-Nov-26",
+      "journal": "Europace : European pacing, arrhythmias, and cardiac electrophysiology : journal of the working groups on cardiac pacing, arrhythmias, and cardiac cellular electrophysiology of the European Society of Cardiology",
+      "journalAbbr": "Europace",
+      "volumeIssuePage": "",
+      "authors": "Spreen D, Badertscher P, Krisai P, Schaerli N, Moretti E, Stump R, et al.",
+      "citation": "Spreen D, Badertscher P, Krisai P, Schaerli N, Moretti E, Stump R, et al.. Patient Characteristics Associated with Size and Location of Left Atrial Low Voltage Areas in Atrial Fibrillation Patients Undergoing Pulmonary Vein Isolation.. Europace. 2026 Nov 26;:. doi: 10.1093/europace/euag336 doi.",
+      "doi": "10.1093/europace/euag336 doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43094292/",
+      "abstract": "抄録なし (Abstract not available)",
+      "designRank": 3,
+      "studyTypeLabel": "観察研究・その他",
+      "sampleSize": 0,
+      "isTargetJournal": true,
+      "titleJa": "肺静脈隔離を受けている心房細動患者における左心房低電圧領域のサイズと位置に関連する患者の特徴",
+      "summaryJa": "【背景】肺静脈隔離を受けている心房細動患者における左心房低電圧領域のサイズと位置に関連する患者の特徴 (観察研究・その他 / 症例数: 不明)\n【方法】対象介入・評価プロトコルに基づく検証\n【結果】肺静脈隔離を受けている心房細動患者における左心房低電圧領域のサイズと位置に関連する患者の特徴の評価および成績解析\n【結論】肺静脈隔離を受けている心房細動患者における左心房低電圧領域のサイズと位置に関連する患者の特徴における臨床的意義を評価",
+      "abstractJa": "PubMedに抄録が掲載されていません。リンク先の原文サイトを参照してください。",
+      "isNew": true,
+      "firstSeen": "2026-11-27"
+    },
+    {
+      "pmid": "43094286",
+      "title": "Use of 3D Intracardiac Echocardiography for Concomitant Ablation of Atrial Fibrillation and Left Atrial Appendage Closure: A Step by Step Guide.",
+      "pubDate": "2026-Nov-25",
+      "journal": "Journal of cardiovascular electrophysiology",
+      "journalAbbr": "J Cardiovasc Electrophysiol",
+      "volumeIssuePage": "",
+      "authors": "Patel A, Valderrábano M",
+      "citation": "Patel A, Valderrábano M. Use of 3D Intracardiac Echocardiography for Concomitant Ablation of Atrial Fibrillation and Left Atrial Appendage Closure: A Step by Step Guide.. J Cardiovasc Electrophysiol. 2026 Nov 25;:. doi: 10.1111/jce.70560 doi.",
+      "doi": "10.1111/jce.70560 doi",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/43094286/",
+      "abstract": "Intracardiac echocardiography (ICE) has traditionally played a secondary role in atrial fibrillation (AF) ablation and left atrial appendage closure (LAAC), with transesophageal echocardiography (TEE) remaining the standard for appendage imaging. The rise of pulsed field ablation (PFA) has increased interest in adjunctive tools for real-time contact assessment, while trials such as OPTION have highlighted the clinical rationale for combining AF ablation with LAAC in a single procedure. This article describes a step-by-step procedural workflow for concomitant ablation and LAAC using 4D ICE to guide transseptal access, PFA catheter contact, and LAAC device sizing and deployment. Practical troubleshooting strategies for septal crossing and appendage visualization are also discussed.",
+      "designRank": 3,
+      "studyTypeLabel": "観察研究・その他",
+      "sampleSize": 0,
+      "isTargetJournal": true,
+      "titleJa": "心房細動の同時アブレーションと左心耳閉鎖のための 3D 心内心エコー検査の使用: ステップバイステップ ガイド",
+      "summaryJa": "【背景】心内心エコー検査 (ICE) は伝統的に、心房細動 (AF) アブレーションおよび左心耳閉鎖 (LAAC) において二次的な役割を果たしており、経食道心エコー検査 (TE… (観察研究・その他 / 症例数: 不明)\n【方法】パルスフィールドアブレーション（PFA）の台頭により、リアルタイム接触評価のための補助ツールへの関心が高まっている一方、OPTION などの試験では、AF アブレーション…\n【結果】中隔交差と付属器の視覚化に関する実践的なトラブルシューティング戦略についても説明しる\n【結論】中隔交差と付属器の視覚化に関する実践的なトラブルシューティング戦略についても説明しる",
+      "abstractJa": "心内心エコー検査 (ICE) は伝統的に、心房細動 (AF) アブレーションおよび左心耳閉鎖 (LAAC) において二次的な役割を果たしており、経食道心エコー検査 (TEE) が付属器イメージングの標準であり続けています。パルスフィールドアブレーション（PFA）の台頭により、リアルタイム接触評価のための補助ツールへの関心が高まっている一方、OPTION などの試験では、AF アブレーションと LAAC を 1 回の処置で組み合わせる臨床的理論的根拠が強調されています。この記事では、経中隔アクセス、PFA カテーテルの接触、LAAC デバイスのサイジングと展開をガイドする 4D ICE を使用した、同時アブレーションと LAAC の手順ワークフローについて段階的に説明します。中隔交差と付属器の視覚化に関する実践的なトラブルシューティング戦略についても説明します。",
+      "isNew": true,
+      "firstSeen": "2026-11-27"
+    },
+    {
       "pmid": "43081796",
       "title": "Safety and efficacy of irrigated-tip catheter ablation guided by three-dimensional electroanatomic mapping for atrioventricular nodal reentrant tachycardia: the WATER ATTAC study.",
       "pubDate": "2026-Nov-25",
@@ -17941,7 +18007,7 @@
       "titleJa": "房室結節リエントリー性頻脈に対する三次元電気解剖学的マッピングに基づいた灌注チップカテーテルアブレーションの安全性と有効性: WATER ATTAC 研究",
       "summaryJa": "【背景】房室結節リエントリー性頻脈に対する三次元電気解剖学的マッピングに基づいた灌注チップカテーテルアブレーションの安全性と有効性: WATER ATTAC 研究 (観察研究・その他 / 症例数: 不明)\n【方法】新規技術と既存治療法との直接比較・評価手法\n【結果】主要エンドポイントおよび併発症発生率の比較解析\n【結論】房室結節リエントリー性頻脈に対する三次元電気解剖学的マッピングに基づいた灌注チップカテーテルアブレーションの安全性と有効性: WATER ATTAC 研究において良好な治療成績と安全性を確認",
       "abstractJa": "PubMedに抄録が掲載されていません。リンク先の原文サイトを参照してください。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -17963,7 +18029,7 @@
       "titleJa": "三次元画像における心室細動開始のプルキンエ活性化軌跡",
       "summaryJa": "【背景】VFの開始は、プルキンエ活性化クラスターの軌道の徐々に変化することに関連しており、プルキンエ線維と心室心筋層との間のリエントリーから生じると思われる (観察研究・その他 / 症例数: 不明)\n【方法】VFの開始は、プルキンエ活性化クラスターの軌道の徐々に変化することに関連しており、プルキンエ線維と心室心筋層との間のリエントリーから生じると思われる\n【結果】VFの開始は、プルキンエ活性化クラスターの軌道の徐々に変化することに関連しており、プルキンエ線維と心室心筋層との間のリエントリーから生じると思われる\n【結論】VFの開始は、プルキンエ活性化クラスターの軌道の徐々に変化することに関連しており、プルキンエ線維と心室心筋層との間のリエントリーから生じると思われる",
       "abstractJa": "VFの開始は、プルキンエ活性化クラスターの軌道の徐々に変化することに関連しており、プルキンエ線維と心室心筋層との間のリエントリーから生じると思われる。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -17985,7 +18051,7 @@
       "titleJa": "生殖年齢女性における心房細動と心房粗動の管理の傾向: GWTG-AFib レジストリ",
       "summaryJa": "【背景】米国では、生殖年齢の女性における不整脈の発生が増加している。 (観察研究・その他 / 症例数: 不明)\n【方法】Get With The ガイドライン (GWTG) 心房細動登録は 2013 年から 2024 年の間に調査され、心房細動 (AFib) または粗動 (AFL) で入院…\n【結果】2013年から2024年までに生殖年齢の女性を対象としたAFibまたはAFLによる入院3,755人のうち、2,732人（72.8％）が抗凝固剤を投与されて退院し、1,380人（36.8％）が抗不整脈薬の投与を受けた。\n【結論】妊娠に関連する可能性のある薬剤の使用が頻繁かつ増加していることは、不整脈管理と生殖計画および薬剤の安全性を統合する、生殖に特化した指導の必要性を浮き彫りにしている",
       "abstractJa": "背景: 米国では、生殖年齢の女性における不整脈の発生が増加しています。  ガイドラインの証拠が限られていることと、多くの抗不整脈療法に伴う母体/胎児のリスクのため、管理は依然として困難です。  目的: この研究は、過去 10 年間の生殖年齢女性の心房性不整脈の治療における処方パターンと管理傾向を特徴付けることを目的としています。  方法: 2013 年から 2024 年の間に Get With The guideline (GWTG) 心房細動登録を調査し、心房細動 (AFib) または粗動 (AFL) で入院した生殖年齢 (50 歳以下) の女性全員を対象にしました。  薬剤は、低リスク、競合薬剤、妊娠中の回避/禁忌に分類されました。 最もよく使用される抗凝固薬、抗不整脈薬、および心拍数制御薬の退院処方パターンが分析されました。  時間的傾向はコクラン・アーミテージ検定を使用して評価され、グループ比較はカイ二乗分析を使用して実行されました。  結果：2013年から2024年の間に生殖年齢の女性を対象としたAFibまたはAFLによる入院3,755人のうち、2,732人（72.8％）が抗凝固剤を投与され退院し、1,380人（36.8％）が抗不整脈薬の投与を受けた。  全体として、受診者の75.3%は、一般に妊娠中に回避/禁忌として分類される薬剤を使用して退院しており、研究期間中にそのような薬剤の使用は大幅に増加傾向にあり(p<0.05)、これは主に抗凝固薬の使用増加によるものである。 新規発症心房細動による入院は651件（20.5％）を占め、このサブグループ（62％）では心拍数制御よりもリズム制御戦略がより頻繁に使用された。  結論：妊娠に関連する可能性がある薬剤の使用が頻繁かつ増加していることは、不整脈管理と生殖計画および薬剤の安全性を統合する、生殖に特化した指導の必要性を浮き彫りにしています。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -18007,7 +18073,7 @@
       "titleJa": "心房細動アブレーションのためのパルスフィールドアブレーション技術の比較：体系的レビューとペアワイズメタ分析",
       "summaryJa": "【背景】市販のパルスフィールド アブレーション (PFA) プラットフォームは、カテーテルの形状、マッピングの統合、灌注、エネルギー供給戦略が異なりる。 (観察研究・その他 / 症例数: 不明)\n【方法】PubMed/MEDLINE、Scopus、および CENTRAL が 2026 年 10 月 8 日まで検索された。\n【結果】43 件の研究を表す 46 件の観察報告が含まれていました。\n【結論】これらのプラットフォームは、単一の均一に優れたシステムを持たずに、異なるワークフローとバイオマーカーのプロファイルを示しました",
       "abstractJa": "背景: 市販のパルスフィールドアブレーション (PFA) プラットフォームは、カテーテルの形状、マッピングの統合、灌注、エネルギー供給戦略が異なります。  目的: FARAPULSE、VARIPULSE、PulseSelect、Affera/Sphere-9、および Volt を、手順、生物学的、安全性、および有効性の結果にわたって比較すること。  方法: PubMed/MEDLINE、Scopus、および CENTRAL を 2026 年 10 月 8 日まで検索しました。デバイスの直接比較ごとに、別々の変量効果ペアワイズ メタ分析を実行しました。  探索的分析では、病変戦略、出版年、電気解剖学的マッピング、および心臓内心エコー検査が検討されました。  結果: 43 件の研究を代表する 46 件の観察報告が含まれていました。 VARIPULSE ワークフローでは、FARAPULSE (MD -13.54 分、95% CI -18.89 ～ -8.19) および PulseSelect (MD -11.45、95% CI -16.96 ～ -5.94) よりも透視検査の使用量が少なく、Affera/Sphere-9 では FARAPULSE より使用量が少なかった (MD -7.20、95% CI) -10.27から-4.14）。  Affera/Sphere-9 は、FARAPULSE、PulseSelect、および VARIPULSE よりもハプトグロビンの減少が少ないことが示されました。ボルトはFARAPULSEよりも少ない結果を示しました。  どのプラットフォームも一貫して手術時間を短縮したり、全体的な合併症や急性腎障害において明確に異なったりすることはありませんでした。  FARAPULSE と PulseSelect 以外では、耐久性の比較は限定的なままでした。  結論: これらのプラットフォームは、単一の均一に優れたシステムを持たずに、異なるワークフローとバイオマーカーのプロファイルを示しました。 VARIPULSE と Affera/Sphere-9 ワークフローでは、利用可能な直接比較では透視検査の使用量が少なく、Affera/Sphere-9 と Volt では、選択した比較でハプトグロビン減少が少ないことが示されました。  これらのバイオマーカーの所見は、腎臓またはハードの臨床上の利点を確立しませんでした。  比較耐久性はまだ不明です。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -18315,7 +18381,7 @@
       "titleJa": "無症候性心房細動における抗凝固療法：個別管理のための科学的根拠に基づいたフレームワーク",
       "summaryJa": "【背景】ウェアラブルモニタリング技術や心臓埋め込み型電子機器の使用が増加したことにより、無症候性心房細動（SCAF）が頻繁に偶発的に検出されるようになりましたが、長期にわたる抗凝… (観察研究・その他 / 症例数: 不明)\n【方法】SCAF が単なる臨床疾患の前駆体ではなく、心房疾患の連続的なスペクトルにおける別個の臨床実体であることを示す証拠が増えている\n【結果】SCAF が単なる臨床疾患の前駆体ではなく、心房疾患の連続的なスペクトルにおける別個の臨床実体であることを示す証拠が増えている\n【結論】このレビューは、観察研究、ランダム化臨床試験、事後分析からのデータを総合して、個別の抗凝固療法とリスクと利益を考慮するための包括的で実践的な枠組みを提供しる",
       "abstractJa": "ウェアラブルモニタリング技術や心臓埋め込み型電子機器の使用が増加したことにより、無症候性心房細動（SCAF）が頻繁に偶発的に検出されるようになりましたが、長期にわたる抗凝固療法の役割は依然として不確実です。  SCAF が単なる臨床疾患の前駆体ではなく、心房疾患の連続的なスペクトルにおける別個の臨床実体であることを示す証拠が増えています。  我々は、SCAFにおける抗凝固療法は、平均余命や患者の好みに加えて、不整脈負荷、ベースラインの臨床リスク、構造的心房性心筋症の程度を統合することによって導かれるべきであると提案する。 このレビューは、観察研究、ランダム化臨床試験、事後分析からのデータを総合して、個別の抗凝固療法とリスクと利益を考慮するための包括的で実践的な枠組みを提供します。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -18623,7 +18689,7 @@
       "titleJa": "初めての肺静脈隔離後の患者所有の消費者向けデバイスを使用した遠隔活動およびリズムモニタリング",
       "summaryJa": "【背景】～の機能状態の尺度 (観察研究・その他 / 症例数: 不明)\n【方法】そして\n【結果】前向きTRUSTレジストリに登録され、指標PVIを受け、対象となるスマートフォンを所有していると報告した心房細動患者に再連絡し、インフォームドコンセントを提供し、スマートフォンとスマートウォッチで生成されたデータを共有し…\n【結論】消費者のスマートフォンやスマートウォッチから活動データやリズムデータをリモートで収集することが可能で、広範囲にわたる複数年にわたる研究データが得られる",
       "abstractJa": "目的: 消費者向けデバイスから受動的に収集された身体活動データは、心房細動 (AF) 患者の機能状態のスケーラブルで客観的な尺度を提供できる可能性があります。  この研究では、指標肺静脈隔離術 (PVI) を受けている患者から活動とリズムのデータを遠隔で収集する実現可能性を評価しました。  方法と結果：予測TRUSTレジストリに登録され、インデックスPVIを受け、対象となるスマートフォンを所有していると報告した心房細動患者に再連絡し、インフォームドコンセントを提供し、スマートフォンとスマートウォッチで生成されたデータを共有した。  事前に指定された実現可能性の基準は、参加率、技術的な成功、および一時的なデータ範囲でした。 主な機能的結果は、PVI 前 1 年間と PVI 後 2 年間の平均日歩数変化でした。  探索的分析では、日常の活動と心房細動の再発および心房細動の負担との関連性を調べた。  対象となる患者 280 名のうち、172 名 (61%) がデータ転送を試み、172 名中 154 名 (90%) がデータ転送を完了し、そのうち 123 名が事前に指定された完全性基準を満たしました。  モニタリング期間の中央値は 6.0 [3.6, 6.6] 年で、カバー率は 98% [77, 100] でした。  PVI 後、1 日の平均歩数は 5731 ± 2808 から 6220 ± 2816 歩/日へと増加しました (+488 歩/日 [187, 789]; P = 0.002)。  35 人のスマートウォッチ ユーザーでは、PVI 後、AF の負担が 3.6% [1.6、10.8] から 0.0% [0.0、0.3] に減少しました (P < 0.001)。  ベースラインの AF 負荷は、毎日の歩数と逆相関していました (ρ = -0.36、P = 0.035)。 結論: 消費者のスマートフォンやスマートウォッチからの活動データとリズムデータのリモート収集は実現可能であり、広範囲にわたる複数年にわたる研究データが得られます。  これにより、長期的な機能成果のスケーラブルかつ客観的な定量化が可能になります。  この探索的コホートでは、PVI 後に 1 日の歩数が増加し、ベースラインの AF 負担と逆相関していました。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -18645,7 +18711,7 @@
       "titleJa": "肥満と心房細動: ライフスタイル、薬物療法、アブレーションの統合",
       "summaryJa": "【背景】肥満は心房細動 (AF) の危険因子として確立されており、ガイドラインでは過体重または肥満の患者に対して 10% 以上の体重削減を推奨している (観察研究・その他 / 症例数: 不明)\n【方法】しかし、食事による減量介入に関する最近のランダム化臨床試験では有意な効果は示されておらず、集中的で構造化されたプログラムにもかかわらず、ほとんどの参加者がガイドラインの目…\n【結果】肥満は心房細動 (AF) の危険因子として確立されており、ガイドラインでは過体重または肥満の患者に対して 10% 以上の体重削減を推奨している。\n【結論】包括的な LRFM、薬理学的体重管理、およびカテーテルアブレーションは、競合する治療法ではなく、統合された AF ケアの補完的な要素として見なされるべきである",
       "abstractJa": "肥満は心房細動 (AF) の危険因子として確立されており、ガイドラインでは過体重または肥満の患者に対して 10% 以上の体重削減を推奨しています。  しかし、食事による減量介入に関する最近のランダム化臨床試験では有意な効果は示されておらず、集中的で構造化されたプログラムにもかかわらず、ほとんどの参加者がガイドラインの目標を達成できていません。  対照的に、新たな証拠は、グルカゴン様ペプチド-1受容体アゴニストがカテーテルアブレーションと組み合わせると不整脈の再発を減らすことを示唆していますが、治療期間、費用、除脂肪体重の保存、および利益のメカニズムに関しては疑問が残っています。 ランダム化試験は、心臓代謝の健康に総合的に取り組み、不整脈の再発と医療利用を減らし、生活の質を改善する学際的なライフスタイルリスク因子管理（LRFM）クリニックもサポートしていますが、現実世界での提供は依然として限られています。  新たに発症した心房細動は心臓代謝の健康状態のマーカーとして認識され、アブレーション前後に構造化された評価を迅速に行う必要があります。  包括的な LRFM、薬理学的体重管理、およびカテーテルアブレーションは、競合する治療法ではなく、統合された AF ケアの補完的な要素として見なされるべきです。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -22077,7 +22143,7 @@
       "titleJa": "遺伝子型陽性不整脈原性心筋症および拡張型心筋症における経壁性遅発ガドリニウム増強の臨床的意義",
       "summaryJa": "【背景】心筋中部および心外膜下の遅発ガドリニウム増強（LGE）は、遺伝性不整脈原性心筋症（ACM）および拡張型心筋症（DCM）において典型的である。 (観察研究・その他 / 症例数: 不明)\n【方法】われわれは遺伝子型陽性のACM/DCM患者1,379人を遡及的に分析し、心臓磁気共鳴画像法で711人を特定したが、重大な冠動脈疾患はなかった。\n【結果】経壁性 LGE は患者の 5% (33/711) に存在し、LMNA および DSP 変異キャリアが豊富であった。\n【結論】経壁的 LGE は、特に LMNA および DSP バリアントを有する患者において、不整脈や心不全のリスクが大幅に増加している、遺伝子型陽性 ACM/DCM の小さいながらも高リス…",
       "abstractJa": "背景: 心筋中部および心外膜下の遅発ガドリニウム増強（LGE）は、遺伝性不整脈原性心筋症（ACM）および拡張型心筋症（DCM）において典型的である。  通常虚血性と考えられ、ACM 基準から除外される経壁性 LGE も発生する可能性がありますが、その臨床的関連性は不明です。  目的: この研究の目的は、遺伝子型陽性の非虚血性 ACM/DCM 患者における経壁性 LGE の有病率、遺伝的関連、および予後の重要性を評価することでした。  方法：遺伝子型陽性のACM/DCM患者1,379人を遡及的に分析し、心臓磁気共鳴画像法で711人を特定したが、重大な冠動脈疾患はなかった。  患者は、LGE パターン (経壁性、非経壁性、または欠如) によって層別化されました。 主要な心室不整脈 (MVA) および進行性心不全 (AHF) イベントは、カプラン マイヤー分析および年齢調整コックス回帰分析を使用して評価されました。  結果: 経壁性 LGE は患者の 5% (33/711) に存在し、LMNA および DSP 変異キャリアが豊富でした。  非経壁性 LGE または非経壁性 LGE と比較して、経壁性 LGE は、血栓塞栓性イベント、心房細動、および植込み型除細動器の植込み率の高さと関連していました（すべて P ≤ 0.003）。  また、MVA イベント (45% vs 27% vs 14%) および AHF 治療 (18% vs 12% vs 6%) の発生率も増加しました (P < 0.05)。  年齢調整モデルでは、経壁的 LGE は、非経壁的 LGE (HR: 1.9; P = 0.03) および LGE なし (HR: 2.9; P = 0.0005) と比較して、MVA/AHF の複合エンドポイントを独立して予測しました。 結論: 経壁的 LGE は、特に LMNA および DSP バリアントを有する患者の間で、不整脈や心不全のリスクが大幅に増加している、遺伝子型陽性 ACM/DCM の小さいながらも高リスクのサブセットを特定します。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -23661,7 +23727,7 @@
       "titleJa": "Y染色体のモザイク欠損と心房細動との関連性",
       "summaryJa": "【背景】Y 染色体のモザイク欠損 (mLoY) は、男性における最も一般的な加齢に関連した体細胞突然変異であり、死亡率の増加および線維性心血管表現型と関連している。 (観察研究・その他 / 症例数: 不明)\n【方法】私たちは、利用可能なゲノムデータと臨床データを使用して、マサチューセッツジェネラルブリガムバイオバンクからの20歳以上の男性参加者17,916人を分析しました。\n【結果】2,940 人の AF 患者と 14,976 人の対照参加者の間では、どちらの分類方法でも、mLoY 有病率は AF 患者の方が高かった。\n【結論】mLoY は独立して、AF の有病率の上昇と AF 患者の死亡率の上昇と関連している",
       "abstractJa": "背景: Y染色体のモザイク欠損(mLoY)は、男性において最も一般的な加齢に関連した体細胞突然変異であり、死亡率の増加および線維性心血管表現型と関連している。  目的: この研究は、病院を拠点とする大規模なバイオバンク コホートにおける mLoY、心房細動 (AF)、死亡率の関連性を評価することを目的としました。  方法：マサチューセッツ・ジェネラル・ブリガム・バイオバンクからの20歳以上の男性参加者17,916名を、利用可能なゲノムおよび臨床データを用いて分析した。  mLoY は、ジェノタイピング アレイ データから得られた Y 染色体値の平均 log R 比を使用して定量化されました。  ヒストグラムベースのカットオフと Y 染色体ベースの閾値法の平均 log R 比という 2 つの分類アプローチが使用されました。 mLoY、AF、死亡率の関連性は、心血管疾患の併存疾患を調整した多変量ロジスティック回帰を使用して評価されました。  結果： 2,940 人の AF 患者と 14,976 人の対照参加者の間では、mLoY 有病率はどちらの分類方法でも AF 患者の方が高かった。  年齢と併存疾患を調整した後、Y染色体値<-0.1を持つ個人ではAFのオッズが25%増加しました(調整後OR: 1.25; 95% CI: 1.01-1.55)。  AF患者では、mLoYは独立して全死因死亡リスクの37％上昇と関連していた（調整後OR：1.37、95％CI：1.06～1.79）。  結論: mLoY は独立して、AF の有病率の上昇と AF 患者の死亡率の上昇と関連しています。 これらの発見は、mLoYが高齢男性の心血管リスク層別化の潜在的なバイオマーカーであることを裏付けており、線維症がさらなる研究を正当化する重要なメカニズム経路であることを強調している。",
-      "isNew": true,
+      "isNew": false,
       "firstSeen": "2026-11-26"
     },
     {
@@ -26569,28 +26635,6 @@
       "firstSeen": "2026-11-12"
     },
     {
-      "pmid": "41956271",
-      "title": "Socioeconomic deprivation and reclassification of ischemic stroke risk in patients with atrial fibrillation: A report from UK Biobank.",
-      "pubDate": "2026-Apr-07",
-      "journal": "Heart rhythm",
-      "journalAbbr": "Heart Rhythm",
-      "volumeIssuePage": "23(10):e2397-e2405",
-      "authors": "Rhee TM, Ahn HJ, Lee KY, Choi J, Lee SR, Oh S, et al.",
-      "citation": "Rhee TM, Ahn HJ, Lee KY, Choi J, Lee SR, Oh S, et al.. Socioeconomic deprivation and reclassification of ischemic stroke risk in patients with atrial fibrillation: A report from UK Biobank.. Heart Rhythm. 2026 Apr 07;23(10):e2397-e2405. doi: 10.1016/j.hrthm.2026.03.1964 doi.",
-      "doi": "10.1016/j.hrthm.2026.03.1964 doi",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41956271/",
-      "abstract": "BACKGROUND:\nThe impact of socioeconomic deprivation on stroke risk stratification among patients with atrial fibrillation (AF) remains underexplored, particularly across its specific domains.\n\nOBJECTIVE:\nWe investigated the association between socioeconomic deprivation and ischemic stroke risk in AF.\n\nMETHODS:\nWe included 21,893 United Kingdom Biobank participants with newly diagnosed AF, excluding those with prior stroke or baseline use of antithrombotic. Socioeconomic status was assessed using the Index of Multiple Deprivation (IMD), comprising 7 domains: income, employment, health, education, crime, housing, and living environment. Individuals in the top 5% were defined as the highly-deprived group. The primary outcome was incident ischemic stroke.\n\nRESULTS:\nOver a median follow-up of 3.9 years (1.6-7.2), the highly-deprived group had a higher incidence of stroke than the control group (16.09 vs 8.56 per 1000 person-years), with a graded linear increase in the hazard ratio (HR) for stroke across the full range of IMD scores. Socioeconomic deprivation was independently associated with increased stroke risk (adjusted HR 1.75, 95% confidence interval 1.24-2.46, P = .001). Income, employment, health, and living environment deprivation were most strongly associated with increased stroke risk. In patients with CHADS-VA score 0-1, stroke incidence in the highly-deprived group exceeded that of control individuals with score 2-3. Adding IMD to the CHADS-VA score improved the C-index from 0.595 to 0.613 (P = .027) and net reclassification index by 14.6% (P = .002).\n\nCONCLUSION:\nSocioeconomic deprivation independently predicts ischemic stroke in AF and enhances risk stratification beyond clinical scores, highlighting the value of incorporating socioeconomic metrics into risk prediction, thus impacting clinical decision.",
-      "designRank": 3,
-      "studyTypeLabel": "観察研究・その他",
-      "sampleSize": 0,
-      "isTargetJournal": true,
-      "titleJa": "心房細動患者における社会経済的剥奪と虚血性脳卒中リスクの再分類：英国バイオバンクの報告書",
-      "summaryJa": "【背景】社会経済的剥奪が脳卒中リスク階層化に及ぼす影響 (観察研究・その他 / 症例数:不明)\n【方法】心房細動（AF）に関する研究は、特にその特定の領域においては未解明のままである。\n\n目的:\n私たちは、社会経済的貧困と虚血性脳卒中のリスクとの関連を調査した。\n【結果】追跡期間中央値3.9年（1.6～7.2）にわたって、高度に貧困にあるグループは対照グループよりも脳卒中発生率が高く（1000人年あたり16.09対8.56）、段階的に直線的に増加した。\n【結論】社会経済的剥奪は独立して心房細動における虚血性脳卒中を予測し、臨床スコアを超えてリスク階層化を強化し、リスクに社会経済的指標を組み込むことの価値を強調する",
-      "abstractJa": "背景:\n心房細動（AF）患者の脳卒中リスク層別化に対する社会経済的貧困の影響は、特にその特定の領域においては、依然として十分に解明されていない。\n\n目的:\n私たちは、社会経済的貧困とAFにおける虚血性脳卒中のリスクとの関連を調査した。\n\n方法:\n新たに心房細動と診断された英国バイオバンク参加者21,893人を対象とした。ただし、以前の脳卒中または抗血栓薬のベースライン使用歴のある人は除く。社会経済的地位は、収入、雇用、健康、教育、犯罪、住宅、生活環境の 7 つの領域で構成される多重剥奪指数 (IMD) を使用して評価された。上位 5% の個人は、高度に恵まれないグループとして定義された。主要転帰は虚血性脳卒中発生であった。\n\n結果:\n追跡期間中央値3.9年（1.6～7.2）にわたって、高度貧困グループは対照グループよりも脳卒中発生率が高く（1000人年あたり16.09対8.56）、IMDスコアの全範囲にわたって脳卒中のハザード比（HR）が段階的に直線的に増加した。社会経済的貧困は、独立して脳卒中リスクの増加と関連していた(調整後HR 1.75、95%信頼区間 1.24-2.46、P = 0.001)。収入、雇用、健康、生活環境の剥奪は脳卒中リスクの増加と最も強く関連していた。 CHADS-VAスコアが0～1の患者では、高度に恵まれないグループの脳卒中発生率がスコア2～3の対照群の脳卒中発生率を上回った。 CHADS-VA スコアに IMD を追加すると、C 指数が 0.595 から 0.613 (P = .027) に改善され、正味再分類指数が 14.6% (P = .002) 改善された。\n\n結論:\n社会経済的剥奪は独立して心房細動における虚血性脳卒中を予測し、臨床スコアを超えたリスク層別化を強化し、リスク予測に社会経済的指標を組み込むことの価値を強調し、臨床上の意思決定に影響を与える。",
-      "isNew": false,
-      "firstSeen": "2026-11-12"
-    },
-    {
       "pmid": "41956267",
       "title": "Epicardial assessment of transmural posterior wall isolation during endocardial pulsed field ablation in long-standing persistent atrial fibrillation.",
       "pubDate": "2026-Apr-07",
@@ -27823,28 +27867,6 @@
       "firstSeen": "2026-11-21"
     },
     {
-      "pmid": "41731960",
-      "title": "Pulsed Field Ablation in Atrial Fibrillation: First Reported Mexican Experience and Procedural Learning Curve.",
-      "pubDate": "2026-Feb-23",
-      "journal": "Journal of cardiovascular electrophysiology",
-      "journalAbbr": "J Cardiovasc Electrophysiol",
-      "volumeIssuePage": "37(4):872-875",
-      "authors": "Aguirre RG, Rodríguez CEG, Díaz JRL, Molina FJV, Garza SMG, Hernández NIO, et al.",
-      "citation": "Aguirre RG, Rodríguez CEG, Díaz JRL, Molina FJV, Garza SMG, Hernández NIO, et al.. Pulsed Field Ablation in Atrial Fibrillation: First Reported Mexican Experience and Procedural Learning Curve.. J Cardiovasc Electrophysiol. 2026 Feb 23;37(4):872-875. doi: 10.1111/jce.70304 doi.",
-      "doi": "10.1111/jce.70304 doi",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41731960/",
-      "abstract": "BACKGROUND:\nPulsed field ablation (PFA) is a novel non-thermal modality for atrial fibrillation (AF) ablation that selectively targets myocardial tissue while minimizing collateral injury. While widely reported in Europe and the United States, data from Latin America remain scarce.\n\nMETHODS:\nWe present the first four cases of PFA performed in Monterrey, Mexico. All procedures were conducted with ultrasound-guided femoral venous access, transseptal puncture using FastCath SL1 and Brockenbrough needle guided with intracardiac echocardiography, mapping with pentaray catheter, and ablation with a PulsedSelect PFA catheter via a FlexCath sheath. Antral pulmonary vein isolation was the primary endpoint, with posterior wall ablation performed at operator discretion.\n\nRESULTS:\nPulmonary vein isolation was achieved in all patients. Two patients underwent posterior wall ablation. Isthmus measurements were obtained only in patients who underwent pulmonary vein isolation alone, with posterior isthmus lengths of 16.9 mm and 12 mm. Three patients maintained sinus rhythm throughout the procedure; one patient with a common right pulmonary vein trunk and an enlarged left atrial volume index (LAVI) developed intraprocedural AF requiring electrical cardioversion. Mean procedure time was 149 min (range 105-220), and mean fluoroscopy time was 22 min (range 14-27). No complications occurred.\n\nCONCLUSIONS:\nThis first Mexican experience demonstrates that PFA is feasible and safe, with reproducible pulmonary vein isolation and a short procedural learning curve. These findings align with international reports and support the integration of PFA into AF ablation strategies in Latin America.",
-      "designRank": 3,
-      "studyTypeLabel": "観察研究・その他",
-      "sampleSize": 0,
-      "isTargetJournal": true,
-      "titleJa": "心房細動におけるパルスフィールドアブレーション: 最初に報告されたメキシコの経験と手順の学習曲線",
-      "summaryJa": "【背景】パルスフィールドアブレーション(PFA)は、側副傷害を最小限に抑えながら心筋組織を選択的に標的とする心房細動(AF)アブレーションのための新しい非熱療法である。 (観察研究・その他 / 症例数:不明)\n【方法】メキシコのモンテレイで行われたPFAの最初の4症例を紹介する。\n【結果】全患者において肺静脈隔離が達成された。\n【結論】このメキシコでの最初の経験は、再現性のある肺静脈隔離と短い手順の学習曲線を備えた PFA が実行可能で安全であることを実証した。",
-      "abstractJa": "背景:\nパルスフィールドアブレーション (PFA) は、側副傷害を最小限に抑えながら心筋組織を選択的に標的とする、心房細動 (AF) アブレーションのための新しい非熱療法である。ヨーロッパと米国では広く報道されているが、ラテンアメリカでのデータは依然として不足している。\n\n方法:\nメキシコのモンテレーで行われた最初の 4 つの PFA 症例を紹介する。すべての手順は、超音波ガイド下の大腿静脈アクセス、FastCath SL1 と心臓内心エコー検査でガイドされたブロッケンブロー針を使用した経中隔穿刺、ペンタレイ カテーテルによるマッピング、および FlexCath シースを介した PulsedSelect PFA カテーテルによるアブレーションによって行われた。前庭部肺静脈の隔離が主要評価項目であり、後壁アブレーションは術者の判断で実施された。\n\n結果:\nすべての患者で肺静脈の隔離が達成された。 2人の患者が後壁アブレーションを受けた。峡部の測定値は、肺静脈隔離のみを受けた患者のみで得られ、後部峡部の長さは 16.9 mm および 12 mm であった。 3 人の患者は処置全体を通して洞調律を維持した。共通の右肺静脈幹と拡大した左心房体積指数（LAVI）を有する患者の 1 人は、電気的電気的除細動を必要とする術中 AF を発症した。平均手術時間は 149 分 (範囲 105 ～ 220)、平均透視時間は 22 分 (範囲 14 ～ 27) であった。合併症は発生しなかった。\n\n結論:\nこのメキシコでの最初の経験は、再現性のある肺静脈隔離と短い手順の学習曲線を備えた PFA が実行可能で安全であることを実証した。これらの発見は国際報告と一致しており、ラテンアメリカにおける心房細動アブレーション戦略への PFA の統合を裏付けている。",
-      "isNew": false,
-      "firstSeen": "2026-11-12"
-    },
-    {
       "pmid": "41729358",
       "title": "Focal-bipolar pulsed field ablation as a bailout strategy for radiofrequency-resistant atrioventricular nodal reentrant tachycardia.",
       "pubDate": "2026-Feb-23",
@@ -28171,28 +28193,6 @@
       "titleJa": "心房細動：過小評価されている糖尿病の合併症",
       "summaryJa": "【背景】心房細動：過小評価されている糖尿病の合併症。 (観察研究・その他 / 症例数:不明)\n【方法】心房細動のリスクがある人、および無症状または臨床的心房細動を患っている人のすべての段階にわたって。\n【結果】主要評価項目および臨床経過の観察\n【結論】心房細動：過小評価されている糖尿病の合併症における臨床的意義",
       "abstractJa": "心房細動 (AF) は糖尿病の合併症として認識されるべきであり、有病率は最大 25% であり、糖尿病患者の発生率は増加している。心房細動は、高血圧、アテローム性動脈硬化性心血管疾患、または心不全とは関係なく、糖尿病患者で発症する可能性がある。糖尿病と心房細動を結びつける病因は多因子的であり、心房の構造的、電気的、電気機械的、自律神経のリモデリング、さらには糖尿病関連の代謝併存疾患が関与している。糖尿病（主に 2 型糖尿病）の有病率はさらに増加すると予想されるため、個人、社会、医療システムに対する心房細動の共存負担は今後も増大し続けるでしょう。したがって、心房細動のリスクのある糖尿病患者および無症状または臨床的心房細動の患者のすべての段階にわたる糖尿病患者のケアを最適化するには、統合されたCAREベースの管理アプローチを採用する必要がある。これには、併存疾患と危険因子の管理、脳卒中と血栓塞栓症の回避、速度とリズムの制御による症状の軽減、評価と動的再評価が含まれる。この総説では、糖尿病と心房細動の複雑かつ密接な関係を概説し、糖尿病患者における疫学、病因、および糖尿病患者におけるCAREベースのアプローチに基づく管理戦略に取り組んでいる。このような配慮により、タイムリーな予防、早期発見、効果的な介入が促進され、最終的には AF および糖尿病患者の健康転帰が改善される可能性がある。",
-      "isNew": false,
-      "firstSeen": "2026-11-12"
-    },
-    {
-      "pmid": "41666150",
-      "title": "Semaglutide as adjunctive therapy to catheter ablation in obesity-related paroxysmal atrial fibrillation.",
-      "pubDate": "2026-Feb-03",
-      "journal": "Europace : European pacing, arrhythmias, and cardiac electrophysiology : journal of the working groups on cardiac pacing, arrhythmias, and cardiac cellular electrophysiology of the European Society of Cardiology",
-      "journalAbbr": "Europace",
-      "volumeIssuePage": "28(2)",
-      "authors": "Ciconte G, Salerno R, Fuga A, Vuturo A, Boccellino A, Negro G, et al.",
-      "citation": "Ciconte G, Salerno R, Fuga A, Vuturo A, Boccellino A, Negro G, et al.. Semaglutide as adjunctive therapy to catheter ablation in obesity-related paroxysmal atrial fibrillation.. Europace. 2026 Feb 03;28(2):. doi: 10.1093/europace/euag018 doi.",
-      "doi": "10.1093/europace/euag018 doi",
-      "url": "https://pubmed.ncbi.nlm.nih.gov/41666150/",
-      "abstract": "AIMS:\nObesity adversely affects atrial fibrillation (AF) outcomes and is associated with higher recurrence after catheter ablation. Glucagon-like peptide-1 receptor agonists (GLP-1RAs) promote weight loss and improve metabolic inflammation, but their role as adjuncts to ablation has not been completely defined. This study investigated the impact of semaglutide on post-ablation rhythm outcomes in obese patients with AF.\n\nMETHODS AND RESULTS:\nThis single-centre, propensity-matched study included obese patients [body mass index (BMI) ≥ 30 kg/m²] undergoing first-time catheter ablation for paroxysmal AF (2019-2024). Patients who initiated semaglutide within 3 months before or 1 month after ablation were compared with matched controls who did not receive GLP-1RA therapy. All patients underwent continuous rhythm monitoring using implantable cardiac monitors. The primary endpoint was any atrial tachyarrhythmia recurrence beyond a 2-month blanking period. The final cohort included 181 semaglutide-treated patients and 181 controls with matched clinical and procedural characteristics. At 18-month follow-up, freedom from recurrence was 80.2% vs. 65.2%; semaglutide was associated with a significantly lower risk of recurrence (hazard ratio 0.52; 95% confidence interval 0.34-0.78; P = 0.002). Weight and BMI decreased significantly in the semaglutide group (-11.8 ± 3.8 kg; -4.0 ± 1.4 kg/m²) compared with controls (-1.9 ± 1.2 kg; -0.3 ± 0.8 kg/m²; both P < 0.001). A substantial proportion of treated patients achieved ≥10% weight reduction.\n\nCONCLUSION:\nGlucagon-like peptide-1 receptor agonist therapy using semaglutide is associated with a reduced risk of AF recurrence in obese patients undergoing AF catheter ablation, indicating its potential as an adjunctive treatment. Further studies are needed to confirm these findings and elucidate the effects of GLP-1RA on AF recurrence.",
-      "designRank": 3,
-      "studyTypeLabel": "観察研究・その他",
-      "sampleSize": 0,
-      "isTargetJournal": true,
-      "titleJa": "肥満関連発作性心房細動におけるカテーテルアブレーションの補助療法としてのセマグルチド",
-      "summaryJa": "【背景】肥満は心房細動（AF）の転帰に悪影響を及ぼし、カテーテルアブレーション後の再発率の上昇と関連している。 (観察研究・その他 / 症例数:不明)\n【方法と結論】この単一施設の傾向一致研究には、発作性心房細動のために初めてカテーテルアブレーションを受ける肥満患者[体格指数（BMI）≧30kg/m²]が含まれていた（2019年～2024年）。  アブレーション前 3 か月以内またはアブレーション後 1 か月以内にセマグルチドを開始した患者を、対応する対照と比較した。\n【結論】セマグルチドを用いたグルカゴン様ペプチド-1受容体アゴニスト療法は、AFカテーテルアブレーションを受ける肥満患者におけるAF再発リスクの低下と関連しており、補助治療としての可能性を示している。",
-      "abstractJa": "目的:\n肥満は心房細動（AF）の転帰に悪影響を及ぼし、カテーテルアブレーション後の再発率の上昇と関連している。グルカゴン様ペプチド-1 受容体アゴニスト (GLP-1RA) は、体重減少を促進し、代謝性炎症を改善するが、アブレーションの補助剤としての役割は完全には定義されていない。この研究では、AF を伴う肥満患者におけるアブレーション後のリズム結果に対するセマグルチドの影響を調査した。\n\n【方法と結論】\nこの単一施設の傾向適合研究には、発作性心房細動のために初めてカテーテルアブレーションを受ける肥満患者[体格指数（BMI）≧30kg/m²]が含まれていた（2019～2024年）。アブレーション前3か月以内またはアブレーション後1か月以内にセマグルチドを開始した患者を、GLP-1RA療法を受けなかった対応する対照と比較した。すべての患者は埋め込み型心臓モニターを使用して継続的なリズムモニタリングを受けた。主要エンドポイントは、2か月のブランク期間を超えた心房性頻脈性不整脈の再発であった。最終コホートには、臨床的および処置上の特徴が一致するセマグルチド治療を受けた患者 181 名と対照 181 名が含まれていた。 18 か月の追跡調査では、再発がない率は 80.2% 対 65.2% であった。セマグルチドは再発リスクの有意な低下と関連していた(ハザード比 0.52; 95%信頼区間 0.34-0.78; P = 0.002)。体重とBMIは、対照群（-1.9 ± 1.2 kg、-0.3 ± 0.8 kg/m 2、両方とも P < 0.001）と比較して、セマグルチド群（-11.8 ± 3.8 kg、-4.0 ± 1.4 kg/m 2）で有意に減少した。治療を受けた患者のかなりの割合が 10% 以上の体重減少を達成した。\n\n結論:\nセマグルチドを使用したグルカゴン様ペプチド-1受容体アゴニスト療法は、AFカテーテルアブレーションを受けている肥満患者のAF再発リスクの低下と関連しており、補助治療としての可能性を示している。これらの所見を確認し、AF再発に対するGLP-1RAの効果を解明するには、さらなる研究が必要である。",
       "isNew": false,
       "firstSeen": "2026-11-12"
     },
